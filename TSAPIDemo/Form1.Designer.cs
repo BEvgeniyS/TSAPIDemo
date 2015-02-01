@@ -47,8 +47,9 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverID_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.connectionCheckbox = new System.Windows.Forms.CheckBox();
+            this.streamCheckbox = new System.Windows.Forms.CheckBox();
             this.snapShotDataTree = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
@@ -167,8 +168,9 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.button1);
             this.TestsTab.Controls.Add(this.label7);
-            this.TestsTab.Controls.Add(this.connectionCheckbox);
+            this.TestsTab.Controls.Add(this.streamCheckbox);
             this.TestsTab.Controls.Add(this.snapShotDataTree);
             this.TestsTab.Controls.Add(this.label1);
             this.TestsTab.Controls.Add(this.deviceTextBox);
@@ -181,6 +183,16 @@ namespace TSAPIDemo
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(26, 135);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(113, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "GetDeviceList";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -190,16 +202,16 @@ namespace TSAPIDemo
             this.label7.TabIndex = 10;
             this.label7.Text = "ACS stream status:";
             // 
-            // connectionCheckbox
+            // streamCheckbox
             // 
-            this.connectionCheckbox.AutoSize = true;
-            this.connectionCheckbox.Location = new System.Drawing.Point(26, 345);
-            this.connectionCheckbox.Name = "connectionCheckbox";
-            this.connectionCheckbox.Size = new System.Drawing.Size(95, 17);
-            this.connectionCheckbox.TabIndex = 9;
-            this.connectionCheckbox.Text = "not connected";
-            this.connectionCheckbox.UseVisualStyleBackColor = true;
-            this.connectionCheckbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.connectionCheckbox_MouseClick);
+            this.streamCheckbox.AutoSize = true;
+            this.streamCheckbox.Location = new System.Drawing.Point(26, 345);
+            this.streamCheckbox.Name = "streamCheckbox";
+            this.streamCheckbox.Size = new System.Drawing.Size(95, 17);
+            this.streamCheckbox.TabIndex = 9;
+            this.streamCheckbox.Text = "not connected";
+            this.streamCheckbox.UseVisualStyleBackColor = true;
+            this.streamCheckbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.connectionCheckbox_MouseClick);
             // 
             // snapShotDataTree
             // 
@@ -286,7 +298,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.TextBox login_textBox;
         private System.Windows.Forms.TextBox serverID_textBox;
         private System.Windows.Forms.TabPage TestsTab;
-        private System.Windows.Forms.CheckBox connectionCheckbox;
+        private System.Windows.Forms.CheckBox streamCheckbox;
         private System.Windows.Forms.TreeView snapShotDataTree;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox deviceTextBox;
@@ -294,6 +306,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.TabControl mainTabs;
         public bool configured = false;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button1;
 
 
 

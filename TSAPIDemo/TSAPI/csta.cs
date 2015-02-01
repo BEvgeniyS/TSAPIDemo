@@ -623,7 +623,7 @@ namespace Tsapi
         }
     };
 
-    public const int CSTA_MAX_HEAP = 1024;
+    public const int CSTA_MAX_HEAP = 2048;
 
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public class EventBuffer_t : ICustomMarshaler
@@ -652,7 +652,9 @@ namespace Tsapi
 
         public int GetNativeDataSize()
         {
-            return Marshal.SizeOf(typeof(Csta.CSTAEvent_t));
+            int size = Marshal.SizeOf(typeof(Csta.CSTAEvent_t)); 
+            //return Marshal.SizeOf(typeof(Csta.CSTAEvent_t));
+            return size;
         }
 
         public object MarshalNativeToManaged(System.IntPtr pNativeData)

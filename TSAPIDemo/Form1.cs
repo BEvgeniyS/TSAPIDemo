@@ -40,7 +40,7 @@ namespace TSAPIDemo
                 this.mainTabs.SelectTab(configTab);
                 return;
             }
-            if (!connectionCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5  || !connectionCheckbox.Checked) { return; }
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5  || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
@@ -188,14 +188,14 @@ namespace TSAPIDemo
             if (evtBuf.evt.eventHeader.eventClass.eventClass != 2 || evtBuf.evt.eventHeader.eventType.eventType != 2)
             {
                 MessageBox.Show("Could not open stream. ErrorCode = " + evtBuf.evt.acsConfirmation.failureEvent.error);
-                connectionCheckbox.Checked = false;
+                streamCheckbox.Checked = false;
                 this.goButton.Enabled = false;
                 return;
             }
             else
             {
-                connectionCheckbox.Text = "Connected to AES server. Handle = " + this.acsHandle;
-                connectionCheckbox.Checked = true;
+                streamCheckbox.Text = "Connected to AES server. Handle = " + this.acsHandle;
+                streamCheckbox.Checked = true;
                 this.goButton.Enabled = true;
             }
         }
@@ -307,15 +307,15 @@ namespace TSAPIDemo
         {
             if (!this.configured)
             {
-                this.connectionCheckbox.Checked = false;
+                this.streamCheckbox.Checked = false;
                 MessageBox.Show("Application is not configured");
                 this.mainTabs.SelectTab(configTab);
                 return;
             }
-            if (!this.connectionCheckbox.Checked)
+            if (!this.streamCheckbox.Checked)
             {
-                Acs.acsAbortStream(this.acsHandle, out privData);
-                connectionCheckbox.Text = "Disconnected from AES server";
+                closeStream(this.acsHandle);
+                streamCheckbox.Text = "Disconnected from AES server";
                 this.goButton.Enabled = false;
             }
             else
@@ -363,7 +363,7 @@ namespace TSAPIDemo
             return evtBuf;
         }
 
-        private Acs.RetCode_t cstaClearCall(ref Csta.ConnectionID_t cId)
+        private Csta.EventBuffer_t clearCall(ref Csta.ConnectionID_t cId)
         {
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
@@ -374,7 +374,7 @@ namespace TSAPIDemo
             if (retCode._value < 0)
             {
                 MessageBox.Show("cstaClearCall error: " + retCode);
-                return new Acs.RetCode_t();
+                return null;
             }
             this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
@@ -387,7 +387,7 @@ namespace TSAPIDemo
             if (retCode._value < 0)
             {
                 MessageBox.Show("acsGetEventBlock error: " + retCode);
-                return new Acs.RetCode_t();
+                return null;
             }
             if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION ||
                 evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_CLEAR_CALL_CONF)
@@ -398,9 +398,66 @@ namespace TSAPIDemo
                     MessageBox.Show("Clear call failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
                 }
             }
-            return retCode;
+            return evtBuf;
         }
 
+        private Csta.EventBuffer_t closeStream(Acs.ACSHandle_t acsHandle)
+        {
+            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+            Acs.PrivateData_t privData = new Acs.PrivateData_t();
+            Acs.RetCode_t retCode = Acs.acsCloseStream(acsHandle, new Acs.InvokeID_t(), ref privData);
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          ref privData,
+                                          out numEvents);
+            if (retCode._value < 0)
+            {
+                MessageBox.Show("acsGetEventBlock error: " + retCode);
+                return null;
+            }
+            if (evtBuf.evt.eventHeader.eventClass.eventClass != Acs.ACSCONFIRMATION ||
+                evtBuf.evt.eventHeader.eventType.eventType != Acs.ACS_CLOSE_STREAM_CONF)
+            {
+                if (evtBuf.evt.eventHeader.eventClass.eventClass == Acs.ACSCONFIRMATION
+                    && evtBuf.evt.eventHeader.eventType.eventType == Acs.ACS_UNIVERSAL_FAILURE_CONF)
+                {
+                    MessageBox.Show("Clear call failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                }
+            }
+            return evtBuf;
+        }
+
+        private Csta.EventBuffer_t getDeviceList(Acs.ACSHandle_t acsHandle)
+        {
+            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+            Acs.PrivateData_t privData = new Acs.PrivateData_t();
+            int idx = -1;
+            Acs.RetCode_t retCode = Csta.cstaGetDeviceList(acsHandle, new Acs.InvokeID_t(), idx, Csta.CSTALevel_t.CSTA_HOME_WORK_TOP);
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP * 2;
+            ushort numEvents;
+            Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          ref privData,
+                                          out numEvents);
+
+            idx = evtBuf.evt.cstaConfirmation.getDeviceList.index;
+            retCode = Csta.cstaGetDeviceList(acsHandle, new Acs.InvokeID_t(), idx, Csta.CSTALevel_t.CSTA_HOME_WORK_TOP);
+
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            eventBufSize = Csta.CSTA_MAX_HEAP;
+            Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          ref privData,
+                                          out numEvents);
+            return evtBuf;
+        }
 
         private void mainTabs_Selecting(object sender, TabControlCancelEventArgs e)
         {
@@ -428,15 +485,18 @@ namespace TSAPIDemo
             ContextMenuStrip snapShotDataTreeContextMenu = new ContextMenuStrip();
             ToolStripItem snapShotCallContextMenuItem = snapShotDataTreeContextMenu.Items.Add("cstaClearCall");
             snapShotDataTreeContextMenu.Click += (s, ev) => {
-                Acs.RetCode_t retCode = cstaClearCall(ref selectedConnId);
-                if (retCode._value >= 0)
-                {
-                    snapShotDataTree.Nodes.Remove(tmpNode);
-                }
+                Csta.EventBuffer_t evtbuf = clearCall(ref selectedConnId);
+                snapShotDataTree.Nodes.Remove(tmpNode);
             };
             
             snapShotDataTreeContextMenu.Show(Cursor.Position);
             
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Csta.EventBuffer_t evtbuf =  getDeviceList(this.acsHandle);
+            MessageBox.Show("Number of devices = " + evtbuf.evt.cstaConfirmation.getDeviceList.devList.count);
         }
     }
 

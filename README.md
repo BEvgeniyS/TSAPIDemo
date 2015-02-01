@@ -2,7 +2,7 @@
 
 ## About
 TSAPIDemo is a demo application to demonstrate and test several possibilities of TSAPISharp library.
-The aim is to test all the methods and develop a wrapper for all TSAPI methods and structures
+The aim is to develop a wrapper for all TSAPI methods and structures
 Right now it can perform snapshot of the requested device and calls associated with it.
 It also retrieves UCID of the call.
 

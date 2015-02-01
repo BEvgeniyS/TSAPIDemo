@@ -1757,17 +1757,17 @@ namespace Tsapi
         }
         
         public struct DeviceList_t {
-            short           count;
+            public short count;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 20)]
-            DeviceID_t[] device;
+            public DeviceID_t[] device;
         }
 
         public struct CSTAGetDeviceListConfEvent_t
         {
-            SDBLevel_t driverSdbLevel;
-            CSTALevel_t level;
-            long index;
-            DeviceList_t devList;
+            public SDBLevel_t driverSdbLevel;
+            public CSTALevel_t level;
+            public int index;
+            public DeviceList_t devList;
         }
 
         public struct CSTAQueryCallMonitor_t
