@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -46,7 +47,7 @@ namespace TSAPIDemo
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
                                                  invokeId,
                                                  ref currentDevice,
-                                                 ref privData);
+                                                 privData);
             if (retCode._value < 0)
             {
                 MessageBox.Show("cstaSnapshotDeviceReq error: " + retCode);
@@ -59,7 +60,7 @@ namespace TSAPIDemo
             retCode = Acs.acsGetEventBlock(this.acsHandle,
                                           evtBuf,
                                           ref eventBufSize,
-                                          ref privData,
+                                          privData,
                                           out numEvents);
             if (retCode._value < 0)
             {
@@ -116,6 +117,12 @@ namespace TSAPIDemo
             {
                 goButton_Click(sender, e);
             }
+        }
+
+        private void EventReactionHandler(uint esrparam)
+        {
+            //MessageBox.Show("acsSetESR Test, stream = " + esrparam);
+            Debug.WriteLine("acsSetESR Test, stream = " + esrparam);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -175,7 +182,7 @@ namespace TSAPIDemo
                                                           sendExtraBufs,
                                                           recvQSize,
                                                           recvExtraBufs,
-                                                          ref privData);
+                                                          privData);
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
             ushort numEvents = 0;
@@ -183,7 +190,7 @@ namespace TSAPIDemo
             retCode = Acs.acsGetEventBlock(this.acsHandle,
                                      evtBuf,
                                      ref eventBufSize,
-                                     ref privData,
+                                     privData,
                                      out numEvents);
             if (evtBuf.evt.eventHeader.eventClass.eventClass != 2 || evtBuf.evt.eventHeader.eventType.eventType != 2)
             {
@@ -198,6 +205,8 @@ namespace TSAPIDemo
                 streamCheckbox.Checked = true;
                 this.goButton.Enabled = true;
             }
+            Acs.EsrDelegate eventReaction = new Acs.EsrDelegate(EventReactionHandler);
+            Acs.acsSetESR(this.acsHandle, eventReaction, this.acsHandle._value, false);
         }
 
 
@@ -207,17 +216,17 @@ namespace TSAPIDemo
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
             ushort numEvents = 0;
-            Acs.RetCode_t retCode = Att.attQueryUCID(ref this.privData, ref conn);
-            retCode = Csta.cstaEscapeService(acsHandle, invokeId, ref privData);
+            Acs.RetCode_t retCode = Att.attQueryUCID(this.privData, ref conn);
+            retCode = Csta.cstaEscapeService(acsHandle, invokeId, privData);
             privData.length = Att.ATT_MAX_PRIVATE_DATA;
             retCode = Acs.acsGetEventBlock(acsHandle,
                                          evtBuf,
                                          ref eventBufSize,
-                                         ref privData,
+                                         privData,
                                          out numEvents);
 
             Att.ATTEvent_t attevt;
-            retCode = Att.attPrivateData(ref privData, out attevt);
+            retCode = Att.attPrivateData(privData, out attevt);
             return attevt.queryUCID.ucid;
         }
 
@@ -225,7 +234,7 @@ namespace TSAPIDemo
 
         private void mainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Acs.acsAbortStream(this.acsHandle, out privData);
+            Acs.acsAbortStream(this.acsHandle, null);
             WriteConfig();
         }
 
@@ -332,7 +341,7 @@ namespace TSAPIDemo
             Acs.RetCode_t retCode = Csta.cstaSnapshotCallReq(this.acsHandle,
                                                  invokeId,
                                                  ref cId,
-                                                 ref this.privData);
+                                                 this.privData);
             if (retCode._value < 0)
             {
                 MessageBox.Show("cstaSnapshotCallReq error: " + retCode);
@@ -344,7 +353,7 @@ namespace TSAPIDemo
             retCode = Acs.acsGetEventBlock(this.acsHandle,
                                           evtBuf,
                                           ref eventBufSize,
-                                          ref privData,
+                                          privData,
                                           out numEvents);
             if (retCode._value < 0)
             {
@@ -370,7 +379,7 @@ namespace TSAPIDemo
             Acs.RetCode_t retCode = Csta.cstaClearCall(this.acsHandle,
                                                  invokeId,
                                                  ref cId,
-                                                 ref this.privData);
+                                                 this.privData);
             if (retCode._value < 0)
             {
                 MessageBox.Show("cstaClearCall error: " + retCode);
@@ -382,7 +391,7 @@ namespace TSAPIDemo
             retCode = Acs.acsGetEventBlock(this.acsHandle,
                                           evtBuf,
                                           ref eventBufSize,
-                                          ref privData,
+                                          privData,
                                           out numEvents);
             if (retCode._value < 0)
             {
@@ -404,15 +413,13 @@ namespace TSAPIDemo
         private Csta.EventBuffer_t closeStream(Acs.ACSHandle_t acsHandle)
         {
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
-            Acs.PrivateData_t privData = new Acs.PrivateData_t();
-            Acs.RetCode_t retCode = Acs.acsCloseStream(acsHandle, new Acs.InvokeID_t(), ref privData);
-            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            Acs.RetCode_t retCode = Acs.acsCloseStream(acsHandle, new Acs.InvokeID_t(), null);
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
             ushort numEvents;
             retCode = Acs.acsGetEventBlock(this.acsHandle,
                                           evtBuf,
                                           ref eventBufSize,
-                                          ref privData,
+                                          null,
                                           out numEvents);
             if (retCode._value < 0)
             {
@@ -443,7 +450,7 @@ namespace TSAPIDemo
             Acs.acsGetEventBlock(this.acsHandle,
                                           evtBuf,
                                           ref eventBufSize,
-                                          ref privData,
+                                          privData,
                                           out numEvents);
 
             idx = evtBuf.evt.cstaConfirmation.getDeviceList.index;
@@ -454,7 +461,7 @@ namespace TSAPIDemo
             Acs.acsGetEventBlock(this.acsHandle,
                                           evtBuf,
                                           ref eventBufSize,
-                                          ref privData,
+                                          privData,
                                           out numEvents);
             return evtBuf;
         }

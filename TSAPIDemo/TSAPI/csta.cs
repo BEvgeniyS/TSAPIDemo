@@ -789,14 +789,14 @@ namespace Tsapi
                         Acs.ACSHandle_t acsHandle,
                         ref ConnectionID_t activeCall,
                         ref ConnectionID_t otherCall,
-                        ref Acs.PrivateData_t privateData);   
+                        Acs.PrivateData_t privateData);   
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaAnswerCall(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t activeCall,
                         ref ConnectionID_t alertingCall,
-                        ref Acs.PrivateData_t privateData);   
+                        Acs.PrivateData_t privateData);   
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaCallCompletion(
@@ -804,21 +804,21 @@ namespace Tsapi
                         Acs.InvokeID_t activeCall,
                         Feature_t feature,
                         ref ConnectionID_t call,
-                        ref Acs.PrivateData_t privateData);  
+                        Acs.PrivateData_t privateData);  
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaClearCall(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t call,
-                        ref Acs.PrivateData_t privateData);  
+                        Acs.PrivateData_t privateData);  
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaClearConnection(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t call,
-                        ref Acs.PrivateData_t privateData);  
+                        Acs.PrivateData_t privateData);  
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaConferenceCall(
@@ -826,7 +826,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t heldCall,
                         ref ConnectionID_t activeCall,
-                        ref Acs.PrivateData_t privateData);  
+                        Acs.PrivateData_t privateData);  
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaConsultationCall(
@@ -834,7 +834,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t activeCall,
                         ref DeviceID_t calledDevice,
-                        ref Acs.PrivateData_t privateData); 
+                        Acs.PrivateData_t privateData); 
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaDeflectCall(
@@ -842,7 +842,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t deflectCall,
                         ref DeviceID_t calledDevice,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaGroupPickupCall(
@@ -850,7 +850,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t deflectCall,
                         ref DeviceID_t pickupDevice,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaHoldCall(
@@ -858,7 +858,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t activeCall,
                         Boolean  reservation,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaMakeCall(
@@ -866,7 +866,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t callingDevice,
                         ref DeviceID_t calledDevice,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaMakePredictiveCall(
@@ -874,7 +874,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t callingDevice,
                         ref DeviceID_t calledDevice,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaPickupCall(
@@ -882,7 +882,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t deflectCall,
                         ref DeviceID_t calledDevice,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaReconnectCall(
@@ -890,14 +890,14 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t activeCall,
                         ref ConnectionID_t heldCall,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaRetrieveCall(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t heldCall,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaTransferCall(
@@ -905,7 +905,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t heldCall,
                         ref ConnectionID_t activeCall,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     // Telephony Supplementary Services 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -914,7 +914,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
                         Boolean  messages,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSetDoNotDisturb(
@@ -922,7 +922,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
                         Boolean  doNotDisturb,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSetForwarding(
@@ -932,7 +932,7 @@ namespace Tsapi
                         ForwardingType_t forwardingType,
                         Boolean  forwardingOn,
                         ref DeviceID_t forwardingDestination,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSetAgentState(
@@ -943,49 +943,49 @@ namespace Tsapi
                         AgentID_t agentID,
                         AgentGroup_t agentGroup,
                         AgentPassword_t agentPassword,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaQueryMsgWaitingInd(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaQueryDoNotDisturb(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaQueryForwarding(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaQueryAgentState(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaQueryLastNumber(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaQueryDeviceInfo(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     // Monitor Services 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -994,7 +994,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t deviceID,
                         ref CSTAMonitorFilter_t monitorFilter,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaMonitorCall(
@@ -1002,7 +1002,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t call,
                         ref CSTAMonitorFilter_t monitorFilter,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaMonitorCallsViaDevice(
@@ -1010,7 +1010,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t deviceID,
                         ref CSTAMonitorFilter_t monitorFilter,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaChangeMonitorFilter(
@@ -1018,14 +1018,14 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         CSTAMonitorCrossRefID_t monitorCrossRefID,
                         ref CSTAMonitorFilter_t filterlist,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaChangeMonitorFilter(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         CSTAMonitorCrossRefID_t monitorCrossRefID,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     // Snapshot Services 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -1033,14 +1033,14 @@ namespace Tsapi
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t snapshotObj,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSnapshotDeviceReq(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t snapshotObj,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     // Routing Services 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -1048,13 +1048,13 @@ namespace Tsapi
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t routingDevice,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaRouteRegisterCancel(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         RouteRegisterReqID_t routeRegisterReqID,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     // Release 1 calls, w/o invokeID, for backward compatibility 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -1066,7 +1066,7 @@ namespace Tsapi
                         RetryValue_t remainRetry,
                         ref SetUpValues_t setupInformation,
                         Boolean routeUsedReq,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaRouteEnd(
@@ -1074,7 +1074,7 @@ namespace Tsapi
                         RouteRegisterReqID_t routeRegisterReqID,
                         RoutingCrossRefID_t routingCrossRefID,
                         CSTAUniversalFailure_t errorValue,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     // Release 2 calls, with invokeID 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -1087,7 +1087,7 @@ namespace Tsapi
                         RetryValue_t remainRetry,
                         ref SetUpValues_t setupInformation,
                         Boolean routeUsedReq,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
  
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaRouteEndInv(
@@ -1096,53 +1096,53 @@ namespace Tsapi
                         RouteRegisterReqID_t routeRegisterReqID,
                         RoutingCrossRefID_t routingCrossRefID,
                         CSTAUniversalFailure_t errorValue,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     // Escape Services 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaEscapeService(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaEscapeServiceConf(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         CSTAUniversalFailure_t error,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSendPrivateEvent(
                         Acs.ACSHandle_t acsHandle,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     // Maintenance Services 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSysStatReq(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSysStatStart(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         SystemStatusFilter_t statusFilter,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSysStatStop(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaChangeSysStatFilter(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         SystemStatusFilter_t statusFilter,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -1150,13 +1150,13 @@ namespace Tsapi
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         SystemStatus_t systemStatus,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaSysStatEvent(
                         Acs.ACSHandle_t acsHandle,
                         SystemStatus_t systemStatus,
-                        ref Acs.PrivateData_t privateData);
+                        Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaGetAPICaps(

@@ -207,7 +207,7 @@ namespace Tsapi
         public const int PRIVATE_VENDOR_SIZE = 32;
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct PrivateData_t
+        public class PrivateData_t
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = PRIVATE_VENDOR_SIZE)]
             public string vendor;
@@ -234,18 +234,18 @@ namespace Tsapi
                             ushort sendExtraBufs,
                             ushort recvQSize,
                             ushort recvExtraBufs,
-                            ref PrivateData_t priv);
+                            PrivateData_t priv);
 
         [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern RetCode_t acsCloseStream(
                             ACSHandle_t acsHandle,
                             InvokeID_t invokeID,
-                            ref PrivateData_t priv);
+                            PrivateData_t priv);
 
         [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern RetCode_t acsAbortStream(
                             ACSHandle_t acsHandle,
-                            out PrivateData_t privateData);
+                            PrivateData_t privateData);
 
 
         [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -255,9 +255,9 @@ namespace Tsapi
         [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern RetCode_t acsGetEventPoll(
                             ACSHandle_t acsHandle,
-                            out Csta.CSTAEvent_t eventBuf,
+                            [In, Out, MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Csta.EventBuffer_t))] Csta.EventBuffer_t eventBuf,
                             ref ushort eventBufSize,
-                            ref PrivateData_t privData,
+                            PrivateData_t privData,
                             out ushort numEvents);
 
         [DllImport("csta32.dll", CharSet = CharSet.Ansi)]
@@ -265,7 +265,7 @@ namespace Tsapi
                             ACSHandle_t acsHandle,
                             [In, Out, MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Csta.EventBuffer_t))] Csta.EventBuffer_t eventBuf,
                             ref ushort eventBufSize,
-                            ref PrivateData_t privData,
+                            PrivateData_t privData,
                             out ushort numEvents);
 
 
@@ -280,5 +280,16 @@ namespace Tsapi
         public static extern RetCode_t acsQueryAuthInfo(
                             ref ServerID_t serverID,
                             ref ACSAuthInfo_t authInfo);
+
+        [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern RetCode_t acsSetESR(
+                            ACSHandle_t acsHandle,
+                            //[MarshalAs(UnmanagedType.FunctionPtr)]
+                            EsrDelegate esr,
+                            uint esrparam,
+                            bool notifyAll);
+
+        //[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void EsrDelegate(uint esrparam);
     }
 }

@@ -191,7 +191,7 @@ namespace Tsapi
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attQueryUCID(
-                            ref Acs.PrivateData_t privData,
+                            Acs.PrivateData_t privData,
                             ref Csta.ConnectionID_t call);
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -203,7 +203,7 @@ namespace Tsapi
         // Decode ATTPrivateData
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attPrivateData(
-                            ref Acs.PrivateData_t privData,
+                            Acs.PrivateData_t privData,
                             out ATTEvent_t eventBuffer);
 
     }
