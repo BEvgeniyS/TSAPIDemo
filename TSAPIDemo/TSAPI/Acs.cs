@@ -274,7 +274,7 @@ namespace Tsapi
                             ACSHandle_t acsHandle,
                             HWND hwnd,
                             uint msg,
-                            Boolean notifyAll);
+                            bool notifyAll);
 
         [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern RetCode_t acsQueryAuthInfo(

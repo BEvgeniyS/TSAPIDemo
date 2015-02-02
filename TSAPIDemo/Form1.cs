@@ -14,6 +14,9 @@ namespace TSAPIDemo
 {
     public partial class mainForm : Form
     {
+        private const int WM_USER = 0x0400;
+        private const int WM_TSAPI_EVENT = WM_USER + 99;
+
         public mainForm()
         {
             InitializeComponent();
@@ -121,8 +124,8 @@ namespace TSAPIDemo
 
         private void EventReactionHandler(uint esrparam)
         {
-            //MessageBox.Show("acsSetESR Test, stream = " + esrparam);
-            Debug.WriteLine("acsSetESR Test, stream = " + esrparam);
+            //MessageBox.Show("[acsSetESR Test] stream = " + esrparam);
+            Debug.WriteLine("[acsSetESR Test] stream = " + esrparam);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -207,6 +210,7 @@ namespace TSAPIDemo
             }
             Acs.EsrDelegate eventReaction = new Acs.EsrDelegate(EventReactionHandler);
             Acs.acsSetESR(this.acsHandle, eventReaction, this.acsHandle._value, false);
+            Acs.acsEventNotify(this.acsHandle, this.Handle, WM_TSAPI_EVENT, false);
         }
 
 
@@ -503,7 +507,40 @@ namespace TSAPIDemo
         private void button1_Click(object sender, EventArgs e)
         {
             Csta.EventBuffer_t evtbuf =  getDeviceList(this.acsHandle);
-            MessageBox.Show("Number of devices = " + evtbuf.evt.cstaConfirmation.getDeviceList.devList.count);
+            //MessageBox.Show("Number of devices = " + evtbuf.evt.cstaConfirmation.getDeviceList.devList.count);
+        }
+
+        //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_TSAPI_EVENT:
+                {
+                    short[] wmEventData = Aux.SplitPtr(m.LParam);
+                    //MessageBox.Show(string.Format("TSAPI lib has an event for us! AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]));
+                    Debug.WriteLine(string.Format("[acsEventNotify Test] Got event: AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]));
+                    break;
+                }
+            }
+            base.WndProc(ref m);
+        }
+
+        private void flushEventQueueButton_Click(object sender, EventArgs e)
+        {
+            Acs.RetCode_t retCode =  Acs.acsFlushEventQueue(this.acsHandle);
+            if (retCode._value == 0)
+            {
+                MessageBox.Show("Events flushed successfully!");
+            }
+            else if (retCode._value > 0)
+            {
+                MessageBox.Show("acsFlushEventQueue result: " + retCode._value);
+            }
+            else
+            {
+                MessageBox.Show("acsFlushEventQueue failed. Error: " + retCode._value);
+            }
         }
     }
 

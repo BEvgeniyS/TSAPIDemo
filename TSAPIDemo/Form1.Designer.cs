@@ -55,6 +55,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.goButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
+            this.flushEventQueueButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -168,6 +169,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.flushEventQueueButton);
             this.TestsTab.Controls.Add(this.button1);
             this.TestsTab.Controls.Add(this.label7);
             this.TestsTab.Controls.Add(this.streamCheckbox);
@@ -264,6 +266,16 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
+            // flushEventQueueButton
+            // 
+            this.flushEventQueueButton.Location = new System.Drawing.Point(44, 164);
+            this.flushEventQueueButton.Name = "flushEventQueueButton";
+            this.flushEventQueueButton.Size = new System.Drawing.Size(75, 23);
+            this.flushEventQueueButton.TabIndex = 5;
+            this.flushEventQueueButton.Text = "FlushEventQueue";
+            this.flushEventQueueButton.UseVisualStyleBackColor = true;
+            this.flushEventQueueButton.Click += new System.EventHandler(this.flushEventQueueButton_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -307,6 +319,7 @@ namespace TSAPIDemo
         public bool configured = false;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button flushEventQueueButton;
 
 
 

@@ -33,6 +33,15 @@ namespace Tsapi
             }
             return arr;
         }
+
+        public static short[] SplitPtr(IntPtr dwordValue)
+        {
+            var result = new short[2];
+            result[0] = unchecked((short)dwordValue);
+            result[1] = unchecked((short)((uint)dwordValue >> 16));
+            return result;
+        }
+
     }
 }
 
