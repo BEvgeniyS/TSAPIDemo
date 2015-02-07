@@ -358,27 +358,27 @@ namespace Tsapi
         public struct ATTV5ConsultationCall_t
         {
             Csta.DeviceID_t destRoute;
-            Boolean priorityCalling;
+            bool priorityCalling;
             ATTV5UserToUserInfo_t userInfo;
         };
 
         public struct ATTV5MakeCall_t
         {
             Csta.DeviceID_t destRoute;
-            Boolean priorityCalling;
+            bool priorityCalling;
             ATTV5UserToUserInfo_t userInfo;
         };
 
         public struct ATTV5DirectAgentCall_t
         {
             Csta.DeviceID_t split;
-            Boolean priorityCalling;
+            bool priorityCalling;
             ATTV5UserToUserInfo_t userInfo;
         };
 
         public struct ATTV5MakePredictiveCall_t
         {
-            Boolean priorityCalling;
+            bool priorityCalling;
             short maxRings;
             ATTAnswerTreat_t answerTreat;
             Csta.DeviceID_t destRoute;
@@ -494,7 +494,7 @@ namespace Tsapi
 
         public struct ATTQueryStationStatusConfEvent_t
         {
-            Boolean stationStatus;
+            bool stationStatus;
         };
 
         public struct ATTQueryTod_t
@@ -674,7 +674,7 @@ namespace Tsapi
         {
             Csta.DeviceID_t callingDevice;
             Csta.DeviceID_t directAgentCallSplit;
-            Boolean priorityCalling;
+            bool priorityCalling;
             Csta.DeviceID_t destRoute;
             ATTUserCollectCode_t collectCode;
             ATTUserProvidedCode_t userProvidedCode;
@@ -688,7 +688,7 @@ namespace Tsapi
 
         public struct ATTSysStat_t
         {
-            Boolean linkStatusReq;
+            bool linkStatusReq;
         };
 
         public enum ATTLinkState_t
@@ -909,131 +909,131 @@ namespace Tsapi
 
         public struct ATTAgentMeasurementsPresent_t
         {
-            Boolean allMeasurements;
-            Boolean acdCalls;
-            Boolean extension;
-            Boolean name;
-            Boolean state;
-            Boolean avgACDTalkTime;
-            Boolean avgExtensionTime;
-            Boolean callRate;
-            Boolean elapsedTime;
-            Boolean extensionCalls;
-            Boolean extensionIncomingCalls;
-            Boolean extensionOutgoingCalls;
-            Boolean shiftACDCalls;
-            Boolean shiftAvgACDTalkTime;
-            Boolean splitAcceptableSvcLevel;
-            Boolean splitACDCalls;
-            Boolean splitAfterCallSessions;
-            Boolean splitAgentsAvailable;
-            Boolean splitAgentsInAfterCall;
-            Boolean splitAgentsInAux;
-            Boolean splitAgentsInOther;
-            Boolean splitAgentsOnACDCalls;
-            Boolean splitAgentsOnExtCalls;
-            Boolean splitAgentsStaffed;
-            Boolean splitAvgACDTalkTime;
-            Boolean splitAvgAfterCallTime;
-            Boolean splitAvgSpeedOfAnswer;
-            Boolean splitAvgTimeToAbandon;
-            Boolean splitCallRate;
-            Boolean splitCallsAbandoned;
-            Boolean splitCallsFlowedIn;
-            Boolean splitCallsFlowedOut;
-            Boolean splitCallsWaiting;
-            Boolean splitName;
-            Boolean splitNumber;
-            Boolean splitExtension;
-            Boolean splitObjective;
-            Boolean splitOldestCallWaiting;
-            Boolean splitPercentInSvcLevel;
-            Boolean splitTotalACDTalkTime;
-            Boolean splitTotalAfterCallTime;
-            Boolean splitTotalAuxTime;
-            Boolean timeAgentEnteredState;
-            Boolean totalACDTalkTime;
-            Boolean totalAfterCallTime;
-            Boolean totalAuxTime;
-            Boolean totalAvailableTime;
-            Boolean totalHoldTime;
-            Boolean totalStaffedTime;
-            Boolean totalACDCallTime;
-            Boolean avgACDCallTime;
+            bool allMeasurements;
+            bool acdCalls;
+            bool extension;
+            bool name;
+            bool state;
+            bool avgACDTalkTime;
+            bool avgExtensionTime;
+            bool callRate;
+            bool elapsedTime;
+            bool extensionCalls;
+            bool extensionIncomingCalls;
+            bool extensionOutgoingCalls;
+            bool shiftACDCalls;
+            bool shiftAvgACDTalkTime;
+            bool splitAcceptableSvcLevel;
+            bool splitACDCalls;
+            bool splitAfterCallSessions;
+            bool splitAgentsAvailable;
+            bool splitAgentsInAfterCall;
+            bool splitAgentsInAux;
+            bool splitAgentsInOther;
+            bool splitAgentsOnACDCalls;
+            bool splitAgentsOnExtCalls;
+            bool splitAgentsStaffed;
+            bool splitAvgACDTalkTime;
+            bool splitAvgAfterCallTime;
+            bool splitAvgSpeedOfAnswer;
+            bool splitAvgTimeToAbandon;
+            bool splitCallRate;
+            bool splitCallsAbandoned;
+            bool splitCallsFlowedIn;
+            bool splitCallsFlowedOut;
+            bool splitCallsWaiting;
+            bool splitName;
+            bool splitNumber;
+            bool splitExtension;
+            bool splitObjective;
+            bool splitOldestCallWaiting;
+            bool splitPercentInSvcLevel;
+            bool splitTotalACDTalkTime;
+            bool splitTotalAfterCallTime;
+            bool splitTotalAuxTime;
+            bool timeAgentEnteredState;
+            bool totalACDTalkTime;
+            bool totalAfterCallTime;
+            bool totalAuxTime;
+            bool totalAvailableTime;
+            bool totalHoldTime;
+            bool totalStaffedTime;
+            bool totalACDCallTime;
+            bool avgACDCallTime;
         };
 
         public struct ATTSplitSkillMeasurementsPresent_t
         {
-            Boolean allMeasurements;
-            Boolean acceptableSvcLevel;
-            Boolean acdCalls;
-            Boolean afterCallSessions;
-            Boolean agentsAvailable;
-            Boolean agentsInAfterCall;
-            Boolean agentsInAux;
-            Boolean agentsInOther;
-            Boolean onACDCalls;
-            Boolean agentsOnExtensionCalls;
-            Boolean agentsStaffed;
-            Boolean avgACDTalkTime;
-            Boolean afterCallTime;
-            Boolean avgSpeedOfAnswer;
-            Boolean avgTimeToAbandon;
-            Boolean callRate;
-            Boolean callsAbandoned;
-            Boolean callsFlowedIn;
-            Boolean callsFlowedOut;
-            Boolean callsWaiting;
-            Boolean oldestCallWaiting;
-            Boolean percentInSvcLevel;
-            Boolean name;
-            Boolean extension;
-            Boolean number;
-            Boolean objective;
-            Boolean totalAfterCallTime;
-            Boolean totalAuxTime;
-            Boolean totalACDTalkTime;
+            bool allMeasurements;
+            bool acceptableSvcLevel;
+            bool acdCalls;
+            bool afterCallSessions;
+            bool agentsAvailable;
+            bool agentsInAfterCall;
+            bool agentsInAux;
+            bool agentsInOther;
+            bool onACDCalls;
+            bool agentsOnExtensionCalls;
+            bool agentsStaffed;
+            bool avgACDTalkTime;
+            bool afterCallTime;
+            bool avgSpeedOfAnswer;
+            bool avgTimeToAbandon;
+            bool callRate;
+            bool callsAbandoned;
+            bool callsFlowedIn;
+            bool callsFlowedOut;
+            bool callsWaiting;
+            bool oldestCallWaiting;
+            bool percentInSvcLevel;
+            bool name;
+            bool extension;
+            bool number;
+            bool objective;
+            bool totalAfterCallTime;
+            bool totalAuxTime;
+            bool totalACDTalkTime;
         };
 
         public struct ATTTrunkGroupMeasurementsPresent_t
         {
-            Boolean allMeasurements;
-            Boolean avgIncomingCallTime;
-            Boolean avgOutgoingCallTime;
-            Boolean incomingAbandonedCalls;
-            Boolean incomingCalls;
-            Boolean incomingUsage;
-            Boolean numberOfTrunks;
-            Boolean outgoingCalls;
-            Boolean outgoingCompletedCalls;
-            Boolean outgoingUsage;
-            Boolean percentAllTrunksBusy;
-            Boolean percentTrunksMaintBusy;
-            Boolean trunkGroupName;
-            Boolean trunkGroupNumber;
-            Boolean trunksInUse;
-            Boolean trunksMaintBusy;
+            bool allMeasurements;
+            bool avgIncomingCallTime;
+            bool avgOutgoingCallTime;
+            bool incomingAbandonedCalls;
+            bool incomingCalls;
+            bool incomingUsage;
+            bool numberOfTrunks;
+            bool outgoingCalls;
+            bool outgoingCompletedCalls;
+            bool outgoingUsage;
+            bool percentAllTrunksBusy;
+            bool percentTrunksMaintBusy;
+            bool trunkGroupName;
+            bool trunkGroupNumber;
+            bool trunksInUse;
+            bool trunksMaintBusy;
         };
 
         public struct ATTVdnMeasurementsPresent_t
         {
-            Boolean allMeasurements;
-            Boolean acceptableSvcLevel;
-            Boolean acdCalls;
-            Boolean avgACDTalkTime;
-            Boolean avgSpeedOfAnswer;
-            Boolean avgTimeToAbandon;
-            Boolean callsAbandoned;
-            Boolean callsFlowedOut;
-            Boolean callsForcedBusyDisc;
-            Boolean callsOffered;
-            Boolean callsWaiting;
-            Boolean callsNonACD;
-            Boolean oldestCallWaiting;
-            Boolean percentInSvcLevel;
-            Boolean totalACDTalkTime;
-            Boolean extension;
-            Boolean name;
+            bool allMeasurements;
+            bool acceptableSvcLevel;
+            bool acdCalls;
+            bool avgACDTalkTime;
+            bool avgSpeedOfAnswer;
+            bool avgTimeToAbandon;
+            bool callsAbandoned;
+            bool callsFlowedOut;
+            bool callsForcedBusyDisc;
+            bool callsOffered;
+            bool callsWaiting;
+            bool callsNonACD;
+            bool oldestCallWaiting;
+            bool percentInSvcLevel;
+            bool totalACDTalkTime;
+            bool extension;
+            bool name;
         };
 
         public struct ATTQueryAgentMeasurements_t
@@ -1140,15 +1140,15 @@ namespace Tsapi
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             string switchVersion;
-            Boolean sendDTMFTone;
-            Boolean enteredDigitsEvent;
-            Boolean queryDeviceName;
-            Boolean queryAgentMeas;
-            Boolean querySplitSkillMeas;
-            Boolean queryTrunkGroupMeas;
-            Boolean queryVdnMeas;
-            Boolean reserved1;
-            Boolean reserved2;
+            bool sendDTMFTone;
+            bool enteredDigitsEvent;
+            bool queryDeviceName;
+            bool queryAgentMeas;
+            bool querySplitSkillMeas;
+            bool queryTrunkGroupMeas;
+            bool queryVdnMeas;
+            bool reserved1;
+            bool reserved2;
         };
 
         public enum ATTParticipationType_t
@@ -1184,7 +1184,7 @@ namespace Tsapi
             Csta.ConnectionID_t activeCall;
             Csta.DeviceID_t deviceToBeJoin;
             ATTParticipationType_t participationType;
-            Boolean alertDestination;
+            bool alertDestination;
         };
 
         public struct ATTSingleStepConferenceCallConfEvent_t
@@ -1197,7 +1197,7 @@ namespace Tsapi
         public struct ATTSelectiveListeningHold_t
         {
             Csta.ConnectionID_t subjectConnection;
-            Boolean allParties;
+            bool allParties;
             Csta.ConnectionID_t selectedParty;
         };
 
@@ -1209,7 +1209,7 @@ namespace Tsapi
         public struct ATTSelectiveListeningRetrieve_t
         {
             Csta.ConnectionID_t subjectConnection;
-            Boolean allParties;
+            bool allParties;
             Csta.ConnectionID_t selectedParty;
         };
 
@@ -1238,7 +1238,7 @@ namespace Tsapi
 
         public struct ATTCallOriginatorInfo_t
         {
-            Boolean hasInfo;
+            bool hasInfo;
             short callOriginatorType;
         };
 
@@ -1254,7 +1254,7 @@ namespace Tsapi
             ATTV5UserToUserInfo_t userInfo;
             ATTUCID_t ucid;
             ATTCallOriginatorInfo_t callOriginatorInfo;
-            Boolean flexibleBilling;
+            bool flexibleBilling;
         };
 
         public struct ATTConnIDList_t
@@ -1353,7 +1353,7 @@ namespace Tsapi
             Csta.CalledDeviceID_t distributingDevice;
             ATTUCID_t ucid;
             ATTCallOriginatorInfo_t callOriginatorInfo;
-            Boolean flexibleBilling;
+            bool flexibleBilling;
         };
 
         public struct ATTV5EstablishedEvent_t
@@ -1369,7 +1369,7 @@ namespace Tsapi
             Csta.CalledDeviceID_t distributingDevice;
             ATTUCID_t ucid;
             ATTCallOriginatorInfo_t callOriginatorInfo;
-            Boolean flexibleBilling;
+            bool flexibleBilling;
         };
 
         public struct ATTV5TransferredEvent_t
@@ -1387,7 +1387,7 @@ namespace Tsapi
             ATTV5UserToUserInfo_t userInfo;
             ATTUCID_t ucid;
             ATTCallOriginatorInfo_t callOriginatorInfo;
-            Boolean flexibleBilling;
+            bool flexibleBilling;
         };
 
         public struct ATTPrivateFilter_t
@@ -1503,21 +1503,21 @@ namespace Tsapi
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
             string switchVersion;
-            Boolean sendDTMFTone;
-            Boolean enteredDigitsEvent;
-            Boolean queryDeviceName;
-            Boolean queryAgentMeas;
-            Boolean querySplitSkillMeas;
-            Boolean queryTrunkGroupMeas;
-            Boolean queryVdnMeas;
-            Boolean singleStepConference;
-            Boolean selectiveListeningHold;
-            Boolean selectiveListeningRetrieve;
-            Boolean setBillingRate;
-            Boolean queryUCID;
-            Boolean chargeAdviceEvent;
-            Boolean reserved1;
-            Boolean reserved2;
+            bool sendDTMFTone;
+            bool enteredDigitsEvent;
+            bool queryDeviceName;
+            bool queryAgentMeas;
+            bool querySplitSkillMeas;
+            bool queryTrunkGroupMeas;
+            bool queryVdnMeas;
+            bool singleStepConference;
+            bool selectiveListeningHold;
+            bool selectiveListeningRetrieve;
+            bool setBillingRate;
+            bool queryUCID;
+            bool chargeAdviceEvent;
+            bool reserved1;
+            bool reserved2;
         };
 
         public struct ATTQueryDeviceInfoConfEvent_t
@@ -1529,7 +1529,7 @@ namespace Tsapi
 
         public struct ATTSetAdviceOfCharge_t
         {
-            Boolean featureFlag;
+            bool featureFlag;
         };
 
         public struct ATTSetAdviceOfChargeConfEvent_t
@@ -1549,12 +1549,12 @@ namespace Tsapi
         {
             ATTWorkMode_t workMode;
             int reasonCode;
-            Boolean enablePending;
+            bool enablePending;
         };
 
         public struct ATTSetAgentStateConfEvent_t
         {
-            Boolean isPending;
+            bool isPending;
         };
 
         public struct ATTQueryAgentStateConfEvent_t
@@ -1585,7 +1585,7 @@ namespace Tsapi
             ATTUserToUserInfo_t userInfo;
             ATTUCID_t ucid;
             ATTCallOriginatorInfo_t callOriginatorInfo;
-            Boolean flexibleBilling;
+            bool flexibleBilling;
             Csta.DeviceID_t trunkMember;
         };
 
@@ -1601,7 +1601,7 @@ namespace Tsapi
             ATTUserToUserInfo_t userInfo;
             ATTUCID_t ucid;
             ATTCallOriginatorInfo_t callOriginatorInfo;
-            Boolean flexibleBilling;
+            bool flexibleBilling;
         };
 
         public struct ATTTrunkInfo_t
@@ -1645,27 +1645,27 @@ namespace Tsapi
         public struct ATTConsultationCall_t
         {
             Csta.DeviceID_t destRoute;
-            Boolean priorityCalling;
+            bool priorityCalling;
             ATTUserToUserInfo_t userInfo;
         };
 
         public struct ATTMakeCall_t
         {
             Csta.DeviceID_t destRoute;
-            Boolean priorityCalling;
+            bool priorityCalling;
             ATTUserToUserInfo_t userInfo;
         };
 
         public struct ATTDirectAgentCall_t
         {
             Csta.DeviceID_t split;
-            Boolean priorityCalling;
+            bool priorityCalling;
             ATTUserToUserInfo_t userInfo;
         };
 
         public struct ATTMakePredictiveCall_t
         {
-            Boolean priorityCalling;
+            bool priorityCalling;
             short maxRings;
             ATTAnswerTreat_t answerTreat;
             Csta.DeviceID_t destRoute;
@@ -1693,7 +1693,7 @@ namespace Tsapi
         {
             Csta.DeviceID_t callingDevice;
             Csta.DeviceID_t directAgentCallSplit;
-            Boolean priorityCalling;
+            bool priorityCalling;
             Csta.DeviceID_t destRoute;
             ATTUserCollectCode_t collectCode;
             ATTUserProvidedCode_t userProvidedCode;
@@ -1714,7 +1714,7 @@ namespace Tsapi
             Csta.CalledDeviceID_t distributingDevice;
             ATTUCID_t ucid;
             ATTCallOriginatorInfo_t callOriginatorInfo;
-            Boolean flexibleBilling;
+            bool flexibleBilling;
         };
 
         public struct ATTEstablishedEvent_t
@@ -1730,7 +1730,7 @@ namespace Tsapi
             Csta.CalledDeviceID_t distributingDevice;
             ATTUCID_t ucid;
             ATTCallOriginatorInfo_t callOriginatorInfo;
-            Boolean flexibleBilling;
+            bool flexibleBilling;
         };
 
         public struct ATTOriginatedEvent_t

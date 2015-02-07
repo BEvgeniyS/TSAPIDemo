@@ -677,7 +677,7 @@ namespace Tsapi
         public struct ForwardingInfo_t
         {
             ForwardingType_t forwardingType;
-            Boolean forwardingOn;
+            bool forwardingOn;
             DeviceID_t forwardDN;
         }
 
@@ -909,7 +909,7 @@ namespace Tsapi
         public struct CSTAHoldCall_t
         {
             ConnectionID_t activeCall;
-            Boolean reservation;
+            bool reservation;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
@@ -960,7 +960,7 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct CSTAQueryMwiConfEvent_t
         {
-            Boolean messages;
+            bool messages;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
@@ -972,7 +972,7 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct CSTAQueryDndConfEvent_t
         {
-            Boolean doNotDisturb;
+            bool doNotDisturb;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
@@ -1090,7 +1090,7 @@ namespace Tsapi
         public struct CSTASetMwi_t
         {
             DeviceID_t device;
-            Boolean messages;
+            bool messages;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
@@ -1102,7 +1102,7 @@ namespace Tsapi
         public struct CSTASetDnd_t
         {
             DeviceID_t device;
-            Boolean doNotDisturb;
+            bool doNotDisturb;
         }
 
         public struct CSTASetDndConfEvent_t
@@ -1303,7 +1303,7 @@ namespace Tsapi
         public struct CSTADoNotDisturbEvent_t
         {
             SubjectDeviceID_t device;
-            Boolean doNotDisturbOn;
+            bool doNotDisturbOn;
         }
 
         public struct CSTAForwardingEvent_t
@@ -1316,7 +1316,7 @@ namespace Tsapi
         {
             CalledDeviceID_t deviceForMessage;
             SubjectDeviceID_t invokingDevice;
-            Boolean messageWaitingOn;
+            bool messageWaitingOn;
         }
 
         public struct CSTALoggedOnEvent_t
@@ -1391,7 +1391,7 @@ namespace Tsapi
             DeviceID_t callingDevice;
             ConnectionID_t routedCall;
             SelectValue_t routedSelAlgorithm;
-            Boolean priority;
+            bool priority;
             SetUpValues_t setupInformation;
         }
 
@@ -1402,7 +1402,7 @@ namespace Tsapi
             DeviceID_t routeSelected;
             RetryValue_t remainRetry;
             SetUpValues_t setupInformation;
-            Boolean routeUsedReq;
+            bool routeUsedReq;
         }
 
         public struct CSTAReRouteRequest_t
@@ -1417,7 +1417,7 @@ namespace Tsapi
             RoutingCrossRefID_t routingCrossRefID;
             DeviceID_t routeUsed;
             DeviceID_t callingDevice;
-            Boolean domain;
+            bool domain;
         }
 
         public struct CSTARouteEndEvent_t
@@ -1777,7 +1777,7 @@ namespace Tsapi
         
         public struct CSTAQueryCallMonitorConfEvent_t 
         {
-            Boolean         callMonitor;
+            bool         callMonitor;
         }
 
         public struct CSTARouteRequestExtEvent_t 
@@ -1788,7 +1788,7 @@ namespace Tsapi
             CallingDeviceID_t callingDevice;
             ConnectionID_t  routedCall;
             SelectValue_t   routedSelAlgorithm;
-            Boolean         priority;
+            bool         priority;
             SetUpValues_t   setupInformation;
         }
         
@@ -1798,7 +1798,7 @@ namespace Tsapi
             RoutingCrossRefID_t routingCrossRefID;
             CalledDeviceID_t routeUsed;
             CallingDeviceID_t callingDevice;
-            Boolean         domain;
+            bool         domain;
         }
 
         public struct CSTARouteSelectInvRequest_t 

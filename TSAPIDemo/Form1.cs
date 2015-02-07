@@ -128,6 +128,13 @@ namespace TSAPIDemo
             Debug.WriteLine("[acsSetESR Test] stream = " + esrparam);
         }
 
+        private bool acsEnumServerNamesCallbackHandler(StringBuilder serverName, uint lParam)
+        {
+            Debug.WriteLine("[acsEnumServerNames Test] server = " + serverName );
+            MessageBox.Show("Found server:\n" + serverName);
+            if (serverName.ToString() != string.Empty) return true; else return false;
+        }
+
         private void mainForm_Load(object sender, EventArgs e)
         {
             if (this.configured)
@@ -541,6 +548,13 @@ namespace TSAPIDemo
             {
                 MessageBox.Show("acsFlushEventQueue failed. Error: " + retCode._value);
             }
+        }
+
+        private void enumServerNamesButton_Click(object sender, EventArgs e)
+        {
+
+            Acs.EnumServerNamesCB callback = new Acs.EnumServerNamesCB(acsEnumServerNamesCallbackHandler);
+            Acs.acsEnumServerNames(Acs.StreamType_t.ST_CSTA, callback, 0);
         }
     }
 

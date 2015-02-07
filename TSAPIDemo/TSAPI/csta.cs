@@ -857,7 +857,7 @@ namespace Tsapi
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref ConnectionID_t activeCall,
-                        Boolean  reservation,
+                        bool reservation,
                         Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -913,7 +913,7 @@ namespace Tsapi
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
-                        Boolean  messages,
+                        bool messages,
                         Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -921,7 +921,7 @@ namespace Tsapi
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
-                        Boolean  doNotDisturb,
+                        bool doNotDisturb,
                         Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -930,7 +930,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         ref DeviceID_t device,
                         ForwardingType_t forwardingType,
-                        Boolean  forwardingOn,
+                        bool forwardingOn,
                         ref DeviceID_t forwardingDestination,
                         Acs.PrivateData_t privateData);
 
@@ -1065,7 +1065,7 @@ namespace Tsapi
                         ref DeviceID_t routeSelected,
                         RetryValue_t remainRetry,
                         ref SetUpValues_t setupInformation,
-                        Boolean routeUsedReq,
+                        bool routeUsedReq,
                         Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
@@ -1086,7 +1086,7 @@ namespace Tsapi
                         ref DeviceID_t routeSelected,
                         RetryValue_t remainRetry,
                         ref SetUpValues_t setupInformation,
-                        Boolean routeUsedReq,
+                        bool routeUsedReq,
                         Acs.PrivateData_t privateData);
  
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]

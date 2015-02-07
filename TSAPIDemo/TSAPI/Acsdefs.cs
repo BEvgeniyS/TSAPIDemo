@@ -380,7 +380,7 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ACSNameSrvReply_t
         {
-            Boolean more;
+            bool more;
             private struct list
             {
                 short count;

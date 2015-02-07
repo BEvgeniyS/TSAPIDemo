@@ -291,5 +291,18 @@ namespace Tsapi
 
         //[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void EsrDelegate(uint esrparam);
+
+        public delegate bool EnumServerNamesCB(
+                            [MarshalAs(UnmanagedType.LPStr)]
+                            System.Text.StringBuilder serverName,
+                            uint lParam
+                            );
+
+        [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern RetCode_t acsEnumServerNames(
+                            StreamType_t streamType,
+                            EnumServerNamesCB callback,
+                            uint lParam);
+
     }
 }

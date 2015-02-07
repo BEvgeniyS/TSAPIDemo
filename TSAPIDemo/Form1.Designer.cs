@@ -47,6 +47,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverID_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.flushEventQueueButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.streamCheckbox = new System.Windows.Forms.CheckBox();
@@ -55,7 +56,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.goButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.flushEventQueueButton = new System.Windows.Forms.Button();
+            this.enumServerNamesButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -169,6 +170,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.enumServerNamesButton);
             this.TestsTab.Controls.Add(this.flushEventQueueButton);
             this.TestsTab.Controls.Add(this.button1);
             this.TestsTab.Controls.Add(this.label7);
@@ -184,6 +186,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // flushEventQueueButton
+            // 
+            this.flushEventQueueButton.Location = new System.Drawing.Point(44, 164);
+            this.flushEventQueueButton.Name = "flushEventQueueButton";
+            this.flushEventQueueButton.Size = new System.Drawing.Size(75, 23);
+            this.flushEventQueueButton.TabIndex = 5;
+            this.flushEventQueueButton.Text = "FlushEventQueue";
+            this.flushEventQueueButton.UseVisualStyleBackColor = true;
+            this.flushEventQueueButton.Click += new System.EventHandler(this.flushEventQueueButton_Click);
             // 
             // button1
             // 
@@ -266,15 +278,15 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // flushEventQueueButton
+            // enumServerNamesButton
             // 
-            this.flushEventQueueButton.Location = new System.Drawing.Point(44, 164);
-            this.flushEventQueueButton.Name = "flushEventQueueButton";
-            this.flushEventQueueButton.Size = new System.Drawing.Size(75, 23);
-            this.flushEventQueueButton.TabIndex = 5;
-            this.flushEventQueueButton.Text = "FlushEventQueue";
-            this.flushEventQueueButton.UseVisualStyleBackColor = true;
-            this.flushEventQueueButton.Click += new System.EventHandler(this.flushEventQueueButton_Click);
+            this.enumServerNamesButton.Location = new System.Drawing.Point(44, 193);
+            this.enumServerNamesButton.Name = "enumServerNamesButton";
+            this.enumServerNamesButton.Size = new System.Drawing.Size(75, 23);
+            this.enumServerNamesButton.TabIndex = 12;
+            this.enumServerNamesButton.Text = "EnumServerNames";
+            this.enumServerNamesButton.UseVisualStyleBackColor = true;
+            this.enumServerNamesButton.Click += new System.EventHandler(this.enumServerNamesButton_Click);
             // 
             // mainForm
             // 
@@ -320,6 +332,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button flushEventQueueButton;
+        private System.Windows.Forms.Button enumServerNamesButton;
 
 
 
