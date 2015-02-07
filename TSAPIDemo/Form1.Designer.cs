@@ -45,7 +45,7 @@ namespace TSAPIDemo
             this.appName_textBox = new System.Windows.Forms.TextBox();
             this.password_textBox = new System.Windows.Forms.TextBox();
             this.login_textBox = new System.Windows.Forms.TextBox();
-            this.serverID_textBox = new System.Windows.Forms.TextBox();
+            this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.flushEventQueueButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -73,7 +73,7 @@ namespace TSAPIDemo
             this.configTab.Controls.Add(this.appName_textBox);
             this.configTab.Controls.Add(this.password_textBox);
             this.configTab.Controls.Add(this.login_textBox);
-            this.configTab.Controls.Add(this.serverID_textBox);
+            this.configTab.Controls.Add(this.serverId_textBox);
             this.configTab.Location = new System.Drawing.Point(4, 22);
             this.configTab.Name = "configTab";
             this.configTab.Padding = new System.Windows.Forms.Padding(3);
@@ -161,12 +161,12 @@ namespace TSAPIDemo
             // 
             // serverID_textBox
             // 
-            this.serverID_textBox.Location = new System.Drawing.Point(130, 51);
-            this.serverID_textBox.MaxLength = 64;
-            this.serverID_textBox.Name = "serverID_textBox";
-            this.serverID_textBox.Size = new System.Drawing.Size(300, 20);
-            this.serverID_textBox.TabIndex = 0;
-            this.serverID_textBox.Leave += new System.EventHandler(this.serverID_textBox_Leave);
+            this.serverId_textBox.Location = new System.Drawing.Point(130, 51);
+            this.serverId_textBox.MaxLength = 64;
+            this.serverId_textBox.Name = "serverID_textBox";
+            this.serverId_textBox.Size = new System.Drawing.Size(300, 20);
+            this.serverId_textBox.TabIndex = 0;
+            this.serverId_textBox.Leave += new System.EventHandler(this.serverID_textBox_Leave);
             // 
             // TestsTab
             // 
@@ -320,7 +320,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.TextBox appName_textBox;
         private System.Windows.Forms.TextBox password_textBox;
         private System.Windows.Forms.TextBox login_textBox;
-        private System.Windows.Forms.TextBox serverID_textBox;
+        private System.Windows.Forms.TextBox serverId_textBox;
         private System.Windows.Forms.TabPage TestsTab;
         private System.Windows.Forms.CheckBox streamCheckbox;
         private System.Windows.Forms.TreeView snapShotDataTree;

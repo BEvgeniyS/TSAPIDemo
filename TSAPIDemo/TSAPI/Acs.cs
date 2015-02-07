@@ -305,4 +305,29 @@ namespace Tsapi
                             uint lParam);
 
     }
+    public class EnumServerHandler
+    {
+        private string _serverName;
+        public string serverName 
+        { 
+            get
+            {
+                return _serverName;
+            }
+        }
+        public bool acsEnumServerNamesCallbackHandler(System.Text.StringBuilder serverNameSB, uint lParam)
+        {
+            System.Diagnostics.Debug.WriteLine("[acsEnumServerNames Test] server = " + serverNameSB);
+            string serverName = serverNameSB.ToString();
+            if (serverName != string.Empty)
+            {
+                this._serverName = serverName;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
 }

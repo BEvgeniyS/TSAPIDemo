@@ -22,7 +22,7 @@ namespace TSAPIDemo
             InitializeComponent();
             try
             {
-                this.serverID_textBox.Text = config.AppSettings.Settings["ServerID"].Value;
+                this.serverId_textBox.Text = getServerId();
                 this.login_textBox.Text = config.AppSettings.Settings["TSAPI login"].Value;
                 this.password_textBox.Text = config.AppSettings.Settings["Password"].Value;
                 this.appName_textBox.Text = config.AppSettings.Settings["ApplicationName"].Value;
@@ -128,13 +128,6 @@ namespace TSAPIDemo
             Debug.WriteLine("[acsSetESR Test] stream = " + esrparam);
         }
 
-        private bool acsEnumServerNamesCallbackHandler(StringBuilder serverName, uint lParam)
-        {
-            Debug.WriteLine("[acsEnumServerNames Test] server = " + serverName );
-            MessageBox.Show("Found server:\n" + serverName);
-            if (serverName.ToString() != string.Empty) return true; else return false;
-        }
-
         private void mainForm_Load(object sender, EventArgs e)
         {
             if (this.configured)
@@ -153,7 +146,7 @@ namespace TSAPIDemo
             var invokeIdType = Acs.InvokeIDType_t.LIB_GEN_ID;
             var invokeId = new Acs.InvokeID_t();
             var streamType = Acs.StreamType_t.ST_CSTA;
-            Acs.ServerID_t serverId = config.AppSettings.Settings["ServerID"].Value;
+             Acs.ServerID_t serverId = getServerId();
             Acs.LoginID_t loginId = config.AppSettings.Settings["TSAPI login"].Value;
             Acs.Passwd_t passwd = config.AppSettings.Settings["Password"].Value;
             Acs.AppName_t appName = config.AppSettings.Settings["ApplicationName"].Value;
@@ -253,7 +246,7 @@ namespace TSAPIDemo
         {
             try
             {
-               config.Save(ConfigurationSaveMode.Modified);
+                config.Save(ConfigurationSaveMode.Modified);
             }
             catch { }
         }
@@ -261,14 +254,14 @@ namespace TSAPIDemo
 
         private void serverID_textBox_Leave(object sender, EventArgs e)
         {
-            if (serverID_textBox.Text == string.Empty) this.configured = false;
+            if (serverId_textBox.Text == string.Empty) this.configured = false;
             if (config.AppSettings.Settings["ServerID"] == null)
             {
-                config.AppSettings.Settings.Add("ServerID", serverID_textBox.Text);
+                config.AppSettings.Settings.Add("ServerID", serverId_textBox.Text);
             }
             else
             {
-                config.AppSettings.Settings["ServerID"].Value = serverID_textBox.Text;
+                config.AppSettings.Settings["ServerID"].Value = serverId_textBox.Text;
             }
         }
 
@@ -482,7 +475,7 @@ namespace TSAPIDemo
             if (e.TabPage != this.configTab)
             {
                 configured = false;
-                if (serverID_textBox.Text != string.Empty &&
+                if (getServerId() != string.Empty &&
                     login_textBox.Text != string.Empty &&
                     password_textBox.Text != string.Empty &&
                     appName_textBox.Text != string.Empty &&
@@ -514,7 +507,7 @@ namespace TSAPIDemo
         private void button1_Click(object sender, EventArgs e)
         {
             Csta.EventBuffer_t evtbuf =  getDeviceList(this.acsHandle);
-            //MessageBox.Show("Number of devices = " + evtbuf.evt.cstaConfirmation.getDeviceList.devList.count);
+            MessageBox.Show("Number of devices = " + evtbuf.evt.cstaConfirmation.getDeviceList.devList.count);
         }
 
         //[System.Security.Permissions.PermissionSet(System.Security.Permissions.SecurityAction.Demand, Name = "FullTrust")]
@@ -552,9 +545,25 @@ namespace TSAPIDemo
 
         private void enumServerNamesButton_Click(object sender, EventArgs e)
         {
-
-            Acs.EnumServerNamesCB callback = new Acs.EnumServerNamesCB(acsEnumServerNamesCallbackHandler);
+            var enumServerHandler = new EnumServerHandler();
+            Acs.EnumServerNamesCB callback = new Acs.EnumServerNamesCB(enumServerHandler.acsEnumServerNamesCallbackHandler);
             Acs.acsEnumServerNames(Acs.StreamType_t.ST_CSTA, callback, 0);
+            MessageBox.Show("Found server:\n" + enumServerHandler.serverName);
+        }
+
+        private string getServerId()
+        {
+            var enumServerHandler = new EnumServerHandler();
+            Acs.EnumServerNamesCB callback = new Acs.EnumServerNamesCB(enumServerHandler.acsEnumServerNamesCallbackHandler);
+            Acs.acsEnumServerNames(Acs.StreamType_t.ST_CSTA, callback, 0);
+            if (enumServerHandler.serverName != string.Empty)
+            {
+                return enumServerHandler.serverName;
+            }
+            else
+            {
+                return config.AppSettings.Settings["ServerID"].Value;
+            }
         }
     }
 
