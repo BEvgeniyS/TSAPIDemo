@@ -585,6 +585,14 @@ namespace TSAPIDemo
             }
         }
 
+        private void acsQueryAuthInfoButton_Click(object sender, EventArgs e)
+        {
+            Acs.ServerID_t serverID = config.AppSettings.Settings["ServerID"].Value;
+            Acs.ACSAuthInfo_t authInfo = new Acs.ACSAuthInfo_t();
+            Acs.acsQueryAuthInfo(ref serverID, ref authInfo);
+            MessageBox.Show(authInfo.authType + "; LoginId = " + authInfo.authLoginID);
+        }
+
     }
 
     class CallNode : TreeNode

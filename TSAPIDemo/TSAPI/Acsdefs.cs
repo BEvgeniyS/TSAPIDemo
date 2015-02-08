@@ -400,8 +400,8 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ACSAuthInfo_t
         {
-            ACSAuthType_t authType;
-            LoginID_t authLoginID;
+            public ACSAuthType_t authType;
+            public LoginID_t authLoginID;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]

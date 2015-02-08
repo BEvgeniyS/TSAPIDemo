@@ -36,6 +36,7 @@ namespace TSAPIDemo
         private void InitializeComponent()
         {
             this.configTab = new System.Windows.Forms.TabPage();
+            this.enumServerNamesButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.acsQueryAuthInfoButton = new System.Windows.Forms.Button();
             this.flushEventQueueButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -56,7 +58,6 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.goButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.enumServerNamesButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -82,6 +83,16 @@ namespace TSAPIDemo
             this.configTab.TabIndex = 1;
             this.configTab.Text = "Configuration";
             this.configTab.UseVisualStyleBackColor = true;
+            // 
+            // enumServerNamesButton
+            // 
+            this.enumServerNamesButton.Location = new System.Drawing.Point(355, 48);
+            this.enumServerNamesButton.Name = "enumServerNamesButton";
+            this.enumServerNamesButton.Size = new System.Drawing.Size(75, 23);
+            this.enumServerNamesButton.TabIndex = 13;
+            this.enumServerNamesButton.Text = "EnumServerNames";
+            this.enumServerNamesButton.UseVisualStyleBackColor = true;
+            this.enumServerNamesButton.Click += new System.EventHandler(this.enumServerNamesButton_Click);
             // 
             // label6
             // 
@@ -171,6 +182,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.acsQueryAuthInfoButton);
             this.TestsTab.Controls.Add(this.flushEventQueueButton);
             this.TestsTab.Controls.Add(this.button1);
             this.TestsTab.Controls.Add(this.label7);
@@ -187,11 +199,21 @@ namespace TSAPIDemo
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
             // 
+            // acsQueryAuthInfoButton
+            // 
+            this.acsQueryAuthInfoButton.Location = new System.Drawing.Point(26, 193);
+            this.acsQueryAuthInfoButton.Name = "acsQueryAuthInfoButton";
+            this.acsQueryAuthInfoButton.Size = new System.Drawing.Size(113, 23);
+            this.acsQueryAuthInfoButton.TabIndex = 12;
+            this.acsQueryAuthInfoButton.Text = "acsQueryAuthInfo";
+            this.acsQueryAuthInfoButton.UseVisualStyleBackColor = true;
+            this.acsQueryAuthInfoButton.Click += new System.EventHandler(this.acsQueryAuthInfoButton_Click);
+            // 
             // flushEventQueueButton
             // 
-            this.flushEventQueueButton.Location = new System.Drawing.Point(44, 164);
+            this.flushEventQueueButton.Location = new System.Drawing.Point(26, 164);
             this.flushEventQueueButton.Name = "flushEventQueueButton";
-            this.flushEventQueueButton.Size = new System.Drawing.Size(75, 23);
+            this.flushEventQueueButton.Size = new System.Drawing.Size(113, 23);
             this.flushEventQueueButton.TabIndex = 5;
             this.flushEventQueueButton.Text = "FlushEventQueue";
             this.flushEventQueueButton.UseVisualStyleBackColor = true;
@@ -278,16 +300,6 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // enumServerNamesButton
-            // 
-            this.enumServerNamesButton.Location = new System.Drawing.Point(355, 48);
-            this.enumServerNamesButton.Name = "enumServerNamesButton";
-            this.enumServerNamesButton.Size = new System.Drawing.Size(75, 23);
-            this.enumServerNamesButton.TabIndex = 13;
-            this.enumServerNamesButton.Text = "EnumServerNames";
-            this.enumServerNamesButton.UseVisualStyleBackColor = true;
-            this.enumServerNamesButton.Click += new System.EventHandler(this.enumServerNamesButton_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -333,6 +345,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button flushEventQueueButton;
         private System.Windows.Forms.Button enumServerNamesButton;
+        private System.Windows.Forms.Button acsQueryAuthInfoButton;
 
 
 
