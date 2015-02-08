@@ -22,18 +22,28 @@ namespace TSAPIDemo
             InitializeComponent();
             try
             {
-                this.serverId_textBox.Text = getServerId();
-                this.login_textBox.Text = config.AppSettings.Settings["TSAPI login"].Value;
-                this.password_textBox.Text = config.AppSettings.Settings["Password"].Value;
-                this.appName_textBox.Text = config.AppSettings.Settings["ApplicationName"].Value;
-                this.apiVer_textBox.Text = config.AppSettings.Settings["ApiVersion"].Value;
+                if (config.AppSettings.Settings["ServerID"].Value != "" ||
+                    config.AppSettings.Settings["ServerID"].Value != "AVAYA#Switch_Connection#Service_Type#AE_Service")
+                {
+                    config.AppSettings.Settings["ServerID"].Value = getServerId();
+                }
                 this.configured = true;
+                try { this.serverId_textBox.Text = config.AppSettings.Settings["ServerID"].Value; }
+                catch { this.configured = false; }
+                try { this.login_textBox.Text = config.AppSettings.Settings["TSAPI login"].Value; }
+                catch { this.configured = false; }
+                try { this.password_textBox.Text = config.AppSettings.Settings["Password"].Value; }
+                catch { this.configured = false; }
+                try { this.appName_textBox.Text = config.AppSettings.Settings["ApplicationName"].Value; }
+                catch { this.configured = false; }
+                try { this.apiVer_textBox.Text = config.AppSettings.Settings["ApiVersion"].Value; }
+                catch { this.configured = false; }
             }
             catch
             {
                 this.configured = false;
-                this.mainTabs.SelectTab(configTab);
             }
+            if (!this.configured) { this.mainTabs.SelectTab(configTab); }
         }
 
         private void goButton_Click(object sender, EventArgs e)
@@ -146,7 +156,7 @@ namespace TSAPIDemo
             var invokeIdType = Acs.InvokeIDType_t.LIB_GEN_ID;
             var invokeId = new Acs.InvokeID_t();
             var streamType = Acs.StreamType_t.ST_CSTA;
-             Acs.ServerID_t serverId = getServerId();
+            Acs.ServerID_t serverId = config.AppSettings.Settings["ServerID"].Value;
             Acs.LoginID_t loginId = config.AppSettings.Settings["TSAPI login"].Value;
             Acs.Passwd_t passwd = config.AppSettings.Settings["Password"].Value;
             Acs.AppName_t appName = config.AppSettings.Settings["ApplicationName"].Value;
@@ -475,7 +485,7 @@ namespace TSAPIDemo
             if (e.TabPage != this.configTab)
             {
                 configured = false;
-                if (getServerId() != string.Empty &&
+                if (serverId_textBox.Text != string.Empty &&
                     login_textBox.Text != string.Empty &&
                     password_textBox.Text != string.Empty &&
                     appName_textBox.Text != string.Empty &&
@@ -548,7 +558,16 @@ namespace TSAPIDemo
             var enumServerHandler = new EnumServerHandler();
             Acs.EnumServerNamesCB callback = new Acs.EnumServerNamesCB(enumServerHandler.acsEnumServerNamesCallbackHandler);
             Acs.acsEnumServerNames(Acs.StreamType_t.ST_CSTA, callback, 0);
-            MessageBox.Show("Found server:\n" + enumServerHandler.serverName);
+            this.serverId_textBox.Text = enumServerHandler.serverName;
+            if (config.AppSettings.Settings["ServerID"] == null)
+            {
+                config.AppSettings.Settings.Add("ServerID", enumServerHandler.serverName);
+            }
+            else
+            {
+            config.AppSettings.Settings["ServerID"].Value = enumServerHandler.serverName;
+            }
+            //MessageBox.Show("Found server:\n" + enumServerHandler.serverName);
         }
 
         private string getServerId()
@@ -565,6 +584,7 @@ namespace TSAPIDemo
                 return config.AppSettings.Settings["ServerID"].Value;
             }
         }
+
     }
 
     class CallNode : TreeNode

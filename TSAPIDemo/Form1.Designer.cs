@@ -64,6 +64,7 @@ namespace TSAPIDemo
             // 
             // configTab
             // 
+            this.configTab.Controls.Add(this.enumServerNamesButton);
             this.configTab.Controls.Add(this.label6);
             this.configTab.Controls.Add(this.label5);
             this.configTab.Controls.Add(this.label4);
@@ -159,18 +160,17 @@ namespace TSAPIDemo
             this.login_textBox.TabIndex = 1;
             this.login_textBox.Leave += new System.EventHandler(this.login_textBox_Leave);
             // 
-            // serverID_textBox
+            // serverId_textBox
             // 
             this.serverId_textBox.Location = new System.Drawing.Point(130, 51);
             this.serverId_textBox.MaxLength = 64;
-            this.serverId_textBox.Name = "serverID_textBox";
-            this.serverId_textBox.Size = new System.Drawing.Size(300, 20);
+            this.serverId_textBox.Name = "serverId_textBox";
+            this.serverId_textBox.Size = new System.Drawing.Size(219, 20);
             this.serverId_textBox.TabIndex = 0;
             this.serverId_textBox.Leave += new System.EventHandler(this.serverID_textBox_Leave);
             // 
             // TestsTab
             // 
-            this.TestsTab.Controls.Add(this.enumServerNamesButton);
             this.TestsTab.Controls.Add(this.flushEventQueueButton);
             this.TestsTab.Controls.Add(this.button1);
             this.TestsTab.Controls.Add(this.label7);
@@ -280,10 +280,10 @@ namespace TSAPIDemo
             // 
             // enumServerNamesButton
             // 
-            this.enumServerNamesButton.Location = new System.Drawing.Point(44, 193);
+            this.enumServerNamesButton.Location = new System.Drawing.Point(355, 48);
             this.enumServerNamesButton.Name = "enumServerNamesButton";
             this.enumServerNamesButton.Size = new System.Drawing.Size(75, 23);
-            this.enumServerNamesButton.TabIndex = 12;
+            this.enumServerNamesButton.TabIndex = 13;
             this.enumServerNamesButton.Text = "EnumServerNames";
             this.enumServerNamesButton.UseVisualStyleBackColor = true;
             this.enumServerNamesButton.Click += new System.EventHandler(this.enumServerNamesButton_Click);
