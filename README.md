@@ -1,4 +1,4 @@
-## TSAPIDemo 0.1
+## TSAPIDemo
 
 ## About
 TSAPIDemo is a demo application to demonstrate and test several possibilities of TSAPISharp library.
