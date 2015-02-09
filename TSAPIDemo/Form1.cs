@@ -90,32 +90,37 @@ namespace TSAPIDemo
             }
             int callCountForSnapshotDevice = evtBuf.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
             Csta.ConnectionID_t tmpConn;
-            this.snapShotDataTree.Nodes.Clear();
+
+            TSAPIDemo.Subforms.SnapShotDeviceForm snapShotDevicePop = new Subforms.SnapShotDeviceForm();
+            snapShotDevicePop.parentForm = this;
+
+            snapShotDevicePop.snapShotDataTree.Nodes.Clear();
             for (int i = 0; i < callCountForSnapshotDevice; i++)
             {
                 var snapDeviceInfoArray = (Csta.CSTASnapshotDeviceResponseInfo_t[])evtBuf.auxData["snapDeviceInfo"];
                 tmpConn = snapDeviceInfoArray[i].callIdentifier;
                 CallNode callNode = new CallNode();
                 callNode.Text = GetUcid(tmpConn).ToString();
-                this.snapShotDataTree.Nodes.Add(callNode);
+                snapShotDevicePop.snapShotDataTree.Nodes.Add(callNode);
 
                 callNode.connection = tmpConn;
-                this.snapShotDataTree.Nodes[i].Text += ". States: ";
+                snapShotDevicePop.snapShotDataTree.Nodes[i].Text += ". States: ";
                 for (int j = 0; j < snapDeviceInfoArray[i].localCallState.count; j++)
                 {
                     var snapDeviceStateArray = (Csta.LocalConnectionState_t[])evtBuf.auxData["snapDeviceState" + i];
-                    this.snapShotDataTree.Nodes[i].Text += "#" + (j+1) + ": " + snapDeviceStateArray[j] + " ";
+                    snapShotDevicePop.snapShotDataTree.Nodes[i].Text += "#" + (j + 1) + ": " + snapDeviceStateArray[j] + " ";
                 }
                 Csta.EventBuffer_t snapCallEvt = snapshotCall(ref tmpConn);
-                this.snapShotDataTree.Nodes[i].Nodes.Clear();
+                snapShotDevicePop.snapShotDataTree.Nodes[i].Nodes.Clear();
                 int callCountForSnapshotCall = snapCallEvt.evt.cstaConfirmation.snapshotCall.snapshotData.count;
                 var snapCallInfoArray = (Csta.CSTASnapshotCallResponseInfo_t[])snapCallEvt.auxData["snapCallInfo"];
                 for (int j = 0; j < callCountForSnapshotCall; j++)
                 {
                     TreeNode t = new TreeNode(snapCallInfoArray[j].deviceOnCall.deviceID.ToString() + "; " + snapCallInfoArray[j].deviceOnCall.deviceIDType + "; " + snapCallInfoArray[j].deviceOnCall.deviceIDStatus);
-                    this.snapShotDataTree.Nodes[i].Nodes.Add(t);
+                    snapShotDevicePop.snapShotDataTree.Nodes[i].Nodes.Add(t);
                 }
-                this.snapShotDataTree.Nodes[i].Expand();
+                snapShotDevicePop.snapShotDataTree.Nodes[i].Expand();
+                snapShotDevicePop.ShowDialog();
             }
 
             if (callCountForSnapshotDevice < 1)
@@ -134,8 +139,8 @@ namespace TSAPIDemo
 
         private void EventReactionHandler(uint esrparam)
         {
-            //MessageBox.Show("[acsSetESR Test] stream = " + esrparam);
-            Debug.WriteLine("[acsSetESR Test] stream = " + esrparam);
+            //MessageBox.Show("[acsSetESR Test] acsHandle = " + esrparam);
+            Debug.WriteLine("[acsSetESR Test] acsHandle = " + esrparam);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -386,43 +391,7 @@ namespace TSAPIDemo
             return evtBuf;
         }
 
-        private Csta.EventBuffer_t clearCall(ref Csta.ConnectionID_t cId)
-        {
-            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
-            Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
-            Acs.RetCode_t retCode = Csta.cstaClearCall(this.acsHandle,
-                                                 invokeId,
-                                                 ref cId,
-                                                 this.privData);
-            if (retCode._value < 0)
-            {
-                MessageBox.Show("cstaClearCall error: " + retCode);
-                return null;
-            }
-            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
-            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
-            ushort numEvents;
-            retCode = Acs.acsGetEventBlock(this.acsHandle,
-                                          evtBuf,
-                                          ref eventBufSize,
-                                          privData,
-                                          out numEvents);
-            if (retCode._value < 0)
-            {
-                MessageBox.Show("acsGetEventBlock error: " + retCode);
-                return null;
-            }
-            if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION ||
-                evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_CLEAR_CALL_CONF)
-            {
-                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION
-                    && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
-                {
-                    MessageBox.Show("Clear call failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
-                }
-            }
-            return evtBuf;
-        }
+       
 
         private Csta.EventBuffer_t closeStream(Acs.ACSHandle_t acsHandle)
         {
@@ -497,22 +466,7 @@ namespace TSAPIDemo
             }
         }
 
-        private void snapShotDataTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (e.Button != MouseButtons.Right) { return; }
-            snapShotDataTree.SelectedNode = e.Node;
-            CallNode tmpNode = (CallNode)e.Node;
-            Csta.ConnectionID_t selectedConnId = tmpNode.connection;
-            ContextMenuStrip snapShotDataTreeContextMenu = new ContextMenuStrip();
-            ToolStripItem snapShotCallContextMenuItem = snapShotDataTreeContextMenu.Items.Add("cstaClearCall");
-            snapShotDataTreeContextMenu.Click += (s, ev) => {
-                Csta.EventBuffer_t evtbuf = clearCall(ref selectedConnId);
-                snapShotDataTree.Nodes.Remove(tmpNode);
-            };
-            
-            snapShotDataTreeContextMenu.Show(Cursor.Position);
-            
-        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -589,8 +543,71 @@ namespace TSAPIDemo
         {
             Acs.ServerID_t serverID = config.AppSettings.Settings["ServerID"].Value;
             Acs.ACSAuthInfo_t authInfo = new Acs.ACSAuthInfo_t();
-            Acs.acsQueryAuthInfo(ref serverID, ref authInfo);
-            MessageBox.Show(authInfo.authType + "; LoginId = " + authInfo.authLoginID);
+            Acs.RetCode_t retCode =  Acs.acsQueryAuthInfo(ref serverID, ref authInfo);
+            if (retCode._value > 0)
+            {
+                MessageBox.Show(authInfo.authType + "; LoginId = " + authInfo.authLoginID);
+            }
+            else
+            {
+                MessageBox.Show("There was an error during acsQueryAuthInfo. Code = " + retCode._value);
+            }
+        }
+
+        private void acsSetHeartbeatIntervalButton_Click(object sender, EventArgs e)
+        {
+            acsSetHeartbeatIntervalPopupForm subform = new acsSetHeartbeatIntervalPopupForm();
+            subform.ShowDialog();
+            if (subform.DialogResult == DialogResult.OK)
+            {
+                ushort hbInterval = subform.ReturnValue;
+                var invoikeId = new Acs.InvokeID_t();
+                Acs.RetCode_t retCode = Acs.acsSetHeartbeatInterval(this.acsHandle, invoikeId, hbInterval, null);
+                if (retCode._value > 0)
+                {
+                    Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+                    ushort numEvents;
+                    ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+                    Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, null, out numEvents);
+                    if (evtBuf.evt.eventHeader.eventClass.eventClass == Acs.ACSCONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Acs.ACS_UNIVERSAL_FAILURE_CONF)
+                    {
+                        MessageBox.Show("Could not change HeartbeatInterval. Error: " + evtBuf.evt.acsConfirmation.failureEvent.error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("There was an error during acsSetHeartbeatInterval. Code = " + retCode._value);
+                }
+            }
+        }
+
+        private void cstaGetAPICapsButton_Click(object sender, EventArgs e)
+        {
+            var invoikeId = new Acs.InvokeID_t();
+            Acs.RetCode_t retCode = Csta.cstaGetAPICaps(this.acsHandle, invoikeId);
+            if (retCode._value >= 0)
+            {
+                Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+                ushort numEvents;
+                ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+                Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, null, out numEvents);
+                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_GETAPI_CAPS_CONF)
+                {
+                    System.Reflection.FieldInfo[] _PropertyInfos = evtBuf.evt.cstaConfirmation.getAPICaps.GetType().GetFields();
+                    var sb = new StringBuilder();
+
+                    foreach (var info in _PropertyInfos)
+                    {
+                        var value = info.GetValue(evtBuf.evt.cstaConfirmation.getAPICaps);
+                        sb.Append(info.Name + "=" + value.ToString() + "\t\t");
+                    }
+                    MessageBox.Show(sb.ToString());
+                }
+                else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                {
+                    MessageBox.Show("Could not get API caps. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                }
+            }
         }
 
     }

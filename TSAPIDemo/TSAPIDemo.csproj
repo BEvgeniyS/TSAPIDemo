@@ -66,6 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Subforms\acsSetHeartbeatIntervalPopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Subforms\acsSetHeartbeatIntervalPopupForm.Designer.cs">
+      <DependentUpon>acsSetHeartbeatIntervalPopupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Auxillary.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -75,6 +81,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Subforms\SnapShotDeviceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Subforms\SnapShotDeviceForm.Designer.cs">
+      <DependentUpon>SnapShotDeviceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TSAPI\Acs.cs" />
     <Compile Include="TSAPI\Acsdefs.cs" />
     <Compile Include="TSAPI\Acslimit.cs" />
@@ -83,6 +95,10 @@
     <Compile Include="TSAPI\Csta.cs" />
     <Compile Include="TSAPI\Cstadefs.cs" />
     <Compile Include="TSAPI\Tsplatfm.cs" />
+    <EmbeddedResource Include="Subforms\acsSetHeartbeatIntervalPopupForm.resx">
+      <DependentUpon>acsSetHeartbeatIntervalPopupForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -97,6 +113,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Subforms\SnapShotDeviceForm.resx">
+      <DependentUpon>SnapShotDeviceForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

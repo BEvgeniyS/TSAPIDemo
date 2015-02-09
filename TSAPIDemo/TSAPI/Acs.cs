@@ -304,6 +304,12 @@ namespace Tsapi
                             EnumServerNamesCB callback,
                             uint lParam);
 
+        [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern RetCode_t acsSetHeartbeatInterval(
+                            ACSHandle_t acsHandle,
+                            InvokeID_t invokeID,
+                            ushort heartbeatInterval,
+                            PrivateData_t privateData);
     }
     public class EnumServerHandler
     {

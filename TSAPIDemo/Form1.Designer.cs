@@ -6,8 +6,8 @@ namespace TSAPIDemo
     {
         public static System.Configuration.Configuration config  = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-        Acs.ACSHandle_t acsHandle;
-        Acs.PrivateData_t privData;
+        public Acs.ACSHandle_t acsHandle;
+        public Acs.PrivateData_t privData;
 
         /// <summary>
         /// Required designer variable.
@@ -48,16 +48,17 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.acsSetHeartbeatIntervalButton = new System.Windows.Forms.Button();
             this.acsQueryAuthInfoButton = new System.Windows.Forms.Button();
             this.flushEventQueueButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.streamCheckbox = new System.Windows.Forms.CheckBox();
-            this.snapShotDataTree = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.goButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
+            this.cstaGetAPICapsButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -79,7 +80,7 @@ namespace TSAPIDemo
             this.configTab.Location = new System.Drawing.Point(4, 22);
             this.configTab.Name = "configTab";
             this.configTab.Padding = new System.Windows.Forms.Padding(3);
-            this.configTab.Size = new System.Drawing.Size(595, 382);
+            this.configTab.Size = new System.Drawing.Size(940, 501);
             this.configTab.TabIndex = 1;
             this.configTab.Text = "Configuration";
             this.configTab.UseVisualStyleBackColor = true;
@@ -182,26 +183,37 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaGetAPICapsButton);
+            this.TestsTab.Controls.Add(this.acsSetHeartbeatIntervalButton);
             this.TestsTab.Controls.Add(this.acsQueryAuthInfoButton);
             this.TestsTab.Controls.Add(this.flushEventQueueButton);
             this.TestsTab.Controls.Add(this.button1);
             this.TestsTab.Controls.Add(this.label7);
             this.TestsTab.Controls.Add(this.streamCheckbox);
-            this.TestsTab.Controls.Add(this.snapShotDataTree);
             this.TestsTab.Controls.Add(this.label1);
             this.TestsTab.Controls.Add(this.deviceTextBox);
             this.TestsTab.Controls.Add(this.goButton);
             this.TestsTab.Location = new System.Drawing.Point(4, 22);
             this.TestsTab.Name = "TestsTab";
             this.TestsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TestsTab.Size = new System.Drawing.Size(595, 382);
+            this.TestsTab.Size = new System.Drawing.Size(940, 501);
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
             // 
+            // acsSetHeartbeatIntervalButton
+            // 
+            this.acsSetHeartbeatIntervalButton.Location = new System.Drawing.Point(22, 199);
+            this.acsSetHeartbeatIntervalButton.Name = "acsSetHeartbeatIntervalButton";
+            this.acsSetHeartbeatIntervalButton.Size = new System.Drawing.Size(113, 34);
+            this.acsSetHeartbeatIntervalButton.TabIndex = 13;
+            this.acsSetHeartbeatIntervalButton.Text = "Set Heartbeat Interval";
+            this.acsSetHeartbeatIntervalButton.UseVisualStyleBackColor = true;
+            this.acsSetHeartbeatIntervalButton.Click += new System.EventHandler(this.acsSetHeartbeatIntervalButton_Click);
+            // 
             // acsQueryAuthInfoButton
             // 
-            this.acsQueryAuthInfoButton.Location = new System.Drawing.Point(26, 193);
+            this.acsQueryAuthInfoButton.Location = new System.Drawing.Point(22, 169);
             this.acsQueryAuthInfoButton.Name = "acsQueryAuthInfoButton";
             this.acsQueryAuthInfoButton.Size = new System.Drawing.Size(113, 23);
             this.acsQueryAuthInfoButton.TabIndex = 12;
@@ -211,7 +223,7 @@ namespace TSAPIDemo
             // 
             // flushEventQueueButton
             // 
-            this.flushEventQueueButton.Location = new System.Drawing.Point(26, 164);
+            this.flushEventQueueButton.Location = new System.Drawing.Point(22, 140);
             this.flushEventQueueButton.Name = "flushEventQueueButton";
             this.flushEventQueueButton.Size = new System.Drawing.Size(113, 23);
             this.flushEventQueueButton.TabIndex = 5;
@@ -221,7 +233,7 @@ namespace TSAPIDemo
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(26, 135);
+            this.button1.Location = new System.Drawing.Point(22, 111);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 23);
             this.button1.TabIndex = 11;
@@ -248,16 +260,6 @@ namespace TSAPIDemo
             this.streamCheckbox.Text = "not connected";
             this.streamCheckbox.UseVisualStyleBackColor = true;
             this.streamCheckbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.connectionCheckbox_MouseClick);
-            // 
-            // snapShotDataTree
-            // 
-            this.snapShotDataTree.BackColor = System.Drawing.SystemColors.Window;
-            this.snapShotDataTree.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.snapShotDataTree.Location = new System.Drawing.Point(156, 53);
-            this.snapShotDataTree.Name = "snapShotDataTree";
-            this.snapShotDataTree.Size = new System.Drawing.Size(393, 280);
-            this.snapShotDataTree.TabIndex = 7;
-            this.snapShotDataTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.snapShotDataTree_NodeMouseClick);
             // 
             // label1
             // 
@@ -296,15 +298,25 @@ namespace TSAPIDemo
             this.mainTabs.Location = new System.Drawing.Point(0, 0);
             this.mainTabs.Name = "mainTabs";
             this.mainTabs.SelectedIndex = 0;
-            this.mainTabs.Size = new System.Drawing.Size(603, 408);
+            this.mainTabs.Size = new System.Drawing.Size(948, 527);
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
+            // 
+            // cstaGetAPICapsButton
+            // 
+            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(22, 240);
+            this.cstaGetAPICapsButton.Name = "cstaGetAPICapsButton";
+            this.cstaGetAPICapsButton.Size = new System.Drawing.Size(113, 23);
+            this.cstaGetAPICapsButton.TabIndex = 14;
+            this.cstaGetAPICapsButton.Text = "cstaGetAPICaps";
+            this.cstaGetAPICapsButton.UseVisualStyleBackColor = true;
+            this.cstaGetAPICapsButton.Click += new System.EventHandler(this.cstaGetAPICapsButton_Click);
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 408);
+            this.ClientSize = new System.Drawing.Size(948, 527);
             this.Controls.Add(this.mainTabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "mainForm";
@@ -335,7 +347,6 @@ namespace TSAPIDemo
         private System.Windows.Forms.TextBox serverId_textBox;
         private System.Windows.Forms.TabPage TestsTab;
         private System.Windows.Forms.CheckBox streamCheckbox;
-        private System.Windows.Forms.TreeView snapShotDataTree;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox deviceTextBox;
         private System.Windows.Forms.Button goButton;
@@ -346,6 +357,8 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button flushEventQueueButton;
         private System.Windows.Forms.Button enumServerNamesButton;
         private System.Windows.Forms.Button acsQueryAuthInfoButton;
+        private System.Windows.Forms.Button acsSetHeartbeatIntervalButton;
+        private System.Windows.Forms.Button cstaGetAPICapsButton;
 
 
 
