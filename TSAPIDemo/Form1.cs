@@ -610,6 +610,33 @@ namespace TSAPIDemo
             }
         }
 
+        private void cstaQueryCallMonitorButton_Click(object sender, EventArgs e)
+        {
+            Acs.RetCode_t retCode = Csta.cstaQueryCallMonitor(this.acsHandle, new Acs.InvokeID_t());
+            if (retCode._value >= 0)
+            {
+                Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+                ushort numEvents;
+                ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+                Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, null, out numEvents);
+                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_QUERY_CALL_MONITOR_CONF)
+                {
+                    if (evtBuf.evt.cstaConfirmation.queryCallMonitor.callMonitor)
+                    {
+                        MessageBox.Show("ACS stream has permission in the security database to do call/call monitoring.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("ACS stream has NO permission in the security database to do call/call monitoring.");
+                    }
+                }
+                else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                {
+                    MessageBox.Show("Could not determine queryCallMonitor permissions. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                }
+            }
+        }
+
     }
 
     class CallNode : TreeNode

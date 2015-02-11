@@ -48,17 +48,18 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.cstaGetAPICapsButton = new System.Windows.Forms.Button();
             this.acsSetHeartbeatIntervalButton = new System.Windows.Forms.Button();
             this.acsQueryAuthInfoButton = new System.Windows.Forms.Button();
-            this.flushEventQueueButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.acsFlushEventQueueButton = new System.Windows.Forms.Button();
+            this.cstaGetDeviceListButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.streamCheckbox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.goButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaGetAPICapsButton = new System.Windows.Forms.Button();
+            this.cstaQueryCallMonitorButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -183,11 +184,12 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaQueryCallMonitorButton);
             this.TestsTab.Controls.Add(this.cstaGetAPICapsButton);
             this.TestsTab.Controls.Add(this.acsSetHeartbeatIntervalButton);
             this.TestsTab.Controls.Add(this.acsQueryAuthInfoButton);
-            this.TestsTab.Controls.Add(this.flushEventQueueButton);
-            this.TestsTab.Controls.Add(this.button1);
+            this.TestsTab.Controls.Add(this.acsFlushEventQueueButton);
+            this.TestsTab.Controls.Add(this.cstaGetDeviceListButton);
             this.TestsTab.Controls.Add(this.label7);
             this.TestsTab.Controls.Add(this.streamCheckbox);
             this.TestsTab.Controls.Add(this.label1);
@@ -200,6 +202,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // cstaGetAPICapsButton
+            // 
+            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(169, 140);
+            this.cstaGetAPICapsButton.Name = "cstaGetAPICapsButton";
+            this.cstaGetAPICapsButton.Size = new System.Drawing.Size(113, 23);
+            this.cstaGetAPICapsButton.TabIndex = 14;
+            this.cstaGetAPICapsButton.Text = "GetAPICaps";
+            this.cstaGetAPICapsButton.UseVisualStyleBackColor = true;
+            this.cstaGetAPICapsButton.Click += new System.EventHandler(this.cstaGetAPICapsButton_Click);
             // 
             // acsSetHeartbeatIntervalButton
             // 
@@ -217,34 +229,34 @@ namespace TSAPIDemo
             this.acsQueryAuthInfoButton.Name = "acsQueryAuthInfoButton";
             this.acsQueryAuthInfoButton.Size = new System.Drawing.Size(113, 23);
             this.acsQueryAuthInfoButton.TabIndex = 12;
-            this.acsQueryAuthInfoButton.Text = "acsQueryAuthInfo";
+            this.acsQueryAuthInfoButton.Text = "QueryAuthInfo";
             this.acsQueryAuthInfoButton.UseVisualStyleBackColor = true;
             this.acsQueryAuthInfoButton.Click += new System.EventHandler(this.acsQueryAuthInfoButton_Click);
             // 
-            // flushEventQueueButton
+            // acsFlushEventQueueButton
             // 
-            this.flushEventQueueButton.Location = new System.Drawing.Point(22, 140);
-            this.flushEventQueueButton.Name = "flushEventQueueButton";
-            this.flushEventQueueButton.Size = new System.Drawing.Size(113, 23);
-            this.flushEventQueueButton.TabIndex = 5;
-            this.flushEventQueueButton.Text = "FlushEventQueue";
-            this.flushEventQueueButton.UseVisualStyleBackColor = true;
-            this.flushEventQueueButton.Click += new System.EventHandler(this.flushEventQueueButton_Click);
+            this.acsFlushEventQueueButton.Location = new System.Drawing.Point(22, 140);
+            this.acsFlushEventQueueButton.Name = "acsFlushEventQueueButton";
+            this.acsFlushEventQueueButton.Size = new System.Drawing.Size(113, 23);
+            this.acsFlushEventQueueButton.TabIndex = 5;
+            this.acsFlushEventQueueButton.Text = "FlushEventQueue";
+            this.acsFlushEventQueueButton.UseVisualStyleBackColor = true;
+            this.acsFlushEventQueueButton.Click += new System.EventHandler(this.flushEventQueueButton_Click);
             // 
-            // button1
+            // cstaGetDeviceListButton
             // 
-            this.button1.Location = new System.Drawing.Point(22, 111);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(113, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "GetDeviceList";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.cstaGetDeviceListButton.Location = new System.Drawing.Point(169, 177);
+            this.cstaGetDeviceListButton.Name = "cstaGetDeviceListButton";
+            this.cstaGetDeviceListButton.Size = new System.Drawing.Size(113, 23);
+            this.cstaGetDeviceListButton.TabIndex = 11;
+            this.cstaGetDeviceListButton.Text = "GetDeviceList";
+            this.cstaGetDeviceListButton.UseVisualStyleBackColor = true;
+            this.cstaGetDeviceListButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(23, 329);
+            this.label7.Location = new System.Drawing.Point(19, 452);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(96, 13);
             this.label7.TabIndex = 10;
@@ -253,7 +265,7 @@ namespace TSAPIDemo
             // streamCheckbox
             // 
             this.streamCheckbox.AutoSize = true;
-            this.streamCheckbox.Location = new System.Drawing.Point(26, 345);
+            this.streamCheckbox.Location = new System.Drawing.Point(22, 468);
             this.streamCheckbox.Name = "streamCheckbox";
             this.streamCheckbox.Size = new System.Drawing.Size(95, 17);
             this.streamCheckbox.TabIndex = 9;
@@ -302,15 +314,15 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaGetAPICapsButton
+            // cstaQueryCallMonitorButton
             // 
-            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(22, 240);
-            this.cstaGetAPICapsButton.Name = "cstaGetAPICapsButton";
-            this.cstaGetAPICapsButton.Size = new System.Drawing.Size(113, 23);
-            this.cstaGetAPICapsButton.TabIndex = 14;
-            this.cstaGetAPICapsButton.Text = "cstaGetAPICaps";
-            this.cstaGetAPICapsButton.UseVisualStyleBackColor = true;
-            this.cstaGetAPICapsButton.Click += new System.EventHandler(this.cstaGetAPICapsButton_Click);
+            this.cstaQueryCallMonitorButton.Location = new System.Drawing.Point(169, 210);
+            this.cstaQueryCallMonitorButton.Name = "cstaQueryCallMonitorButton";
+            this.cstaQueryCallMonitorButton.Size = new System.Drawing.Size(113, 23);
+            this.cstaQueryCallMonitorButton.TabIndex = 15;
+            this.cstaQueryCallMonitorButton.Text = "QueryCallMonitor";
+            this.cstaQueryCallMonitorButton.UseVisualStyleBackColor = true;
+            this.cstaQueryCallMonitorButton.Click += new System.EventHandler(this.cstaQueryCallMonitorButton_Click);
             // 
             // mainForm
             // 
@@ -353,12 +365,13 @@ namespace TSAPIDemo
         private System.Windows.Forms.TabControl mainTabs;
         public bool configured = false;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button flushEventQueueButton;
+        private System.Windows.Forms.Button cstaGetDeviceListButton;
+        private System.Windows.Forms.Button acsFlushEventQueueButton;
         private System.Windows.Forms.Button enumServerNamesButton;
         private System.Windows.Forms.Button acsQueryAuthInfoButton;
         private System.Windows.Forms.Button acsSetHeartbeatIntervalButton;
         private System.Windows.Forms.Button cstaGetAPICapsButton;
+        private System.Windows.Forms.Button cstaQueryCallMonitorButton;
 
 
 

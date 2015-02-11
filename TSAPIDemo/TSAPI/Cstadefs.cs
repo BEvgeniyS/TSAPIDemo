@@ -1777,7 +1777,7 @@ namespace Tsapi
         
         public struct CSTAQueryCallMonitorConfEvent_t 
         {
-            bool         callMonitor;
+           public bool callMonitor;
         }
 
         public struct CSTARouteRequestExtEvent_t 
