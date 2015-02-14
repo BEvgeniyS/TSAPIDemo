@@ -46,7 +46,7 @@ namespace TSAPIDemo
             if (!this.configured) { this.mainTabs.SelectTab(configTab); }
         }
 
-        private void goButton_Click(object sender, EventArgs e)
+        private void snapShotDeviceButton_Click(object sender, EventArgs e)
         {
             if (!configured)
             {
@@ -120,9 +120,8 @@ namespace TSAPIDemo
                     snapShotDevicePop.snapShotDataTree.Nodes[i].Nodes.Add(t);
                 }
                 snapShotDevicePop.snapShotDataTree.Nodes[i].Expand();
-                snapShotDevicePop.ShowDialog();
             }
-
+            snapShotDevicePop.ShowDialog();
             if (callCountForSnapshotDevice < 1)
             {
                 MessageBox.Show("No active calls");
@@ -133,7 +132,7 @@ namespace TSAPIDemo
         {
             if (e.KeyChar == (char)Keys.Return)
             {
-                goButton_Click(sender, e);
+                snapShotDeviceButton_Click(sender, e);
             }
         }
 
@@ -200,7 +199,7 @@ namespace TSAPIDemo
                                                           sendExtraBufs,
                                                           recvQSize,
                                                           recvExtraBufs,
-                                                          privData);
+                                                          this.privData);
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
             ushort numEvents = 0;
@@ -208,20 +207,20 @@ namespace TSAPIDemo
             retCode = Acs.acsGetEventBlock(this.acsHandle,
                                      evtBuf,
                                      ref eventBufSize,
-                                     privData,
+                                     this.privData,
                                      out numEvents);
             if (evtBuf.evt.eventHeader.eventClass.eventClass != 2 || evtBuf.evt.eventHeader.eventType.eventType != 2)
             {
                 MessageBox.Show("Could not open stream. ErrorCode = " + evtBuf.evt.acsConfirmation.failureEvent.error);
                 streamCheckbox.Checked = false;
-                this.goButton.Enabled = false;
+                this.snapShotDeviceButton.Enabled = false;
                 return;
             }
             else
             {
                 streamCheckbox.Text = "Connected to AES server. Handle = " + this.acsHandle;
                 streamCheckbox.Checked = true;
-                this.goButton.Enabled = true;
+                this.snapShotDeviceButton.Enabled = true;
             }
             Acs.EsrDelegate eventReaction = new Acs.EsrDelegate(EventReactionHandler);
             Acs.acsSetESR(this.acsHandle, eventReaction, this.acsHandle._value, false);
@@ -236,16 +235,17 @@ namespace TSAPIDemo
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
             ushort numEvents = 0;
             Acs.RetCode_t retCode = Att.attQueryUCID(this.privData, ref conn);
-            retCode = Csta.cstaEscapeService(acsHandle, invokeId, privData);
-            privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            retCode = Csta.cstaEscapeService(acsHandle, invokeId, this.privData);
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
             retCode = Acs.acsGetEventBlock(acsHandle,
                                          evtBuf,
                                          ref eventBufSize,
-                                         privData,
+                                         this.privData,
                                          out numEvents);
 
             Att.ATTEvent_t attevt;
-            retCode = Att.attPrivateData(privData, out attevt);
+            retCode = Att.attPrivateData(this.privData, out attevt);
+            Debug.WriteLine("attPrivateData retCode = " + retCode._value);
             return attevt.queryUCID.ucid;
         }
 
@@ -344,7 +344,7 @@ namespace TSAPIDemo
             {
                 closeStream(this.acsHandle);
                 streamCheckbox.Text = "Disconnected from AES server";
-                this.goButton.Enabled = false;
+                this.snapShotDeviceButton.Enabled = false;
             }
             else
             {
@@ -544,9 +544,9 @@ namespace TSAPIDemo
             Acs.ServerID_t serverID = config.AppSettings.Settings["ServerID"].Value;
             Acs.ACSAuthInfo_t authInfo = new Acs.ACSAuthInfo_t();
             Acs.RetCode_t retCode =  Acs.acsQueryAuthInfo(ref serverID, ref authInfo);
-            if (retCode._value > 0)
+            if (retCode._value >= 0)
             {
-                MessageBox.Show(authInfo.authType + "; LoginId = " + authInfo.authLoginID);
+                MessageBox.Show("Authentication type: " + authInfo.authType + "\n LoginId = " + authInfo.authLoginID);
             }
             else
             {

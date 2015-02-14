@@ -35,7 +35,7 @@ namespace Tsapi
         public struct ATTEvent_t
         {
             public ATTEventType_t eventType;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = Csta.CSTA_MAX_HEAP)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = Att.ATTPRIV_MAX_HEAP)]
             private byte[] heap;
 
             // private version 6 
@@ -191,6 +191,7 @@ namespace Tsapi
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attQueryUCID(
+                            [In, Out]
                             Acs.PrivateData_t privData,
                             ref Csta.ConnectionID_t call);
 
@@ -203,6 +204,7 @@ namespace Tsapi
         // Decode ATTPrivateData
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attPrivateData(
+                            [In, Out]
                             Acs.PrivateData_t privData,
                             out ATTEvent_t eventBuffer);
 

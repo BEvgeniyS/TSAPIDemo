@@ -265,6 +265,7 @@ namespace Tsapi
                             ACSHandle_t acsHandle,
                             [In, Out, MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Csta.EventBuffer_t))] Csta.EventBuffer_t eventBuf,
                             ref ushort eventBufSize,
+                            [In, Out]
                             PrivateData_t privData,
                             out ushort numEvents);
 

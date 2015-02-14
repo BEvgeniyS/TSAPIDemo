@@ -48,6 +48,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.cstaQueryCallMonitorButton = new System.Windows.Forms.Button();
             this.cstaGetAPICapsButton = new System.Windows.Forms.Button();
             this.acsSetHeartbeatIntervalButton = new System.Windows.Forms.Button();
             this.acsQueryAuthInfoButton = new System.Windows.Forms.Button();
@@ -55,11 +56,10 @@ namespace TSAPIDemo
             this.cstaGetDeviceListButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.streamCheckbox = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.deviceLabel = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
-            this.goButton = new System.Windows.Forms.Button();
+            this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaQueryCallMonitorButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -192,9 +192,9 @@ namespace TSAPIDemo
             this.TestsTab.Controls.Add(this.cstaGetDeviceListButton);
             this.TestsTab.Controls.Add(this.label7);
             this.TestsTab.Controls.Add(this.streamCheckbox);
-            this.TestsTab.Controls.Add(this.label1);
+            this.TestsTab.Controls.Add(this.deviceLabel);
             this.TestsTab.Controls.Add(this.deviceTextBox);
-            this.TestsTab.Controls.Add(this.goButton);
+            this.TestsTab.Controls.Add(this.snapShotDeviceButton);
             this.TestsTab.Location = new System.Drawing.Point(4, 22);
             this.TestsTab.Name = "TestsTab";
             this.TestsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -203,9 +203,19 @@ namespace TSAPIDemo
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
             // 
+            // cstaQueryCallMonitorButton
+            // 
+            this.cstaQueryCallMonitorButton.Location = new System.Drawing.Point(169, 376);
+            this.cstaQueryCallMonitorButton.Name = "cstaQueryCallMonitorButton";
+            this.cstaQueryCallMonitorButton.Size = new System.Drawing.Size(113, 23);
+            this.cstaQueryCallMonitorButton.TabIndex = 15;
+            this.cstaQueryCallMonitorButton.Text = "QueryCallMonitor";
+            this.cstaQueryCallMonitorButton.UseVisualStyleBackColor = true;
+            this.cstaQueryCallMonitorButton.Click += new System.EventHandler(this.cstaQueryCallMonitorButton_Click);
+            // 
             // cstaGetAPICapsButton
             // 
-            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(169, 140);
+            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(169, 306);
             this.cstaGetAPICapsButton.Name = "cstaGetAPICapsButton";
             this.cstaGetAPICapsButton.Size = new System.Drawing.Size(113, 23);
             this.cstaGetAPICapsButton.TabIndex = 14;
@@ -215,7 +225,7 @@ namespace TSAPIDemo
             // 
             // acsSetHeartbeatIntervalButton
             // 
-            this.acsSetHeartbeatIntervalButton.Location = new System.Drawing.Point(22, 199);
+            this.acsSetHeartbeatIntervalButton.Location = new System.Drawing.Point(22, 365);
             this.acsSetHeartbeatIntervalButton.Name = "acsSetHeartbeatIntervalButton";
             this.acsSetHeartbeatIntervalButton.Size = new System.Drawing.Size(113, 34);
             this.acsSetHeartbeatIntervalButton.TabIndex = 13;
@@ -225,7 +235,7 @@ namespace TSAPIDemo
             // 
             // acsQueryAuthInfoButton
             // 
-            this.acsQueryAuthInfoButton.Location = new System.Drawing.Point(22, 169);
+            this.acsQueryAuthInfoButton.Location = new System.Drawing.Point(22, 335);
             this.acsQueryAuthInfoButton.Name = "acsQueryAuthInfoButton";
             this.acsQueryAuthInfoButton.Size = new System.Drawing.Size(113, 23);
             this.acsQueryAuthInfoButton.TabIndex = 12;
@@ -235,7 +245,7 @@ namespace TSAPIDemo
             // 
             // acsFlushEventQueueButton
             // 
-            this.acsFlushEventQueueButton.Location = new System.Drawing.Point(22, 140);
+            this.acsFlushEventQueueButton.Location = new System.Drawing.Point(22, 306);
             this.acsFlushEventQueueButton.Name = "acsFlushEventQueueButton";
             this.acsFlushEventQueueButton.Size = new System.Drawing.Size(113, 23);
             this.acsFlushEventQueueButton.TabIndex = 5;
@@ -245,7 +255,7 @@ namespace TSAPIDemo
             // 
             // cstaGetDeviceListButton
             // 
-            this.cstaGetDeviceListButton.Location = new System.Drawing.Point(169, 177);
+            this.cstaGetDeviceListButton.Location = new System.Drawing.Point(169, 343);
             this.cstaGetDeviceListButton.Name = "cstaGetDeviceListButton";
             this.cstaGetDeviceListButton.Size = new System.Drawing.Size(113, 23);
             this.cstaGetDeviceListButton.TabIndex = 11;
@@ -273,14 +283,14 @@ namespace TSAPIDemo
             this.streamCheckbox.UseVisualStyleBackColor = true;
             this.streamCheckbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.connectionCheckbox_MouseClick);
             // 
-            // label1
+            // deviceLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Snapshot Device";
+            this.deviceLabel.AutoSize = true;
+            this.deviceLabel.Location = new System.Drawing.Point(23, 37);
+            this.deviceLabel.Name = "deviceLabel";
+            this.deviceLabel.Size = new System.Drawing.Size(72, 13);
+            this.deviceLabel.TabIndex = 6;
+            this.deviceLabel.Text = "Device Name";
             // 
             // deviceTextBox
             // 
@@ -291,16 +301,16 @@ namespace TSAPIDemo
             this.deviceTextBox.TabIndex = 5;
             this.deviceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.deviceTextBox_KeyPress);
             // 
-            // goButton
+            // snapShotDeviceButton
             // 
-            this.goButton.Enabled = false;
-            this.goButton.Location = new System.Drawing.Point(37, 79);
-            this.goButton.Name = "goButton";
-            this.goButton.Size = new System.Drawing.Size(75, 23);
-            this.goButton.TabIndex = 4;
-            this.goButton.Text = "go";
-            this.goButton.UseVisualStyleBackColor = true;
-            this.goButton.Click += new System.EventHandler(this.goButton_Click);
+            this.snapShotDeviceButton.Enabled = false;
+            this.snapShotDeviceButton.Location = new System.Drawing.Point(26, 79);
+            this.snapShotDeviceButton.Name = "snapShotDeviceButton";
+            this.snapShotDeviceButton.Size = new System.Drawing.Size(98, 23);
+            this.snapShotDeviceButton.TabIndex = 4;
+            this.snapShotDeviceButton.Text = "SnapShotDevice";
+            this.snapShotDeviceButton.UseVisualStyleBackColor = true;
+            this.snapShotDeviceButton.Click += new System.EventHandler(this.snapShotDeviceButton_Click);
             // 
             // mainTabs
             // 
@@ -313,16 +323,6 @@ namespace TSAPIDemo
             this.mainTabs.Size = new System.Drawing.Size(948, 527);
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
-            // 
-            // cstaQueryCallMonitorButton
-            // 
-            this.cstaQueryCallMonitorButton.Location = new System.Drawing.Point(169, 210);
-            this.cstaQueryCallMonitorButton.Name = "cstaQueryCallMonitorButton";
-            this.cstaQueryCallMonitorButton.Size = new System.Drawing.Size(113, 23);
-            this.cstaQueryCallMonitorButton.TabIndex = 15;
-            this.cstaQueryCallMonitorButton.Text = "QueryCallMonitor";
-            this.cstaQueryCallMonitorButton.UseVisualStyleBackColor = true;
-            this.cstaQueryCallMonitorButton.Click += new System.EventHandler(this.cstaQueryCallMonitorButton_Click);
             // 
             // mainForm
             // 
@@ -359,9 +359,9 @@ namespace TSAPIDemo
         private System.Windows.Forms.TextBox serverId_textBox;
         private System.Windows.Forms.TabPage TestsTab;
         private System.Windows.Forms.CheckBox streamCheckbox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label deviceLabel;
         private System.Windows.Forms.TextBox deviceTextBox;
-        private System.Windows.Forms.Button goButton;
+        private System.Windows.Forms.Button snapShotDeviceButton;
         private System.Windows.Forms.TabControl mainTabs;
         public bool configured = false;
         private System.Windows.Forms.Label label7;
