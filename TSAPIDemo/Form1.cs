@@ -89,6 +89,12 @@ namespace TSAPIDemo
                 return;
             }
             int callCountForSnapshotDevice = evtBuf.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
+            if (callCountForSnapshotDevice < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+
             Csta.ConnectionID_t tmpConn;
 
             TSAPIDemo.Subforms.SnapShotDeviceForm snapShotDevicePop = new Subforms.SnapShotDeviceForm();
@@ -122,10 +128,6 @@ namespace TSAPIDemo
                 snapShotDevicePop.snapShotDataTree.Nodes[i].Expand();
             }
             snapShotDevicePop.ShowDialog();
-            if (callCountForSnapshotDevice < 1)
-            {
-                MessageBox.Show("No active calls");
-            }
         }
 
         private void deviceTextBox_KeyPress(object sender, KeyPressEventArgs e)

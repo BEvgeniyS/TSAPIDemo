@@ -22,6 +22,7 @@ namespace TSAPIDemo.Subforms
         {
             if (e.Button != MouseButtons.Right) { return; }
             snapShotDataTree.SelectedNode = e.Node;
+            if (!(e.Node is CallNode)) return;
             CallNode tmpNode = (CallNode)e.Node;
             Csta.ConnectionID_t selectedConnId = tmpNode.connection;
             ContextMenuStrip snapShotDataTreeContextMenu = new ContextMenuStrip();
