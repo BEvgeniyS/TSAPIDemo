@@ -48,6 +48,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.cstaAlternateCallButton = new System.Windows.Forms.Button();
             this.cstaQueryCallMonitorButton = new System.Windows.Forms.Button();
             this.cstaGetAPICapsButton = new System.Windows.Forms.Button();
             this.acsSetHeartbeatIntervalButton = new System.Windows.Forms.Button();
@@ -60,7 +61,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaAlternateCallButton = new System.Windows.Forms.Button();
+            this.cstaAnswerCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -185,6 +186,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaAnswerCallButton);
             this.TestsTab.Controls.Add(this.cstaAlternateCallButton);
             this.TestsTab.Controls.Add(this.cstaQueryCallMonitorButton);
             this.TestsTab.Controls.Add(this.cstaGetAPICapsButton);
@@ -204,6 +206,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // cstaAlternateCallButton
+            // 
+            this.cstaAlternateCallButton.Location = new System.Drawing.Point(26, 109);
+            this.cstaAlternateCallButton.Name = "cstaAlternateCallButton";
+            this.cstaAlternateCallButton.Size = new System.Drawing.Size(98, 23);
+            this.cstaAlternateCallButton.TabIndex = 16;
+            this.cstaAlternateCallButton.Text = "AlternateCall";
+            this.cstaAlternateCallButton.UseVisualStyleBackColor = true;
+            this.cstaAlternateCallButton.Click += new System.EventHandler(this.cstaAlternateCallButton_Click);
             // 
             // cstaQueryCallMonitorButton
             // 
@@ -326,15 +338,15 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaAlternateCallButton
+            // cstaAnswerCallButton
             // 
-            this.cstaAlternateCallButton.Location = new System.Drawing.Point(26, 109);
-            this.cstaAlternateCallButton.Name = "cstaAlternateCallButton";
-            this.cstaAlternateCallButton.Size = new System.Drawing.Size(98, 23);
-            this.cstaAlternateCallButton.TabIndex = 16;
-            this.cstaAlternateCallButton.Text = "AlternateCall";
-            this.cstaAlternateCallButton.UseVisualStyleBackColor = true;
-            this.cstaAlternateCallButton.Click += new System.EventHandler(this.cstaAlternateCallButton_Click);
+            this.cstaAnswerCallButton.Location = new System.Drawing.Point(132, 51);
+            this.cstaAnswerCallButton.Name = "cstaAnswerCallButton";
+            this.cstaAnswerCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaAnswerCallButton.TabIndex = 17;
+            this.cstaAnswerCallButton.Text = "AnswerCall";
+            this.cstaAnswerCallButton.UseVisualStyleBackColor = true;
+            this.cstaAnswerCallButton.Click += new System.EventHandler(this.cstaAnswerCallButton_Click);
             // 
             // mainForm
             // 
@@ -385,6 +397,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaGetAPICapsButton;
         private System.Windows.Forms.Button cstaQueryCallMonitorButton;
         private System.Windows.Forms.Button cstaAlternateCallButton;
+        private System.Windows.Forms.Button cstaAnswerCallButton;
 
 
 
