@@ -637,6 +637,86 @@ namespace TSAPIDemo
             }
         }
 
+        private void cstaAlternateCallButton_Click(object sender, EventArgs e)
+        {
+            if (!configured)
+            {
+                MessageBox.Show("Application is not configured");
+                this.mainTabs.SelectTab(configTab);
+                return;
+            }
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
+            Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
+                                                 invokeId,
+                                                 ref currentDevice,
+                                                 privData);
+            if (retCode._value < 0)
+            {
+                MessageBox.Show("cstaSnapshotDeviceReq error: " + retCode);
+                return;
+            }
+            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (retCode._value != Acs.ACSPOSITIVE_ACK)
+            {
+                MessageBox.Show("acsGetEventBlock error: " + retCode);
+                return;
+            }
+            if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION || evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_SNAPSHOT_DEVICE_CONF)
+            {
+                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                {
+                    MessageBox.Show("Snapshot device failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                }
+                return;
+            }
+            int callCountForSnapshotDevice = evtBuf.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
+            if (callCountForSnapshotDevice < 1)
+            {
+                MessageBox.Show("no active calls");
+                return;
+            }
+            if (callCountForSnapshotDevice < 2 )
+            {
+                MessageBox.Show("We need more than 2 calls on device");
+                return;
+            }
+            Csta.ConnectionID_t[] conns = new Csta.ConnectionID_t[2];
+            for (int i = 0; i<2; i++)
+            {
+                var snapDeviceInfoArray = (Csta.CSTASnapshotDeviceResponseInfo_t[])evtBuf.auxData["snapDeviceInfo"];
+                conns[i] = snapDeviceInfoArray[i].callIdentifier;
+            }
+            retCode = Csta.cstaAlternateCall(this.acsHandle, invokeId, ref conns[0], ref conns[1], null);
+            Debug.WriteLine("cstaAlternateCall result = " + retCode._value);
+
+            evtBuf = new Csta.EventBuffer_t();
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            eventBufSize = Csta.CSTA_MAX_HEAP;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_ALTERNATE_CALL_CONF)
+            {
+                MessageBox.Show("AlternateCall Succeded");
+            }
+            else
+            {
+                MessageBox.Show("AlternateCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+
     }
 
     class CallNode : TreeNode

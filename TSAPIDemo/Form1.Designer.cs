@@ -60,6 +60,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
+            this.cstaAlternateCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -184,6 +185,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaAlternateCallButton);
             this.TestsTab.Controls.Add(this.cstaQueryCallMonitorButton);
             this.TestsTab.Controls.Add(this.cstaGetAPICapsButton);
             this.TestsTab.Controls.Add(this.acsSetHeartbeatIntervalButton);
@@ -324,6 +326,16 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
+            // cstaAlternateCallButton
+            // 
+            this.cstaAlternateCallButton.Location = new System.Drawing.Point(26, 109);
+            this.cstaAlternateCallButton.Name = "cstaAlternateCallButton";
+            this.cstaAlternateCallButton.Size = new System.Drawing.Size(98, 23);
+            this.cstaAlternateCallButton.TabIndex = 16;
+            this.cstaAlternateCallButton.Text = "AlternateCall";
+            this.cstaAlternateCallButton.UseVisualStyleBackColor = true;
+            this.cstaAlternateCallButton.Click += new System.EventHandler(this.cstaAlternateCallButton_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -372,6 +384,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button acsSetHeartbeatIntervalButton;
         private System.Windows.Forms.Button cstaGetAPICapsButton;
         private System.Windows.Forms.Button cstaQueryCallMonitorButton;
+        private System.Windows.Forms.Button cstaAlternateCallButton;
 
 
 

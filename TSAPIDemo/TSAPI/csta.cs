@@ -787,6 +787,7 @@ namespace Tsapi
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t cstaAlternateCall(
                         Acs.ACSHandle_t acsHandle,
+                        Acs.InvokeID_t invokeID,
                         ref ConnectionID_t activeCall,
                         ref ConnectionID_t otherCall,
                         Acs.PrivateData_t privateData);   
