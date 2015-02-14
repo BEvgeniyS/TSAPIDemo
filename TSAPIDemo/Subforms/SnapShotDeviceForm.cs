@@ -26,12 +26,20 @@ namespace TSAPIDemo.Subforms
             CallNode tmpNode = (CallNode)e.Node;
             Csta.ConnectionID_t selectedConnId = tmpNode.connection;
             ContextMenuStrip snapShotDataTreeContextMenu = new ContextMenuStrip();
-            ToolStripItem snapShotCallContextMenuItem = snapShotDataTreeContextMenu.Items.Add("cstaClearCall");
-            snapShotDataTreeContextMenu.Click += (s, ev) => {
+            ToolStripItem cstaClearCallContextMenuItem = snapShotDataTreeContextMenu.Items.Add("cstaClearCall");
+            ToolStripItem cstaClearConnectionContextMenuItem = snapShotDataTreeContextMenu.Items.Add("cstaClearConnection");
+            cstaClearCallContextMenuItem.Click += (s, ev) =>
+            {
                 Csta.EventBuffer_t evtbuf = clearCall(ref selectedConnId);
                 snapShotDataTree.Nodes.Remove(tmpNode);
             };
-            
+
+            cstaClearConnectionContextMenuItem.Click += (s, ev) =>
+            {
+                Csta.EventBuffer_t evtbuf = clearConnection(ref selectedConnId);
+                snapShotDataTree.Nodes.Remove(tmpNode);
+            };
+
             snapShotDataTreeContextMenu.Show(Cursor.Position);
         }
 
@@ -40,6 +48,43 @@ namespace TSAPIDemo.Subforms
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaClearCall(parentForm.acsHandle,
+                                                 invokeId,
+                                                 ref cId,
+                                                 parentForm.privData);
+            if (retCode._value < 0)
+            {
+                MessageBox.Show("cstaClearCall error: " + retCode);
+                return null;
+            }
+            parentForm.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(parentForm.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          parentForm.privData,
+                                          out numEvents);
+            if (retCode._value < 0)
+            {
+                MessageBox.Show("acsGetEventBlock error: " + retCode);
+                return null;
+            }
+            if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION ||
+                evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_CLEAR_CALL_CONF)
+            {
+                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION
+                    && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                {
+                    MessageBox.Show("Clear call failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                }
+            }
+            return evtBuf;
+        }
+        private Csta.EventBuffer_t clearConnection(ref Csta.ConnectionID_t cId)
+        {
+            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+            Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
+            Acs.RetCode_t retCode = Csta.cstaClearConnection(parentForm.acsHandle,
                                                  invokeId,
                                                  ref cId,
                                                  parentForm.privData);
