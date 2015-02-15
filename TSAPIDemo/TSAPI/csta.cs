@@ -326,7 +326,7 @@ namespace Tsapi
     {
         Acs.InvokeID_t invokeID;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = CSTA_MAX_HEAP)]
-        private byte[] heap;
+        internal byte[] heap;
         public CSTAAlternateCallConfEvent_t alternateCall
         {
             get
@@ -537,20 +537,20 @@ namespace Tsapi
                 return (CSTAMonitorStopConfEvent_t)Aux.ByteArrayToStructure<CSTAMonitorStopConfEvent_t>(heap);
             }
         }
-        public CSTASnapshotDeviceConfEvent_t snapshotDevice
-        {
-            get
-            {
-                return (CSTASnapshotDeviceConfEvent_t)Aux.ByteArrayToStructure<CSTASnapshotDeviceConfEvent_t>(heap);
-            }
-        }
-        public CSTASnapshotCallConfEvent_t snapshotCall
-        {
-            get
-            {
-                return (CSTASnapshotCallConfEvent_t)Aux.ByteArrayToStructure<CSTASnapshotCallConfEvent_t>(heap);
-            }
-        }
+        public CSTASnapshotDeviceConfEvent_t snapshotDevice;
+        //{
+        //    get
+        //    {
+        //        return (CSTASnapshotDeviceConfEvent_t)Aux.ByteArrayToStructure<CSTASnapshotDeviceConfEvent_t>(heap);
+        //    }
+        //}
+        public CSTASnapshotCallConfEvent_t snapshotCall;
+        //{
+        //    get
+        //    {
+        //        return (CSTASnapshotCallConfEvent_t)Aux.ByteArrayToStructure<CSTASnapshotCallConfEvent_t>(heap);
+        //    }
+        //}
         public CSTARouteRegisterReqConfEvent_t routeRegister
         {
             get
@@ -661,10 +661,16 @@ namespace Tsapi
         {
             Marshal.PtrToStructure(pNativeData, this.marshaledObj.evt);
 
+            if (this.marshaledObj.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION)
+            {
+                this.marshaledObj.evt.cstaConfirmation = (CSTAConfirmationEvent)Aux.ByteArrayToStructure<CSTAConfirmationEvent>(this.marshaledObj.evt.heap);
+            }
+
             // Marshal SnapShotCall Event
             if (this.marshaledObj.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION &&
                 this.marshaledObj.evt.eventHeader.eventType.eventType == Csta.CSTA_SNAPSHOT_CALL_CONF)
             {
+                this.marshaledObj.evt.cstaConfirmation.snapshotCall = (Csta.CSTASnapshotCallConfEvent_t)Aux.ByteArrayToStructure<Csta.CSTASnapshotCallConfEvent_t>(this.marshaledObj.evt.cstaConfirmation.heap);
                 int infoCount = this.marshaledObj.evt.cstaConfirmation.snapshotCall.snapshotData.count;
                 IntPtr pInfo = this.marshaledObj.evt.cstaConfirmation.snapshotCall.snapshotData.pInfo;
                 Csta.CSTASnapshotCallResponseInfo_t[] infoArray = new CSTASnapshotCallResponseInfo_t[infoCount];
@@ -680,6 +686,7 @@ namespace Tsapi
             if (this.marshaledObj.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION &&
                 this.marshaledObj.evt.eventHeader.eventType.eventType == Csta.CSTA_SNAPSHOT_DEVICE_CONF)
             {
+                this.marshaledObj.evt.cstaConfirmation.snapshotDevice = (CSTASnapshotDeviceConfEvent_t)Aux.ByteArrayToStructure<CSTASnapshotDeviceConfEvent_t>(this.marshaledObj.evt.cstaConfirmation.heap);
                 int infoCount = this.marshaledObj.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
                 IntPtr pInfo = this.marshaledObj.evt.cstaConfirmation.snapshotDevice.snapshotData.pInfo;
                 Csta.CSTASnapshotDeviceResponseInfo_t[] infoArray = new CSTASnapshotDeviceResponseInfo_t[infoCount];
@@ -738,7 +745,7 @@ namespace Tsapi
     {
         public Acs.ACSEventHeader_t eventHeader; // 8 bytes
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = CSTA_MAX_HEAP)]
-        private byte[] heap;
+        internal byte[] heap;
 
         public Acs.ACSUnsolicitedEvent acsUnsolicited
         {
@@ -768,13 +775,13 @@ namespace Tsapi
                 return (CSTAUnsolicitedEvent)Aux.ByteArrayToStructure<CSTAUnsolicitedEvent>(heap);
             }
         }
-        public CSTAConfirmationEvent cstaConfirmation
-        {
-            get
-            {
-                return (CSTAConfirmationEvent)Aux.ByteArrayToStructure<CSTAConfirmationEvent>(heap);
-            }
-        }
+        public CSTAConfirmationEvent cstaConfirmation;
+        //{
+        //    get
+        //    {
+        //        return (CSTAConfirmationEvent)Aux.ByteArrayToStructure<CSTAConfirmationEvent>(heap);
+        //    }
+        //}
         public CSTAEventReport cstaEventReport
         {
             get
