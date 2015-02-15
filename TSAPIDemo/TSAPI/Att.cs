@@ -136,8 +136,17 @@ namespace Tsapi
 
 
             // events received by the G3PD 
+            */
 
-            ATTClearConnection_t				clearConnectionReq;
+            public ATTClearConnection_t clearConnectionReq
+            {
+                get
+                {
+                    return Aux.ByteArrayToStructure<ATTClearConnection_t>(heap);
+                }
+            }
+
+            /*
             ATTConsultationCall_t				consultationCallReq;
             ATTMakeCall_t						makeCallReq;
             ATTDirectAgentCall_t				directAgentCallReq;
@@ -194,6 +203,14 @@ namespace Tsapi
                             [In, Out]
                             Acs.PrivateData_t privData,
                             ref Csta.ConnectionID_t call);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attClearConnection(
+                            [In, Out]
+                            Acs.PrivateData_t privData,
+                            ATTDropResource_t dropResource,
+                            ref ATTV5UserToUserInfo_t userInfo);
+
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(

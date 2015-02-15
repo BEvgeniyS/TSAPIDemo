@@ -470,7 +470,7 @@ namespace TSAPIDemo
 
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void cstaGetDeviceListButton_Click(object sender, EventArgs e)
         {
             Csta.EventBuffer_t evtbuf =  getDeviceList(this.acsHandle);
             MessageBox.Show("Number of devices = " + evtbuf.evt.cstaConfirmation.getDeviceList.devList.count);

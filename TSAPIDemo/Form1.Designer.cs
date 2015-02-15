@@ -275,7 +275,7 @@ namespace TSAPIDemo
             this.cstaGetDeviceListButton.TabIndex = 11;
             this.cstaGetDeviceListButton.Text = "GetDeviceList";
             this.cstaGetDeviceListButton.UseVisualStyleBackColor = true;
-            this.cstaGetDeviceListButton.Click += new System.EventHandler(this.button1_Click);
+            this.cstaGetDeviceListButton.Click += new System.EventHandler(this.cstaGetDeviceListButton_Click);
             // 
             // label7
             // 

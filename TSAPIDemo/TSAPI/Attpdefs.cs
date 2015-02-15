@@ -144,13 +144,13 @@ namespace Tsapi
 
         public struct ATTV5UserToUserInfo_t
         {
-            ATTUUIProtocolType_t type;
-            public struct data
-            {
-                short length;
+            public ATTUUIProtocolType_t type;
+            //public struct data
+            //{
+                public short length;
                 [MarshalAs(UnmanagedType.ByValArray, SizeConst = 33)]
-                byte[] value;
-            };
+                public byte[] value;
+            //};
         }
 
         public enum ATTInterflow_t
@@ -1571,9 +1571,9 @@ namespace Tsapi
             ATTUUIProtocolType_t type;
             public struct data
             {
-                short length;
+                public short length;
                 [MarshalAs(UnmanagedType.ByValArray, SizeConst = 129)]
-                byte[] value;
+                public byte[] value;
             };
         };
 
