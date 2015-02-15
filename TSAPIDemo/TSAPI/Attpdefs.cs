@@ -1436,7 +1436,7 @@ namespace Tsapi
 
         public struct ATTConferenceCallConfEvent_t
         {
-            ATTUCID_t ucid;
+            public ATTUCID_t ucid;
         };
 
         public struct ATTTransferCallConfEvent_t

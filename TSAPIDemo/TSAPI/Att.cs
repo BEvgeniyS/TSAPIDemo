@@ -93,7 +93,15 @@ namespace Tsapi
             /*
             ATTLoggedOffEvent_t					loggedOffEvent;
             ATTConsultationCallConfEvent_t		consultationCall;
-            ATTConferenceCallConfEvent_t		conferenceCall;
+            */
+            public ATTConferenceCallConfEvent_t conferenceCall
+            {
+                get
+                {
+                    return Aux.ByteArrayToStructure<ATTConferenceCallConfEvent_t>(heap);
+                }
+            }
+            /*
             ATTMakeCallConfEvent_t				makeCall;
             ATTMakePredictiveCallConfEvent_t	makePredictiveCall;
             ATTTransferCallConfEvent_t			transferCall;

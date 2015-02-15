@@ -31,7 +31,7 @@ namespace TSAPIDemo.Subforms
             cstaClearCallContextMenuItem.Click += (s, ev) =>
             {
                 Csta.EventBuffer_t evtbuf = clearCall(ref selectedConnId);
-                if (evtbuf.evt.eventHeader.eventClass.eventClass == Csta.CSTA_CLEAR_CALL_CONF)
+                if (evtbuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtbuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CLEAR_CALL_CONF)
                 {
                     snapShotDataTree.Nodes.Remove(tmpNode);
                 }
@@ -40,7 +40,7 @@ namespace TSAPIDemo.Subforms
             cstaClearConnectionContextMenuItem.Click += (s, ev) =>
             {
                 Csta.EventBuffer_t evtbuf = clearConnection(ref selectedConnId);
-                if (evtbuf.evt.eventHeader.eventClass.eventClass == Csta.CSTA_CLEAR_CONNECTION_CONF)
+                if (evtbuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtbuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CLEAR_CONNECTION_CONF)
                 {
                     snapShotDataTree.Nodes.Remove(tmpNode);
                 }
@@ -90,10 +90,12 @@ namespace TSAPIDemo.Subforms
         {
             var u2uString = "Hello, I AM test u2u string";
             var u2uInfo = new Att.ATTV5UserToUserInfo_t();
+            // fixed u2u size
+            int u2uSize = 33;
             u2uInfo.length = (short)u2uString.Length;
             u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
             u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
-            Array.Resize(ref u2uInfo.value, 33);
+            Array.Resize(ref u2uInfo.value, u2uSize);
 
             Att.attClearConnection(parentForm.privData, Att.ATTDropResource_t.DR_NONE, ref u2uInfo);
 

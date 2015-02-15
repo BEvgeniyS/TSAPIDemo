@@ -764,6 +764,42 @@ namespace TSAPIDemo
             }
         }
 
+        private void cstaConferenceCallButton_Click(object sender, EventArgs e)
+        {
+            int callCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+            if (callCount < 2)
+            {
+                MessageBox.Show("Need 2 calls on the device to connect them in conference");
+                return;
+            }
+            var invokeId = new Acs.InvokeID_t();
+            Acs.RetCode_t retCode = Csta.cstaConferenceCall(this.acsHandle, invokeId, ref conns[0], ref conns[1], this.privData);
+            Debug.WriteLine("cstaConferenceCall result = " + retCode._value);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONFERENCE_CALL_CONF)
+            {
+                Att.ATTEvent_t attEvt;
+                retCode = Att.attPrivateData(this.privData, out attEvt);
+                Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                MessageBox.Show("cstaConferenceCall Succeded. UCID of the new call = " + attEvt.conferenceCall.ucid);
+            }
+            else
+            {
+                MessageBox.Show("cstaConferenceCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+
+        }
+
     }
 
     class CallNode : TreeNode
