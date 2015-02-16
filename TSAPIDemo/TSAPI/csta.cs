@@ -322,7 +322,7 @@ namespace Tsapi
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-    public struct CSTAConfirmationEvent
+    public class CSTAConfirmationEvent
     {
         Acs.InvokeID_t invokeID;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = CSTA_MAX_HEAP)]
@@ -538,19 +538,7 @@ namespace Tsapi
             }
         }
         public CSTASnapshotDeviceConfEvent_t snapshotDevice;
-        //{
-        //    get
-        //    {
-        //        return (CSTASnapshotDeviceConfEvent_t)Aux.ByteArrayToStructure<CSTASnapshotDeviceConfEvent_t>(heap);
-        //    }
-        //}
         public CSTASnapshotCallConfEvent_t snapshotCall;
-        //{
-        //    get
-        //    {
-        //        return (CSTASnapshotCallConfEvent_t)Aux.ByteArrayToStructure<CSTASnapshotCallConfEvent_t>(heap);
-        //    }
-        //}
         public CSTARouteRegisterReqConfEvent_t routeRegister
         {
             get
@@ -776,12 +764,6 @@ namespace Tsapi
             }
         }
         public CSTAConfirmationEvent cstaConfirmation;
-        //{
-        //    get
-        //    {
-        //        return (CSTAConfirmationEvent)Aux.ByteArrayToStructure<CSTAConfirmationEvent>(heap);
-        //    }
-        //}
         public CSTAEventReport cstaEventReport
         {
             get

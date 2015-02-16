@@ -1627,8 +1627,8 @@ namespace Tsapi
         {
             ConnectionID_t snapshotObject;
         }
-
-        public struct CSTASnapshotCallConfEvent_t
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+        public class CSTASnapshotCallConfEvent_t
         {
             public CSTASnapshotCallData_t snapshotData;
         }
@@ -1639,7 +1639,7 @@ namespace Tsapi
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct CSTASnapshotDeviceConfEvent_t
+        public class CSTASnapshotDeviceConfEvent_t
         {
             public CSTASnapshotDeviceData_t snapshotData;
         }

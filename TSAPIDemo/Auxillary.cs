@@ -5,7 +5,7 @@ namespace Tsapi
 {
     class Aux
     {
-        public static T ByteArrayToStructure<T>(byte[] bytes) where T : struct
+        public static T ByteArrayToStructure<T>(byte[] bytes)// where T : struct
         {
             GCHandle handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
             T data = (T)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(T));
