@@ -547,7 +547,7 @@ namespace Tsapi
         };
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct CSTASnapshotDeviceData_t
+        public class CSTASnapshotDeviceData_t
         {
             public int count;
             public IntPtr pInfo; //pointer to CSTASnapshotDeviceResponseInfo_t[]

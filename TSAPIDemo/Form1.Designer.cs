@@ -48,6 +48,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.cstaConferenceCallButton = new System.Windows.Forms.Button();
             this.cstaAnswerCallButton = new System.Windows.Forms.Button();
             this.cstaAlternateCallButton = new System.Windows.Forms.Button();
             this.cstaQueryCallMonitorButton = new System.Windows.Forms.Button();
@@ -62,7 +63,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaConferenceCallButton = new System.Windows.Forms.Button();
+            this.cstaConsultantCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -187,6 +188,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaConsultantCallButton);
             this.TestsTab.Controls.Add(this.cstaConferenceCallButton);
             this.TestsTab.Controls.Add(this.cstaAnswerCallButton);
             this.TestsTab.Controls.Add(this.cstaAlternateCallButton);
@@ -208,6 +210,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // cstaConferenceCallButton
+            // 
+            this.cstaConferenceCallButton.Location = new System.Drawing.Point(132, 79);
+            this.cstaConferenceCallButton.Name = "cstaConferenceCallButton";
+            this.cstaConferenceCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaConferenceCallButton.TabIndex = 18;
+            this.cstaConferenceCallButton.Text = "ConferenceCall";
+            this.cstaConferenceCallButton.UseVisualStyleBackColor = true;
+            this.cstaConferenceCallButton.Click += new System.EventHandler(this.cstaConferenceCallButton_Click);
             // 
             // cstaAnswerCallButton
             // 
@@ -350,15 +362,15 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaConferenceCallButton
+            // cstaConsultantCallButton
             // 
-            this.cstaConferenceCallButton.Location = new System.Drawing.Point(132, 79);
-            this.cstaConferenceCallButton.Name = "cstaConferenceCallButton";
-            this.cstaConferenceCallButton.Size = new System.Drawing.Size(87, 23);
-            this.cstaConferenceCallButton.TabIndex = 18;
-            this.cstaConferenceCallButton.Text = "ConferenceCall";
-            this.cstaConferenceCallButton.UseVisualStyleBackColor = true;
-            this.cstaConferenceCallButton.Click += new System.EventHandler(this.cstaConferenceCallButton_Click);
+            this.cstaConsultantCallButton.Location = new System.Drawing.Point(132, 109);
+            this.cstaConsultantCallButton.Name = "cstaConsultantCallButton";
+            this.cstaConsultantCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaConsultantCallButton.TabIndex = 19;
+            this.cstaConsultantCallButton.Text = "ConsultantCall";
+            this.cstaConsultantCallButton.UseVisualStyleBackColor = true;
+            this.cstaConsultantCallButton.Click += new System.EventHandler(this.cstaConsultantCallButton_Click);
             // 
             // mainForm
             // 
@@ -411,6 +423,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaAlternateCallButton;
         private System.Windows.Forms.Button cstaAnswerCallButton;
         private System.Windows.Forms.Button cstaConferenceCallButton;
+        private System.Windows.Forms.Button cstaConsultantCallButton;
 
 
 

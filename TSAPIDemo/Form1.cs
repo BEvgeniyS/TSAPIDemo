@@ -800,6 +800,40 @@ namespace TSAPIDemo
 
         }
 
+        private void cstaConsultantCallButton_Click(object sender, EventArgs e)
+        {
+            cstaConsultationCallPopupForm subform = new cstaConsultationCallPopupForm();
+            subform.ShowDialog();
+            if (subform.DialogResult == DialogResult.OK)
+            {
+                Csta.DeviceID_t dev = subform.ReturnDeviceId;
+                Acs.InvokeID_t invoikeId = new Acs.InvokeID_t();
+                int callCount;
+                Csta.ConnectionID_t conn = GetCurrentConnections(out callCount)[0];
+                if (callCount < 1) return;
+                Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conn, ref dev, this.privData);
+                if (retCode._value > 0)
+                {
+                    Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+                    ushort numEvents;
+                    ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+                    Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, null, out numEvents);
+                    if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONSULTATION_CALL_CONF)
+                    {
+                        MessageBox.Show(String.Format("Consultant Call to {0} successfull!", dev.ToString()));
+                    }
+                    else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                    {
+                        MessageBox.Show("Could not perform ConsultantCall. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("There was an error during cstaConsultantCall. Code = " + retCode._value);
+                }
+            }
+        }
+
     }
 
     class CallNode : TreeNode
