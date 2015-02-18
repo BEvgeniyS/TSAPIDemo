@@ -641,6 +641,9 @@ namespace TSAPIDemo
 
         private void cstaAlternateCallButton_Click(object sender, EventArgs e)
         {
+
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+
             int callCount;
             Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
 
@@ -734,6 +737,7 @@ namespace TSAPIDemo
 
         private void cstaAnswerCallButton_Click(object sender, EventArgs e)
         {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             int callCount;
             Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
             if (callCount < 1)
@@ -766,6 +770,7 @@ namespace TSAPIDemo
 
         private void cstaConferenceCallButton_Click(object sender, EventArgs e)
         {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             int callCount;
             Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
             if (callCount < 2)
@@ -802,6 +807,8 @@ namespace TSAPIDemo
 
         private void cstaConsultantCallButton_Click(object sender, EventArgs e)
         {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+
             cstaConsultationCallPopupForm subform = new cstaConsultationCallPopupForm();
             subform.ShowDialog();
             if (subform.DialogResult == DialogResult.OK)
@@ -809,9 +816,13 @@ namespace TSAPIDemo
                 Csta.DeviceID_t dev = subform.ReturnDeviceId;
                 Acs.InvokeID_t invoikeId = new Acs.InvokeID_t();
                 int callCount;
-                Csta.ConnectionID_t conn = GetCurrentConnections(out callCount)[0];
-                if (callCount < 1) return;
-                Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conn, ref dev, this.privData);
+                Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+                if (callCount < 1 || conns.Length < 1)
+                {
+                    MessageBox.Show("No active calls");
+                    return;
+                }
+                Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], ref dev, this.privData);
                 if (retCode._value > 0)
                 {
                     Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
