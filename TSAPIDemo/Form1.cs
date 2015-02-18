@@ -59,7 +59,7 @@ namespace TSAPIDemo
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
                                                  invokeId,
-                                                 ref currentDevice,
+                                                 currentDevice,
                                                  privData);
             if (retCode._value < 0)
             {
@@ -695,7 +695,7 @@ namespace TSAPIDemo
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
                                                  invokeId,
-                                                 ref currentDevice,
+                                                 currentDevice,
                                                  privData);
             if (retCode._value < 0)
             {
@@ -822,16 +822,33 @@ namespace TSAPIDemo
                     MessageBox.Show("No active calls");
                     return;
                 }
-                Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], ref dev, this.privData);
+
+                // Define private data
+                var u2uString = "Hello, I AM test u2u string";
+                var u2uInfo = new Att.ATTV5UserToUserInfo_t();
+                // fixed u2u size
+                int u2uSize = 33;
+                u2uInfo.length = (short)u2uString.Length;
+                u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
+                u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
+                Array.Resize(ref u2uInfo.value, u2uSize);
+
+                Att.attV6ConsultationCall(this.privData, null, false, ref u2uInfo);
+
+
+                Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], dev, this.privData);
                 if (retCode._value > 0)
                 {
                     Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
                     ushort numEvents;
                     ushort eventBufSize = Csta.CSTA_MAX_HEAP;
-                    Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, null, out numEvents);
+                    Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, this.privData, out numEvents);
                     if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONSULTATION_CALL_CONF)
                     {
-                        MessageBox.Show(String.Format("Consultant Call to {0} successfull!", dev.ToString()));
+                        Att.ATTEvent_t attEvt;
+                        retCode = Att.attPrivateData(this.privData, out attEvt);
+                        Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                        MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.conferenceCall.ucid));
                     }
                     else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
                     {

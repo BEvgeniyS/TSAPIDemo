@@ -92,8 +92,15 @@ namespace Tsapi
 
             /*
             ATTLoggedOffEvent_t					loggedOffEvent;
-            ATTConsultationCallConfEvent_t		consultationCall;
             */
+            ATTConsultationCallConfEvent_t		consultationCall
+            {
+                get
+                {
+                    return Aux.ByteArrayToStructure<ATTConsultationCallConfEvent_t>(heap);
+                }
+            }
+            
             public ATTConferenceCallConfEvent_t conferenceCall
             {
                 get
@@ -219,6 +226,29 @@ namespace Tsapi
                             ATTDropResource_t dropResource,
                             ref ATTV5UserToUserInfo_t userInfo);
 
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attV6ClearConnection(
+                            [In, Out]
+                            Acs.PrivateData_t privData,
+                            ATTDropResource_t dropResource,
+                            ref ATTV5UserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attConsultationCall(
+                            [In, Out]
+                            Acs.PrivateData_t privData,
+                            Csta.DeviceID_t deviceRoute,
+                            bool priorityCalling,
+                            ref ATTV5UserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attV6ConsultationCall(
+                            [In, Out]
+                            Acs.PrivateData_t privData,
+                            Csta.DeviceID_t deviceRoute,
+                            bool priorityCalling,
+                            ref ATTV5UserToUserInfo_t userInfo);
+
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(
@@ -232,6 +262,8 @@ namespace Tsapi
                             [In, Out]
                             Acs.PrivateData_t privData,
                             out ATTEvent_t eventBuffer);
+
+
 
     }
 }

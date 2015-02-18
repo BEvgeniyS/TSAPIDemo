@@ -263,7 +263,7 @@ namespace Tsapi
         };
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct DeviceID_t
+        public class DeviceID_t
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             private string device;

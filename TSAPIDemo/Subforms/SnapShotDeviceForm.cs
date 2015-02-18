@@ -97,7 +97,7 @@ namespace TSAPIDemo.Subforms
             u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
             Array.Resize(ref u2uInfo.value, u2uSize);
 
-            Att.attClearConnection(parentForm.privData, Att.ATTDropResource_t.DR_NONE, ref u2uInfo);
+            Att.attV6ClearConnection(parentForm.privData, Att.ATTDropResource_t.DR_NONE, ref u2uInfo);
 
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
