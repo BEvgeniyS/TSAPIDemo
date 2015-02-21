@@ -89,7 +89,7 @@ namespace TSAPIDemo.Subforms
         private Csta.EventBuffer_t clearConnection(ref Csta.ConnectionID_t cId)
         {
             var u2uString = "Hello, I AM test u2u string";
-            var u2uInfo = new Att.ATTV5UserToUserInfo_t();
+            var u2uInfo = new Att.ATTUserToUserInfo_t();
             // fixed u2u size
             int u2uSize = 33;
             u2uInfo.length = (short)u2uString.Length;

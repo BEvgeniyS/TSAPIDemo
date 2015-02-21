@@ -813,51 +813,112 @@ namespace TSAPIDemo
             subform.ShowDialog();
             if (subform.DialogResult == DialogResult.OK)
             {
-                Csta.DeviceID_t dev = subform.ReturnDeviceId;
-                Acs.InvokeID_t invoikeId = new Acs.InvokeID_t();
-                int callCount;
-                Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-                if (callCount < 1 || conns.Length < 1)
+                if (subform.consultationCallRadioButton.Checked)
                 {
-                    MessageBox.Show("No active calls");
-                    return;
-                }
-
-                // Define private data
-                var u2uString = "Hello, I AM test u2u string";
-                var u2uInfo = new Att.ATTV5UserToUserInfo_t();
-                // fixed u2u size
-                int u2uSize = 33;
-                u2uInfo.length = (short)u2uString.Length;
-                u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
-                u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
-                Array.Resize(ref u2uInfo.value, u2uSize);
-
-                Att.attV6ConsultationCall(this.privData, null, false, ref u2uInfo);
-
-
-                Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], dev, this.privData);
-                if (retCode._value > 0)
-                {
-                    Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
-                    ushort numEvents;
-                    ushort eventBufSize = Csta.CSTA_MAX_HEAP;
-                    Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, this.privData, out numEvents);
-                    if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONSULTATION_CALL_CONF)
+                    Csta.DeviceID_t dev = subform.ReturnDeviceId;
+                    Acs.InvokeID_t invoikeId = new Acs.InvokeID_t();
+                    int callCount;
+                    Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+                    if (callCount < 1 || conns.Length < 1)
                     {
-                        Att.ATTEvent_t attEvt;
-                        retCode = Att.attPrivateData(this.privData, out attEvt);
-                        Debug.WriteLine("attPrivateData retCode = " + retCode._value);
-                        MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.conferenceCall.ucid));
+                        MessageBox.Show("No active calls");
+                        return;
                     }
-                    else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+
+                    // Define private data
+                    var u2uString = "Hello, I AM test u2u string";
+                    var u2uInfo = new Att.ATTUserToUserInfo_t();
+                    // fixed u2u size
+                    int u2uSize = Att.ATT_MAX_UUI_SIZE;
+                    u2uInfo.length = (short)u2uString.Length;
+                    u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
+                    u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
+                    Array.Resize(ref u2uInfo.value, u2uSize);
+
+                    Att.attV6ConsultationCall(this.privData, null, false, ref u2uInfo);
+
+
+                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], dev, this.privData);
+                    if (retCode._value > 0)
                     {
-                        MessageBox.Show("Could not perform ConsultantCall. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                        Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+                        ushort numEvents;
+                        ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+                        Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, this.privData, out numEvents);
+                        if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONSULTATION_CALL_CONF)
+                        {
+                            Att.ATTEvent_t attEvt;
+                            retCode = Att.attPrivateData(this.privData, out attEvt);
+                            Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                            if (attEvt.eventType.eventType ==  Att.ATT_CONSULTATION_CALL_CONF)
+                                MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.consultationCall.ucid));
+                            else
+                                MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
+                        }
+                        else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                        {
+                            MessageBox.Show("Could not perform ConsultantCall. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("There was an error during cstaConsultantCall. Code = " + retCode._value);
                     }
                 }
-                else
+                else if (subform.DirectAgentCallRadioButton.Checked)
                 {
-                    MessageBox.Show("There was an error during cstaConsultantCall. Code = " + retCode._value);
+                    Csta.DeviceID_t dev = subform.ReturnDeviceId;
+                    Acs.InvokeID_t invoikeId = new Acs.InvokeID_t();
+                    int callCount;
+                    Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+                    if (callCount < 1 || conns.Length < 1)
+                    {
+                        MessageBox.Show("No active calls");
+                        return;
+                    }
+
+                    // Define private data
+                    var u2uString = "Hello, I AM test u2u string";
+                    var u2uInfo = new Att.ATTUserToUserInfo_t();
+                    // fixed u2u size
+                    int u2uSize = Att.ATT_MAX_UUI_SIZE;
+                    u2uInfo.length = (short)u2uString.Length;
+                    u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
+                    u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
+                    Array.Resize(ref u2uInfo.value, u2uSize);
+                    //string dummy = new string('\0', 60);
+                    Csta.DeviceID_t split = subform.ReturnDeviceId;
+
+                    Att.attV6DirectAgentCall(this.privData, split, false, ref u2uInfo);
+
+
+                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], dev, this.privData);
+                    if (retCode._value > 0)
+                    {
+                        Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+                        ushort numEvents;
+                        ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+                        Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, this.privData, out numEvents);
+                        if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONSULTATION_CALL_CONF)
+                        {
+                            Att.ATTEvent_t attEvt;
+                            retCode = Att.attPrivateData(this.privData, out attEvt);
+                            if (attEvt.eventType.eventType == Att.ATT_DIRECT_AGENT_CALL)
+                                MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.consultationCall.ucid));
+                            else
+                                MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
+                            Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                            MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.conferenceCall.ucid));
+                        }
+                        else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                        {
+                            MessageBox.Show("Could not perform ConsultantCall. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("There was an error during cstaConsultantCall. Code = " + retCode._value);
+                    }
                 }
             }
         }

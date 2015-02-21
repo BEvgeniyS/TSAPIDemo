@@ -23,5 +23,29 @@ namespace TSAPIDemo
                 this.ReturnDeviceId = this.deviceIdTextBox.Text;
                 this.DialogResult = DialogResult.OK;
         }
+
+        private void deviceIdTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                okButton_Click(sender, e);
+            }
+        }
+
+        private void consultationCallRadioButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                okButton_Click(sender, e);
+            }
+        }
+
+        private void DirectAgentCallRadioButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                okButton_Click(sender, e);
+            }
+        }
     }
 }

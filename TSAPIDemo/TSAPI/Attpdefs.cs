@@ -1400,7 +1400,7 @@ namespace Tsapi
 
         public struct ATTConsultationCallConfEvent_t
         {
-            ATTUCID_t ucid;
+            internal ATTUCID_t ucid;
         };
 
         public struct ATTMakeCallConfEvent_t
@@ -1568,13 +1568,13 @@ namespace Tsapi
 
         public struct ATTUserToUserInfo_t
         {
-            ATTUUIProtocolType_t type;
-            public struct data
-            {
+            public ATTUUIProtocolType_t type;
+            //public struct data
+            //{
                 public short length;
-                [MarshalAs(UnmanagedType.ByValArray, SizeConst = 129)]
+                [MarshalAs(UnmanagedType.ByValArray, SizeConst = ATT_MAX_UUI_SIZE)]
                 public byte[] value;
-            };
+            //};
         };
 
         public struct ATTRouteRequestEvent_t
@@ -1658,9 +1658,9 @@ namespace Tsapi
 
         public struct ATTDirectAgentCall_t
         {
-            Csta.DeviceID_t split;
-            bool priorityCalling;
-            ATTUserToUserInfo_t userInfo;
+            internal Csta.DeviceID_t split;
+            internal bool priorityCalling;
+            internal ATTUserToUserInfo_t userInfo;
         };
 
         public struct ATTMakePredictiveCall_t

@@ -31,27 +31,32 @@
             this.deviceIdTextBox = new System.Windows.Forms.TextBox();
             this.deviceIdLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
+            this.consultantCallTypeGroupBox = new System.Windows.Forms.GroupBox();
+            this.DirectAgentCallRadioButton = new System.Windows.Forms.RadioButton();
+            this.consultationCallRadioButton = new System.Windows.Forms.RadioButton();
+            this.consultantCallTypeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // deviceIdTextBox
             // 
-            this.deviceIdTextBox.Location = new System.Drawing.Point(48, 29);
+            this.deviceIdTextBox.Location = new System.Drawing.Point(40, 29);
             this.deviceIdTextBox.Name = "deviceIdTextBox";
             this.deviceIdTextBox.Size = new System.Drawing.Size(100, 20);
             this.deviceIdTextBox.TabIndex = 0;
+            this.deviceIdTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.deviceIdTextBox_KeyDown);
             // 
             // deviceIdLabel
             // 
             this.deviceIdLabel.AutoSize = true;
-            this.deviceIdLabel.Location = new System.Drawing.Point(30, 9);
+            this.deviceIdLabel.Location = new System.Drawing.Point(49, 9);
             this.deviceIdLabel.Name = "deviceIdLabel";
-            this.deviceIdLabel.Size = new System.Drawing.Size(132, 13);
+            this.deviceIdLabel.Size = new System.Drawing.Size(83, 13);
             this.deviceIdLabel.TabIndex = 1;
-            this.deviceIdLabel.Text = "Enter consultant DeviceID";
+            this.deviceIdLabel.Text = "Enter DeviceID:";
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(166, 27);
+            this.okButton.Location = new System.Drawing.Point(146, 29);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 2;
@@ -59,16 +64,54 @@
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
+            // consultantCallTypeGroupBox
+            // 
+            this.consultantCallTypeGroupBox.Controls.Add(this.DirectAgentCallRadioButton);
+            this.consultantCallTypeGroupBox.Controls.Add(this.consultationCallRadioButton);
+            this.consultantCallTypeGroupBox.Location = new System.Drawing.Point(33, 55);
+            this.consultantCallTypeGroupBox.Name = "consultantCallTypeGroupBox";
+            this.consultantCallTypeGroupBox.Size = new System.Drawing.Size(129, 71);
+            this.consultantCallTypeGroupBox.TabIndex = 3;
+            this.consultantCallTypeGroupBox.TabStop = false;
+            this.consultantCallTypeGroupBox.Text = "Consultant Call type";
+            // 
+            // DirectAgentCallRadioButton
+            // 
+            this.DirectAgentCallRadioButton.AutoSize = true;
+            this.DirectAgentCallRadioButton.Location = new System.Drawing.Point(9, 44);
+            this.DirectAgentCallRadioButton.Name = "DirectAgentCallRadioButton";
+            this.DirectAgentCallRadioButton.Size = new System.Drawing.Size(98, 17);
+            this.DirectAgentCallRadioButton.TabIndex = 1;
+            this.DirectAgentCallRadioButton.Text = "DirectAgentCall";
+            this.DirectAgentCallRadioButton.UseVisualStyleBackColor = true;
+            this.DirectAgentCallRadioButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DirectAgentCallRadioButton_KeyDown);
+            // 
+            // consultationCallRadioButton
+            // 
+            this.consultationCallRadioButton.AutoSize = true;
+            this.consultationCallRadioButton.Checked = true;
+            this.consultationCallRadioButton.Location = new System.Drawing.Point(9, 20);
+            this.consultationCallRadioButton.Name = "consultationCallRadioButton";
+            this.consultationCallRadioButton.Size = new System.Drawing.Size(100, 17);
+            this.consultationCallRadioButton.TabIndex = 0;
+            this.consultationCallRadioButton.TabStop = true;
+            this.consultationCallRadioButton.Text = "ConsultationCall";
+            this.consultationCallRadioButton.UseVisualStyleBackColor = true;
+            this.consultationCallRadioButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.consultationCallRadioButton_KeyDown);
+            // 
             // cstaConsultationCallPopupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 73);
+            this.ClientSize = new System.Drawing.Size(290, 134);
+            this.Controls.Add(this.consultantCallTypeGroupBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.deviceIdLabel);
             this.Controls.Add(this.deviceIdTextBox);
             this.Name = "cstaConsultationCallPopupForm";
             this.Text = "Consultation Call";
+            this.consultantCallTypeGroupBox.ResumeLayout(false);
+            this.consultantCallTypeGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -79,5 +122,8 @@
         private System.Windows.Forms.TextBox deviceIdTextBox;
         private System.Windows.Forms.Label deviceIdLabel;
         private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.GroupBox consultantCallTypeGroupBox;
+        internal System.Windows.Forms.RadioButton DirectAgentCallRadioButton;
+        internal System.Windows.Forms.RadioButton consultationCallRadioButton;
     }
 }

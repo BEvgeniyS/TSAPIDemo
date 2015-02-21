@@ -9,11 +9,15 @@ namespace Tsapi
 
         public const int ATT_MAX_PRIVATE_DATA = 1024;
         public const int ATTPRIV_MAX_HEAP = 64;
+        public const int ATT_MAX_USER_INFO = 129;
+        public const int ATT_MAX_UUI_SIZE = 96;
+        public const int ATTV5_MAX_UUI_SIZE = 32;
+
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ATTEventType_t
         {
-            private int eventType;
+            internal int eventType;
 
             public ATTEventType_t(ushort value)
             {
@@ -336,7 +340,7 @@ namespace Tsapi
                 }
             }
 
-            ATTConsultationCallConfEvent_t consultationCall
+            internal ATTConsultationCallConfEvent_t consultationCall
             {
                 get
                 {
@@ -344,7 +348,7 @@ namespace Tsapi
                 }
             }
 
-            public ATTConferenceCallConfEvent_t conferenceCall
+            internal ATTConferenceCallConfEvent_t conferenceCall
             {
                 get
                 {
@@ -616,7 +620,7 @@ namespace Tsapi
                     return Aux.ByteArrayToStructure<ATTMakeCall_t>(heap);
                 }
             }
-            ATTDirectAgentCall_t				directAgentCallReq
+            internal ATTDirectAgentCall_t directAgentCallReq
             {
                 get
                 {
@@ -921,7 +925,15 @@ namespace Tsapi
                             [In, Out]
                             Acs.PrivateData_t privData,
                             ATTDropResource_t dropResource,
-                            ref ATTV5UserToUserInfo_t userInfo);
+                            ref ATTUserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attV6ConsultationCall(
+                            [In, Out]
+                            Acs.PrivateData_t privData,
+                            Csta.DeviceID_t deviceRoute,
+                            bool priorityCalling,
+                            ref ATTUserToUserInfo_t userInfo);
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attConsultationCall(
@@ -932,13 +944,21 @@ namespace Tsapi
                             ref ATTV5UserToUserInfo_t userInfo);
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
-        public static extern Acs.RetCode_t attV6ConsultationCall(
+        public static extern Acs.RetCode_t attV6DirectAgentCall(
+                            [In, Out]
+                            Acs.PrivateData_t privData,
+                            [MarshalAs(UnmanagedType.LPStruct)]
+                            Csta.DeviceID_t split,
+                            bool priorityCalling,
+                            ref ATTUserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attDirectAgentCall(
                             [In, Out]
                             Acs.PrivateData_t privData,
                             Csta.DeviceID_t deviceRoute,
                             bool priorityCalling,
                             ref ATTV5UserToUserInfo_t userInfo);
-
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(
