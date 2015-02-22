@@ -34,6 +34,7 @@
             this.consultantCallTypeGroupBox = new System.Windows.Forms.GroupBox();
             this.DirectAgentCallRadioButton = new System.Windows.Forms.RadioButton();
             this.consultationCallRadioButton = new System.Windows.Forms.RadioButton();
+            this.supervisorAssistCallRadioButton = new System.Windows.Forms.RadioButton();
             this.consultantCallTypeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,11 +67,12 @@
             // 
             // consultantCallTypeGroupBox
             // 
+            this.consultantCallTypeGroupBox.Controls.Add(this.supervisorAssistCallRadioButton);
             this.consultantCallTypeGroupBox.Controls.Add(this.DirectAgentCallRadioButton);
             this.consultantCallTypeGroupBox.Controls.Add(this.consultationCallRadioButton);
             this.consultantCallTypeGroupBox.Location = new System.Drawing.Point(33, 55);
             this.consultantCallTypeGroupBox.Name = "consultantCallTypeGroupBox";
-            this.consultantCallTypeGroupBox.Size = new System.Drawing.Size(129, 71);
+            this.consultantCallTypeGroupBox.Size = new System.Drawing.Size(129, 92);
             this.consultantCallTypeGroupBox.TabIndex = 3;
             this.consultantCallTypeGroupBox.TabStop = false;
             this.consultantCallTypeGroupBox.Text = "Consultant Call type";
@@ -78,7 +80,7 @@
             // DirectAgentCallRadioButton
             // 
             this.DirectAgentCallRadioButton.AutoSize = true;
-            this.DirectAgentCallRadioButton.Location = new System.Drawing.Point(9, 44);
+            this.DirectAgentCallRadioButton.Location = new System.Drawing.Point(9, 43);
             this.DirectAgentCallRadioButton.Name = "DirectAgentCallRadioButton";
             this.DirectAgentCallRadioButton.Size = new System.Drawing.Size(98, 17);
             this.DirectAgentCallRadioButton.TabIndex = 1;
@@ -90,7 +92,7 @@
             // 
             this.consultationCallRadioButton.AutoSize = true;
             this.consultationCallRadioButton.Checked = true;
-            this.consultationCallRadioButton.Location = new System.Drawing.Point(9, 20);
+            this.consultationCallRadioButton.Location = new System.Drawing.Point(9, 21);
             this.consultationCallRadioButton.Name = "consultationCallRadioButton";
             this.consultationCallRadioButton.Size = new System.Drawing.Size(100, 17);
             this.consultationCallRadioButton.TabIndex = 0;
@@ -99,11 +101,22 @@
             this.consultationCallRadioButton.UseVisualStyleBackColor = true;
             this.consultationCallRadioButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.consultationCallRadioButton_KeyDown);
             // 
+            // supervisorAssistCallRadioButton
+            // 
+            this.supervisorAssistCallRadioButton.AutoSize = true;
+            this.supervisorAssistCallRadioButton.Location = new System.Drawing.Point(9, 67);
+            this.supervisorAssistCallRadioButton.Name = "supervisorAssistCallRadioButton";
+            this.supervisorAssistCallRadioButton.Size = new System.Drawing.Size(119, 17);
+            this.supervisorAssistCallRadioButton.TabIndex = 2;
+            this.supervisorAssistCallRadioButton.Text = "SupervisorAssistCall";
+            this.supervisorAssistCallRadioButton.UseVisualStyleBackColor = true;
+            this.supervisorAssistCallRadioButton.KeyDown += new System.Windows.Forms.KeyEventHandler(this.supervisorAssistCallRadioButton_KeyDown);
+            // 
             // cstaConsultationCallPopupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(290, 134);
+            this.ClientSize = new System.Drawing.Size(290, 159);
             this.Controls.Add(this.consultantCallTypeGroupBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.deviceIdLabel);
@@ -125,5 +138,6 @@
         private System.Windows.Forms.GroupBox consultantCallTypeGroupBox;
         internal System.Windows.Forms.RadioButton DirectAgentCallRadioButton;
         internal System.Windows.Forms.RadioButton consultationCallRadioButton;
+        internal System.Windows.Forms.RadioButton supervisorAssistCallRadioButton;
     }
 }

@@ -47,5 +47,13 @@ namespace TSAPIDemo
                 okButton_Click(sender, e);
             }
         }
+
+        private void supervisorAssistCallRadioButton_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                okButton_Click(sender, e);
+            }
+        }
     }
 }

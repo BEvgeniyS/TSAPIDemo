@@ -947,7 +947,6 @@ namespace Tsapi
         public static extern Acs.RetCode_t attV6DirectAgentCall(
                             [In, Out]
                             Acs.PrivateData_t privData,
-                            [MarshalAs(UnmanagedType.LPStruct)]
                             Csta.DeviceID_t split,
                             bool priorityCalling,
                             ref ATTUserToUserInfo_t userInfo);
@@ -956,9 +955,24 @@ namespace Tsapi
         public static extern Acs.RetCode_t attDirectAgentCall(
                             [In, Out]
                             Acs.PrivateData_t privData,
-                            Csta.DeviceID_t deviceRoute,
+                            Csta.DeviceID_t split,
                             bool priorityCalling,
                             ref ATTV5UserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attV6SupervisorAssistCall(
+                            [In, Out]
+                            Acs.PrivateData_t privData,
+                            Csta.DeviceID_t deviceRoute,
+                            ref ATTUserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSupervisorAssistCall(
+                            [In, Out]
+                            Acs.PrivateData_t privData,
+                            Csta.DeviceID_t deviceRoute,
+                            ref ATTV5UserToUserInfo_t userInfo);
+
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(
