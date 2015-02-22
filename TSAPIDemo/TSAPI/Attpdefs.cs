@@ -1405,7 +1405,7 @@ namespace Tsapi
 
         public struct ATTMakeCallConfEvent_t
         {
-            ATTUCID_t ucid;
+            internal ATTUCID_t ucid;
         };
 
         public struct ATTMakePredictiveCallConfEvent_t

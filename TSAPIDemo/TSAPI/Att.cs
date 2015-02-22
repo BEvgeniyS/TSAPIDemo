@@ -356,7 +356,7 @@ namespace Tsapi
                 }
             }
 
-            ATTMakeCallConfEvent_t makeCall
+            internal ATTMakeCallConfEvent_t makeCall
             {
                 get
                 {
@@ -972,6 +972,23 @@ namespace Tsapi
                             Acs.PrivateData_t privData,
                             Csta.DeviceID_t deviceRoute,
                             ref ATTV5UserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attV6MakeCall(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            Csta.DeviceID_t destRoute,
+                            bool priorityCalling,
+                            ref ATTUserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attMakeCall(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            Csta.DeviceID_t destRoute,
+                            bool priorityCalling,
+                            ref ATTV5UserToUserInfo_t userInfo);
+        
 
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]

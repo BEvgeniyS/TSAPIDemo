@@ -886,7 +886,6 @@ namespace TSAPIDemo
                     u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
                     u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
                     Array.Resize(ref u2uInfo.value, u2uSize);
-                    //string dummy = new string('\0', 60);
                     Csta.DeviceID_t split = subform.ReturnDeviceId;
 
                     Att.attV6DirectAgentCall(this.privData, split, false, ref u2uInfo);
@@ -941,7 +940,6 @@ namespace TSAPIDemo
                     u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
                     u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
                     Array.Resize(ref u2uInfo.value, u2uSize);
-                    //string dummy = new string('\0', 60);
                     Csta.DeviceID_t split = subform.ReturnDeviceId;
 
                     Att.attV6SupervisorAssistCall(this.privData, split, ref u2uInfo);
@@ -995,7 +993,7 @@ namespace TSAPIDemo
             DialogResult deviceSelectResult = deviceSelectDialog.DialogResult;
             if (deviceSelectResult != DialogResult.OK)
             {
-                MessageBox.Show("No device selected");
+                //MessageBox.Show("No device selected");
                 return;
             }
             Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
@@ -1052,6 +1050,63 @@ namespace TSAPIDemo
             else
             {
                 MessageBox.Show("cstaHoldCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+
+        private void cstaMakeCallButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+
+            var invokeId = new Acs.InvokeID_t();
+            Csta.DeviceID_t callingDevice = this.deviceTextBox.Text;
+
+            var deviceSelectDialog = new DeviceSelectSubform();
+            deviceSelectDialog.ShowDialog();
+            DialogResult deviceSelectResult = deviceSelectDialog.DialogResult;
+            if (deviceSelectResult != DialogResult.OK)
+            {
+                //MessageBox.Show("No device selected");
+                return;
+            }
+            Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
+
+            // Define private data
+            var u2uString = "Hello, I AM test u2u string";
+            var u2uInfo = new Att.ATTUserToUserInfo_t();
+            // fixed u2u size
+            int u2uSize = Att.ATT_MAX_UUI_SIZE;
+            u2uInfo.length = (short)u2uString.Length;
+            u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
+            u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
+            Array.Resize(ref u2uInfo.value, u2uSize);
+            Csta.DeviceID_t destRoute = null;
+
+            Att.attV6MakeCall(this.privData, destRoute, false, ref u2uInfo);
+
+            Acs.RetCode_t retCode = Csta.cstaMakeCall(this.acsHandle, invokeId, callingDevice, calledDevice, this.privData);
+            Debug.WriteLine("cstaMakeCall result = " + retCode._value);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_MAKE_CALL_CONF)
+            {
+                Att.ATTEvent_t attEvt;
+                retCode = Att.attPrivateData(this.privData, out attEvt);
+                Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                if (attEvt.eventType.eventType == Att.ATT_MAKE_CALL_CONF)
+                    MessageBox.Show(String.Format("Make Call from {0} to {1} is successfull! Ucid of new call = {2}", callingDevice.ToString(), calledDevice.ToString(), attEvt.consultationCall.ucid));
+                else
+                    MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
+            }
+            else
+            {
+                MessageBox.Show("cstaMakeCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
             }
         }
 
