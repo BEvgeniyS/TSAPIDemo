@@ -1004,8 +1004,6 @@ namespace Tsapi
                             Csta.DeviceID_t destRoute,
                             bool priorityCalling,
                             ref ATTV5UserToUserInfo_t userInfo);
-        
-
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(

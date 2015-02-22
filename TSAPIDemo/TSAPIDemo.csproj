@@ -103,17 +103,23 @@
     <Compile Include="Subforms\cstaConsultationCallPopupForm.Designer.cs">
       <DependentUpon>cstaConsultationCallPopupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Subforms\DeviceSelectSubform.cs">
+    <Compile Include="Subforms\cstaMakeCallPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Subforms\DeviceSelectSubform.Designer.cs">
-      <DependentUpon>DeviceSelectSubform.cs</DependentUpon>
+    <Compile Include="Subforms\cstaMakeCallPopupForm.Designer.cs">
+      <DependentUpon>cstaMakeCallPopupForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Subforms\SnapShotDeviceForm.cs">
+    <Compile Include="Subforms\DeviceSelectPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Subforms\SnapShotDeviceForm.Designer.cs">
-      <DependentUpon>SnapShotDeviceForm.cs</DependentUpon>
+    <Compile Include="Subforms\DeviceSelectPopupForm.Designer.cs">
+      <DependentUpon>DeviceSelectPopupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Subforms\SnapShotDevicePopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Subforms\SnapShotDevicePopup.Designer.cs">
+      <DependentUpon>SnapShotDevicePopup.cs</DependentUpon>
     </Compile>
     <Compile Include="TSAPI\Acs.cs" />
     <Compile Include="TSAPI\Acsdefs.cs" />
@@ -144,11 +150,15 @@
     <EmbeddedResource Include="Subforms\cstaConsultationCallPopupForm.resx">
       <DependentUpon>cstaConsultationCallPopupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Subforms\DeviceSelectSubform.resx">
-      <DependentUpon>DeviceSelectSubform.cs</DependentUpon>
+    <EmbeddedResource Include="Subforms\cstaMakeCallPopupForm.resx">
+      <DependentUpon>cstaMakeCallPopupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Subforms\SnapShotDeviceForm.resx">
-      <DependentUpon>SnapShotDeviceForm.cs</DependentUpon>
+    <EmbeddedResource Include="Subforms\DeviceSelectPopupForm.resx">
+      <DependentUpon>DeviceSelectPopupForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Subforms\SnapShotDevicePopup.resx">
+      <DependentUpon>SnapShotDevicePopup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="app.config" />

@@ -113,7 +113,7 @@ namespace TSAPIDemo
 
             Csta.ConnectionID_t tmpConn;
 
-            TSAPIDemo.Subforms.SnapShotDeviceForm snapShotDevicePop = new Subforms.SnapShotDeviceForm();
+            TSAPIDemo.Subforms.SnapShotDevicePopup snapShotDevicePop = new Subforms.SnapShotDevicePopup();
             snapShotDevicePop.parentForm = this;
 
             snapShotDevicePop.snapShotDataTree.Nodes.Clear();
@@ -1004,7 +1004,7 @@ namespace TSAPIDemo
             }
             var invokeId = new Acs.InvokeID_t();
 
-            var deviceSelectDialog = new DeviceSelectSubform();
+            var deviceSelectDialog = new DeviceSelectPopupForm();
             deviceSelectDialog.ShowDialog();
             DialogResult deviceSelectResult = deviceSelectDialog.DialogResult;
             if (deviceSelectResult != DialogResult.OK)
@@ -1076,7 +1076,7 @@ namespace TSAPIDemo
             var invokeId = new Acs.InvokeID_t();
             Csta.DeviceID_t callingDevice = this.deviceTextBox.Text;
 
-            var deviceSelectDialog = new DeviceSelectSubform();
+            var deviceSelectDialog = new cstaMakeCallPopupForm();
             deviceSelectDialog.ShowDialog();
             DialogResult deviceSelectResult = deviceSelectDialog.DialogResult;
             if (deviceSelectResult != DialogResult.OK)
@@ -1086,7 +1086,6 @@ namespace TSAPIDemo
             }
             Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
 
-            // Define private data
             var u2uString = "Hello, I AM test u2u string";
             var u2uInfo = new Att.ATTUserToUserInfo_t();
             // fixed u2u size
@@ -1095,10 +1094,17 @@ namespace TSAPIDemo
             u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
             u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
             Array.Resize(ref u2uInfo.value, u2uSize);
-            Csta.DeviceID_t destRoute = null;
+            Csta.DeviceID_t destRouteOrSplit;
+            if (deviceSelectDialog.destRouteOrSplitTextBox.Text == string.Empty)
+                destRouteOrSplit = null;
+            else
+                destRouteOrSplit = deviceSelectDialog.destRouteOrSplitTextBox.Text;
 
-            Att.attV6MakeCall(this.privData, destRoute, false, ref u2uInfo);
-
+            if (!deviceSelectDialog.directAgentCallCheckBox.Checked)
+                Att.attV6MakeCall(this.privData, destRouteOrSplit, false, ref u2uInfo);
+            else
+                Att.attV6DirectAgentCall(this.privData, destRouteOrSplit, false, ref u2uInfo);
+     
             Acs.RetCode_t retCode = Csta.cstaMakeCall(this.acsHandle, invokeId, callingDevice, calledDevice, this.privData);
             Debug.WriteLine("cstaMakeCall result = " + retCode._value);
 

@@ -16,7 +16,7 @@
 
 namespace TSAPIDemo
 {
-    partial class DeviceSelectSubform
+    partial class cstaMakeCallPopupForm
     {
         /// <summary>
         /// Required designer variable.
@@ -47,6 +47,9 @@ namespace TSAPIDemo
             this.deviceIdTextBox = new System.Windows.Forms.TextBox();
             this.deviceIDLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
+            this.directAgentCallCheckBox = new System.Windows.Forms.CheckBox();
+            this.destRouteOrSplitLabel = new System.Windows.Forms.Label();
+            this.destRouteOrSplitTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // deviceIdTextBox
@@ -68,7 +71,7 @@ namespace TSAPIDemo
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(73, 48);
+            this.okButton.Location = new System.Drawing.Point(77, 104);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 2;
@@ -76,15 +79,45 @@ namespace TSAPIDemo
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
-            // DeviceSelectSubform
+            // directAgentCallCheckBox
+            // 
+            this.directAgentCallCheckBox.AutoSize = true;
+            this.directAgentCallCheckBox.Location = new System.Drawing.Point(64, 81);
+            this.directAgentCallCheckBox.Name = "directAgentCallCheckBox";
+            this.directAgentCallCheckBox.Size = new System.Drawing.Size(105, 17);
+            this.directAgentCallCheckBox.TabIndex = 3;
+            this.directAgentCallCheckBox.Text = "Direct-Agent Call";
+            this.directAgentCallCheckBox.UseVisualStyleBackColor = true;
+            this.directAgentCallCheckBox.Click += new System.EventHandler(this.directAgentCallCheckBox_Click);
+            // 
+            // destRouteOrSplitLabel
+            // 
+            this.destRouteOrSplitLabel.AutoSize = true;
+            this.destRouteOrSplitLabel.Location = new System.Drawing.Point(21, 51);
+            this.destRouteOrSplitLabel.Name = "destRouteOrSplitLabel";
+            this.destRouteOrSplitLabel.Size = new System.Drawing.Size(86, 13);
+            this.destRouteOrSplitLabel.TabIndex = 5;
+            this.destRouteOrSplitLabel.Text = "Enter DestRoute";
+            // 
+            // destRouteOrSplitTextBox
+            // 
+            this.destRouteOrSplitTextBox.Location = new System.Drawing.Point(113, 48);
+            this.destRouteOrSplitTextBox.Name = "destRouteOrSplitTextBox";
+            this.destRouteOrSplitTextBox.Size = new System.Drawing.Size(100, 20);
+            this.destRouteOrSplitTextBox.TabIndex = 4;
+            // 
+            // cstaMakeCallPopupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 87);
+            this.ClientSize = new System.Drawing.Size(244, 165);
+            this.Controls.Add(this.destRouteOrSplitLabel);
+            this.Controls.Add(this.destRouteOrSplitTextBox);
+            this.Controls.Add(this.directAgentCallCheckBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.deviceIDLabel);
             this.Controls.Add(this.deviceIdTextBox);
-            this.Name = "DeviceSelectSubform";
+            this.Name = "cstaMakeCallPopupForm";
             this.Text = "Select Device";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -96,5 +129,8 @@ namespace TSAPIDemo
         internal System.Windows.Forms.TextBox deviceIdTextBox;
         private System.Windows.Forms.Label deviceIDLabel;
         private System.Windows.Forms.Button okButton;
+        internal System.Windows.Forms.CheckBox directAgentCallCheckBox;
+        internal System.Windows.Forms.Label destRouteOrSplitLabel;
+        internal System.Windows.Forms.TextBox destRouteOrSplitTextBox;
     }
 }

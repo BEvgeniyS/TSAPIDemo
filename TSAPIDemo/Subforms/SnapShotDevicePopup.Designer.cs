@@ -16,7 +16,7 @@
 
 namespace TSAPIDemo.Subforms
 {
-    partial class SnapShotDeviceForm
+    partial class SnapShotDevicePopup
     {
         /// <summary>
         /// Required designer variable.

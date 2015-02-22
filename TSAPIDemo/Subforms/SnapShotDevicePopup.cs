@@ -26,10 +26,10 @@ using Tsapi;
 
 namespace TSAPIDemo.Subforms
 {
-    public partial class SnapShotDeviceForm : Form
+    public partial class SnapShotDevicePopup : Form
     {
         internal mainForm parentForm;
-        internal SnapShotDeviceForm()
+        internal SnapShotDevicePopup()
         {
             InitializeComponent();
         }

@@ -25,9 +25,9 @@ using System.Windows.Forms;
 
 namespace TSAPIDemo
 {
-    public partial class DeviceSelectSubform : Form
+    public partial class DeviceSelectPopupForm : Form
     {
-        public DeviceSelectSubform()
+        public DeviceSelectPopupForm()
         {
             InitializeComponent();
         }
