@@ -978,6 +978,50 @@ namespace TSAPIDemo
             }
         }
 
+        private void deflectCallButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            int callCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+            if (callCount < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+            var invokeId = new Acs.InvokeID_t();
+
+            var deviceSelectDialog = new DeviceSelectSubform();
+            deviceSelectDialog.ShowDialog();
+            DialogResult deviceSelectResult = deviceSelectDialog.DialogResult;
+            if (deviceSelectResult != DialogResult.OK)
+            {
+                MessageBox.Show("No device selected");
+                return;
+            }
+            Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
+
+
+            Acs.RetCode_t retCode = Csta.cstaDeflectCall(this.acsHandle, invokeId, ref conns[0], calledDevice, null);
+            Debug.WriteLine("cstaAnswerCall result = " + retCode._value);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_DEFLECT_CALL_CONF)
+            {
+                MessageBox.Show("cstaDeflectCall Succeded");
+            }
+            else
+            {
+                MessageBox.Show("cstaDeflectCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+
     }
 
     class CallNode : TreeNode

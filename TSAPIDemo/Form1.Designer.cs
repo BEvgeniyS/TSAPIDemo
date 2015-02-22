@@ -48,6 +48,8 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.deflectCallButton = new System.Windows.Forms.Button();
+            this.cstaConsultantCallButton = new System.Windows.Forms.Button();
             this.cstaConferenceCallButton = new System.Windows.Forms.Button();
             this.cstaAnswerCallButton = new System.Windows.Forms.Button();
             this.cstaAlternateCallButton = new System.Windows.Forms.Button();
@@ -63,7 +65,6 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaConsultantCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -188,6 +189,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.deflectCallButton);
             this.TestsTab.Controls.Add(this.cstaConsultantCallButton);
             this.TestsTab.Controls.Add(this.cstaConferenceCallButton);
             this.TestsTab.Controls.Add(this.cstaAnswerCallButton);
@@ -210,6 +212,26 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // deflectCallButton
+            // 
+            this.deflectCallButton.Location = new System.Drawing.Point(226, 53);
+            this.deflectCallButton.Name = "deflectCallButton";
+            this.deflectCallButton.Size = new System.Drawing.Size(75, 23);
+            this.deflectCallButton.TabIndex = 20;
+            this.deflectCallButton.Text = "DeflectCall";
+            this.deflectCallButton.UseVisualStyleBackColor = true;
+            this.deflectCallButton.Click += new System.EventHandler(this.deflectCallButton_Click);
+            // 
+            // cstaConsultantCallButton
+            // 
+            this.cstaConsultantCallButton.Location = new System.Drawing.Point(132, 108);
+            this.cstaConsultantCallButton.Name = "cstaConsultantCallButton";
+            this.cstaConsultantCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaConsultantCallButton.TabIndex = 19;
+            this.cstaConsultantCallButton.Text = "ConsultantCall";
+            this.cstaConsultantCallButton.UseVisualStyleBackColor = true;
+            this.cstaConsultantCallButton.Click += new System.EventHandler(this.cstaConsultantCallButton_Click);
             // 
             // cstaConferenceCallButton
             // 
@@ -243,7 +265,7 @@ namespace TSAPIDemo
             // 
             // cstaQueryCallMonitorButton
             // 
-            this.cstaQueryCallMonitorButton.Location = new System.Drawing.Point(169, 376);
+            this.cstaQueryCallMonitorButton.Location = new System.Drawing.Point(141, 371);
             this.cstaQueryCallMonitorButton.Name = "cstaQueryCallMonitorButton";
             this.cstaQueryCallMonitorButton.Size = new System.Drawing.Size(113, 23);
             this.cstaQueryCallMonitorButton.TabIndex = 15;
@@ -253,7 +275,7 @@ namespace TSAPIDemo
             // 
             // cstaGetAPICapsButton
             // 
-            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(169, 306);
+            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(141, 306);
             this.cstaGetAPICapsButton.Name = "cstaGetAPICapsButton";
             this.cstaGetAPICapsButton.Size = new System.Drawing.Size(113, 23);
             this.cstaGetAPICapsButton.TabIndex = 14;
@@ -293,7 +315,7 @@ namespace TSAPIDemo
             // 
             // cstaGetDeviceListButton
             // 
-            this.cstaGetDeviceListButton.Location = new System.Drawing.Point(169, 343);
+            this.cstaGetDeviceListButton.Location = new System.Drawing.Point(141, 335);
             this.cstaGetDeviceListButton.Name = "cstaGetDeviceListButton";
             this.cstaGetDeviceListButton.Size = new System.Drawing.Size(113, 23);
             this.cstaGetDeviceListButton.TabIndex = 11;
@@ -362,16 +384,6 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaConsultantCallButton
-            // 
-            this.cstaConsultantCallButton.Location = new System.Drawing.Point(132, 109);
-            this.cstaConsultantCallButton.Name = "cstaConsultantCallButton";
-            this.cstaConsultantCallButton.Size = new System.Drawing.Size(87, 23);
-            this.cstaConsultantCallButton.TabIndex = 19;
-            this.cstaConsultantCallButton.Text = "ConsultantCall";
-            this.cstaConsultantCallButton.UseVisualStyleBackColor = true;
-            this.cstaConsultantCallButton.Click += new System.EventHandler(this.cstaConsultantCallButton_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -424,6 +436,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaAnswerCallButton;
         private System.Windows.Forms.Button cstaConferenceCallButton;
         private System.Windows.Forms.Button cstaConsultantCallButton;
+        private System.Windows.Forms.Button deflectCallButton;
 
 
 

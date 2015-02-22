@@ -87,6 +87,12 @@
     <Compile Include="Subforms\cstaConsultationCallPopupForm.Designer.cs">
       <DependentUpon>cstaConsultationCallPopupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Subforms\DeviceSelectSubform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Subforms\DeviceSelectSubform.Designer.cs">
+      <DependentUpon>DeviceSelectSubform.cs</DependentUpon>
+    </Compile>
     <Compile Include="Subforms\SnapShotDeviceForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     </Compile>
     <EmbeddedResource Include="Subforms\cstaConsultationCallPopupForm.resx">
       <DependentUpon>cstaConsultationCallPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Subforms\DeviceSelectSubform.resx">
+      <DependentUpon>DeviceSelectSubform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Subforms\SnapShotDeviceForm.resx">
       <DependentUpon>SnapShotDeviceForm.cs</DependentUpon>
