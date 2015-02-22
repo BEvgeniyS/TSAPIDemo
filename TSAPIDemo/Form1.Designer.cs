@@ -65,6 +65,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
+            this.cstaHoldButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -189,6 +190,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaHoldButton);
             this.TestsTab.Controls.Add(this.deflectCallButton);
             this.TestsTab.Controls.Add(this.cstaConsultantCallButton);
             this.TestsTab.Controls.Add(this.cstaConferenceCallButton);
@@ -215,7 +217,7 @@ namespace TSAPIDemo
             // 
             // deflectCallButton
             // 
-            this.deflectCallButton.Location = new System.Drawing.Point(226, 53);
+            this.deflectCallButton.Location = new System.Drawing.Point(225, 51);
             this.deflectCallButton.Name = "deflectCallButton";
             this.deflectCallButton.Size = new System.Drawing.Size(75, 23);
             this.deflectCallButton.TabIndex = 20;
@@ -384,6 +386,16 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
+            // cstaHoldButton
+            // 
+            this.cstaHoldButton.Location = new System.Drawing.Point(225, 79);
+            this.cstaHoldButton.Name = "cstaHoldButton";
+            this.cstaHoldButton.Size = new System.Drawing.Size(75, 23);
+            this.cstaHoldButton.TabIndex = 21;
+            this.cstaHoldButton.Text = "HoldCall";
+            this.cstaHoldButton.UseVisualStyleBackColor = true;
+            this.cstaHoldButton.Click += new System.EventHandler(this.cstaHoldButton_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,6 +449,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaConferenceCallButton;
         private System.Windows.Forms.Button cstaConsultantCallButton;
         private System.Windows.Forms.Button deflectCallButton;
+        private System.Windows.Forms.Button cstaHoldButton;
 
 
 

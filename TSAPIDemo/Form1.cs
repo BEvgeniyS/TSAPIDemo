@@ -1000,9 +1000,8 @@ namespace TSAPIDemo
             }
             Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
 
-
             Acs.RetCode_t retCode = Csta.cstaDeflectCall(this.acsHandle, invokeId, ref conns[0], calledDevice, null);
-            Debug.WriteLine("cstaAnswerCall result = " + retCode._value);
+            Debug.WriteLine("cstaDeflectCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
@@ -1019,6 +1018,40 @@ namespace TSAPIDemo
             else
             {
                 MessageBox.Show("cstaDeflectCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+
+        private void cstaHoldButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            int callCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+            if (callCount < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+
+            var invokeId = new Acs.InvokeID_t();
+
+            Acs.RetCode_t retCode = Csta.cstaHoldCall(this.acsHandle, invokeId, ref conns[0], false, null);
+            Debug.WriteLine("cstaHoldCall result = " + retCode._value);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_HOLD_CALL_CONF)
+            {
+                MessageBox.Show("cstaHoldCall Succeded");
+            }
+            else
+            {
+                MessageBox.Show("cstaHoldCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
             }
         }
 
