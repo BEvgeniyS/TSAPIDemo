@@ -880,6 +880,7 @@ namespace Tsapi
                         Acs.InvokeID_t invokeID,
                         [In, Out] DeviceID_t callingDevice,
                         [In, Out] DeviceID_t calledDevice,
+                        Csta.AllocationState_t allocationState,
                         Acs.PrivateData_t privateData);
 
     [DllImport("csta32.dll", CharSet = CharSet.Ansi, SetLastError = true)]

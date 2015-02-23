@@ -64,6 +64,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.cstaMakeCallButton = new System.Windows.Forms.Button();
             this.cstaHoldButton = new System.Windows.Forms.Button();
             this.deflectCallButton = new System.Windows.Forms.Button();
             this.cstaConsultantCallButton = new System.Windows.Forms.Button();
@@ -82,7 +83,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaMakeCallButton = new System.Windows.Forms.Button();
+            this.cstaMakePredictiveCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -207,6 +208,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaMakePredictiveCallButton);
             this.TestsTab.Controls.Add(this.cstaMakeCallButton);
             this.TestsTab.Controls.Add(this.cstaHoldButton);
             this.TestsTab.Controls.Add(this.deflectCallButton);
@@ -232,6 +234,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // cstaMakeCallButton
+            // 
+            this.cstaMakeCallButton.Location = new System.Drawing.Point(225, 109);
+            this.cstaMakeCallButton.Name = "cstaMakeCallButton";
+            this.cstaMakeCallButton.Size = new System.Drawing.Size(75, 23);
+            this.cstaMakeCallButton.TabIndex = 22;
+            this.cstaMakeCallButton.Text = "MakeCall";
+            this.cstaMakeCallButton.UseVisualStyleBackColor = true;
+            this.cstaMakeCallButton.Click += new System.EventHandler(this.cstaMakeCallButton_Click);
             // 
             // cstaHoldButton
             // 
@@ -414,15 +426,15 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaMakeCallButton
+            // cstaMakePredictiveCallButton
             // 
-            this.cstaMakeCallButton.Location = new System.Drawing.Point(225, 109);
-            this.cstaMakeCallButton.Name = "cstaMakeCallButton";
-            this.cstaMakeCallButton.Size = new System.Drawing.Size(75, 23);
-            this.cstaMakeCallButton.TabIndex = 22;
-            this.cstaMakeCallButton.Text = "MakeCall";
-            this.cstaMakeCallButton.UseVisualStyleBackColor = true;
-            this.cstaMakeCallButton.Click += new System.EventHandler(this.cstaMakeCallButton_Click);
+            this.cstaMakePredictiveCallButton.Location = new System.Drawing.Point(26, 139);
+            this.cstaMakePredictiveCallButton.Name = "cstaMakePredictiveCallButton";
+            this.cstaMakePredictiveCallButton.Size = new System.Drawing.Size(98, 23);
+            this.cstaMakePredictiveCallButton.TabIndex = 23;
+            this.cstaMakePredictiveCallButton.Text = "PredictiveCall";
+            this.cstaMakePredictiveCallButton.UseVisualStyleBackColor = true;
+            this.cstaMakePredictiveCallButton.Click += new System.EventHandler(this.cstaMakePredictiveCallButton_Click);
             // 
             // mainForm
             // 
@@ -479,6 +491,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button deflectCallButton;
         private System.Windows.Forms.Button cstaHoldButton;
         private System.Windows.Forms.Button cstaMakeCallButton;
+        private System.Windows.Forms.Button cstaMakePredictiveCallButton;
 
 
 

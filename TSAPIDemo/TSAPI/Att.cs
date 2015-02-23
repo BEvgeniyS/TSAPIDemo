@@ -380,7 +380,7 @@ namespace Tsapi
                 }
             }
 
-            ATTMakePredictiveCallConfEvent_t makePredictiveCall
+            internal ATTMakePredictiveCallConfEvent_t makePredictiveCall
             {
                 get
                 {
@@ -1004,6 +1004,28 @@ namespace Tsapi
                             Csta.DeviceID_t destRoute,
                             bool priorityCalling,
                             ref ATTV5UserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attV6MakePredictiveCall(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            bool priorityCalling,
+                            short maxRings,
+                            ATTAnswerTreat_t answerTreat,
+                            Csta.DeviceID_t destRoute,
+                            ref ATTUserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attMakePredictiveCall(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            bool priorityCalling,
+                            short maxRings,
+                            ATTAnswerTreat_t answerTreat,
+                            Csta.DeviceID_t destRoute,
+                            ref ATTV5UserToUserInfo_t userInfo);
+
+
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(

@@ -1132,6 +1132,58 @@ namespace TSAPIDemo
             }
         }
 
+        private void cstaMakePredictiveCallButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+
+            var invokeId = new Acs.InvokeID_t();
+            Csta.DeviceID_t callingDevice = this.deviceTextBox.Text;
+            DeviceSelectPopupForm deviceSelect = new DeviceSelectPopupForm();
+            deviceSelect.ShowDialog();
+            Csta.DeviceID_t calledDevice = deviceSelect.deviceIdTextBox.Text;
+
+            var u2uString = "Hello, I AM test u2u string";
+            var u2uInfo = new Att.ATTUserToUserInfo_t();
+            // fixed u2u size
+            int u2uSize = Att.ATT_MAX_UUI_SIZE;
+            u2uInfo.length = (short)u2uString.Length;
+            u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
+            u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
+            Array.Resize(ref u2uInfo.value, u2uSize);
+            Att.ATTAnswerTreat_t at = Att.ATTAnswerTreat_t.AT_NONE;
+
+            Att.attV6MakePredictiveCall(this.privData, false, 2, at, null, ref u2uInfo);
+
+            Csta.AllocationState_t allocState = Csta.AllocationState_t.AS_CALL_ESTABLISHED;
+            Acs.RetCode_t retCode = Csta.cstaMakePredictiveCall(this.acsHandle, invokeId, callingDevice, calledDevice, allocState, this.privData);
+            Debug.WriteLine("cstaMakePredictiveCall result = " + retCode._value);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_MAKE_PREDICTIVE_CALL_CONF)
+            {
+                Att.ATTEvent_t attEvt;
+                retCode = Att.attPrivateData(this.privData, out attEvt);
+                Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                if (attEvt.eventType.eventType == Att.ATT_MAKE_PREDICTIVE_CALL_CONF)
+                    MessageBox.Show(String.Format("Make Predictive Call from {0} to {1} is successfull! Ucid of new call = {2}", callingDevice.ToString(), calledDevice.ToString(), attEvt.makePredictiveCall.ucid));
+                else
+                    MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
+
+                MessageBox.Show("cstaMakePredictiveCall Succeded");
+            }
+            else
+            {
+                MessageBox.Show("cstaMakePredictiveCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+
     }
 
     class CallNode : TreeNode

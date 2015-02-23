@@ -1424,9 +1424,9 @@ namespace Tsapi
             internal ATTUCID_t ucid;
         };
 
-        public struct ATTMakePredictiveCallConfEvent_t
+        internal struct ATTMakePredictiveCallConfEvent_t
         {
-            ATTUCID_t ucid;
+            internal ATTUCID_t ucid;
         };
 
         public struct ATTV5SetAgentState_t
