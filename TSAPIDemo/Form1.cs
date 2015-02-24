@@ -1100,10 +1100,12 @@ namespace TSAPIDemo
             else
                 destRouteOrSplit = deviceSelectDialog.destRouteOrSplitTextBox.Text;
 
-            if (!deviceSelectDialog.directAgentCallCheckBox.Checked)
+            if (deviceSelectDialog.normalCallRadio.Checked)
                 Att.attV6MakeCall(this.privData, destRouteOrSplit, false, ref u2uInfo);
-            else
+            else if (deviceSelectDialog.directAgentCallRadio.Checked)
                 Att.attV6DirectAgentCall(this.privData, destRouteOrSplit, false, ref u2uInfo);
+            else if (deviceSelectDialog.supervisorAssistCallRadio.Checked)
+                Att.attV6SupervisorAssistCall(this.privData, destRouteOrSplit, ref u2uInfo);
      
             Acs.RetCode_t retCode = Csta.cstaMakeCall(this.acsHandle, invokeId, callingDevice, calledDevice, this.privData);
             Debug.WriteLine("cstaMakeCall result = " + retCode._value);

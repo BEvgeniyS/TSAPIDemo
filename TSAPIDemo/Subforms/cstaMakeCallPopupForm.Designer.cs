@@ -47,9 +47,13 @@ namespace TSAPIDemo
             this.deviceIdTextBox = new System.Windows.Forms.TextBox();
             this.deviceIDLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
-            this.directAgentCallCheckBox = new System.Windows.Forms.CheckBox();
             this.destRouteOrSplitLabel = new System.Windows.Forms.Label();
             this.destRouteOrSplitTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.normalCallRadio = new System.Windows.Forms.RadioButton();
+            this.supervisorAssistCallRadio = new System.Windows.Forms.RadioButton();
+            this.directAgentCallRadio = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // deviceIdTextBox
@@ -68,27 +72,17 @@ namespace TSAPIDemo
             this.deviceIDLabel.Size = new System.Drawing.Size(80, 13);
             this.deviceIDLabel.TabIndex = 1;
             this.deviceIDLabel.Text = "Enter DeviceID";
+            this.deviceIDLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(77, 104);
+            this.okButton.Location = new System.Drawing.Point(80, 211);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 2;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // directAgentCallCheckBox
-            // 
-            this.directAgentCallCheckBox.AutoSize = true;
-            this.directAgentCallCheckBox.Location = new System.Drawing.Point(64, 81);
-            this.directAgentCallCheckBox.Name = "directAgentCallCheckBox";
-            this.directAgentCallCheckBox.Size = new System.Drawing.Size(105, 17);
-            this.directAgentCallCheckBox.TabIndex = 3;
-            this.directAgentCallCheckBox.Text = "Direct-Agent Call";
-            this.directAgentCallCheckBox.UseVisualStyleBackColor = true;
-            this.directAgentCallCheckBox.Click += new System.EventHandler(this.directAgentCallCheckBox_Click);
             // 
             // destRouteOrSplitLabel
             // 
@@ -98,6 +92,7 @@ namespace TSAPIDemo
             this.destRouteOrSplitLabel.Size = new System.Drawing.Size(86, 13);
             this.destRouteOrSplitLabel.TabIndex = 5;
             this.destRouteOrSplitLabel.Text = "Enter DestRoute";
+            this.destRouteOrSplitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // destRouteOrSplitTextBox
             // 
@@ -106,19 +101,68 @@ namespace TSAPIDemo
             this.destRouteOrSplitTextBox.Size = new System.Drawing.Size(100, 20);
             this.destRouteOrSplitTextBox.TabIndex = 4;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.normalCallRadio);
+            this.groupBox1.Controls.Add(this.supervisorAssistCallRadio);
+            this.groupBox1.Controls.Add(this.directAgentCallRadio);
+            this.groupBox1.Location = new System.Drawing.Point(45, 83);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(157, 87);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "MakeCall type";
+            // 
+            // normalCallRadio
+            // 
+            this.normalCallRadio.AutoSize = true;
+            this.normalCallRadio.Checked = true;
+            this.normalCallRadio.Location = new System.Drawing.Point(7, 17);
+            this.normalCallRadio.Name = "normalCallRadio";
+            this.normalCallRadio.Size = new System.Drawing.Size(78, 17);
+            this.normalCallRadio.TabIndex = 2;
+            this.normalCallRadio.TabStop = true;
+            this.normalCallRadio.Text = "Normal Call";
+            this.normalCallRadio.UseVisualStyleBackColor = true;
+            this.normalCallRadio.Click += new System.EventHandler(this.normalCallRadio_Click);
+            // 
+            // supervisorAssistCallRadio
+            // 
+            this.supervisorAssistCallRadio.AutoSize = true;
+            this.supervisorAssistCallRadio.Location = new System.Drawing.Point(6, 63);
+            this.supervisorAssistCallRadio.Name = "supervisorAssistCallRadio";
+            this.supervisorAssistCallRadio.Size = new System.Drawing.Size(119, 17);
+            this.supervisorAssistCallRadio.TabIndex = 1;
+            this.supervisorAssistCallRadio.Text = "SupervisorAssistCall";
+            this.supervisorAssistCallRadio.UseVisualStyleBackColor = true;
+            this.supervisorAssistCallRadio.Click += new System.EventHandler(this.supervisorAssistCallRadio_Click);
+            // 
+            // directAgentCallRadio
+            // 
+            this.directAgentCallRadio.AutoSize = true;
+            this.directAgentCallRadio.Location = new System.Drawing.Point(6, 40);
+            this.directAgentCallRadio.Name = "directAgentCallRadio";
+            this.directAgentCallRadio.Size = new System.Drawing.Size(104, 17);
+            this.directAgentCallRadio.TabIndex = 0;
+            this.directAgentCallRadio.Text = "Direct-Agent Call";
+            this.directAgentCallRadio.UseVisualStyleBackColor = true;
+            this.directAgentCallRadio.Click += new System.EventHandler(this.directAgentCallRadio_Click);
+            // 
             // cstaMakeCallPopupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 165);
+            this.ClientSize = new System.Drawing.Size(244, 274);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.destRouteOrSplitLabel);
             this.Controls.Add(this.destRouteOrSplitTextBox);
-            this.Controls.Add(this.directAgentCallCheckBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.deviceIDLabel);
             this.Controls.Add(this.deviceIdTextBox);
             this.Name = "cstaMakeCallPopupForm";
             this.Text = "Select Device";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,8 +173,11 @@ namespace TSAPIDemo
         internal System.Windows.Forms.TextBox deviceIdTextBox;
         private System.Windows.Forms.Label deviceIDLabel;
         private System.Windows.Forms.Button okButton;
-        internal System.Windows.Forms.CheckBox directAgentCallCheckBox;
         internal System.Windows.Forms.Label destRouteOrSplitLabel;
         internal System.Windows.Forms.TextBox destRouteOrSplitTextBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        internal System.Windows.Forms.RadioButton supervisorAssistCallRadio;
+        internal System.Windows.Forms.RadioButton directAgentCallRadio;
+        internal System.Windows.Forms.RadioButton normalCallRadio;
     }
 }
