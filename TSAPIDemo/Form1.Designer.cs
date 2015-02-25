@@ -64,6 +64,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.cstaMakePredictiveCallButton = new System.Windows.Forms.Button();
             this.cstaMakeCallButton = new System.Windows.Forms.Button();
             this.cstaHoldButton = new System.Windows.Forms.Button();
             this.deflectCallButton = new System.Windows.Forms.Button();
@@ -83,7 +84,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaMakePredictiveCallButton = new System.Windows.Forms.Button();
+            this.cstaPickupCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -208,6 +209,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaPickupCallButton);
             this.TestsTab.Controls.Add(this.cstaMakePredictiveCallButton);
             this.TestsTab.Controls.Add(this.cstaMakeCallButton);
             this.TestsTab.Controls.Add(this.cstaHoldButton);
@@ -234,6 +236,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // cstaMakePredictiveCallButton
+            // 
+            this.cstaMakePredictiveCallButton.Location = new System.Drawing.Point(26, 139);
+            this.cstaMakePredictiveCallButton.Name = "cstaMakePredictiveCallButton";
+            this.cstaMakePredictiveCallButton.Size = new System.Drawing.Size(98, 23);
+            this.cstaMakePredictiveCallButton.TabIndex = 23;
+            this.cstaMakePredictiveCallButton.Text = "PredictiveCall";
+            this.cstaMakePredictiveCallButton.UseVisualStyleBackColor = true;
+            this.cstaMakePredictiveCallButton.Click += new System.EventHandler(this.cstaMakePredictiveCallButton_Click);
             // 
             // cstaMakeCallButton
             // 
@@ -426,15 +438,15 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaMakePredictiveCallButton
+            // cstaPickupCallButton
             // 
-            this.cstaMakePredictiveCallButton.Location = new System.Drawing.Point(26, 139);
-            this.cstaMakePredictiveCallButton.Name = "cstaMakePredictiveCallButton";
-            this.cstaMakePredictiveCallButton.Size = new System.Drawing.Size(98, 23);
-            this.cstaMakePredictiveCallButton.TabIndex = 23;
-            this.cstaMakePredictiveCallButton.Text = "PredictiveCall";
-            this.cstaMakePredictiveCallButton.UseVisualStyleBackColor = true;
-            this.cstaMakePredictiveCallButton.Click += new System.EventHandler(this.cstaMakePredictiveCallButton_Click);
+            this.cstaPickupCallButton.Location = new System.Drawing.Point(132, 139);
+            this.cstaPickupCallButton.Name = "cstaPickupCallButton";
+            this.cstaPickupCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaPickupCallButton.TabIndex = 24;
+            this.cstaPickupCallButton.Text = "PickupCall";
+            this.cstaPickupCallButton.UseVisualStyleBackColor = true;
+            this.cstaPickupCallButton.Click += new System.EventHandler(this.cstaPickupCallButton_Click);
             // 
             // mainForm
             // 
@@ -492,6 +504,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaHoldButton;
         private System.Windows.Forms.Button cstaMakeCallButton;
         private System.Windows.Forms.Button cstaMakePredictiveCallButton;
+        private System.Windows.Forms.Button cstaPickupCallButton;
 
 
 

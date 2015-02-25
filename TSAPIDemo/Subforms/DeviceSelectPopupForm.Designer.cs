@@ -68,7 +68,7 @@ namespace TSAPIDemo
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(73, 48);
+            this.okButton.Location = new System.Drawing.Point(90, 53);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 2;
@@ -76,7 +76,7 @@ namespace TSAPIDemo
             this.okButton.UseVisualStyleBackColor = true;
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
-            // DeviceSelectSubform
+            // DeviceSelectPopupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -84,7 +84,8 @@ namespace TSAPIDemo
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.deviceIDLabel);
             this.Controls.Add(this.deviceIdTextBox);
-            this.Name = "DeviceSelectSubform";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "DeviceSelectPopupForm";
             this.Text = "Select Device";
             this.ResumeLayout(false);
             this.PerformLayout();
