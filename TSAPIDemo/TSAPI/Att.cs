@@ -1025,6 +1025,19 @@ namespace Tsapi
                             Csta.DeviceID_t destRoute,
                             ref ATTV5UserToUserInfo_t userInfo);
 
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attV6ReconnectCall(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            ATTDropResource_t dropResource,
+                            ref ATTUserToUserInfo_t userInfo);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attReconnectCall(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            ATTDropResource_t dropResource,
+                            ref ATTV5UserToUserInfo_t userInfo);       
 
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]

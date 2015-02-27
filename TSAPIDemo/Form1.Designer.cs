@@ -64,6 +64,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.cstaPickupCallButton = new System.Windows.Forms.Button();
             this.cstaMakePredictiveCallButton = new System.Windows.Forms.Button();
             this.cstaMakeCallButton = new System.Windows.Forms.Button();
             this.cstaHoldButton = new System.Windows.Forms.Button();
@@ -84,7 +85,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaPickupCallButton = new System.Windows.Forms.Button();
+            this.cstaReconnectCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -209,6 +210,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaReconnectCallButton);
             this.TestsTab.Controls.Add(this.cstaPickupCallButton);
             this.TestsTab.Controls.Add(this.cstaMakePredictiveCallButton);
             this.TestsTab.Controls.Add(this.cstaMakeCallButton);
@@ -236,6 +238,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // cstaPickupCallButton
+            // 
+            this.cstaPickupCallButton.Location = new System.Drawing.Point(132, 139);
+            this.cstaPickupCallButton.Name = "cstaPickupCallButton";
+            this.cstaPickupCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaPickupCallButton.TabIndex = 24;
+            this.cstaPickupCallButton.Text = "PickupCall";
+            this.cstaPickupCallButton.UseVisualStyleBackColor = true;
+            this.cstaPickupCallButton.Click += new System.EventHandler(this.cstaPickupCallButton_Click);
             // 
             // cstaMakePredictiveCallButton
             // 
@@ -438,15 +450,15 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaPickupCallButton
+            // cstaReconnectCallButton
             // 
-            this.cstaPickupCallButton.Location = new System.Drawing.Point(132, 139);
-            this.cstaPickupCallButton.Name = "cstaPickupCallButton";
-            this.cstaPickupCallButton.Size = new System.Drawing.Size(87, 23);
-            this.cstaPickupCallButton.TabIndex = 24;
-            this.cstaPickupCallButton.Text = "PickupCall";
-            this.cstaPickupCallButton.UseVisualStyleBackColor = true;
-            this.cstaPickupCallButton.Click += new System.EventHandler(this.cstaPickupCallButton_Click);
+            this.cstaReconnectCallButton.Location = new System.Drawing.Point(225, 139);
+            this.cstaReconnectCallButton.Name = "cstaReconnectCallButton";
+            this.cstaReconnectCallButton.Size = new System.Drawing.Size(75, 23);
+            this.cstaReconnectCallButton.TabIndex = 25;
+            this.cstaReconnectCallButton.Text = "Reconn.Call";
+            this.cstaReconnectCallButton.UseVisualStyleBackColor = true;
+            this.cstaReconnectCallButton.Click += new System.EventHandler(this.cstaReconnectCallButton_Click);
             // 
             // mainForm
             // 
@@ -505,6 +517,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaMakeCallButton;
         private System.Windows.Forms.Button cstaMakePredictiveCallButton;
         private System.Windows.Forms.Button cstaPickupCallButton;
+        private System.Windows.Forms.Button cstaReconnectCallButton;
 
 
 

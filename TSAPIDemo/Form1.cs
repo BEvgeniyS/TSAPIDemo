@@ -1233,6 +1233,51 @@ namespace TSAPIDemo
             }
         }
 
+        private void cstaReconnectCallButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            int callCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+            if (callCount < 2)
+            {
+                MessageBox.Show("Need 2 calls to reconnect them");
+                return;
+            }
+
+            var invokeId = new Acs.InvokeID_t();
+
+            var u2uString = "Hello, I AM test u2u string";
+            var u2uInfo = new Att.ATTUserToUserInfo_t();
+            int u2uSize = Att.ATT_MAX_UUI_SIZE;
+            u2uInfo.length = (short)u2uString.Length;
+            u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
+            u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
+            Array.Resize(ref u2uInfo.value, u2uSize);
+            var dropResource = Att.ATTDropResource_t.DR_NONE;
+
+            Att.attV6ReconnectCall(this.privData, dropResource, ref u2uInfo);
+
+            Acs.RetCode_t retCode = Csta.cstaReconnectCall(this.acsHandle, invokeId, ref conns[0], ref conns[1], this.privData);
+            Debug.WriteLine("cstaReconnectCall result = " + retCode._value);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_RECONNECT_CALL_CONF)
+            {
+                MessageBox.Show("cstaReconnectCall Succeded");
+            }
+            else
+            {
+                MessageBox.Show("cstaReconnectCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+
     }
 
     class CallNode : TreeNode
