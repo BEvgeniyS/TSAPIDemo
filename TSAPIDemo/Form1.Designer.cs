@@ -64,6 +64,11 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.wmEventNotifyCheckBox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.esrCheckBox = new System.Windows.Forms.CheckBox();
+            this.cstaReconnectCallButton = new System.Windows.Forms.Button();
             this.cstaPickupCallButton = new System.Windows.Forms.Button();
             this.cstaMakePredictiveCallButton = new System.Windows.Forms.Button();
             this.cstaMakeCallButton = new System.Windows.Forms.Button();
@@ -85,7 +90,6 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaReconnectCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -210,6 +214,10 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.label8);
+            this.TestsTab.Controls.Add(this.wmEventNotifyCheckBox);
+            this.TestsTab.Controls.Add(this.label1);
+            this.TestsTab.Controls.Add(this.esrCheckBox);
             this.TestsTab.Controls.Add(this.cstaReconnectCallButton);
             this.TestsTab.Controls.Add(this.cstaPickupCallButton);
             this.TestsTab.Controls.Add(this.cstaMakePredictiveCallButton);
@@ -238,6 +246,56 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(420, 452);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 13);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "WM Event notify";
+            // 
+            // wmEventNotifyCheckBox
+            // 
+            this.wmEventNotifyCheckBox.AutoSize = true;
+            this.wmEventNotifyCheckBox.Location = new System.Drawing.Point(423, 468);
+            this.wmEventNotifyCheckBox.Name = "wmEventNotifyCheckBox";
+            this.wmEventNotifyCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.wmEventNotifyCheckBox.TabIndex = 28;
+            this.wmEventNotifyCheckBox.Text = "Disabled";
+            this.wmEventNotifyCheckBox.UseVisualStyleBackColor = true;
+            this.wmEventNotifyCheckBox.Click += new System.EventHandler(this.wmEventNotifyCheckBox_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(305, 452);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "ESR Event notify";
+            // 
+            // esrCheckBox
+            // 
+            this.esrCheckBox.AutoSize = true;
+            this.esrCheckBox.Location = new System.Drawing.Point(308, 468);
+            this.esrCheckBox.Name = "esrCheckBox";
+            this.esrCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.esrCheckBox.TabIndex = 26;
+            this.esrCheckBox.Text = "Disabled";
+            this.esrCheckBox.UseVisualStyleBackColor = true;
+            this.esrCheckBox.Click += new System.EventHandler(this.esrCheckBox_Click);
+            // 
+            // cstaReconnectCallButton
+            // 
+            this.cstaReconnectCallButton.Location = new System.Drawing.Point(225, 139);
+            this.cstaReconnectCallButton.Name = "cstaReconnectCallButton";
+            this.cstaReconnectCallButton.Size = new System.Drawing.Size(75, 23);
+            this.cstaReconnectCallButton.TabIndex = 25;
+            this.cstaReconnectCallButton.Text = "Reconn.Call";
+            this.cstaReconnectCallButton.UseVisualStyleBackColor = true;
+            this.cstaReconnectCallButton.Click += new System.EventHandler(this.cstaReconnectCallButton_Click);
             // 
             // cstaPickupCallButton
             // 
@@ -450,16 +508,6 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaReconnectCallButton
-            // 
-            this.cstaReconnectCallButton.Location = new System.Drawing.Point(225, 139);
-            this.cstaReconnectCallButton.Name = "cstaReconnectCallButton";
-            this.cstaReconnectCallButton.Size = new System.Drawing.Size(75, 23);
-            this.cstaReconnectCallButton.TabIndex = 25;
-            this.cstaReconnectCallButton.Text = "Reconn.Call";
-            this.cstaReconnectCallButton.UseVisualStyleBackColor = true;
-            this.cstaReconnectCallButton.Click += new System.EventHandler(this.cstaReconnectCallButton_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -518,6 +566,10 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaMakePredictiveCallButton;
         private System.Windows.Forms.Button cstaPickupCallButton;
         private System.Windows.Forms.Button cstaReconnectCallButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox esrCheckBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox wmEventNotifyCheckBox;
 
 
 

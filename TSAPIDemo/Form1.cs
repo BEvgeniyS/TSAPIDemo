@@ -172,6 +172,50 @@ namespace TSAPIDemo
             }
         }
 
+        private void ESRRegister()
+        {
+            Acs.EsrDelegate eventReaction = new Acs.EsrDelegate(EventReactionHandler);
+            Acs.RetCode_t returnCode = Acs.acsSetESR(this.acsHandle, eventReaction, this.acsHandle._value, false);
+            if (returnCode._value == Acs.ACSPOSITIVE_ACK)
+            {
+                this.esrCheckBox.Checked = true;
+                this.esrCheckBox.Text = "Enabled";
+            }
+        }
+
+        private void ESRDeRegister()
+        {
+            Acs.EsrDelegate eventReaction = null;
+            Acs.RetCode_t returnCode = Acs.acsSetESR(this.acsHandle, eventReaction, this.acsHandle._value, false);
+            if (returnCode._value == Acs.ACSPOSITIVE_ACK)
+            {
+                this.esrCheckBox.Checked = false;
+                this.esrCheckBox.Text = "Disabled";
+            }
+        }
+
+        private void EventNotifyRegister()
+        {
+            Acs.RetCode_t returnCode = Acs.acsEventNotify(this.acsHandle, this.Handle, WM_TSAPI_EVENT, false);
+            if (returnCode._value == Acs.ACSPOSITIVE_ACK)
+            {
+                this.wmEventNotifyCheckBox.Checked = true;
+                this.wmEventNotifyCheckBox.Text = "Enabled";
+            }
+        }
+
+        private void EventNotifyDeRegister()
+        {
+            IntPtr nullPtr = IntPtr.Zero;
+            Acs.RetCode_t returnCode = Acs.acsEventNotify(this.acsHandle, nullPtr, WM_TSAPI_EVENT, false);
+            if (returnCode._value == Acs.ACSPOSITIVE_ACK)
+            {
+                this.wmEventNotifyCheckBox.Checked = false;
+                this.wmEventNotifyCheckBox.Text = "Disabled";
+            }
+        }
+
+
         private void openStream()
         {
             this.acsHandle = new Acs.ACSHandle_t();
@@ -240,9 +284,6 @@ namespace TSAPIDemo
                 streamCheckbox.Checked = true;
                 this.snapShotDeviceButton.Enabled = true;
             }
-            Acs.EsrDelegate eventReaction = new Acs.EsrDelegate(EventReactionHandler);
-            Acs.acsSetESR(this.acsHandle, eventReaction, this.acsHandle._value, false);
-            Acs.acsEventNotify(this.acsHandle, this.Handle, WM_TSAPI_EVENT, false);
         }
 
 
@@ -363,10 +404,13 @@ namespace TSAPIDemo
                 closeStream(this.acsHandle);
                 streamCheckbox.Text = "Disconnected from AES server";
                 this.snapShotDeviceButton.Enabled = false;
+                this.esrCheckBox.Enabled = false;
+                this.esrCheckBox.Checked = false;
             }
             else
             {
                 openStream();
+                this.esrCheckBox.Enabled = true;
             }
         }
 
@@ -1278,6 +1322,29 @@ namespace TSAPIDemo
             }
         }
 
+        private void esrCheckBox_Click(object sender, EventArgs e)
+        {
+            if (this.esrCheckBox.Checked)
+            {
+                ESRRegister();
+            }
+            else
+            {
+                ESRDeRegister();
+            }
+        }
+
+        private void wmEventNotifyCheckBox_Click(object sender, EventArgs e)
+        {
+            if (this.wmEventNotifyCheckBox.Checked)
+            {
+                EventNotifyRegister();
+            }
+            else
+            {
+                EventNotifyDeRegister();
+            }
+        }
     }
 
     class CallNode : TreeNode

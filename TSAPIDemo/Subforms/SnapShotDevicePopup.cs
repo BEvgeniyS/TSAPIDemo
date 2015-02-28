@@ -107,7 +107,7 @@ namespace TSAPIDemo.Subforms
             var u2uString = "Hello, I AM test u2u string";
             var u2uInfo = new Att.ATTUserToUserInfo_t();
             // fixed u2u size
-            int u2uSize = 33;
+            int u2uSize = Att.ATT_MAX_UUI_SIZE;
             u2uInfo.length = (short)u2uString.Length;
             u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
             u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
