@@ -427,11 +427,14 @@ namespace TSAPIDemo
                 this.snapShotDeviceButton.Enabled = false;
                 this.esrCheckBox.Enabled = false;
                 this.esrCheckBox.Checked = false;
+                this.wmEventNotifyCheckBox.Enabled = false;
+                this.wmEventNotifyCheckBox.Checked = false;
             }
             else
             {
                 openStream();
                 this.esrCheckBox.Enabled = true;
+                this.wmEventNotifyCheckBox.Enabled = true;
             }
         }
 
@@ -615,6 +618,7 @@ namespace TSAPIDemo
             var enumServerHandler = new EnumServerHandler();
             Acs.EnumServerNamesCB callback = new Acs.EnumServerNamesCB(enumServerHandler.acsEnumServerNamesCallbackHandler);
             Acs.acsEnumServerNames(Acs.StreamType_t.ST_CSTA, callback, 0);
+            Log("[acsEnumServerNames Test] server = " + enumServerHandler.serverName);
             if (enumServerHandler.serverName != string.Empty)
             {
                 return enumServerHandler.serverName;
@@ -1209,9 +1213,10 @@ namespace TSAPIDemo
             var invokeId = new Acs.InvokeID_t();
             Csta.DeviceID_t callingDevice = this.deviceTextBox.Text;
             DeviceSelectPopupForm deviceSelect = new DeviceSelectPopupForm();
-            deviceSelect.ShowDialog();
-            Csta.DeviceID_t calledDevice = deviceSelect.deviceIdTextBox.Text;
+            DialogResult deviceSelectDialog =  deviceSelect.ShowDialog();
+            if (deviceSelectDialog != DialogResult.OK) return;
 
+            Csta.DeviceID_t calledDevice = deviceSelect.deviceIdTextBox.Text;
             var u2uString = "Hello, I AM test u2u string";
             var u2uInfo = new Att.ATTUserToUserInfo_t();
             // fixed u2u size
@@ -1367,6 +1372,82 @@ namespace TSAPIDemo
             else
             {
                 EventNotifyDeRegister();
+            }
+        }
+
+        private void cstaRetrieveCallButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            int callCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+            if (callCount < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+
+            var invokeId = new Acs.InvokeID_t();
+            Acs.RetCode_t retCode = Csta.cstaRetrieveCall(this.acsHandle, invokeId, ref conns[0], null);
+            Debug.WriteLine("cstaRetrieveCall result = " + retCode._value);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_RETRIEVE_CALL_CONF)
+            {
+                MessageBox.Show("cstaRetrieveCall Succeded");
+            }
+            else
+            {
+                MessageBox.Show("cstaRetrieveCall Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+
+        private void SendDTMFToneButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            int callCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+            if (callCount < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+
+
+            var dtmfSelect = new DTMFSelectSubForm();
+            DialogResult dtmfSelectDialog = dtmfSelect.ShowDialog();
+            if (dtmfSelectDialog != DialogResult.OK) return;
+            string tones = dtmfSelect.DTMFSequenceTextBox.Text;
+
+
+
+            var ignored = new Att.ATTConnIDList_t();
+            Acs.RetCode_t retCode = Att.attSendDTMFToneExt(this.privData, ref conns[0], ref ignored, tones, 0, 0);
+
+            var invokeId = new Acs.InvokeID_t();
+            retCode = Csta.cstaEscapeService(this.acsHandle, invokeId, this.privData);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_ESCAPE_SVC_CONF)
+            {
+                MessageBox.Show("attSendDTMFToneExt Succeded");
+            }
+            else
+            {
+                MessageBox.Show("attSendDTMFToneExt Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
             }
         }
     }

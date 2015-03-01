@@ -64,6 +64,9 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.SendDTMFToneButton = new System.Windows.Forms.Button();
+            this.cstaRetrieveCallButton = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             this.logTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.wmEventNotifyCheckBox = new System.Windows.Forms.CheckBox();
@@ -91,7 +94,6 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.label9 = new System.Windows.Forms.Label();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -216,6 +218,8 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.SendDTMFToneButton);
+            this.TestsTab.Controls.Add(this.cstaRetrieveCallButton);
             this.TestsTab.Controls.Add(this.label9);
             this.TestsTab.Controls.Add(this.logTextBox);
             this.TestsTab.Controls.Add(this.label8);
@@ -250,6 +254,35 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // SendDTMFToneButton
+            // 
+            this.SendDTMFToneButton.Location = new System.Drawing.Point(307, 51);
+            this.SendDTMFToneButton.Name = "SendDTMFToneButton";
+            this.SendDTMFToneButton.Size = new System.Drawing.Size(75, 23);
+            this.SendDTMFToneButton.TabIndex = 34;
+            this.SendDTMFToneButton.Text = "SendDTMF";
+            this.SendDTMFToneButton.UseVisualStyleBackColor = true;
+            this.SendDTMFToneButton.Click += new System.EventHandler(this.SendDTMFToneButton_Click);
+            // 
+            // cstaRetrieveCallButton
+            // 
+            this.cstaRetrieveCallButton.Location = new System.Drawing.Point(307, 79);
+            this.cstaRetrieveCallButton.Name = "cstaRetrieveCallButton";
+            this.cstaRetrieveCallButton.Size = new System.Drawing.Size(75, 23);
+            this.cstaRetrieveCallButton.TabIndex = 33;
+            this.cstaRetrieveCallButton.Text = "RetrieveCall";
+            this.cstaRetrieveCallButton.UseVisualStyleBackColor = true;
+            this.cstaRetrieveCallButton.Click += new System.EventHandler(this.cstaRetrieveCallButton_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(577, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(25, 13);
+            this.label9.TabIndex = 32;
+            this.label9.Text = "Log";
             // 
             // logTextBox
             // 
@@ -525,15 +558,6 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(577, 6);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(25, 13);
-            this.label9.TabIndex = 32;
-            this.label9.Text = "Log";
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -598,6 +622,8 @@ namespace TSAPIDemo
         private System.Windows.Forms.CheckBox wmEventNotifyCheckBox;
         private System.Windows.Forms.TextBox logTextBox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button cstaRetrieveCallButton;
+        private System.Windows.Forms.Button SendDTMFToneButton;
 
 
 

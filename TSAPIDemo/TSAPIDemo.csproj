@@ -115,6 +115,12 @@
     <Compile Include="Subforms\DeviceSelectPopupForm.Designer.cs">
       <DependentUpon>DeviceSelectPopupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Subforms\DTMFSelectSubForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Subforms\DTMFSelectSubForm.Designer.cs">
+      <DependentUpon>DTMFSelectSubForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Subforms\SnapShotDevicePopup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     <EmbeddedResource Include="Subforms\DeviceSelectPopupForm.resx">
       <DependentUpon>DeviceSelectPopupForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Subforms\DTMFSelectSubForm.resx">
+      <DependentUpon>DTMFSelectSubForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Subforms\SnapShotDevicePopup.resx">
       <DependentUpon>SnapShotDevicePopup.cs</DependentUpon>

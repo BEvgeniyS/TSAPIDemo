@@ -1039,6 +1039,26 @@ namespace Tsapi
                             ATTDropResource_t dropResource,
                             ref ATTV5UserToUserInfo_t userInfo);       
 
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSendDTMFToneExt(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            ref Csta.ConnectionID_t sender,
+                            ref ATTConnIDList_t receivers,
+                            string tones,
+                            short toneDuration,
+                            short pauseDuration);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSendDTMFTone(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            ref Csta.ConnectionID_t sender,
+                            ref ATTConnIDList_t receivers,
+                            string tones,
+                            short toneDuration,
+                            short pauseDuration);  
+
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(
