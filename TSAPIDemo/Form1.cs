@@ -32,6 +32,9 @@ namespace TSAPIDemo
     {
         private const int WM_USER = 0x0400;
         private const int WM_TSAPI_EVENT = WM_USER + 99;
+        private Acs.EsrDelegate eventReaction;
+        private Queue<string> logQueue = new Queue<string>();
+        private const int logMax = 2000;
 
         public mainForm()
         {
@@ -154,10 +157,28 @@ namespace TSAPIDemo
             }
         }
 
+        public void Log(string logText)
+            {
+                while (logQueue.Count > logMax - 1)
+                    logQueue.Dequeue();
+
+                logQueue.Enqueue(DateTime.Now.ToString() + ": " + logText);
+                this.logTextBox.Text = string.Join(Environment.NewLine, logQueue.ToArray());
+                this.logTextBox.SelectionStart = this.logTextBox.Text.Length - logText.Length;
+                this.logTextBox.ScrollToCaret();
+            }
+
         private void EventReactionHandler(uint esrparam)
         {
-            //MessageBox.Show("[acsSetESR Test] acsHandle = " + esrparam);
-            Debug.WriteLine("[acsSetESR Test] acsHandle = " + esrparam);
+            if (this.InvokeRequired)
+            {
+                this.BeginInvoke(new MethodInvoker(delegate {
+                    string logMsg = "[acsSetESR Test] Event detected. acsHandle = " + esrparam;
+                    //this.logTextBox.AppendText(logMsg); 
+                    Log(logMsg);
+                }));
+            }
+            Debug.WriteLine("[acsSetESR Test] Event detected. acsHandle = " + esrparam);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -174,7 +195,7 @@ namespace TSAPIDemo
 
         private void ESRRegister()
         {
-            Acs.EsrDelegate eventReaction = new Acs.EsrDelegate(EventReactionHandler);
+            this.eventReaction = new Acs.EsrDelegate(EventReactionHandler);
             Acs.RetCode_t returnCode = Acs.acsSetESR(this.acsHandle, eventReaction, this.acsHandle._value, false);
             if (returnCode._value == Acs.ACSPOSITIVE_ACK)
             {
@@ -544,8 +565,11 @@ namespace TSAPIDemo
                 case WM_TSAPI_EVENT:
                 {
                     short[] wmEventData = Aux.SplitPtr(m.LParam);
-                    //MessageBox.Show(string.Format("TSAPI lib has an event for us! AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]));
-                    Debug.WriteLine(string.Format("[acsEventNotify Test] Got event: AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]));
+                    string logMsg = string.Format("[acsEventNotify Test] Got event: AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]);
+                    //MessageBox.Show(logMsg);
+                    Debug.WriteLine(logMsg);
+                    //this.logTextBox.AppendText(logMsg);
+                    Log(logMsg);
                     break;
                 }
             }

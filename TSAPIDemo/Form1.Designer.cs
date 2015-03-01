@@ -64,6 +64,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.logTextBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.wmEventNotifyCheckBox = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -90,6 +91,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
+            this.label9 = new System.Windows.Forms.Label();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -111,7 +113,7 @@ namespace TSAPIDemo
             this.configTab.Location = new System.Drawing.Point(4, 22);
             this.configTab.Name = "configTab";
             this.configTab.Padding = new System.Windows.Forms.Padding(3);
-            this.configTab.Size = new System.Drawing.Size(940, 501);
+            this.configTab.Size = new System.Drawing.Size(1119, 501);
             this.configTab.TabIndex = 1;
             this.configTab.Text = "Configuration";
             this.configTab.UseVisualStyleBackColor = true;
@@ -214,6 +216,8 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.label9);
+            this.TestsTab.Controls.Add(this.logTextBox);
             this.TestsTab.Controls.Add(this.label8);
             this.TestsTab.Controls.Add(this.wmEventNotifyCheckBox);
             this.TestsTab.Controls.Add(this.label1);
@@ -242,15 +246,28 @@ namespace TSAPIDemo
             this.TestsTab.Location = new System.Drawing.Point(4, 22);
             this.TestsTab.Name = "TestsTab";
             this.TestsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TestsTab.Size = new System.Drawing.Size(940, 501);
+            this.TestsTab.Size = new System.Drawing.Size(1119, 501);
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
             // 
+            // logTextBox
+            // 
+            this.logTextBox.Dock = System.Windows.Forms.DockStyle.Right;
+            this.logTextBox.Location = new System.Drawing.Point(608, 3);
+            this.logTextBox.MaxLength = 32000;
+            this.logTextBox.Multiline = true;
+            this.logTextBox.Name = "logTextBox";
+            this.logTextBox.ReadOnly = true;
+            this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.logTextBox.Size = new System.Drawing.Size(508, 495);
+            this.logTextBox.TabIndex = 31;
+            this.logTextBox.WordWrap = false;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(420, 452);
+            this.label8.Location = new System.Drawing.Point(397, 452);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 13);
             this.label8.TabIndex = 29;
@@ -259,7 +276,7 @@ namespace TSAPIDemo
             // wmEventNotifyCheckBox
             // 
             this.wmEventNotifyCheckBox.AutoSize = true;
-            this.wmEventNotifyCheckBox.Location = new System.Drawing.Point(423, 468);
+            this.wmEventNotifyCheckBox.Location = new System.Drawing.Point(400, 468);
             this.wmEventNotifyCheckBox.Name = "wmEventNotifyCheckBox";
             this.wmEventNotifyCheckBox.Size = new System.Drawing.Size(67, 17);
             this.wmEventNotifyCheckBox.TabIndex = 28;
@@ -270,7 +287,7 @@ namespace TSAPIDemo
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(305, 452);
+            this.label1.Location = new System.Drawing.Point(282, 452);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 27;
@@ -279,7 +296,7 @@ namespace TSAPIDemo
             // esrCheckBox
             // 
             this.esrCheckBox.AutoSize = true;
-            this.esrCheckBox.Location = new System.Drawing.Point(308, 468);
+            this.esrCheckBox.Location = new System.Drawing.Point(285, 468);
             this.esrCheckBox.Name = "esrCheckBox";
             this.esrCheckBox.Size = new System.Drawing.Size(67, 17);
             this.esrCheckBox.TabIndex = 26;
@@ -479,7 +496,7 @@ namespace TSAPIDemo
             // deviceTextBox
             // 
             this.deviceTextBox.Location = new System.Drawing.Point(26, 53);
-            this.deviceTextBox.MaxLength = 4;
+            this.deviceTextBox.MaxLength = 64;
             this.deviceTextBox.Name = "deviceTextBox";
             this.deviceTextBox.Size = new System.Drawing.Size(100, 20);
             this.deviceTextBox.TabIndex = 5;
@@ -504,15 +521,24 @@ namespace TSAPIDemo
             this.mainTabs.Location = new System.Drawing.Point(0, 0);
             this.mainTabs.Name = "mainTabs";
             this.mainTabs.SelectedIndex = 0;
-            this.mainTabs.Size = new System.Drawing.Size(948, 527);
+            this.mainTabs.Size = new System.Drawing.Size(1127, 527);
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(577, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(25, 13);
+            this.label9.TabIndex = 32;
+            this.label9.Text = "Log";
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 527);
+            this.ClientSize = new System.Drawing.Size(1127, 527);
             this.Controls.Add(this.mainTabs);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "mainForm";
@@ -570,6 +596,8 @@ namespace TSAPIDemo
         private System.Windows.Forms.CheckBox esrCheckBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox wmEventNotifyCheckBox;
+        private System.Windows.Forms.TextBox logTextBox;
+        private System.Windows.Forms.Label label9;
 
 
 
