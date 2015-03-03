@@ -135,7 +135,7 @@ namespace TSAPIDemo
                     var snapDeviceStateArray = (Csta.LocalConnectionState_t[])evtBuf.auxData["snapDeviceState" + i];
                     snapShotDevicePop.snapShotDataTree.Nodes[i].Text += "#" + (j + 1) + ": " + snapDeviceStateArray[j] + " ";
                 }
-                Csta.EventBuffer_t snapCallEvt = snapshotCall(ref tmpConn);
+                Csta.EventBuffer_t snapCallEvt = snapshotCall(tmpConn);
                 snapShotDevicePop.snapShotDataTree.Nodes[i].Nodes.Clear();
                 int callCountForSnapshotCall = snapCallEvt.evt.cstaConfirmation.snapshotCall.snapshotData.count;
                 var snapCallInfoArray = (Csta.CSTASnapshotCallResponseInfo_t[])snapCallEvt.auxData["snapCallInfo"];
@@ -314,7 +314,7 @@ namespace TSAPIDemo
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
             ushort numEvents = 0;
-            Acs.RetCode_t retCode = Att.attQueryUCID(this.privData, ref conn);
+            Acs.RetCode_t retCode = Att.attQueryUCID(this.privData, conn);
             retCode = Csta.cstaEscapeService(acsHandle, invokeId, this.privData);
             this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
             retCode = Acs.acsGetEventBlock(acsHandle,
@@ -439,13 +439,13 @@ namespace TSAPIDemo
         }
 
 
-        private Csta.EventBuffer_t snapshotCall(ref Csta.ConnectionID_t cId)
+        private Csta.EventBuffer_t snapshotCall(Csta.ConnectionID_t cId)
         {
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotCallReq(this.acsHandle,
                                                  invokeId,
-                                                 ref cId,
+                                                 cId,
                                                  this.privData);
             if (retCode._value < 0)
             {
@@ -747,7 +747,7 @@ namespace TSAPIDemo
             }
 
             var invokeId = new Acs.InvokeID_t();
-            Acs.RetCode_t retCode = Csta.cstaAlternateCall(this.acsHandle, invokeId, ref conns[0], ref conns[1], null);
+            Acs.RetCode_t retCode = Csta.cstaAlternateCall(this.acsHandle, invokeId, conns[0], conns[1], null);
             Debug.WriteLine("cstaAlternateCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -834,7 +834,7 @@ namespace TSAPIDemo
                 return;
             }
             var invokeId = new Acs.InvokeID_t();
-            Acs.RetCode_t retCode = Csta.cstaAnswerCall(this.acsHandle, invokeId, ref conns[0], null);
+            Acs.RetCode_t retCode = Csta.cstaAnswerCall(this.acsHandle, invokeId, conns[0], null);
             Debug.WriteLine("cstaAnswerCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -867,7 +867,7 @@ namespace TSAPIDemo
                 return;
             }
             var invokeId = new Acs.InvokeID_t();
-            Acs.RetCode_t retCode = Csta.cstaConferenceCall(this.acsHandle, invokeId, ref conns[0], ref conns[1], this.privData);
+            Acs.RetCode_t retCode = Csta.cstaConferenceCall(this.acsHandle, invokeId, conns[0], conns[1], this.privData);
             Debug.WriteLine("cstaConferenceCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -926,7 +926,7 @@ namespace TSAPIDemo
                     Att.attV6ConsultationCall(this.privData, null, false, ref u2uInfo);
 
 
-                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], dev, this.privData);
+                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], dev, this.privData);
                     if (retCode._value > 0)
                     {
                         Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
@@ -979,7 +979,7 @@ namespace TSAPIDemo
                     Att.attV6DirectAgentCall(this.privData, split, false, ref u2uInfo);
 
 
-                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], dev, this.privData);
+                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], dev, this.privData);
                     if (retCode._value > 0)
                     {
                         Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
@@ -1033,7 +1033,7 @@ namespace TSAPIDemo
                     Att.attV6SupervisorAssistCall(this.privData, split, ref u2uInfo);
 
 
-                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, ref conns[0], dev, this.privData);
+                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], dev, this.privData);
                     if (retCode._value > 0)
                     {
                         Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
@@ -1086,7 +1086,7 @@ namespace TSAPIDemo
             }
             Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
 
-            Acs.RetCode_t retCode = Csta.cstaDeflectCall(this.acsHandle, invokeId, ref conns[0], calledDevice, null);
+            Acs.RetCode_t retCode = Csta.cstaDeflectCall(this.acsHandle, invokeId, conns[0], calledDevice, null);
             Debug.WriteLine("cstaDeflectCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1120,7 +1120,7 @@ namespace TSAPIDemo
 
             var invokeId = new Acs.InvokeID_t();
 
-            Acs.RetCode_t retCode = Csta.cstaHoldCall(this.acsHandle, invokeId, ref conns[0], false, null);
+            Acs.RetCode_t retCode = Csta.cstaHoldCall(this.acsHandle, invokeId, conns[0], false, null);
             Debug.WriteLine("cstaHoldCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1285,7 +1285,7 @@ namespace TSAPIDemo
             Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
 
 
-            Acs.RetCode_t retCode = Csta.cstaPickupCall(this.acsHandle, invokeId, ref conns[0], calledDevice, null);
+            Acs.RetCode_t retCode = Csta.cstaPickupCall(this.acsHandle, invokeId, conns[0], calledDevice, null);
             Debug.WriteLine("cstaPickupCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1330,7 +1330,7 @@ namespace TSAPIDemo
 
             Att.attV6ReconnectCall(this.privData, dropResource, ref u2uInfo);
 
-            Acs.RetCode_t retCode = Csta.cstaReconnectCall(this.acsHandle, invokeId, ref conns[0], ref conns[1], this.privData);
+            Acs.RetCode_t retCode = Csta.cstaReconnectCall(this.acsHandle, invokeId, conns[0], conns[1], this.privData);
             Debug.WriteLine("cstaReconnectCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1387,7 +1387,7 @@ namespace TSAPIDemo
             }
 
             var invokeId = new Acs.InvokeID_t();
-            Acs.RetCode_t retCode = Csta.cstaRetrieveCall(this.acsHandle, invokeId, ref conns[0], null);
+            Acs.RetCode_t retCode = Csta.cstaRetrieveCall(this.acsHandle, invokeId, conns[0], null);
             Debug.WriteLine("cstaRetrieveCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1428,7 +1428,8 @@ namespace TSAPIDemo
 
 
             var ignored = new Att.ATTConnIDList_t();
-            Acs.RetCode_t retCode = Att.attSendDTMFToneExt(this.privData, ref conns[0], ref ignored, tones, 0, 0);
+            Acs.RetCode_t retCode = Att.attSendDTMFToneExt(this.privData, conns[0], ref ignored, tones, 0, 0);
+            if (retCode._value != Acs.ACSPOSITIVE_ACK) return;
 
             var invokeId = new Acs.InvokeID_t();
             retCode = Csta.cstaEscapeService(this.acsHandle, invokeId, this.privData);
@@ -1448,6 +1449,48 @@ namespace TSAPIDemo
             else
             {
                 MessageBox.Show("attSendDTMFToneExt Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+
+        private void attSelectiveListeningHoldButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            int callCount;
+
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
+            if (callCount < 2)
+            {
+                MessageBox.Show("Need at least two calls");
+                return;
+            }
+
+            var connsPopup = new ActiveConnectionsPopupForm(conns);
+            connsPopup._parent = this;
+            connsPopup.ShowDialog();
+
+            return;
+
+            Acs.RetCode_t retCode = Att.attSelectiveListeningHold(this.privData, conns[0], true, conns[1]);
+            if (retCode._value != Acs.ACSPOSITIVE_ACK) return;
+
+            var invokeId = new Acs.InvokeID_t();
+            retCode = Csta.cstaEscapeService(this.acsHandle, invokeId, this.privData);
+
+            var evtBuf = new Csta.EventBuffer_t();
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_ESCAPE_SVC_CONF)
+            {
+                MessageBox.Show("attSelectiveListeningHold Succeded");
+            }
+            else
+            {
+                MessageBox.Show("attSelectiveListeningHold Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
             }
         }
     }

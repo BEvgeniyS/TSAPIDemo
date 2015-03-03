@@ -369,11 +369,17 @@ namespace Tsapi
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4)]
-        public struct ConnectionID_t
+        public class ConnectionID_t
         {
             public int callID;
             public DeviceID_t deviceID;
             public ConnectionID_Device_t devIDType;
+
+
+            public override string ToString()
+            {
+                return string.Format("Connection ID:{0}; Device:{1}; Type:{2}", callID, deviceID, devIDType);
+            }
         };
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]

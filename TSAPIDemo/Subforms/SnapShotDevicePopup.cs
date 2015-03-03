@@ -46,7 +46,7 @@ namespace TSAPIDemo.Subforms
             ToolStripItem cstaClearConnectionContextMenuItem = snapShotDataTreeContextMenu.Items.Add("cstaClearConnection");
             cstaClearCallContextMenuItem.Click += (s, ev) =>
             {
-                Csta.EventBuffer_t evtbuf = clearCall(ref selectedConnId);
+                Csta.EventBuffer_t evtbuf = clearCall(selectedConnId);
                 if (evtbuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtbuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CLEAR_CALL_CONF)
                 {
                     snapShotDataTree.Nodes.Remove(tmpNode);
@@ -55,7 +55,7 @@ namespace TSAPIDemo.Subforms
 
             cstaClearConnectionContextMenuItem.Click += (s, ev) =>
             {
-                Csta.EventBuffer_t evtbuf = clearConnection(ref selectedConnId);
+                Csta.EventBuffer_t evtbuf = clearConnection(selectedConnId);
                 if (evtbuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtbuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CLEAR_CONNECTION_CONF)
                 {
                     snapShotDataTree.Nodes.Remove(tmpNode);
@@ -65,13 +65,13 @@ namespace TSAPIDemo.Subforms
             snapShotDataTreeContextMenu.Show(Cursor.Position);
         }
 
-        private Csta.EventBuffer_t clearCall(ref Csta.ConnectionID_t cId)
+        private Csta.EventBuffer_t clearCall(Csta.ConnectionID_t cId)
         {
             Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaClearCall(parentForm.acsHandle,
                                                  invokeId,
-                                                 ref cId,
+                                                 cId,
                                                  parentForm.privData);
             if (retCode._value < 0)
             {
@@ -102,7 +102,7 @@ namespace TSAPIDemo.Subforms
             }
             return evtBuf;
         }
-        private Csta.EventBuffer_t clearConnection(ref Csta.ConnectionID_t cId)
+        private Csta.EventBuffer_t clearConnection(Csta.ConnectionID_t cId)
         {
             var u2uString = "Hello, I AM test u2u string";
             var u2uInfo = new Att.ATTUserToUserInfo_t();
@@ -119,7 +119,7 @@ namespace TSAPIDemo.Subforms
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaClearConnection(parentForm.acsHandle,
                                                  invokeId,
-                                                 ref cId,
+                                                 cId,
                                                  parentForm.privData);
             if (retCode._value < 0)
             {

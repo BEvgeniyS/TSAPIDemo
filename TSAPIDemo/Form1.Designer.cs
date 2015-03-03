@@ -64,6 +64,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.attSelectiveListeningHoldButton = new System.Windows.Forms.Button();
             this.SendDTMFToneButton = new System.Windows.Forms.Button();
             this.cstaRetrieveCallButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -218,6 +219,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.attSelectiveListeningHoldButton);
             this.TestsTab.Controls.Add(this.SendDTMFToneButton);
             this.TestsTab.Controls.Add(this.cstaRetrieveCallButton);
             this.TestsTab.Controls.Add(this.label9);
@@ -254,6 +256,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // attSelectiveListeningHoldButton
+            // 
+            this.attSelectiveListeningHoldButton.Location = new System.Drawing.Point(307, 109);
+            this.attSelectiveListeningHoldButton.Name = "attSelectiveListeningHoldButton";
+            this.attSelectiveListeningHoldButton.Size = new System.Drawing.Size(75, 23);
+            this.attSelectiveListeningHoldButton.TabIndex = 35;
+            this.attSelectiveListeningHoldButton.Text = "SelectHold";
+            this.attSelectiveListeningHoldButton.UseVisualStyleBackColor = true;
+            this.attSelectiveListeningHoldButton.Click += new System.EventHandler(this.attSelectiveListeningHoldButton_Click);
             // 
             // SendDTMFToneButton
             // 
@@ -624,6 +636,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button cstaRetrieveCallButton;
         private System.Windows.Forms.Button SendDTMFToneButton;
+        private System.Windows.Forms.Button attSelectiveListeningHoldButton;
 
 
 

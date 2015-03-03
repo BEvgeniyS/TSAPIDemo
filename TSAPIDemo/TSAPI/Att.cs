@@ -927,7 +927,7 @@ namespace Tsapi
         public static extern Acs.RetCode_t attQueryUCID(
                             [In, Out]
                             Acs.PrivateData_t privData,
-                            ref Csta.ConnectionID_t call);
+                            Csta.ConnectionID_t call);
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attClearConnection(
@@ -1043,7 +1043,7 @@ namespace Tsapi
         public static extern Acs.RetCode_t attSendDTMFToneExt(
                             [In, Out]
                             Acs.PrivateData_t privateData,
-                            ref Csta.ConnectionID_t sender,
+                            Csta.ConnectionID_t sender,
                             ref ATTConnIDList_t receivers,
                             string tones,
                             short toneDuration,
@@ -1053,11 +1053,21 @@ namespace Tsapi
         public static extern Acs.RetCode_t attSendDTMFTone(
                             [In, Out]
                             Acs.PrivateData_t privateData,
-                            ref Csta.ConnectionID_t sender,
+                            Csta.ConnectionID_t sender,
                             ref ATTConnIDList_t receivers,
                             string tones,
                             short toneDuration,
                             short pauseDuration);  
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSelectiveListeningHold(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            Csta.ConnectionID_t subjectConnection,
+                            bool allParties,
+                            Csta.ConnectionID_t selectedParty);  
+
+        
 
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
