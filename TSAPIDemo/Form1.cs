@@ -1466,6 +1466,7 @@ namespace TSAPIDemo
             }
 
             var connsPopup = new ActiveConnectionsPopupForm(conns);
+            connsPopup.connectionListBox.singleSelectMode = true;
             connsPopup._parent = this;
             connsPopup.ShowDialog();
 

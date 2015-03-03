@@ -35,5 +35,22 @@ namespace TSAPIDemo
             Csta.cstaEscapeService(this._parent.acsHandle, new Acs.InvokeID_t(), this._parent.privData);
 
         }
+
+        private void connectionListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (connectionListBox.singleSelectMode)
+            {
+                for (int ix = 0; ix < connectionListBox.Items.Count; ++ix)
+                    if (ix != e.Index) connectionListBox.SetItemChecked(ix, false);
+            }
+        }
+    }
+}
+
+namespace System.Windows.Forms
+{
+    public class CheckedListBoxEx : CheckedListBox
+    {
+        internal bool singleSelectMode = false;
     }
 }

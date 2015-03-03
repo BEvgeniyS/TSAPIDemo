@@ -29,7 +29,7 @@ namespace TSAPIDemo
         /// </summary>
         private void InitializeComponent()
         {
-            this.connectionListBox = new System.Windows.Forms.CheckedListBox();
+            this.connectionListBox = new System.Windows.Forms.CheckedListBoxEx();
             this.label1 = new System.Windows.Forms.Label();
             this.selectHoldButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -42,6 +42,7 @@ namespace TSAPIDemo
             this.connectionListBox.Name = "connectionListBox";
             this.connectionListBox.Size = new System.Drawing.Size(292, 259);
             this.connectionListBox.TabIndex = 0;
+            this.connectionListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.connectionListBox_ItemCheck);
             // 
             // label1
             // 
@@ -79,7 +80,7 @@ namespace TSAPIDemo
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox connectionListBox;
+        internal System.Windows.Forms.CheckedListBoxEx connectionListBox;
         private System.Windows.Forms.Label label1;
         internal Csta.ConnectionID_t[] connections;
         internal mainForm _parent;
