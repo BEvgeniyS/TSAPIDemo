@@ -685,13 +685,14 @@ namespace TSAPIDemo
                 {
                     System.Reflection.FieldInfo[] _PropertyInfos = evtBuf.evt.cstaConfirmation.getAPICaps.GetType().GetFields();
                     var sb = new StringBuilder();
-
+                    sb.Append("Received API caps:" + Environment.NewLine);
                     foreach (var info in _PropertyInfos)
                     {
                         var value = info.GetValue(evtBuf.evt.cstaConfirmation.getAPICaps);
-                        sb.Append(info.Name + "=" + value.ToString() + "\t\t");
+                        sb.Append(info.Name + "=" + value.ToString() + Environment.NewLine);
                     }
-                    MessageBox.Show(sb.ToString());
+                    MessageBox.Show("Got API caps. Please refer to the log.");
+                    Log(sb.ToString());
                 }
                 else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
                 {
