@@ -73,7 +73,7 @@ namespace TSAPIDemo
                 this.mainTabs.SelectTab(configTab);
                 return;
             }
-            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5  || !streamCheckbox.Checked) { return; }
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
@@ -158,21 +158,22 @@ namespace TSAPIDemo
         }
 
         public void Log(string logText)
-            {
-                while (logQueue.Count > logMax - 1)
-                    logQueue.Dequeue();
+        {
+            while (logQueue.Count > logMax - 1)
+                logQueue.Dequeue();
 
-                logQueue.Enqueue(DateTime.Now.ToString() + ": " + logText);
-                this.logTextBox.Text = string.Join(Environment.NewLine, logQueue.ToArray());
-                this.logTextBox.SelectionStart = this.logTextBox.Text.Length - logText.Length;
-                this.logTextBox.ScrollToCaret();
-            }
+            logQueue.Enqueue(DateTime.Now.ToString() + ": " + logText);
+            this.logTextBox.Text = string.Join(Environment.NewLine, logQueue.ToArray());
+            this.logTextBox.SelectionStart = this.logTextBox.Text.Length - logText.Length;
+            this.logTextBox.ScrollToCaret();
+        }
 
         private void EventReactionHandler(uint esrparam)
         {
             if (this.InvokeRequired)
             {
-                this.BeginInvoke(new MethodInvoker(delegate {
+                this.BeginInvoke(new MethodInvoker(delegate
+                {
                     string logMsg = "[acsSetESR Test] Event detected. acsHandle = " + esrparam;
                     //this.logTextBox.AppendText(logMsg); 
                     Log(logMsg);
@@ -253,7 +254,7 @@ namespace TSAPIDemo
             ushort sendExtraBufs = 0;
             ushort recvQSize = 0;
             ushort recvExtraBufs = 0;
-            var  currentDevice = deviceTextBox.Text;
+            var currentDevice = deviceTextBox.Text;
             // Get supportedVersion string
             string requestedVersion = "3-7";
             System.Text.StringBuilder supportedVersion = new System.Text.StringBuilder();
@@ -477,7 +478,7 @@ namespace TSAPIDemo
             return evtBuf;
         }
 
-       
+
 
         private Csta.EventBuffer_t closeStream(Acs.ACSHandle_t acsHandle)
         {
@@ -556,7 +557,7 @@ namespace TSAPIDemo
 
         private void cstaGetDeviceListButton_Click(object sender, EventArgs e)
         {
-            Csta.EventBuffer_t evtbuf =  getDeviceList(this.acsHandle);
+            Csta.EventBuffer_t evtbuf = getDeviceList(this.acsHandle);
             MessageBox.Show("Number of devices = " + evtbuf.evt.cstaConfirmation.getDeviceList.devList.count);
         }
 
@@ -566,22 +567,19 @@ namespace TSAPIDemo
             switch (m.Msg)
             {
                 case WM_TSAPI_EVENT:
-                {
-                    short[] wmEventData = Aux.SplitPtr(m.LParam);
-                    string logMsg = string.Format("[acsEventNotify Test] Got event: AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]);
-                    //MessageBox.Show(logMsg);
-                    Debug.WriteLine(logMsg);
-                    //this.logTextBox.AppendText(logMsg);
-                    Log(logMsg);
-                    break;
-                }
+                    {
+                        short[] wmEventData = Aux.SplitPtr(m.LParam);
+                        string logMsg = string.Format("[acsEventNotify Test] Got event: AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]);
+                        Log(logMsg);
+                        break;
+                    }
             }
             base.WndProc(ref m);
         }
 
         private void flushEventQueueButton_Click(object sender, EventArgs e)
         {
-            Acs.RetCode_t retCode =  Acs.acsFlushEventQueue(this.acsHandle);
+            Acs.RetCode_t retCode = Acs.acsFlushEventQueue(this.acsHandle);
             if (retCode._value == 0)
             {
                 MessageBox.Show("Events flushed successfully!");
@@ -608,7 +606,7 @@ namespace TSAPIDemo
             }
             else
             {
-            config.AppSettings.Settings["ServerID"].Value = enumServerHandler.serverName;
+                config.AppSettings.Settings["ServerID"].Value = enumServerHandler.serverName;
             }
             //MessageBox.Show("Found server:\n" + enumServerHandler.serverName);
         }
@@ -633,7 +631,7 @@ namespace TSAPIDemo
         {
             Acs.ServerID_t serverID = config.AppSettings.Settings["ServerID"].Value;
             Acs.ACSAuthInfo_t authInfo = new Acs.ACSAuthInfo_t();
-            Acs.RetCode_t retCode =  Acs.acsQueryAuthInfo(ref serverID, ref authInfo);
+            Acs.RetCode_t retCode = Acs.acsQueryAuthInfo(ref serverID, ref authInfo);
             if (retCode._value >= 0)
             {
                 MessageBox.Show("Authentication type: " + authInfo.authType + "\n LoginId = " + authInfo.authLoginID);
@@ -939,7 +937,7 @@ namespace TSAPIDemo
                             Att.ATTEvent_t attEvt;
                             retCode = Att.attPrivateData(this.privData, out attEvt);
                             Debug.WriteLine("attPrivateData retCode = " + retCode._value);
-                            if (attEvt.eventType.eventType ==  Att.ATT_CONSULTATION_CALL_CONF)
+                            if (attEvt.eventType.eventType == Att.ATT_CONSULTATION_CALL_CONF)
                                 MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.consultationCall.ucid));
                             else
                                 MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
@@ -1179,7 +1177,7 @@ namespace TSAPIDemo
                 Att.attV6DirectAgentCall(this.privData, destRouteOrSplit, false, ref u2uInfo);
             else if (deviceSelectDialog.supervisorAssistCallRadio.Checked)
                 Att.attV6SupervisorAssistCall(this.privData, destRouteOrSplit, ref u2uInfo);
-     
+
             Acs.RetCode_t retCode = Csta.cstaMakeCall(this.acsHandle, invokeId, callingDevice, calledDevice, this.privData);
             Debug.WriteLine("cstaMakeCall result = " + retCode._value);
 
@@ -1214,7 +1212,7 @@ namespace TSAPIDemo
             var invokeId = new Acs.InvokeID_t();
             Csta.DeviceID_t callingDevice = this.deviceTextBox.Text;
             DeviceSelectPopupForm deviceSelect = new DeviceSelectPopupForm();
-            DialogResult deviceSelectDialog =  deviceSelect.ShowDialog();
+            DialogResult deviceSelectDialog = deviceSelect.ShowDialog();
             if (deviceSelectDialog != DialogResult.OK) return;
 
             Csta.DeviceID_t calledDevice = deviceSelect.deviceIdTextBox.Text;
@@ -1264,7 +1262,7 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
 
-            
+
 
             int callCount;
             Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
@@ -1420,13 +1418,10 @@ namespace TSAPIDemo
                 return;
             }
 
-
             var dtmfSelect = new DTMFSelectSubForm();
             DialogResult dtmfSelectDialog = dtmfSelect.ShowDialog();
             if (dtmfSelectDialog != DialogResult.OK) return;
             string tones = dtmfSelect.DTMFSequenceTextBox.Text;
-
-
 
             var ignored = new Att.ATTConnIDList_t();
             Acs.RetCode_t retCode = Att.attSendDTMFToneExt(this.privData, conns[0], ref ignored, tones, 0, 0);
@@ -1456,46 +1451,64 @@ namespace TSAPIDemo
         private void attSelectiveListeningHoldButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-            int callCount;
 
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 2)
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
+            Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
+                                                 invokeId,
+                                                 currentDevice,
+                                                 this.privData);
+            if (retCode._value < 0)
             {
-                MessageBox.Show("Need at least two calls");
+                MessageBox.Show("cstaSnapshotDeviceReq error: " + retCode);
                 return;
             }
-
-            var connsPopup = new ActiveConnectionsPopupForm(conns);
-            connsPopup.connectionListBox.singleSelectMode = true;
-            connsPopup._parent = this;
-            connsPopup.ShowDialog();
-
-            return;
-
-            Acs.RetCode_t retCode = Att.attSelectiveListeningHold(this.privData, conns[0], true, conns[1]);
-            if (retCode._value != Acs.ACSPOSITIVE_ACK) return;
-
-            var invokeId = new Acs.InvokeID_t();
-            retCode = Csta.cstaEscapeService(this.acsHandle, invokeId, this.privData);
-
-            var evtBuf = new Csta.EventBuffer_t();
+            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
             ushort eventBufSize = Csta.CSTA_MAX_HEAP;
-            ushort numEvents;
+            ushort numEvt;
             retCode = Acs.acsGetEventBlock(this.acsHandle,
                                           evtBuf,
                                           ref eventBufSize,
                                           privData,
-                                          out numEvents);
-            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_ESCAPE_SVC_CONF)
+                                          out numEvt);
+            if (retCode._value < 0)
             {
-                MessageBox.Show("attSelectiveListeningHold Succeded");
+                MessageBox.Show("acsGetEventBlock error: " + retCode);
+                return;
             }
-            else
+            if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION || evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_SNAPSHOT_DEVICE_CONF)
             {
-                MessageBox.Show("attSelectiveListeningHold Failed. Error was: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                {
+                    MessageBox.Show("Snapshot device failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                }
+                return;
             }
+            int callCountForSnapshotDevice = evtBuf.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
+            if (callCountForSnapshotDevice < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+            var snapDeviceInfoArray = (Csta.CSTASnapshotDeviceResponseInfo_t[])evtBuf.auxData["snapDeviceInfo"];
+            var firstConn = snapDeviceInfoArray[0].callIdentifier;
+            Csta.EventBuffer_t snapCallEvt = snapshotCall(firstConn);
+            int callCountForSnapshotCall = snapCallEvt.evt.cstaConfirmation.snapshotCall.snapshotData.count;
+            var snapCallInfoArray = (Csta.CSTASnapshotCallResponseInfo_t[])snapCallEvt.auxData["snapCallInfo"];
+
+            var snapCallConnsArray = new Csta.ConnectionID_t[snapCallInfoArray.Length];
+            for (int i = 0; i < snapCallInfoArray.Length; i++)
+            {
+                snapCallConnsArray[i] = snapCallInfoArray[i].callIdentifier;
+            }
+
+            var selectiveListeningHoldPopup = new attSelectiveListeningHoldPopupForm(snapCallConnsArray);
+            selectiveListeningHoldPopup._parent = this;
+            selectiveListeningHoldPopup.ShowDialog();
         }
     }
+
 
     class CallNode : TreeNode
     {

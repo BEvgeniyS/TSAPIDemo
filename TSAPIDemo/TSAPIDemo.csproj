@@ -97,11 +97,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Subforms\ActiveConnectionsPopupForm.cs">
+    <Compile Include="Subforms\attSelectiveListeningHoldPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Subforms\ActiveConnectionsPopupForm.Designer.cs">
-      <DependentUpon>ActiveConnectionsPopupForm.cs</DependentUpon>
+    <Compile Include="Subforms\attSelectiveListeningHoldPopupForm.Designer.cs">
+      <DependentUpon>attSelectiveListeningHoldPopupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Subforms\cstaConsultationCallPopupForm.cs">
       <SubType>Form</SubType>
@@ -159,8 +159,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Subforms\ActiveConnectionsPopupForm.resx">
-      <DependentUpon>ActiveConnectionsPopupForm.cs</DependentUpon>
+    <EmbeddedResource Include="Subforms\attSelectiveListeningHoldPopupForm.resx">
+      <DependentUpon>attSelectiveListeningHoldPopupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Subforms\cstaConsultationCallPopupForm.resx">
       <DependentUpon>cstaConsultationCallPopupForm.cs</DependentUpon>
