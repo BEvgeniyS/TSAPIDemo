@@ -1,8 +1,7 @@
 ## TSAPIDemo
 
 ## About
-TSAPIDemo is a demo application to demonstrate and test several possibilities of TSAPISharp library.
-The aim is to develop a wrapper for all TSAPI methods and structures
+TSAPIDemo is a demo application to develop a proper C# wrapper for Avaya's TSAPI library by testing all methods in a demo application.
 You can look at project's wiki to see project progress so far
 
 ## Requirements
