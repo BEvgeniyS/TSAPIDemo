@@ -1507,6 +1507,66 @@ namespace TSAPIDemo
             selectiveListeningHoldPopup._parent = this;
             selectiveListeningHoldPopup.ShowDialog();
         }
+
+        private void attSelectiveListeningRetrieveButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
+            Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
+                                                 invokeId,
+                                                 currentDevice,
+                                                 this.privData);
+            if (retCode._value < 0)
+            {
+                MessageBox.Show("cstaSnapshotDeviceReq error: " + retCode);
+                return;
+            }
+            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvt;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvt);
+            if (retCode._value < 0)
+            {
+                MessageBox.Show("acsGetEventBlock error: " + retCode);
+                return;
+            }
+            if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION || evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_SNAPSHOT_DEVICE_CONF)
+            {
+                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                {
+                    MessageBox.Show("Snapshot device failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                }
+                return;
+            }
+            int callCountForSnapshotDevice = evtBuf.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
+            if (callCountForSnapshotDevice < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+            var snapDeviceInfoArray = (Csta.CSTASnapshotDeviceResponseInfo_t[])evtBuf.auxData["snapDeviceInfo"];
+            var firstConn = snapDeviceInfoArray[0].callIdentifier;
+            Csta.EventBuffer_t snapCallEvt = snapshotCall(firstConn);
+            int callCountForSnapshotCall = snapCallEvt.evt.cstaConfirmation.snapshotCall.snapshotData.count;
+            var snapCallInfoArray = (Csta.CSTASnapshotCallResponseInfo_t[])snapCallEvt.auxData["snapCallInfo"];
+
+            var snapCallConnsArray = new Csta.ConnectionID_t[snapCallInfoArray.Length];
+            for (int i = 0; i < snapCallInfoArray.Length; i++)
+            {
+                snapCallConnsArray[i] = snapCallInfoArray[i].callIdentifier;
+            }
+
+            var selectiveListeningRetruevePopup = new attSelectiveListeningRetrievePopupForm(snapCallConnsArray);
+            selectiveListeningRetruevePopup._parent = this;
+            selectiveListeningRetruevePopup.ShowDialog();
+        }
     }
 
 

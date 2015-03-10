@@ -95,6 +95,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
+            this.attSelectiveListeningRetrieveButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -219,6 +220,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.attSelectiveListeningRetrieveButton);
             this.TestsTab.Controls.Add(this.attSelectiveListeningHoldButton);
             this.TestsTab.Controls.Add(this.SendDTMFToneButton);
             this.TestsTab.Controls.Add(this.cstaRetrieveCallButton);
@@ -570,6 +572,16 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
+            // attSelectiveListeningRetrieveButton
+            // 
+            this.attSelectiveListeningRetrieveButton.Location = new System.Drawing.Point(307, 139);
+            this.attSelectiveListeningRetrieveButton.Name = "attSelectiveListeningRetrieveButton";
+            this.attSelectiveListeningRetrieveButton.Size = new System.Drawing.Size(75, 23);
+            this.attSelectiveListeningRetrieveButton.TabIndex = 36;
+            this.attSelectiveListeningRetrieveButton.Text = "Sel.Retrieve";
+            this.attSelectiveListeningRetrieveButton.UseVisualStyleBackColor = true;
+            this.attSelectiveListeningRetrieveButton.Click += new System.EventHandler(this.attSelectiveListeningRetrieveButton_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -637,6 +649,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaRetrieveCallButton;
         private System.Windows.Forms.Button SendDTMFToneButton;
         private System.Windows.Forms.Button attSelectiveListeningHoldButton;
+        private System.Windows.Forms.Button attSelectiveListeningRetrieveButton;
 
 
 

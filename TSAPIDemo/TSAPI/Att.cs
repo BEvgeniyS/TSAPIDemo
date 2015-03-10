@@ -1065,9 +1065,15 @@ namespace Tsapi
                             Acs.PrivateData_t privateData,
                             Csta.ConnectionID_t subjectConnection,
                             bool allParties,
-                            Csta.ConnectionID_t selectedParty);  
+                            Csta.ConnectionID_t selectedParty);
 
-        
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSelectiveListeningRetrieve(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            Csta.ConnectionID_t subjectConnection,
+                            bool allParties,
+                            Csta.ConnectionID_t selectedParty);  
 
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
