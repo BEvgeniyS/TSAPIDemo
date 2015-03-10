@@ -1075,6 +1075,14 @@ namespace Tsapi
                             bool allParties,
                             Csta.ConnectionID_t selectedParty);  
 
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSingleStepConferenceCall(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            Csta.ConnectionID_t activeCall,
+                            Csta.DeviceID_t deviceToBeJoin,
+                            Att.ATTParticipationType_t participationType,
+                            bool alertDestination);  
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(

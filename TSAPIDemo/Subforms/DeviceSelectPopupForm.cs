@@ -41,5 +41,7 @@ namespace TSAPIDemo
         {
             if (e.KeyCode == Keys.Enter) okButton_Click(sender, e);
         }
+
+        internal mainForm _parent;
     }
 }

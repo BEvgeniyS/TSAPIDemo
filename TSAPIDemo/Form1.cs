@@ -1567,6 +1567,18 @@ namespace TSAPIDemo
             selectiveListeningRetruevePopup._parent = this;
             selectiveListeningRetruevePopup.ShowDialog();
         }
+
+        private void attSingleStepConferenceCallButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            var devicePopup = new DeviceSelectPopupForm();
+            devicePopup._parent = this;
+            var dialogResult = devicePopup.ShowDialog();
+            if (dialogResult != DialogResult.OK) return;
+            Csta.DeviceID_t deviceToBeJoin = devicePopup.deviceIdTextBox.Text;
+
+        }
     }
 
 
