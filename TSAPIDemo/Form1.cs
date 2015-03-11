@@ -1572,14 +1572,18 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            int callsCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
+            if (callsCount < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
             var devicePopup = new DeviceSelectPopupForm();
             devicePopup._parent = this;
             var dialogResult = devicePopup.ShowDialog();
             if (dialogResult != DialogResult.OK) return;
             Csta.DeviceID_t deviceToBeJoin = devicePopup.deviceIdTextBox.Text;
-            int callsCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
-            if (callsCount < 1) return;
             var activeCall = conns[0];
 
 
