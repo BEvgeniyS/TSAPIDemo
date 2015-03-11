@@ -256,7 +256,7 @@ namespace TSAPIDemo
             ushort recvExtraBufs = 0;
             var currentDevice = deviceTextBox.Text;
             // Get supportedVersion string
-            string requestedVersion = "3-7";
+            string requestedVersion = "3-8";
             System.Text.StringBuilder supportedVersion = new System.Text.StringBuilder();
             Acs.RetCode_t attrc = Att.attMakeVersionString(requestedVersion, supportedVersion);
             // Set PrivateData request
@@ -1623,6 +1623,62 @@ namespace TSAPIDemo
                 MessageBox.Show("attSingleStepConference Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
             }
 
+        }
+
+        private void attSingleStepTransferCallButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            int callsCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
+            if (callsCount < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+
+            var devicePopup = new DeviceSelectPopupForm();
+            devicePopup._parent = this;
+            var dialogResult = devicePopup.ShowDialog();
+            if (dialogResult != DialogResult.OK) return;
+            Csta.DeviceID_t transferredTo = devicePopup.deviceIdTextBox.Text;
+            var activeCall = conns[0];
+
+            Acs.RetCode_t retCode = Att.attSingleStepTransferCall(this.privData, activeCall, transferredTo);
+            Log("attSingleStepTransferCall result = " + retCode._value);
+
+            if (retCode._value < 0) return;
+            var invokeId = new Acs.InvokeID_t();
+            retCode = Csta.cstaEscapeService(this.acsHandle, invokeId, this.privData);
+
+            if (retCode._value < 0)
+            {
+                this.Log("cstaEscapeService result = " + retCode._value);
+                return;
+            }
+
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            this.Log("acsGetEventBlock result = " + retCode._value);
+            if (retCode._value < 0) return;
+
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_ESCAPE_SVC_CONF)
+            {
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
+                Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                if (attEvt.eventType.eventType == Att.ATT_SINGLE_STEP_TRANSFER_CALL_CONF)
+                    MessageBox.Show("attSingleStepTransfer Succeded. New device = " + attEvt.ssTransferCallConf.transferredCall.deviceID);
+                else
+                    MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
+            }
+            else
+            {
+                MessageBox.Show("attSingleStepConference Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+            }
         }
     }
 

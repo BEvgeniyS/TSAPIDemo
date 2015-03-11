@@ -146,9 +146,12 @@ namespace Tsapi
         public const int ATT_ESTABLISHED = 118;
         public const int ATT_ORIGINATED = 119;
 
+        // custom
+        public const int ATT_SINGLE_STEP_TRANSFER_CALL_CONF = 143;
+
         #endregion
 
-        public const int LAST_PRIV_TYPE = ATT_ORIGINATED;  // Please keep this up to data when private types are added
+        public const int LAST_PRIV_TYPE = ATT_SINGLE_STEP_TRANSFER_CALL_CONF;  // Please keep this up to data when private types are added
         public const int EXPOSED_PRIV_TYPE = LAST_PRIV_TYPE;
 
         public enum ATTUUIProtocolType_t
@@ -1195,12 +1198,26 @@ namespace Tsapi
             }
         }
 
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ATTSingleStepConferenceCall_t
         {
             Csta.ConnectionID_t activeCall;
             Csta.DeviceID_t deviceToBeJoin;
             ATTParticipationType_t participationType;
             bool alertDestination;
+        };
+
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+        public class ATTSingleStepTransferCallConfEvent_t
+        {
+            internal Csta.ConnectionID_t transferredCall;
+            internal ATTUCID_t ucid;
+        };
+
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+        public class ATTV8SingleStepTransferCallConfEvent_t
+        {
+            internal Csta.ConnectionID_t transferredCall;
         };
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]

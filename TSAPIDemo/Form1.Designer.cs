@@ -64,6 +64,7 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.attSingleStepConferenceCallButton = new System.Windows.Forms.Button();
             this.attSelectiveListeningRetrieveButton = new System.Windows.Forms.Button();
             this.attSelectiveListeningHoldButton = new System.Windows.Forms.Button();
             this.SendDTMFToneButton = new System.Windows.Forms.Button();
@@ -96,7 +97,7 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.attSingleStepConferenceCallButton = new System.Windows.Forms.Button();
+            this.attSingleStepTransferCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -221,6 +222,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.attSingleStepTransferCallButton);
             this.TestsTab.Controls.Add(this.attSingleStepConferenceCallButton);
             this.TestsTab.Controls.Add(this.attSelectiveListeningRetrieveButton);
             this.TestsTab.Controls.Add(this.attSelectiveListeningHoldButton);
@@ -260,6 +262,16 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // attSingleStepConferenceCallButton
+            // 
+            this.attSingleStepConferenceCallButton.Location = new System.Drawing.Point(389, 53);
+            this.attSingleStepConferenceCallButton.Name = "attSingleStepConferenceCallButton";
+            this.attSingleStepConferenceCallButton.Size = new System.Drawing.Size(75, 23);
+            this.attSingleStepConferenceCallButton.TabIndex = 37;
+            this.attSingleStepConferenceCallButton.Text = "SSConf";
+            this.attSingleStepConferenceCallButton.UseVisualStyleBackColor = true;
+            this.attSingleStepConferenceCallButton.Click += new System.EventHandler(this.attSingleStepConferenceCallButton_Click);
             // 
             // attSelectiveListeningRetrieveButton
             // 
@@ -584,15 +596,15 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // attSingleStepConferenceCallButton
+            // attSingleStepTransferCallButton
             // 
-            this.attSingleStepConferenceCallButton.Location = new System.Drawing.Point(389, 53);
-            this.attSingleStepConferenceCallButton.Name = "attSingleStepConferenceCallButton";
-            this.attSingleStepConferenceCallButton.Size = new System.Drawing.Size(75, 23);
-            this.attSingleStepConferenceCallButton.TabIndex = 37;
-            this.attSingleStepConferenceCallButton.Text = "1StepConf";
-            this.attSingleStepConferenceCallButton.UseVisualStyleBackColor = true;
-            this.attSingleStepConferenceCallButton.Click += new System.EventHandler(this.attSingleStepConferenceCallButton_Click);
+            this.attSingleStepTransferCallButton.Location = new System.Drawing.Point(389, 79);
+            this.attSingleStepTransferCallButton.Name = "attSingleStepTransferCallButton";
+            this.attSingleStepTransferCallButton.Size = new System.Drawing.Size(75, 23);
+            this.attSingleStepTransferCallButton.TabIndex = 38;
+            this.attSingleStepTransferCallButton.Text = "SSTrans";
+            this.attSingleStepTransferCallButton.UseVisualStyleBackColor = true;
+            this.attSingleStepTransferCallButton.Click += new System.EventHandler(this.attSingleStepTransferCallButton_Click);
             // 
             // mainForm
             // 
@@ -663,6 +675,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button attSelectiveListeningHoldButton;
         private System.Windows.Forms.Button attSelectiveListeningRetrieveButton;
         private System.Windows.Forms.Button attSingleStepConferenceCallButton;
+        private System.Windows.Forms.Button attSingleStepTransferCallButton;
 
 
 

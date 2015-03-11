@@ -58,6 +58,26 @@ namespace Tsapi
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = Att.ATT_MAX_PRIVATE_DATA)]
             private byte[] heap;
 
+            // private version 9
+            public ATTSingleStepTransferCallConfEvent_t v8ssTransferCallConf
+            {
+                get
+                {
+                    return Aux.ByteArrayToStructure<ATTSingleStepTransferCallConfEvent_t>(heap);
+                }
+            }
+
+
+            // private version 8
+            public ATTV8SingleStepTransferCallConfEvent_t ssTransferCallConf
+            {
+                get
+                {
+                    return Aux.ByteArrayToStructure<ATTV8SingleStepTransferCallConfEvent_t>(heap);
+                }
+            }
+
+
             // private version 6 
             public ATTSingleStepConferenceCallConfEvent_t ssconference
             {
@@ -1073,7 +1093,7 @@ namespace Tsapi
                             Acs.PrivateData_t privateData,
                             Csta.ConnectionID_t subjectConnection,
                             bool allParties,
-                            Csta.ConnectionID_t selectedParty);  
+                            Csta.ConnectionID_t selectedParty);
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attSingleStepConferenceCall(
@@ -1082,7 +1102,14 @@ namespace Tsapi
                             Csta.ConnectionID_t activeCall,
                             Csta.DeviceID_t deviceToBeJoin,
                             Att.ATTParticipationType_t participationType,
-                            bool alertDestination);  
+                            bool alertDestination);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSingleStepTransferCall(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            Csta.ConnectionID_t activeCall,
+                            Csta.DeviceID_t transferredTo);  
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(
