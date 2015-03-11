@@ -52,10 +52,10 @@ namespace Tsapi
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct ATTEvent_t
+        public class ATTEvent_t
         {
             public ATTEventType_t eventType;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = Att.ATTPRIV_MAX_HEAP)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = Att.ATT_MAX_PRIVATE_DATA)]
             private byte[] heap;
 
             // private version 6 
@@ -1095,7 +1095,8 @@ namespace Tsapi
         public static extern Acs.RetCode_t attPrivateData(
                             [In, Out]
                             Acs.PrivateData_t privData,
-                            out ATTEvent_t eventBuffer);
+                            [In, Out]
+                            ATTEvent_t eventBuffer);
 
 
 

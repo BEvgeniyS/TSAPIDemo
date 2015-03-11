@@ -228,7 +228,7 @@ namespace Tsapi
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = PRIVATE_VENDOR_SIZE)]
             public string vendor;
             public ushort length;
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 1024)]
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = Att.ATT_MAX_PRIVATE_DATA)]
             public byte[] data;
         };
         

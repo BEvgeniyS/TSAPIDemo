@@ -368,7 +368,7 @@ namespace Tsapi
             DYNAMIC_ID = 1
         }
 
-        [StructLayout(LayoutKind.Sequential, Pack = 4)]
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public class ConnectionID_t
         {
             public int callID;
@@ -390,7 +390,7 @@ namespace Tsapi
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct ConnectionList_t
+        public class ConnectionList_t
         {
             int count;
             IntPtr connection; //pointer to Connection_t[]

@@ -1174,7 +1174,7 @@ namespace Tsapi
         };
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct ATTUCID_t
+        public class ATTUCID_t
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
             private string data;
@@ -1203,11 +1203,12 @@ namespace Tsapi
             bool alertDestination;
         };
 
-        public struct ATTSingleStepConferenceCallConfEvent_t
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+        public class ATTSingleStepConferenceCallConfEvent_t
         {
-            Csta.ConnectionID_t newCall;
-            Csta.ConnectionList_t connList;
-            ATTUCID_t ucid;
+            internal Csta.ConnectionID_t newCall;
+            internal Csta.ConnectionList_t connList;
+            internal ATTUCID_t ucid;
         };
 
         public struct ATTSelectiveListeningHold_t

@@ -324,10 +324,10 @@ namespace TSAPIDemo
                                          this.privData,
                                          out numEvents);
 
-            Att.ATTEvent_t attevt;
-            retCode = Att.attPrivateData(this.privData, out attevt);
+            Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+            retCode = Att.attPrivateData(this.privData, attEvt);
             Debug.WriteLine("attPrivateData retCode = " + retCode._value);
-            return attevt.queryUCID.ucid;
+            return attEvt.queryUCID.ucid;
         }
 
 
@@ -880,8 +880,8 @@ namespace TSAPIDemo
                                           out numEvents);
             if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONFERENCE_CALL_CONF)
             {
-                Att.ATTEvent_t attEvt;
-                retCode = Att.attPrivateData(this.privData, out attEvt);
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
                 Debug.WriteLine("attPrivateData retCode = " + retCode._value);
                 MessageBox.Show("cstaConferenceCall Succeded. UCID of the new call = " + attEvt.conferenceCall.ucid);
             }
@@ -934,8 +934,8 @@ namespace TSAPIDemo
                         Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, this.privData, out numEvents);
                         if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONSULTATION_CALL_CONF)
                         {
-                            Att.ATTEvent_t attEvt;
-                            retCode = Att.attPrivateData(this.privData, out attEvt);
+                            Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                            retCode = Att.attPrivateData(this.privData, attEvt);
                             Debug.WriteLine("attPrivateData retCode = " + retCode._value);
                             if (attEvt.eventType.eventType == Att.ATT_CONSULTATION_CALL_CONF)
                                 MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.consultationCall.ucid));
@@ -987,8 +987,8 @@ namespace TSAPIDemo
                         Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, this.privData, out numEvents);
                         if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONSULTATION_CALL_CONF)
                         {
-                            Att.ATTEvent_t attEvt;
-                            retCode = Att.attPrivateData(this.privData, out attEvt);
+                            Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                            retCode = Att.attPrivateData(this.privData, attEvt);
                             if (attEvt.eventType.eventType == Att.ATT_DIRECT_AGENT_CALL)
                                 MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.consultationCall.ucid));
                             else
@@ -1041,8 +1041,8 @@ namespace TSAPIDemo
                         Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, this.privData, out numEvents);
                         if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CONSULTATION_CALL_CONF)
                         {
-                            Att.ATTEvent_t attEvt;
-                            retCode = Att.attPrivateData(this.privData, out attEvt);
+                            Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                            retCode = Att.attPrivateData(this.privData, attEvt);
                             if (attEvt.eventType.eventType == Att.ATT_DIRECT_AGENT_CALL)
                                 MessageBox.Show(String.Format("Consultant Call to {0} successfull! Ucid of new call = {1}", dev.ToString(), attEvt.consultationCall.ucid));
                             else
@@ -1191,8 +1191,8 @@ namespace TSAPIDemo
                                           out numEvents);
             if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_MAKE_CALL_CONF)
             {
-                Att.ATTEvent_t attEvt;
-                retCode = Att.attPrivateData(this.privData, out attEvt);
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
                 Debug.WriteLine("attPrivateData retCode = " + retCode._value);
                 if (attEvt.eventType.eventType == Att.ATT_MAKE_CALL_CONF)
                     MessageBox.Show(String.Format("Make Call from {0} to {1} is successfull! Ucid of new call = {2}", callingDevice.ToString(), calledDevice.ToString(), attEvt.consultationCall.ucid));
@@ -1242,8 +1242,8 @@ namespace TSAPIDemo
                                           out numEvents);
             if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_MAKE_PREDICTIVE_CALL_CONF)
             {
-                Att.ATTEvent_t attEvt;
-                retCode = Att.attPrivateData(this.privData, out attEvt);
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
                 Debug.WriteLine("attPrivateData retCode = " + retCode._value);
                 if (attEvt.eventType.eventType == Att.ATT_MAKE_PREDICTIVE_CALL_CONF)
                     MessageBox.Show(String.Format("Make Predictive Call from {0} to {1} is successfull! Ucid of new call = {2}", callingDevice.ToString(), calledDevice.ToString(), attEvt.makePredictiveCall.ucid));
@@ -1577,6 +1577,47 @@ namespace TSAPIDemo
             var dialogResult = devicePopup.ShowDialog();
             if (dialogResult != DialogResult.OK) return;
             Csta.DeviceID_t deviceToBeJoin = devicePopup.deviceIdTextBox.Text;
+            int callsCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
+            if (callsCount < 1) return;
+            var activeCall = conns[0];
+
+
+            Acs.RetCode_t retCode = Att.attSingleStepConferenceCall(this.privData, activeCall, deviceToBeJoin, Att.ATTParticipationType_t.PT_ACTIVE, false);
+            Log("attSingleStepConferenceCall result = " + retCode._value);
+
+
+            if (retCode._value < 0) return;
+            var invokeId = new Acs.InvokeID_t();
+            retCode = Csta.cstaEscapeService(this.acsHandle, invokeId, this.privData);
+
+            if (retCode._value < 0)
+            {
+                this.Log("cstaEscapeService result = " + retCode._value);
+                return;
+            }
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            this.Log("acsGetEventBlock result = " + retCode._value);
+            if (retCode._value < 0) return;
+
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_ESCAPE_SVC_CONF)
+            {
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
+                Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                if (attEvt.eventType.eventType == Att.ATT_SINGLE_STEP_CONFERENCE_CALL_CONF)
+                    MessageBox.Show("attSingleStepConference Succeded. New call UCID = " + attEvt.ssconference.ucid);
+                else
+                    MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
+            }
+            else
+            {
+                MessageBox.Show("attSingleStepConference Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+            }
 
         }
     }
