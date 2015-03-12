@@ -1475,7 +1475,7 @@ namespace Tsapi
 
         public struct ATTTransferCallConfEvent_t
         {
-            ATTUCID_t ucid;
+           internal ATTUCID_t ucid;
         };
 
         public struct ATTMonitorFilter_t

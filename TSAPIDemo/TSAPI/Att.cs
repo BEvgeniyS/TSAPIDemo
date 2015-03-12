@@ -408,7 +408,7 @@ namespace Tsapi
                 }
             }
 
-            ATTTransferCallConfEvent_t transferCall
+            internal ATTTransferCallConfEvent_t transferCall
             {
                 get
                 {

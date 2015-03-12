@@ -64,6 +64,8 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.cstaTransferCallButton = new System.Windows.Forms.Button();
+            this.attSingleStepTransferCallButton = new System.Windows.Forms.Button();
             this.attSingleStepConferenceCallButton = new System.Windows.Forms.Button();
             this.attSelectiveListeningRetrieveButton = new System.Windows.Forms.Button();
             this.attSelectiveListeningHoldButton = new System.Windows.Forms.Button();
@@ -97,7 +99,6 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.attSingleStepTransferCallButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.mainTabs.SuspendLayout();
@@ -222,6 +223,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.cstaTransferCallButton);
             this.TestsTab.Controls.Add(this.attSingleStepTransferCallButton);
             this.TestsTab.Controls.Add(this.attSingleStepConferenceCallButton);
             this.TestsTab.Controls.Add(this.attSelectiveListeningRetrieveButton);
@@ -262,6 +264,26 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // cstaTransferCallButton
+            // 
+            this.cstaTransferCallButton.Location = new System.Drawing.Point(389, 108);
+            this.cstaTransferCallButton.Name = "cstaTransferCallButton";
+            this.cstaTransferCallButton.Size = new System.Drawing.Size(75, 23);
+            this.cstaTransferCallButton.TabIndex = 39;
+            this.cstaTransferCallButton.Text = "TransCall";
+            this.cstaTransferCallButton.UseVisualStyleBackColor = true;
+            this.cstaTransferCallButton.Click += new System.EventHandler(this.cstaTransferCallButton_Click);
+            // 
+            // attSingleStepTransferCallButton
+            // 
+            this.attSingleStepTransferCallButton.Location = new System.Drawing.Point(389, 79);
+            this.attSingleStepTransferCallButton.Name = "attSingleStepTransferCallButton";
+            this.attSingleStepTransferCallButton.Size = new System.Drawing.Size(75, 23);
+            this.attSingleStepTransferCallButton.TabIndex = 38;
+            this.attSingleStepTransferCallButton.Text = "SSTrans";
+            this.attSingleStepTransferCallButton.UseVisualStyleBackColor = true;
+            this.attSingleStepTransferCallButton.Click += new System.EventHandler(this.attSingleStepTransferCallButton_Click);
             // 
             // attSingleStepConferenceCallButton
             // 
@@ -596,16 +618,6 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 4;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // attSingleStepTransferCallButton
-            // 
-            this.attSingleStepTransferCallButton.Location = new System.Drawing.Point(389, 79);
-            this.attSingleStepTransferCallButton.Name = "attSingleStepTransferCallButton";
-            this.attSingleStepTransferCallButton.Size = new System.Drawing.Size(75, 23);
-            this.attSingleStepTransferCallButton.TabIndex = 38;
-            this.attSingleStepTransferCallButton.Text = "SSTrans";
-            this.attSingleStepTransferCallButton.UseVisualStyleBackColor = true;
-            this.attSingleStepTransferCallButton.Click += new System.EventHandler(this.attSingleStepTransferCallButton_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -676,6 +688,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button attSelectiveListeningRetrieveButton;
         private System.Windows.Forms.Button attSingleStepConferenceCallButton;
         private System.Windows.Forms.Button attSingleStepTransferCallButton;
+        private System.Windows.Forms.Button cstaTransferCallButton;
 
 
 
