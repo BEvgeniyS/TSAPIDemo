@@ -46,7 +46,7 @@ namespace TSAPIDemo.Subforms
             ToolStripItem cstaClearConnectionContextMenuItem = snapShotDataTreeContextMenu.Items.Add("cstaClearConnection");
             cstaClearCallContextMenuItem.Click += (s, ev) =>
             {
-                Csta.EventBuffer_t evtbuf = clearCall(selectedConnId);
+                Csta.EventBuffer_t evtbuf = Csta.clearCall(this.parentForm.acsHandle, selectedConnId);
                 if (evtbuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtbuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CLEAR_CALL_CONF)
                 {
                     snapShotDataTree.Nodes.Remove(tmpNode);
@@ -65,43 +65,7 @@ namespace TSAPIDemo.Subforms
             snapShotDataTreeContextMenu.Show(Cursor.Position);
         }
 
-        private Csta.EventBuffer_t clearCall(Csta.ConnectionID_t cId)
-        {
-            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
-            Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
-            Acs.RetCode_t retCode = Csta.cstaClearCall(parentForm.acsHandle,
-                                                 invokeId,
-                                                 cId,
-                                                 parentForm.privData);
-            if (retCode._value < 0)
-            {
-                MessageBox.Show("cstaClearCall error: " + retCode);
-                return null;
-            }
-            parentForm.privData.length = Att.ATT_MAX_PRIVATE_DATA;
-            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
-            ushort numEvents;
-            retCode = Acs.acsGetEventBlock(parentForm.acsHandle,
-                                          evtBuf,
-                                          ref eventBufSize,
-                                          parentForm.privData,
-                                          out numEvents);
-            if (retCode._value < 0)
-            {
-                MessageBox.Show("acsGetEventBlock error: " + retCode);
-                return null;
-            }
-            if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION ||
-                evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_CLEAR_CALL_CONF)
-            {
-                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION
-                    && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
-                {
-                    MessageBox.Show("Clear call failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
-                }
-            }
-            return evtBuf;
-        }
+        
         private Csta.EventBuffer_t clearConnection(Csta.ConnectionID_t cId)
         {
             var u2uString = "Hello, I AM test u2u string";

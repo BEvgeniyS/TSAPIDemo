@@ -678,7 +678,8 @@ namespace TSAPIDemo
                 Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
                 ushort numEvents;
                 ushort eventBufSize = Csta.CSTA_MAX_HEAP;
-                Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, null, out numEvents);
+                this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+                Acs.acsGetEventBlock(this.acsHandle, evtBuf, ref eventBufSize, this.privData, out numEvents);
                 if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_GETAPI_CAPS_CONF)
                 {
                     System.Reflection.FieldInfo[] _PropertyInfos = evtBuf.evt.cstaConfirmation.getAPICaps.GetType().GetFields();
@@ -1717,6 +1718,30 @@ namespace TSAPIDemo
             {
                 MessageBox.Show("TransferCall Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
             }
+        }
+
+        private void cstaClearCallButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            int callsCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
+            if (callsCount < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+            Csta.EventBuffer_t eventBuf = Csta.clearCall(this.acsHandle, conns[0]);
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && 
+                eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CLEAR_CALL_CONF)
+                MessageBox.Show("Call Clear succeded!");
+            else
+                MessageBox.Show("TransferCall Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+        }
+
+        private void cstaClearConnectionButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

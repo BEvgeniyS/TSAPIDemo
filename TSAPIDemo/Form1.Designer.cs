@@ -52,6 +52,10 @@ namespace TSAPIDemo
         private void InitializeComponent()
         {
             this.configTab = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.wmEventNotifyCheckBox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.esrCheckBox = new System.Windows.Forms.CheckBox();
             this.enumServerNamesButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -64,48 +68,57 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cstaGetAPICapsButton = new System.Windows.Forms.Button();
+            this.cstaGetDeviceListButton = new System.Windows.Forms.Button();
+            this.cstaQueryCallMonitorButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.acsFlushEventQueueButton = new System.Windows.Forms.Button();
+            this.acsQueryAuthInfoButton = new System.Windows.Forms.Button();
+            this.acsSetHeartbeatIntervalButton = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cstaClearConnectionButton = new System.Windows.Forms.Button();
+            this.cstaClearCallButton = new System.Windows.Forms.Button();
             this.cstaTransferCallButton = new System.Windows.Forms.Button();
+            this.cstaAlternateCallButton = new System.Windows.Forms.Button();
             this.attSingleStepTransferCallButton = new System.Windows.Forms.Button();
+            this.cstaAnswerCallButton = new System.Windows.Forms.Button();
             this.attSingleStepConferenceCallButton = new System.Windows.Forms.Button();
+            this.cstaConferenceCallButton = new System.Windows.Forms.Button();
             this.attSelectiveListeningRetrieveButton = new System.Windows.Forms.Button();
+            this.cstaConsultantCallButton = new System.Windows.Forms.Button();
             this.attSelectiveListeningHoldButton = new System.Windows.Forms.Button();
+            this.deflectCallButton = new System.Windows.Forms.Button();
             this.SendDTMFToneButton = new System.Windows.Forms.Button();
+            this.cstaHoldButton = new System.Windows.Forms.Button();
             this.cstaRetrieveCallButton = new System.Windows.Forms.Button();
+            this.cstaMakeCallButton = new System.Windows.Forms.Button();
+            this.cstaMakePredictiveCallButton = new System.Windows.Forms.Button();
+            this.cstaPickupCallButton = new System.Windows.Forms.Button();
+            this.cstaReconnectCallButton = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.logTextBox = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.wmEventNotifyCheckBox = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.esrCheckBox = new System.Windows.Forms.CheckBox();
-            this.cstaReconnectCallButton = new System.Windows.Forms.Button();
-            this.cstaPickupCallButton = new System.Windows.Forms.Button();
-            this.cstaMakePredictiveCallButton = new System.Windows.Forms.Button();
-            this.cstaMakeCallButton = new System.Windows.Forms.Button();
-            this.cstaHoldButton = new System.Windows.Forms.Button();
-            this.deflectCallButton = new System.Windows.Forms.Button();
-            this.cstaConsultantCallButton = new System.Windows.Forms.Button();
-            this.cstaConferenceCallButton = new System.Windows.Forms.Button();
-            this.cstaAnswerCallButton = new System.Windows.Forms.Button();
-            this.cstaAlternateCallButton = new System.Windows.Forms.Button();
-            this.cstaQueryCallMonitorButton = new System.Windows.Forms.Button();
-            this.cstaGetAPICapsButton = new System.Windows.Forms.Button();
-            this.acsSetHeartbeatIntervalButton = new System.Windows.Forms.Button();
-            this.acsQueryAuthInfoButton = new System.Windows.Forms.Button();
-            this.acsFlushEventQueueButton = new System.Windows.Forms.Button();
-            this.cstaGetDeviceListButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.streamCheckbox = new System.Windows.Forms.CheckBox();
+            this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.deviceLabel = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
-            this.snapShotDeviceButton = new System.Windows.Forms.Button();
             this.mainTabs = new System.Windows.Forms.TabControl();
+            this.setFeatureTab = new System.Windows.Forms.TabPage();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.mainTabs.SuspendLayout();
             this.SuspendLayout();
             // 
             // configTab
             // 
+            this.configTab.Controls.Add(this.label8);
+            this.configTab.Controls.Add(this.wmEventNotifyCheckBox);
+            this.configTab.Controls.Add(this.label1);
+            this.configTab.Controls.Add(this.esrCheckBox);
             this.configTab.Controls.Add(this.enumServerNamesButton);
             this.configTab.Controls.Add(this.label6);
             this.configTab.Controls.Add(this.label5);
@@ -120,10 +133,50 @@ namespace TSAPIDemo
             this.configTab.Location = new System.Drawing.Point(4, 22);
             this.configTab.Name = "configTab";
             this.configTab.Padding = new System.Windows.Forms.Padding(3);
-            this.configTab.Size = new System.Drawing.Size(1119, 501);
+            this.configTab.Size = new System.Drawing.Size(1119, 468);
             this.configTab.TabIndex = 1;
             this.configTab.Text = "Configuration";
             this.configTab.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(171, 206);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 13);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "WM Event notify";
+            // 
+            // wmEventNotifyCheckBox
+            // 
+            this.wmEventNotifyCheckBox.AutoSize = true;
+            this.wmEventNotifyCheckBox.Location = new System.Drawing.Point(174, 222);
+            this.wmEventNotifyCheckBox.Name = "wmEventNotifyCheckBox";
+            this.wmEventNotifyCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.wmEventNotifyCheckBox.TabIndex = 32;
+            this.wmEventNotifyCheckBox.Text = "Disabled";
+            this.wmEventNotifyCheckBox.UseVisualStyleBackColor = true;
+            this.wmEventNotifyCheckBox.Click += new System.EventHandler(this.wmEventNotifyCheckBox_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(56, 206);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 13);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "ESR Event notify";
+            // 
+            // esrCheckBox
+            // 
+            this.esrCheckBox.AutoSize = true;
+            this.esrCheckBox.Location = new System.Drawing.Point(59, 222);
+            this.esrCheckBox.Name = "esrCheckBox";
+            this.esrCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.esrCheckBox.TabIndex = 30;
+            this.esrCheckBox.Text = "Disabled";
+            this.esrCheckBox.UseVisualStyleBackColor = true;
+            this.esrCheckBox.Click += new System.EventHandler(this.esrCheckBox_Click);
             // 
             // enumServerNamesButton
             // 
@@ -223,122 +276,328 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
-            this.TestsTab.Controls.Add(this.cstaTransferCallButton);
-            this.TestsTab.Controls.Add(this.attSingleStepTransferCallButton);
-            this.TestsTab.Controls.Add(this.attSingleStepConferenceCallButton);
-            this.TestsTab.Controls.Add(this.attSelectiveListeningRetrieveButton);
-            this.TestsTab.Controls.Add(this.attSelectiveListeningHoldButton);
-            this.TestsTab.Controls.Add(this.SendDTMFToneButton);
-            this.TestsTab.Controls.Add(this.cstaRetrieveCallButton);
+            this.TestsTab.Controls.Add(this.groupBox3);
+            this.TestsTab.Controls.Add(this.groupBox2);
+            this.TestsTab.Controls.Add(this.groupBox1);
             this.TestsTab.Controls.Add(this.label9);
             this.TestsTab.Controls.Add(this.logTextBox);
-            this.TestsTab.Controls.Add(this.label8);
-            this.TestsTab.Controls.Add(this.wmEventNotifyCheckBox);
-            this.TestsTab.Controls.Add(this.label1);
-            this.TestsTab.Controls.Add(this.esrCheckBox);
-            this.TestsTab.Controls.Add(this.cstaReconnectCallButton);
-            this.TestsTab.Controls.Add(this.cstaPickupCallButton);
-            this.TestsTab.Controls.Add(this.cstaMakePredictiveCallButton);
-            this.TestsTab.Controls.Add(this.cstaMakeCallButton);
-            this.TestsTab.Controls.Add(this.cstaHoldButton);
-            this.TestsTab.Controls.Add(this.deflectCallButton);
-            this.TestsTab.Controls.Add(this.cstaConsultantCallButton);
-            this.TestsTab.Controls.Add(this.cstaConferenceCallButton);
-            this.TestsTab.Controls.Add(this.cstaAnswerCallButton);
-            this.TestsTab.Controls.Add(this.cstaAlternateCallButton);
-            this.TestsTab.Controls.Add(this.cstaQueryCallMonitorButton);
-            this.TestsTab.Controls.Add(this.cstaGetAPICapsButton);
-            this.TestsTab.Controls.Add(this.acsSetHeartbeatIntervalButton);
-            this.TestsTab.Controls.Add(this.acsQueryAuthInfoButton);
-            this.TestsTab.Controls.Add(this.acsFlushEventQueueButton);
-            this.TestsTab.Controls.Add(this.cstaGetDeviceListButton);
             this.TestsTab.Controls.Add(this.label7);
             this.TestsTab.Controls.Add(this.streamCheckbox);
-            this.TestsTab.Controls.Add(this.deviceLabel);
-            this.TestsTab.Controls.Add(this.deviceTextBox);
-            this.TestsTab.Controls.Add(this.snapShotDeviceButton);
             this.TestsTab.Location = new System.Drawing.Point(4, 22);
             this.TestsTab.Name = "TestsTab";
             this.TestsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TestsTab.Size = new System.Drawing.Size(1119, 501);
+            this.TestsTab.Size = new System.Drawing.Size(1119, 468);
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cstaGetAPICapsButton);
+            this.groupBox3.Controls.Add(this.cstaGetDeviceListButton);
+            this.groupBox3.Controls.Add(this.cstaQueryCallMonitorButton);
+            this.groupBox3.Location = new System.Drawing.Point(228, 136);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(99, 110);
+            this.groupBox3.TabIndex = 42;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "CSTA control";
+            // 
+            // cstaGetAPICapsButton
+            // 
+            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(6, 19);
+            this.cstaGetAPICapsButton.Name = "cstaGetAPICapsButton";
+            this.cstaGetAPICapsButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaGetAPICapsButton.TabIndex = 14;
+            this.cstaGetAPICapsButton.Text = "GetAPICaps";
+            this.cstaGetAPICapsButton.UseVisualStyleBackColor = true;
+            this.cstaGetAPICapsButton.Click += new System.EventHandler(this.cstaGetAPICapsButton_Click);
+            // 
+            // cstaGetDeviceListButton
+            // 
+            this.cstaGetDeviceListButton.Location = new System.Drawing.Point(6, 48);
+            this.cstaGetDeviceListButton.Name = "cstaGetDeviceListButton";
+            this.cstaGetDeviceListButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaGetDeviceListButton.TabIndex = 11;
+            this.cstaGetDeviceListButton.Text = "GetDeviceList";
+            this.cstaGetDeviceListButton.UseVisualStyleBackColor = true;
+            this.cstaGetDeviceListButton.Click += new System.EventHandler(this.cstaGetDeviceListButton_Click);
+            // 
+            // cstaQueryCallMonitorButton
+            // 
+            this.cstaQueryCallMonitorButton.Location = new System.Drawing.Point(6, 77);
+            this.cstaQueryCallMonitorButton.Name = "cstaQueryCallMonitorButton";
+            this.cstaQueryCallMonitorButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaQueryCallMonitorButton.TabIndex = 15;
+            this.cstaQueryCallMonitorButton.Text = "QueryCallMonitor";
+            this.cstaQueryCallMonitorButton.UseVisualStyleBackColor = true;
+            this.cstaQueryCallMonitorButton.Click += new System.EventHandler(this.cstaQueryCallMonitorButton_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.acsFlushEventQueueButton);
+            this.groupBox2.Controls.Add(this.acsQueryAuthInfoButton);
+            this.groupBox2.Controls.Add(this.acsSetHeartbeatIntervalButton);
+            this.groupBox2.Location = new System.Drawing.Point(228, 7);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(99, 119);
+            this.groupBox2.TabIndex = 41;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Acs Functions";
+            // 
+            // acsFlushEventQueueButton
+            // 
+            this.acsFlushEventQueueButton.Location = new System.Drawing.Point(6, 19);
+            this.acsFlushEventQueueButton.Name = "acsFlushEventQueueButton";
+            this.acsFlushEventQueueButton.Size = new System.Drawing.Size(87, 23);
+            this.acsFlushEventQueueButton.TabIndex = 5;
+            this.acsFlushEventQueueButton.Text = "FlushEventQueue";
+            this.acsFlushEventQueueButton.UseVisualStyleBackColor = true;
+            this.acsFlushEventQueueButton.Click += new System.EventHandler(this.flushEventQueueButton_Click);
+            // 
+            // acsQueryAuthInfoButton
+            // 
+            this.acsQueryAuthInfoButton.Location = new System.Drawing.Point(6, 48);
+            this.acsQueryAuthInfoButton.Name = "acsQueryAuthInfoButton";
+            this.acsQueryAuthInfoButton.Size = new System.Drawing.Size(87, 23);
+            this.acsQueryAuthInfoButton.TabIndex = 12;
+            this.acsQueryAuthInfoButton.Text = "QueryAuthInfo";
+            this.acsQueryAuthInfoButton.UseVisualStyleBackColor = true;
+            this.acsQueryAuthInfoButton.Click += new System.EventHandler(this.acsQueryAuthInfoButton_Click);
+            // 
+            // acsSetHeartbeatIntervalButton
+            // 
+            this.acsSetHeartbeatIntervalButton.Location = new System.Drawing.Point(6, 77);
+            this.acsSetHeartbeatIntervalButton.Name = "acsSetHeartbeatIntervalButton";
+            this.acsSetHeartbeatIntervalButton.Size = new System.Drawing.Size(87, 34);
+            this.acsSetHeartbeatIntervalButton.TabIndex = 13;
+            this.acsSetHeartbeatIntervalButton.Text = "Set Heartbeat Interval";
+            this.acsSetHeartbeatIntervalButton.UseVisualStyleBackColor = true;
+            this.acsSetHeartbeatIntervalButton.Click += new System.EventHandler(this.acsSetHeartbeatIntervalButton_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cstaClearConnectionButton);
+            this.groupBox1.Controls.Add(this.cstaClearCallButton);
+            this.groupBox1.Controls.Add(this.cstaTransferCallButton);
+            this.groupBox1.Controls.Add(this.cstaAlternateCallButton);
+            this.groupBox1.Controls.Add(this.attSingleStepTransferCallButton);
+            this.groupBox1.Controls.Add(this.cstaAnswerCallButton);
+            this.groupBox1.Controls.Add(this.attSingleStepConferenceCallButton);
+            this.groupBox1.Controls.Add(this.cstaConferenceCallButton);
+            this.groupBox1.Controls.Add(this.attSelectiveListeningRetrieveButton);
+            this.groupBox1.Controls.Add(this.cstaConsultantCallButton);
+            this.groupBox1.Controls.Add(this.attSelectiveListeningHoldButton);
+            this.groupBox1.Controls.Add(this.deflectCallButton);
+            this.groupBox1.Controls.Add(this.SendDTMFToneButton);
+            this.groupBox1.Controls.Add(this.cstaHoldButton);
+            this.groupBox1.Controls.Add(this.cstaRetrieveCallButton);
+            this.groupBox1.Controls.Add(this.cstaMakeCallButton);
+            this.groupBox1.Controls.Add(this.cstaMakePredictiveCallButton);
+            this.groupBox1.Controls.Add(this.cstaPickupCallButton);
+            this.groupBox1.Controls.Add(this.cstaReconnectCallButton);
+            this.groupBox1.Location = new System.Drawing.Point(3, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(219, 315);
+            this.groupBox1.TabIndex = 40;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "CallControl";
+            // 
+            // cstaClearConnectionButton
+            // 
+            this.cstaClearConnectionButton.Location = new System.Drawing.Point(21, 107);
+            this.cstaClearConnectionButton.Name = "cstaClearConnectionButton";
+            this.cstaClearConnectionButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaClearConnectionButton.TabIndex = 41;
+            this.cstaClearConnectionButton.Text = "ClearConn";
+            this.cstaClearConnectionButton.UseVisualStyleBackColor = true;
+            this.cstaClearConnectionButton.Click += new System.EventHandler(this.cstaClearConnectionButton_Click);
+            // 
+            // cstaClearCallButton
+            // 
+            this.cstaClearCallButton.Location = new System.Drawing.Point(21, 77);
+            this.cstaClearCallButton.Name = "cstaClearCallButton";
+            this.cstaClearCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaClearCallButton.TabIndex = 40;
+            this.cstaClearCallButton.Text = "ClearCall";
+            this.cstaClearCallButton.UseVisualStyleBackColor = true;
+            this.cstaClearCallButton.Click += new System.EventHandler(this.cstaClearCallButton_Click);
+            // 
             // cstaTransferCallButton
             // 
-            this.cstaTransferCallButton.Location = new System.Drawing.Point(389, 108);
+            this.cstaTransferCallButton.Location = new System.Drawing.Point(114, 252);
             this.cstaTransferCallButton.Name = "cstaTransferCallButton";
-            this.cstaTransferCallButton.Size = new System.Drawing.Size(75, 23);
+            this.cstaTransferCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaTransferCallButton.TabIndex = 39;
             this.cstaTransferCallButton.Text = "TransCall";
             this.cstaTransferCallButton.UseVisualStyleBackColor = true;
             this.cstaTransferCallButton.Click += new System.EventHandler(this.cstaTransferCallButton_Click);
             // 
+            // cstaAlternateCallButton
+            // 
+            this.cstaAlternateCallButton.Location = new System.Drawing.Point(21, 20);
+            this.cstaAlternateCallButton.Name = "cstaAlternateCallButton";
+            this.cstaAlternateCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaAlternateCallButton.TabIndex = 16;
+            this.cstaAlternateCallButton.Text = "AlternateCall";
+            this.cstaAlternateCallButton.UseVisualStyleBackColor = true;
+            this.cstaAlternateCallButton.Click += new System.EventHandler(this.cstaAlternateCallButton_Click);
+            // 
             // attSingleStepTransferCallButton
             // 
-            this.attSingleStepTransferCallButton.Location = new System.Drawing.Point(389, 79);
+            this.attSingleStepTransferCallButton.Location = new System.Drawing.Point(114, 223);
             this.attSingleStepTransferCallButton.Name = "attSingleStepTransferCallButton";
-            this.attSingleStepTransferCallButton.Size = new System.Drawing.Size(75, 23);
+            this.attSingleStepTransferCallButton.Size = new System.Drawing.Size(87, 23);
             this.attSingleStepTransferCallButton.TabIndex = 38;
             this.attSingleStepTransferCallButton.Text = "SSTrans";
             this.attSingleStepTransferCallButton.UseVisualStyleBackColor = true;
             this.attSingleStepTransferCallButton.Click += new System.EventHandler(this.attSingleStepTransferCallButton_Click);
             // 
+            // cstaAnswerCallButton
+            // 
+            this.cstaAnswerCallButton.Location = new System.Drawing.Point(21, 49);
+            this.cstaAnswerCallButton.Name = "cstaAnswerCallButton";
+            this.cstaAnswerCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaAnswerCallButton.TabIndex = 17;
+            this.cstaAnswerCallButton.Text = "AnswerCall";
+            this.cstaAnswerCallButton.UseVisualStyleBackColor = true;
+            this.cstaAnswerCallButton.Click += new System.EventHandler(this.cstaAnswerCallButton_Click);
+            // 
             // attSingleStepConferenceCallButton
             // 
-            this.attSingleStepConferenceCallButton.Location = new System.Drawing.Point(389, 53);
+            this.attSingleStepConferenceCallButton.Location = new System.Drawing.Point(114, 194);
             this.attSingleStepConferenceCallButton.Name = "attSingleStepConferenceCallButton";
-            this.attSingleStepConferenceCallButton.Size = new System.Drawing.Size(75, 23);
+            this.attSingleStepConferenceCallButton.Size = new System.Drawing.Size(87, 23);
             this.attSingleStepConferenceCallButton.TabIndex = 37;
             this.attSingleStepConferenceCallButton.Text = "SSConf";
             this.attSingleStepConferenceCallButton.UseVisualStyleBackColor = true;
             this.attSingleStepConferenceCallButton.Click += new System.EventHandler(this.attSingleStepConferenceCallButton_Click);
             // 
+            // cstaConferenceCallButton
+            // 
+            this.cstaConferenceCallButton.Location = new System.Drawing.Point(21, 136);
+            this.cstaConferenceCallButton.Name = "cstaConferenceCallButton";
+            this.cstaConferenceCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaConferenceCallButton.TabIndex = 18;
+            this.cstaConferenceCallButton.Text = "ConferenceCall";
+            this.cstaConferenceCallButton.UseVisualStyleBackColor = true;
+            this.cstaConferenceCallButton.Click += new System.EventHandler(this.cstaConferenceCallButton_Click);
+            // 
             // attSelectiveListeningRetrieveButton
             // 
-            this.attSelectiveListeningRetrieveButton.Location = new System.Drawing.Point(307, 139);
+            this.attSelectiveListeningRetrieveButton.Location = new System.Drawing.Point(114, 165);
             this.attSelectiveListeningRetrieveButton.Name = "attSelectiveListeningRetrieveButton";
-            this.attSelectiveListeningRetrieveButton.Size = new System.Drawing.Size(75, 23);
+            this.attSelectiveListeningRetrieveButton.Size = new System.Drawing.Size(87, 23);
             this.attSelectiveListeningRetrieveButton.TabIndex = 36;
             this.attSelectiveListeningRetrieveButton.Text = "Sel.Retrieve";
             this.attSelectiveListeningRetrieveButton.UseVisualStyleBackColor = true;
             this.attSelectiveListeningRetrieveButton.Click += new System.EventHandler(this.attSelectiveListeningRetrieveButton_Click);
             // 
+            // cstaConsultantCallButton
+            // 
+            this.cstaConsultantCallButton.Location = new System.Drawing.Point(21, 165);
+            this.cstaConsultantCallButton.Name = "cstaConsultantCallButton";
+            this.cstaConsultantCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaConsultantCallButton.TabIndex = 19;
+            this.cstaConsultantCallButton.Text = "ConsultantCall";
+            this.cstaConsultantCallButton.UseVisualStyleBackColor = true;
+            this.cstaConsultantCallButton.Click += new System.EventHandler(this.cstaConsultantCallButton_Click);
+            // 
             // attSelectiveListeningHoldButton
             // 
-            this.attSelectiveListeningHoldButton.Location = new System.Drawing.Point(307, 109);
+            this.attSelectiveListeningHoldButton.Location = new System.Drawing.Point(114, 136);
             this.attSelectiveListeningHoldButton.Name = "attSelectiveListeningHoldButton";
-            this.attSelectiveListeningHoldButton.Size = new System.Drawing.Size(75, 23);
+            this.attSelectiveListeningHoldButton.Size = new System.Drawing.Size(87, 23);
             this.attSelectiveListeningHoldButton.TabIndex = 35;
             this.attSelectiveListeningHoldButton.Text = "SelectHold";
             this.attSelectiveListeningHoldButton.UseVisualStyleBackColor = true;
             this.attSelectiveListeningHoldButton.Click += new System.EventHandler(this.attSelectiveListeningHoldButton_Click);
             // 
+            // deflectCallButton
+            // 
+            this.deflectCallButton.Location = new System.Drawing.Point(21, 194);
+            this.deflectCallButton.Name = "deflectCallButton";
+            this.deflectCallButton.Size = new System.Drawing.Size(87, 23);
+            this.deflectCallButton.TabIndex = 20;
+            this.deflectCallButton.Text = "DeflectCall";
+            this.deflectCallButton.UseVisualStyleBackColor = true;
+            this.deflectCallButton.Click += new System.EventHandler(this.deflectCallButton_Click);
+            // 
             // SendDTMFToneButton
             // 
-            this.SendDTMFToneButton.Location = new System.Drawing.Point(307, 51);
+            this.SendDTMFToneButton.Location = new System.Drawing.Point(114, 107);
             this.SendDTMFToneButton.Name = "SendDTMFToneButton";
-            this.SendDTMFToneButton.Size = new System.Drawing.Size(75, 23);
+            this.SendDTMFToneButton.Size = new System.Drawing.Size(87, 23);
             this.SendDTMFToneButton.TabIndex = 34;
             this.SendDTMFToneButton.Text = "SendDTMF";
             this.SendDTMFToneButton.UseVisualStyleBackColor = true;
             this.SendDTMFToneButton.Click += new System.EventHandler(this.SendDTMFToneButton_Click);
             // 
+            // cstaHoldButton
+            // 
+            this.cstaHoldButton.Location = new System.Drawing.Point(21, 223);
+            this.cstaHoldButton.Name = "cstaHoldButton";
+            this.cstaHoldButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaHoldButton.TabIndex = 21;
+            this.cstaHoldButton.Text = "HoldCall";
+            this.cstaHoldButton.UseVisualStyleBackColor = true;
+            this.cstaHoldButton.Click += new System.EventHandler(this.cstaHoldButton_Click);
+            // 
             // cstaRetrieveCallButton
             // 
-            this.cstaRetrieveCallButton.Location = new System.Drawing.Point(307, 79);
+            this.cstaRetrieveCallButton.Location = new System.Drawing.Point(114, 78);
             this.cstaRetrieveCallButton.Name = "cstaRetrieveCallButton";
-            this.cstaRetrieveCallButton.Size = new System.Drawing.Size(75, 23);
+            this.cstaRetrieveCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaRetrieveCallButton.TabIndex = 33;
             this.cstaRetrieveCallButton.Text = "RetrieveCall";
             this.cstaRetrieveCallButton.UseVisualStyleBackColor = true;
             this.cstaRetrieveCallButton.Click += new System.EventHandler(this.cstaRetrieveCallButton_Click);
             // 
+            // cstaMakeCallButton
+            // 
+            this.cstaMakeCallButton.Location = new System.Drawing.Point(21, 252);
+            this.cstaMakeCallButton.Name = "cstaMakeCallButton";
+            this.cstaMakeCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaMakeCallButton.TabIndex = 22;
+            this.cstaMakeCallButton.Text = "MakeCall";
+            this.cstaMakeCallButton.UseVisualStyleBackColor = true;
+            this.cstaMakeCallButton.Click += new System.EventHandler(this.cstaMakeCallButton_Click);
+            // 
+            // cstaMakePredictiveCallButton
+            // 
+            this.cstaMakePredictiveCallButton.Location = new System.Drawing.Point(21, 281);
+            this.cstaMakePredictiveCallButton.Name = "cstaMakePredictiveCallButton";
+            this.cstaMakePredictiveCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaMakePredictiveCallButton.TabIndex = 23;
+            this.cstaMakePredictiveCallButton.Text = "PredictiveCall";
+            this.cstaMakePredictiveCallButton.UseVisualStyleBackColor = true;
+            this.cstaMakePredictiveCallButton.Click += new System.EventHandler(this.cstaMakePredictiveCallButton_Click);
+            // 
+            // cstaPickupCallButton
+            // 
+            this.cstaPickupCallButton.Location = new System.Drawing.Point(114, 20);
+            this.cstaPickupCallButton.Name = "cstaPickupCallButton";
+            this.cstaPickupCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaPickupCallButton.TabIndex = 24;
+            this.cstaPickupCallButton.Text = "PickupCall";
+            this.cstaPickupCallButton.UseVisualStyleBackColor = true;
+            this.cstaPickupCallButton.Click += new System.EventHandler(this.cstaPickupCallButton_Click);
+            // 
+            // cstaReconnectCallButton
+            // 
+            this.cstaReconnectCallButton.Location = new System.Drawing.Point(114, 49);
+            this.cstaReconnectCallButton.Name = "cstaReconnectCallButton";
+            this.cstaReconnectCallButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaReconnectCallButton.TabIndex = 25;
+            this.cstaReconnectCallButton.Text = "Reconn.Call";
+            this.cstaReconnectCallButton.UseVisualStyleBackColor = true;
+            this.cstaReconnectCallButton.Click += new System.EventHandler(this.cstaReconnectCallButton_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(577, 6);
+            this.label9.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label9.Location = new System.Drawing.Point(583, 3);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(25, 13);
             this.label9.TabIndex = 32;
@@ -353,214 +612,14 @@ namespace TSAPIDemo
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
             this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.logTextBox.Size = new System.Drawing.Size(508, 495);
+            this.logTextBox.Size = new System.Drawing.Size(508, 462);
             this.logTextBox.TabIndex = 31;
             this.logTextBox.WordWrap = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(397, 452);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(86, 13);
-            this.label8.TabIndex = 29;
-            this.label8.Text = "WM Event notify";
-            // 
-            // wmEventNotifyCheckBox
-            // 
-            this.wmEventNotifyCheckBox.AutoSize = true;
-            this.wmEventNotifyCheckBox.Location = new System.Drawing.Point(400, 468);
-            this.wmEventNotifyCheckBox.Name = "wmEventNotifyCheckBox";
-            this.wmEventNotifyCheckBox.Size = new System.Drawing.Size(67, 17);
-            this.wmEventNotifyCheckBox.TabIndex = 28;
-            this.wmEventNotifyCheckBox.Text = "Disabled";
-            this.wmEventNotifyCheckBox.UseVisualStyleBackColor = true;
-            this.wmEventNotifyCheckBox.Click += new System.EventHandler(this.wmEventNotifyCheckBox_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(282, 452);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 13);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "ESR Event notify";
-            // 
-            // esrCheckBox
-            // 
-            this.esrCheckBox.AutoSize = true;
-            this.esrCheckBox.Location = new System.Drawing.Point(285, 468);
-            this.esrCheckBox.Name = "esrCheckBox";
-            this.esrCheckBox.Size = new System.Drawing.Size(67, 17);
-            this.esrCheckBox.TabIndex = 26;
-            this.esrCheckBox.Text = "Disabled";
-            this.esrCheckBox.UseVisualStyleBackColor = true;
-            this.esrCheckBox.Click += new System.EventHandler(this.esrCheckBox_Click);
-            // 
-            // cstaReconnectCallButton
-            // 
-            this.cstaReconnectCallButton.Location = new System.Drawing.Point(225, 139);
-            this.cstaReconnectCallButton.Name = "cstaReconnectCallButton";
-            this.cstaReconnectCallButton.Size = new System.Drawing.Size(75, 23);
-            this.cstaReconnectCallButton.TabIndex = 25;
-            this.cstaReconnectCallButton.Text = "Reconn.Call";
-            this.cstaReconnectCallButton.UseVisualStyleBackColor = true;
-            this.cstaReconnectCallButton.Click += new System.EventHandler(this.cstaReconnectCallButton_Click);
-            // 
-            // cstaPickupCallButton
-            // 
-            this.cstaPickupCallButton.Location = new System.Drawing.Point(132, 139);
-            this.cstaPickupCallButton.Name = "cstaPickupCallButton";
-            this.cstaPickupCallButton.Size = new System.Drawing.Size(87, 23);
-            this.cstaPickupCallButton.TabIndex = 24;
-            this.cstaPickupCallButton.Text = "PickupCall";
-            this.cstaPickupCallButton.UseVisualStyleBackColor = true;
-            this.cstaPickupCallButton.Click += new System.EventHandler(this.cstaPickupCallButton_Click);
-            // 
-            // cstaMakePredictiveCallButton
-            // 
-            this.cstaMakePredictiveCallButton.Location = new System.Drawing.Point(26, 139);
-            this.cstaMakePredictiveCallButton.Name = "cstaMakePredictiveCallButton";
-            this.cstaMakePredictiveCallButton.Size = new System.Drawing.Size(98, 23);
-            this.cstaMakePredictiveCallButton.TabIndex = 23;
-            this.cstaMakePredictiveCallButton.Text = "PredictiveCall";
-            this.cstaMakePredictiveCallButton.UseVisualStyleBackColor = true;
-            this.cstaMakePredictiveCallButton.Click += new System.EventHandler(this.cstaMakePredictiveCallButton_Click);
-            // 
-            // cstaMakeCallButton
-            // 
-            this.cstaMakeCallButton.Location = new System.Drawing.Point(225, 109);
-            this.cstaMakeCallButton.Name = "cstaMakeCallButton";
-            this.cstaMakeCallButton.Size = new System.Drawing.Size(75, 23);
-            this.cstaMakeCallButton.TabIndex = 22;
-            this.cstaMakeCallButton.Text = "MakeCall";
-            this.cstaMakeCallButton.UseVisualStyleBackColor = true;
-            this.cstaMakeCallButton.Click += new System.EventHandler(this.cstaMakeCallButton_Click);
-            // 
-            // cstaHoldButton
-            // 
-            this.cstaHoldButton.Location = new System.Drawing.Point(225, 79);
-            this.cstaHoldButton.Name = "cstaHoldButton";
-            this.cstaHoldButton.Size = new System.Drawing.Size(75, 23);
-            this.cstaHoldButton.TabIndex = 21;
-            this.cstaHoldButton.Text = "HoldCall";
-            this.cstaHoldButton.UseVisualStyleBackColor = true;
-            this.cstaHoldButton.Click += new System.EventHandler(this.cstaHoldButton_Click);
-            // 
-            // deflectCallButton
-            // 
-            this.deflectCallButton.Location = new System.Drawing.Point(225, 51);
-            this.deflectCallButton.Name = "deflectCallButton";
-            this.deflectCallButton.Size = new System.Drawing.Size(75, 23);
-            this.deflectCallButton.TabIndex = 20;
-            this.deflectCallButton.Text = "DeflectCall";
-            this.deflectCallButton.UseVisualStyleBackColor = true;
-            this.deflectCallButton.Click += new System.EventHandler(this.deflectCallButton_Click);
-            // 
-            // cstaConsultantCallButton
-            // 
-            this.cstaConsultantCallButton.Location = new System.Drawing.Point(132, 108);
-            this.cstaConsultantCallButton.Name = "cstaConsultantCallButton";
-            this.cstaConsultantCallButton.Size = new System.Drawing.Size(87, 23);
-            this.cstaConsultantCallButton.TabIndex = 19;
-            this.cstaConsultantCallButton.Text = "ConsultantCall";
-            this.cstaConsultantCallButton.UseVisualStyleBackColor = true;
-            this.cstaConsultantCallButton.Click += new System.EventHandler(this.cstaConsultantCallButton_Click);
-            // 
-            // cstaConferenceCallButton
-            // 
-            this.cstaConferenceCallButton.Location = new System.Drawing.Point(132, 79);
-            this.cstaConferenceCallButton.Name = "cstaConferenceCallButton";
-            this.cstaConferenceCallButton.Size = new System.Drawing.Size(87, 23);
-            this.cstaConferenceCallButton.TabIndex = 18;
-            this.cstaConferenceCallButton.Text = "ConferenceCall";
-            this.cstaConferenceCallButton.UseVisualStyleBackColor = true;
-            this.cstaConferenceCallButton.Click += new System.EventHandler(this.cstaConferenceCallButton_Click);
-            // 
-            // cstaAnswerCallButton
-            // 
-            this.cstaAnswerCallButton.Location = new System.Drawing.Point(132, 51);
-            this.cstaAnswerCallButton.Name = "cstaAnswerCallButton";
-            this.cstaAnswerCallButton.Size = new System.Drawing.Size(87, 23);
-            this.cstaAnswerCallButton.TabIndex = 17;
-            this.cstaAnswerCallButton.Text = "AnswerCall";
-            this.cstaAnswerCallButton.UseVisualStyleBackColor = true;
-            this.cstaAnswerCallButton.Click += new System.EventHandler(this.cstaAnswerCallButton_Click);
-            // 
-            // cstaAlternateCallButton
-            // 
-            this.cstaAlternateCallButton.Location = new System.Drawing.Point(26, 109);
-            this.cstaAlternateCallButton.Name = "cstaAlternateCallButton";
-            this.cstaAlternateCallButton.Size = new System.Drawing.Size(98, 23);
-            this.cstaAlternateCallButton.TabIndex = 16;
-            this.cstaAlternateCallButton.Text = "AlternateCall";
-            this.cstaAlternateCallButton.UseVisualStyleBackColor = true;
-            this.cstaAlternateCallButton.Click += new System.EventHandler(this.cstaAlternateCallButton_Click);
-            // 
-            // cstaQueryCallMonitorButton
-            // 
-            this.cstaQueryCallMonitorButton.Location = new System.Drawing.Point(141, 371);
-            this.cstaQueryCallMonitorButton.Name = "cstaQueryCallMonitorButton";
-            this.cstaQueryCallMonitorButton.Size = new System.Drawing.Size(113, 23);
-            this.cstaQueryCallMonitorButton.TabIndex = 15;
-            this.cstaQueryCallMonitorButton.Text = "QueryCallMonitor";
-            this.cstaQueryCallMonitorButton.UseVisualStyleBackColor = true;
-            this.cstaQueryCallMonitorButton.Click += new System.EventHandler(this.cstaQueryCallMonitorButton_Click);
-            // 
-            // cstaGetAPICapsButton
-            // 
-            this.cstaGetAPICapsButton.Location = new System.Drawing.Point(141, 306);
-            this.cstaGetAPICapsButton.Name = "cstaGetAPICapsButton";
-            this.cstaGetAPICapsButton.Size = new System.Drawing.Size(113, 23);
-            this.cstaGetAPICapsButton.TabIndex = 14;
-            this.cstaGetAPICapsButton.Text = "GetAPICaps";
-            this.cstaGetAPICapsButton.UseVisualStyleBackColor = true;
-            this.cstaGetAPICapsButton.Click += new System.EventHandler(this.cstaGetAPICapsButton_Click);
-            // 
-            // acsSetHeartbeatIntervalButton
-            // 
-            this.acsSetHeartbeatIntervalButton.Location = new System.Drawing.Point(22, 365);
-            this.acsSetHeartbeatIntervalButton.Name = "acsSetHeartbeatIntervalButton";
-            this.acsSetHeartbeatIntervalButton.Size = new System.Drawing.Size(113, 34);
-            this.acsSetHeartbeatIntervalButton.TabIndex = 13;
-            this.acsSetHeartbeatIntervalButton.Text = "Set Heartbeat Interval";
-            this.acsSetHeartbeatIntervalButton.UseVisualStyleBackColor = true;
-            this.acsSetHeartbeatIntervalButton.Click += new System.EventHandler(this.acsSetHeartbeatIntervalButton_Click);
-            // 
-            // acsQueryAuthInfoButton
-            // 
-            this.acsQueryAuthInfoButton.Location = new System.Drawing.Point(22, 335);
-            this.acsQueryAuthInfoButton.Name = "acsQueryAuthInfoButton";
-            this.acsQueryAuthInfoButton.Size = new System.Drawing.Size(113, 23);
-            this.acsQueryAuthInfoButton.TabIndex = 12;
-            this.acsQueryAuthInfoButton.Text = "QueryAuthInfo";
-            this.acsQueryAuthInfoButton.UseVisualStyleBackColor = true;
-            this.acsQueryAuthInfoButton.Click += new System.EventHandler(this.acsQueryAuthInfoButton_Click);
-            // 
-            // acsFlushEventQueueButton
-            // 
-            this.acsFlushEventQueueButton.Location = new System.Drawing.Point(22, 306);
-            this.acsFlushEventQueueButton.Name = "acsFlushEventQueueButton";
-            this.acsFlushEventQueueButton.Size = new System.Drawing.Size(113, 23);
-            this.acsFlushEventQueueButton.TabIndex = 5;
-            this.acsFlushEventQueueButton.Text = "FlushEventQueue";
-            this.acsFlushEventQueueButton.UseVisualStyleBackColor = true;
-            this.acsFlushEventQueueButton.Click += new System.EventHandler(this.flushEventQueueButton_Click);
-            // 
-            // cstaGetDeviceListButton
-            // 
-            this.cstaGetDeviceListButton.Location = new System.Drawing.Point(141, 335);
-            this.cstaGetDeviceListButton.Name = "cstaGetDeviceListButton";
-            this.cstaGetDeviceListButton.Size = new System.Drawing.Size(113, 23);
-            this.cstaGetDeviceListButton.TabIndex = 11;
-            this.cstaGetDeviceListButton.Text = "GetDeviceList";
-            this.cstaGetDeviceListButton.UseVisualStyleBackColor = true;
-            this.cstaGetDeviceListButton.Click += new System.EventHandler(this.cstaGetDeviceListButton_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 452);
+            this.label7.Location = new System.Drawing.Point(19, 432);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(96, 13);
             this.label7.TabIndex = 10;
@@ -569,7 +628,7 @@ namespace TSAPIDemo
             // streamCheckbox
             // 
             this.streamCheckbox.AutoSize = true;
-            this.streamCheckbox.Location = new System.Drawing.Point(22, 468);
+            this.streamCheckbox.Location = new System.Drawing.Point(22, 448);
             this.streamCheckbox.Name = "streamCheckbox";
             this.streamCheckbox.Size = new System.Drawing.Size(95, 17);
             this.streamCheckbox.TabIndex = 9;
@@ -577,28 +636,10 @@ namespace TSAPIDemo
             this.streamCheckbox.UseVisualStyleBackColor = true;
             this.streamCheckbox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.connectionCheckbox_MouseClick);
             // 
-            // deviceLabel
-            // 
-            this.deviceLabel.AutoSize = true;
-            this.deviceLabel.Location = new System.Drawing.Point(23, 37);
-            this.deviceLabel.Name = "deviceLabel";
-            this.deviceLabel.Size = new System.Drawing.Size(72, 13);
-            this.deviceLabel.TabIndex = 6;
-            this.deviceLabel.Text = "Device Name";
-            // 
-            // deviceTextBox
-            // 
-            this.deviceTextBox.Location = new System.Drawing.Point(26, 53);
-            this.deviceTextBox.MaxLength = 64;
-            this.deviceTextBox.Name = "deviceTextBox";
-            this.deviceTextBox.Size = new System.Drawing.Size(100, 20);
-            this.deviceTextBox.TabIndex = 5;
-            this.deviceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.deviceTextBox_KeyPress);
-            // 
             // snapShotDeviceButton
             // 
             this.snapShotDeviceButton.Enabled = false;
-            this.snapShotDeviceButton.Location = new System.Drawing.Point(26, 79);
+            this.snapShotDeviceButton.Location = new System.Drawing.Point(209, 4);
             this.snapShotDeviceButton.Name = "snapShotDeviceButton";
             this.snapShotDeviceButton.Size = new System.Drawing.Size(98, 23);
             this.snapShotDeviceButton.TabIndex = 4;
@@ -606,24 +647,56 @@ namespace TSAPIDemo
             this.snapShotDeviceButton.UseVisualStyleBackColor = true;
             this.snapShotDeviceButton.Click += new System.EventHandler(this.snapShotDeviceButton_Click);
             // 
+            // deviceLabel
+            // 
+            this.deviceLabel.AutoSize = true;
+            this.deviceLabel.Location = new System.Drawing.Point(12, 12);
+            this.deviceLabel.Name = "deviceLabel";
+            this.deviceLabel.Size = new System.Drawing.Size(55, 13);
+            this.deviceLabel.TabIndex = 6;
+            this.deviceLabel.Text = "Device ID";
+            // 
+            // deviceTextBox
+            // 
+            this.deviceTextBox.Location = new System.Drawing.Point(90, 7);
+            this.deviceTextBox.MaxLength = 64;
+            this.deviceTextBox.Name = "deviceTextBox";
+            this.deviceTextBox.Size = new System.Drawing.Size(100, 20);
+            this.deviceTextBox.TabIndex = 5;
+            this.deviceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.deviceTextBox_KeyPress);
+            // 
             // mainTabs
             // 
             this.mainTabs.Controls.Add(this.TestsTab);
+            this.mainTabs.Controls.Add(this.setFeatureTab);
             this.mainTabs.Controls.Add(this.configTab);
-            this.mainTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainTabs.Location = new System.Drawing.Point(0, 0);
+            this.mainTabs.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.mainTabs.Location = new System.Drawing.Point(0, 40);
             this.mainTabs.Name = "mainTabs";
             this.mainTabs.SelectedIndex = 0;
-            this.mainTabs.Size = new System.Drawing.Size(1127, 527);
-            this.mainTabs.TabIndex = 4;
+            this.mainTabs.Size = new System.Drawing.Size(1127, 494);
+            this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
+            // 
+            // setFeatureTab
+            // 
+            this.setFeatureTab.Location = new System.Drawing.Point(4, 22);
+            this.setFeatureTab.Name = "setFeatureTab";
+            this.setFeatureTab.Padding = new System.Windows.Forms.Padding(3);
+            this.setFeatureTab.Size = new System.Drawing.Size(1119, 468);
+            this.setFeatureTab.TabIndex = 2;
+            this.setFeatureTab.Text = "Set Feature";
+            this.setFeatureTab.UseVisualStyleBackColor = true;
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1127, 527);
+            this.ClientSize = new System.Drawing.Size(1127, 534);
+            this.Controls.Add(this.deviceLabel);
             this.Controls.Add(this.mainTabs);
+            this.Controls.Add(this.deviceTextBox);
+            this.Controls.Add(this.snapShotDeviceButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "mainForm";
             this.Text = "TSAPI demo app";
@@ -633,8 +706,12 @@ namespace TSAPIDemo
             this.configTab.PerformLayout();
             this.TestsTab.ResumeLayout(false);
             this.TestsTab.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.mainTabs.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -676,10 +753,6 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaMakePredictiveCallButton;
         private System.Windows.Forms.Button cstaPickupCallButton;
         private System.Windows.Forms.Button cstaReconnectCallButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox esrCheckBox;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.CheckBox wmEventNotifyCheckBox;
         private System.Windows.Forms.TextBox logTextBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button cstaRetrieveCallButton;
@@ -689,6 +762,16 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button attSingleStepConferenceCallButton;
         private System.Windows.Forms.Button attSingleStepTransferCallButton;
         private System.Windows.Forms.Button cstaTransferCallButton;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox wmEventNotifyCheckBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox esrCheckBox;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button cstaClearCallButton;
+        private System.Windows.Forms.TabPage setFeatureTab;
+        private System.Windows.Forms.Button cstaClearConnectionButton;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox2;
 
 
 

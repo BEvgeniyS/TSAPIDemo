@@ -1181,5 +1181,54 @@ namespace Tsapi
     public static extern Acs.RetCode_t cstaQueryCallMonitor(
                         Acs.ACSHandle_t acsHandle,
                         Acs.InvokeID_t invokeID);
+
+
+
+
+
+
+
+
+
+    public static Csta.EventBuffer_t clearCall(Acs.ACSHandle_t acsHandle, Csta.ConnectionID_t cId)
+    {
+        Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+        Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
+        Acs.RetCode_t retCode = Csta.cstaClearCall(acsHandle,
+                                             invokeId,
+                                             cId,
+                                             null);
+        if (retCode._value < 0)
+        {
+            System.Windows.Forms.MessageBox.Show("cstaClearCall error: " + retCode);
+            return null;
+        }
+        ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+        ushort numEvents;
+        retCode = Acs.acsGetEventBlock(acsHandle,
+                                      evtBuf,
+                                      ref eventBufSize,
+                                      null,
+                                      out numEvents);
+        if (retCode._value < 0)
+        {
+            System.Windows.Forms.MessageBox.Show("acsGetEventBlock error: " + retCode);
+            return null;
+        }
+        if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION ||
+            evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_CLEAR_CALL_CONF)
+        {
+            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION
+                && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+            {
+                System.Windows.Forms.MessageBox.Show("Clear call failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+        }
+        return evtBuf;
+    }
+
+
+
+
     }
 }
