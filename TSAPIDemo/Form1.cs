@@ -1800,6 +1800,52 @@ namespace TSAPIDemo
                 MessageBox.Show("SetAdviceOfCharge Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
             }
         }
+
+        private void cstaSetAgentStateButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+
+            var popup = new cstaSetAgentStatePopupForm();
+            DialogResult dialogResult = popup.ShowDialog();
+
+            if (dialogResult != DialogResult.OK) return;
+            Csta.AgentID_t agentId = popup.agentId;
+            Csta.AgentMode_t agentMode = popup.agentMode;
+            Csta.AgentGroup_t agentGroup = new Csta.AgentGroup_t();
+            Csta.AgentPassword_t agentPass = "";
+
+            Acs.RetCode_t retCode = Att.attV6SetAgentState(this.privData, Att.ATTWorkMode_t.WM_MANUAL_IN, 5, true);
+            Log("attV6SetAgentState result = " + retCode._value);
+
+            retCode = Csta.cstaSetAgentState(this.acsHandle, new Acs.InvokeID_t(), currentDevice, agentMode, agentId, agentGroup, agentPass, this.privData);
+            this.Log("cstaSetAgentState result = " + retCode._value);
+            if (retCode._value < 0) return;
+
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            this.Log("acsGetEventBlock result = " + retCode._value);
+            if (retCode._value < 0) return;
+
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_SET_AGENT_STATE_CONF)
+            {
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
+                Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                if (attEvt.eventType.eventType == Att.ATT_SET_AGENT_STATE_CONF)
+                    MessageBox.Show("cstaSetAgentState Succeded. Pending? " + attEvt.setAgentState.isPending);
+                else
+                    MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
+            }
+            else
+            {
+                MessageBox.Show("cstaSetAgentState Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+            }
+
+        }
     }
 
 

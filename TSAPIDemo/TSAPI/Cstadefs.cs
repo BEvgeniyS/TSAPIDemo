@@ -613,7 +613,7 @@ namespace Tsapi
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct AgentID_t
+        public class AgentID_t
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             private string _value;
@@ -635,13 +635,13 @@ namespace Tsapi
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct AgentGroup_t
+        public class AgentGroup_t
         {
-            DeviceID_t _value;
+            internal DeviceID_t _value;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
-        public struct AgentPassword_t
+        public class AgentPassword_t
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
             private string _value;

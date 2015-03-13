@@ -358,6 +358,7 @@ namespace TSAPIDemo
             this.cstaSetAgentStateButton.TabIndex = 1;
             this.cstaSetAgentStateButton.Text = "SetAgentState";
             this.cstaSetAgentStateButton.UseVisualStyleBackColor = true;
+            this.cstaSetAgentStateButton.Click += new System.EventHandler(this.cstaSetAgentStateButton_Click);
             // 
             // attSetAdviceOfChargeButton
             // 

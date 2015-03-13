@@ -432,7 +432,7 @@ namespace Tsapi
                 }
             }
 
-            ATTSetAgentStateConfEvent_t setAgentState
+            public ATTSetAgentStateConfEvent_t setAgentState
             {
                 get
                 {
@@ -1118,6 +1118,14 @@ namespace Tsapi
                             Acs.PrivateData_t privateData,
                             Csta.ConnectionID_t activeCall,
                             Csta.DeviceID_t transferredTo);  
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attV6SetAgentState(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            ATTWorkMode_t workMode,
+                            int reasonCode,
+                            bool enablePending);          
 
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]

@@ -1618,7 +1618,7 @@ namespace Tsapi
 
         public struct ATTSetAgentStateConfEvent_t
         {
-            bool isPending;
+            public bool isPending;
         };
 
         public struct ATTQueryAgentStateConfEvent_t
