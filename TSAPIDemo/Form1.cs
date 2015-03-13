@@ -256,13 +256,13 @@ namespace TSAPIDemo
             ushort recvExtraBufs = 0;
             var currentDevice = deviceTextBox.Text;
             // Get supportedVersion string
-            string requestedVersion = "3-8";
+            string requestedVersion = "3-10";
             System.Text.StringBuilder supportedVersion = new System.Text.StringBuilder();
             Acs.RetCode_t attrc = Att.attMakeVersionString(requestedVersion, supportedVersion);
             // Set PrivateData request
             this.privData = new Acs.PrivateData_t();
             this.privData.vendor = "VERSION";
-            this.privData.data = new byte[1024];
+            this.privData.data = new byte[Att.ATT_MAX_PRIVATE_DATA];
             this.privData.data[0] = Acs.PRIVATE_DATA_ENCODING;
             for (int i = 0; i < supportedVersion.Length; i++)
             {
@@ -690,8 +690,20 @@ namespace TSAPIDemo
                         var value = info.GetValue(evtBuf.evt.cstaConfirmation.getAPICaps);
                         sb.Append(info.Name + "=" + value.ToString() + Environment.NewLine);
                     }
-                    MessageBox.Show("Got API caps. Please refer to the log.");
+                    sb.Append("_________________________" + Environment.NewLine);
+                    sb.Append("ATT Private API caps:" + Environment.NewLine);
+                    var attEvt = new Att.ATTEvent_t();
+                    retCode = Att.attPrivateData(this.privData, attEvt);
+                    _PropertyInfos = attEvt.attV10GetApiCaps.GetType().GetFields();
+                    foreach (var info in _PropertyInfos)
+                    {
+                        var value = info.GetValue(attEvt.attV10GetApiCaps);
+                        sb.Append(info.Name + "=" + value.ToString() + Environment.NewLine);
+                    }
+
                     Log(sb.ToString());
+                    MessageBox.Show("Got API caps. Please refer to the log.");
+
                 }
                 else if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
                 {

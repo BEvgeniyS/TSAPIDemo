@@ -627,7 +627,7 @@ namespace Tsapi
         }
     };
 
-    public const int CSTA_MAX_HEAP = 2048;
+    public const int CSTA_MAX_HEAP = 4096;
 
     [StructLayout(LayoutKind.Sequential, Pack = 4)]
     public class EventBuffer_t : ICustomMarshaler

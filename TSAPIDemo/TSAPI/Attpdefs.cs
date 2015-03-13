@@ -1554,6 +1554,36 @@ namespace Tsapi
             bool reserved2;
         };
 
+        public struct ATTV10GetAPICapsConfEvent_t
+        {
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 65)]
+            public string switchVersion;
+            public byte sendDTMFTone;
+            public byte enteredDigitsEvent;
+            public byte queryDeviceName;
+            public byte queryAgentMeas;
+            public byte querySplitSkillMeas;
+            public byte queryTrunkGroupMeas;
+            public byte queryVdnMeas;
+            public byte singleStepConference;
+            public byte selectiveListeningHold;
+            public byte selectiveListeningRetrieve;
+            public byte setBillingRate;
+            public byte queryUCID;
+            public byte chargeAdviceEvent;
+            public byte singleStepTransfer;
+            public byte monitorCallsViaDevice;
+            public byte deviceHistoryCount;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+            public string adminSoftwareVersion;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+            public string softwareVersion;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+            public string offerType;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+            public string serverType;
+        }
+
         public struct ATTQueryDeviceInfoConfEvent_t
         {
             ATTExtensionClass_t extensionClass;

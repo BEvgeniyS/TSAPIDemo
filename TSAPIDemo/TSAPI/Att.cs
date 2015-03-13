@@ -23,7 +23,7 @@ namespace Tsapi
     public static partial class Att
     {
 
-        public const int ATT_MAX_PRIVATE_DATA = 1024;
+        public const int ATT_MAX_PRIVATE_DATA = 2048;
         public const int ATTPRIV_MAX_HEAP = 64;
         public const int ATT_MAX_USER_INFO = 129;
         public const int ATT_MAX_UUI_SIZE = 96;
@@ -336,6 +336,14 @@ namespace Tsapi
                 get
                 {
                     return Aux.ByteArrayToStructure<ATTGetAPICapsConfEvent_t>(heap);
+                }
+            }
+
+            public ATTV10GetAPICapsConfEvent_t attV10GetApiCaps
+            {
+                get
+                {
+                    return Aux.ByteArrayToStructure<ATTV10GetAPICapsConfEvent_t>(heap);
                 }
             }
             ATTServiceInitiatedEvent_t serviceInitiated
