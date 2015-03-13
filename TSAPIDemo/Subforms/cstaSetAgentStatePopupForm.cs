@@ -13,15 +13,43 @@ namespace TSAPIDemo
     public partial class cstaSetAgentStatePopupForm : Form
     {
         public Csta.AgentMode_t agentMode;
+        public Att.ATTWorkMode_t workMode;
         public Csta.AgentID_t agentId;
+        public int reasonCode;
+        public bool enablePending;
         public cstaSetAgentStatePopupForm()
         {
             InitializeComponent();
         }
 
-        private void AM_LOG_IN_Button_Click(object sender, EventArgs e)
+        private void Go_Button_Click(object sender, EventArgs e)
         {
             this.agentId = this.agentIdTextBox.Text;
+            this.enablePending = this.enablePendingCheckBox.Checked;
+            Int32.TryParse(this.reasonCodeTextBox.Text, out this.reasonCode);
+            GetAgentMode();
+            GetWorkMode();
+           
+        }
+
+        private void GetWorkMode()
+        {
+            var checkedWorkModeButton = this.workModeGroupBox.Controls.OfType<RadioButton>()
+                                      .FirstOrDefault(rb => rb.Checked);
+            if (checkedWorkModeButton == this.WM_AUX_WORKRadioButton)
+                this.workMode = Att.ATTWorkMode_t.WM_AUX_WORK;
+            else if (checkedWorkModeButton == this.WM_AFTCAL_WKRadioButton)
+                this.workMode = Att.ATTWorkMode_t.WM_AFTCAL_WK;
+            else if (checkedWorkModeButton == this.WM_AUTO_INRadioButton)
+                this.workMode = Att.ATTWorkMode_t.WM_AUTO_IN;
+            else if (checkedWorkModeButton == this.WM_MANUAL_INRadioButton)
+                this.workMode = Att.ATTWorkMode_t.WM_MANUAL_IN;
+            else
+                this.workMode = Att.ATTWorkMode_t.WM_NONE;
+        }
+
+        private void GetAgentMode()
+        {
             var checkedButton = this.agentModeGroupBox.Controls.OfType<RadioButton>()
                                       .FirstOrDefault(rb => rb.Checked);
             if (checkedButton == this.AM_LOG_INRadioButton)
@@ -29,7 +57,26 @@ namespace TSAPIDemo
                 this.agentMode = Csta.AgentMode_t.AM_LOG_IN;
                 this.DialogResult = DialogResult.OK;
             }
-
+            else if (checkedButton == this.AM_LOG_OUTRadioButton)
+            {
+                this.agentMode = Csta.AgentMode_t.AM_LOG_OUT;
+                this.DialogResult = DialogResult.OK;
+            }
+            else if (checkedButton == this.AM_NOT_READYRadioButton)
+            {
+                this.agentMode = Csta.AgentMode_t.AM_NOT_READY;
+                this.DialogResult = DialogResult.OK;
+            }
+            else if (checkedButton == this.AM_READYRadioButton)
+            {
+                this.agentMode = Csta.AgentMode_t.AM_READY;
+                this.DialogResult = DialogResult.OK;
+            }
+            else if (checkedButton == this.AM_WORK_NOT_READYRadioButton)
+            {
+                this.agentMode = Csta.AgentMode_t.AM_WORK_NOT_READY;
+                this.DialogResult = DialogResult.OK;
+            }
             else
                 this.DialogResult = DialogResult.Cancel;
         }
@@ -42,21 +89,18 @@ namespace TSAPIDemo
                                       .FirstOrDefault(rb => rb.Checked);
             if (checkedAgentModeButton == this.AM_LOG_INRadioButton)
             {
-                this.WM_AUX_WORKRadioButton.Checked = true;
                 this.WM_AUX_WORKRadioButton.Enabled = true;
-                this.WM_AFTCAL_WKRadioButton.Checked = true;
+                this.WM_AUX_WORKRadioButton.Checked = true;
                 this.WM_AFTCAL_WKRadioButton.Enabled = true;
-                this.WM_AUTO_INRadioButton.Checked = true;
                 this.WM_AUTO_INRadioButton.Enabled = true;
-                this.WM_MANUAL_INRadioButton.Checked = true;
                 this.WM_MANUAL_INRadioButton.Enabled = true;
-                if (checkedWorkModeButton != this.WM_AUX_WORKRadioButton)
-                    this.reasonCodeTextBox.Enabled = false;
-                else
+                if (checkedWorkModeButton == this.WM_AUX_WORKRadioButton)
                     this.reasonCodeTextBox.Enabled = true;
+                else
+                    this.reasonCodeTextBox.Enabled = false;
                 this.enablePendingCheckBox.Enabled = false;
             }
-            else if (checkedAgentModeButton == this.AM_LOG_INRadioButton)
+            else if (checkedAgentModeButton == this.AM_LOG_OUTRadioButton)
             {
                 this.WM_AUX_WORKRadioButton.Checked = false;
                 this.WM_AUX_WORKRadioButton.Enabled = false;
@@ -88,9 +132,8 @@ namespace TSAPIDemo
                 this.WM_AUX_WORKRadioButton.Enabled = false;
                 this.WM_AFTCAL_WKRadioButton.Checked = false;
                 this.WM_AFTCAL_WKRadioButton.Enabled = false;
-                this.WM_AUTO_INRadioButton.Checked = true;
                 this.WM_AUTO_INRadioButton.Enabled = true;
-                this.WM_MANUAL_INRadioButton.Checked = true;
+                this.WM_AUTO_INRadioButton.Checked = true;
                 this.WM_MANUAL_INRadioButton.Enabled = true;
                 this.reasonCodeTextBox.Enabled = false;
                 this.enablePendingCheckBox.Enabled = true;
@@ -110,5 +153,16 @@ namespace TSAPIDemo
             }
         }
 
+        private void WorkModeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            var checkedAgentModeButton = this.agentModeGroupBox.Controls.OfType<RadioButton>()
+                          .FirstOrDefault(rb => rb.Checked);
+            var checkedWorkModeButton = this.workModeGroupBox.Controls.OfType<RadioButton>()
+                                      .FirstOrDefault(rb => rb.Checked);
+            if (checkedWorkModeButton == this.WM_AUX_WORKRadioButton)
+                this.reasonCodeTextBox.Enabled = true;
+            else
+                this.reasonCodeTextBox.Enabled = false;
+        }
     }
 }

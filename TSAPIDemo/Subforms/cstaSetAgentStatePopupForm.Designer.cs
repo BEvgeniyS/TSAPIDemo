@@ -30,7 +30,7 @@
         {
             this.agentIdTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.AM_LOG_IN_Button = new System.Windows.Forms.Button();
+            this.goButton = new System.Windows.Forms.Button();
             this.agentModeGroupBox = new System.Windows.Forms.GroupBox();
             this.AM_WORK_NOT_READYRadioButton = new System.Windows.Forms.RadioButton();
             this.AM_READYRadioButton = new System.Windows.Forms.RadioButton();
@@ -65,15 +65,15 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "AgentID";
             // 
-            // AM_LOG_IN_Button
+            // goButton
             // 
-            this.AM_LOG_IN_Button.Location = new System.Drawing.Point(73, 209);
-            this.AM_LOG_IN_Button.Name = "AM_LOG_IN_Button";
-            this.AM_LOG_IN_Button.Size = new System.Drawing.Size(161, 23);
-            this.AM_LOG_IN_Button.TabIndex = 2;
-            this.AM_LOG_IN_Button.Text = "AM_LOG_IN";
-            this.AM_LOG_IN_Button.UseVisualStyleBackColor = true;
-            this.AM_LOG_IN_Button.Click += new System.EventHandler(this.AM_LOG_IN_Button_Click);
+            this.goButton.Location = new System.Drawing.Point(109, 218);
+            this.goButton.Name = "goButton";
+            this.goButton.Size = new System.Drawing.Size(161, 23);
+            this.goButton.TabIndex = 2;
+            this.goButton.Text = "GO";
+            this.goButton.UseVisualStyleBackColor = true;
+            this.goButton.Click += new System.EventHandler(this.Go_Button_Click);
             // 
             // agentModeGroupBox
             // 
@@ -168,6 +168,7 @@
             this.WM_MANUAL_INRadioButton.TabIndex = 3;
             this.WM_MANUAL_INRadioButton.Text = "WM_MANUAL_IN";
             this.WM_MANUAL_INRadioButton.UseVisualStyleBackColor = true;
+            this.WM_MANUAL_INRadioButton.CheckedChanged += new System.EventHandler(this.WorkModeRadioButton_CheckedChanged);
             // 
             // WM_AUTO_INRadioButton
             // 
@@ -178,6 +179,7 @@
             this.WM_AUTO_INRadioButton.TabIndex = 2;
             this.WM_AUTO_INRadioButton.Text = "WM_AUTO_IN";
             this.WM_AUTO_INRadioButton.UseVisualStyleBackColor = true;
+            this.WM_AUTO_INRadioButton.CheckedChanged += new System.EventHandler(this.WorkModeRadioButton_CheckedChanged);
             // 
             // WM_AFTCAL_WKRadioButton
             // 
@@ -188,6 +190,7 @@
             this.WM_AFTCAL_WKRadioButton.TabIndex = 1;
             this.WM_AFTCAL_WKRadioButton.Text = "WM_AFTCAL_WK";
             this.WM_AFTCAL_WKRadioButton.UseVisualStyleBackColor = true;
+            this.WM_AFTCAL_WKRadioButton.CheckedChanged += new System.EventHandler(this.WorkModeRadioButton_CheckedChanged);
             // 
             // WM_AUX_WORKRadioButton
             // 
@@ -200,6 +203,7 @@
             this.WM_AUX_WORKRadioButton.TabStop = true;
             this.WM_AUX_WORKRadioButton.Text = "WM_AUX_WORK";
             this.WM_AUX_WORKRadioButton.UseVisualStyleBackColor = true;
+            this.WM_AUX_WORKRadioButton.CheckedChanged += new System.EventHandler(this.WorkModeRadioButton_CheckedChanged);
             // 
             // enablePendingCheckBox
             // 
@@ -239,7 +243,7 @@
             this.Controls.Add(this.enablePendingCheckBox);
             this.Controls.Add(this.workModeGroupBox);
             this.Controls.Add(this.agentModeGroupBox);
-            this.Controls.Add(this.AM_LOG_IN_Button);
+            this.Controls.Add(this.goButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.agentIdTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -258,7 +262,7 @@
 
         private System.Windows.Forms.TextBox agentIdTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button AM_LOG_IN_Button;
+        private System.Windows.Forms.Button goButton;
         private System.Windows.Forms.GroupBox agentModeGroupBox;
         private System.Windows.Forms.GroupBox workModeGroupBox;
         private System.Windows.Forms.CheckBox enablePendingCheckBox;

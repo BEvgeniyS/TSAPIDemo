@@ -1812,10 +1812,13 @@ namespace TSAPIDemo
             if (dialogResult != DialogResult.OK) return;
             Csta.AgentID_t agentId = popup.agentId;
             Csta.AgentMode_t agentMode = popup.agentMode;
+            Att.ATTWorkMode_t workMode = popup.workMode;
+            int reasonCode = popup.reasonCode;
+            bool enablePending = popup.enablePending;
             Csta.AgentGroup_t agentGroup = new Csta.AgentGroup_t();
             Csta.AgentPassword_t agentPass = "";
 
-            Acs.RetCode_t retCode = Att.attV6SetAgentState(this.privData, Att.ATTWorkMode_t.WM_MANUAL_IN, 5, true);
+            Acs.RetCode_t retCode = Att.attV6SetAgentState(this.privData, workMode, reasonCode, enablePending);
             Log("attV6SetAgentState result = " + retCode._value);
 
             retCode = Csta.cstaSetAgentState(this.acsHandle, new Acs.InvokeID_t(), currentDevice, agentMode, agentId, agentGroup, agentPass, this.privData);

@@ -1120,13 +1120,19 @@ namespace Tsapi
                             Csta.DeviceID_t transferredTo);  
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSetAgentState(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            ATTWorkMode_t workMode,
+                            int reasonCode);
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attV6SetAgentState(
                             [In, Out]
                             Acs.PrivateData_t privateData,
                             ATTWorkMode_t workMode,
                             int reasonCode,
-                            bool enablePending);          
-
+                            bool enablePending);     
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attSetAdviceOfCharge(
