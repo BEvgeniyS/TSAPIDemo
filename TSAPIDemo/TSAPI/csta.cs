@@ -1215,20 +1215,49 @@ namespace Tsapi
             System.Windows.Forms.MessageBox.Show("acsGetEventBlock error: " + retCode);
             return null;
         }
-        if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION ||
-            evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_CLEAR_CALL_CONF)
+        return evtBuf;
+    }
+
+    public static Csta.EventBuffer_t clearConnection(Acs.ACSHandle_t acsHandle, Acs.PrivateData_t privData, Csta.ConnectionID_t cId)
+    {
+        var u2uString = "Hello, I AM test u2u string";
+        var u2uInfo = new Att.ATTUserToUserInfo_t();
+        // fixed u2u size
+        int u2uSize = Att.ATT_MAX_UUI_SIZE;
+        u2uInfo.length = (short)u2uString.Length;
+        u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
+        u2uInfo.value = System.Text.Encoding.ASCII.GetBytes(u2uString);
+        Array.Resize(ref u2uInfo.value, u2uSize);
+
+        Att.attV6ClearConnection(privData, Att.ATTDropResource_t.DR_NONE, ref u2uInfo);
+
+        Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+        Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
+        Acs.RetCode_t retCode = Csta.cstaClearConnection(acsHandle,
+                                             invokeId,
+                                             cId,
+                                             privData);
+        if (retCode._value < 0)
         {
-            if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION
-                && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
-            {
-                System.Windows.Forms.MessageBox.Show("Clear call failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
-            }
+            System.Windows.Forms.MessageBox.Show("cstaClearConnection error: " + retCode);
+            return null;
+        }
+        privData.length = Att.ATT_MAX_PRIVATE_DATA;
+        ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+        ushort numEvents;
+        retCode = Acs.acsGetEventBlock(acsHandle,
+                                      evtBuf,
+                                      ref eventBufSize,
+                                      privData,
+                                      out numEvents);
+        if (retCode._value < 0)
+        {
+            System.Windows.Forms.MessageBox.Show("acsGetEventBlock error: " + retCode);
+            return null;
         }
         return evtBuf;
     }
 
 
-
-
-    }
+}
 }

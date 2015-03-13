@@ -1736,12 +1736,26 @@ namespace TSAPIDemo
                 eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CLEAR_CALL_CONF)
                 MessageBox.Show("Call Clear succeded!");
             else
-                MessageBox.Show("TransferCall Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+                MessageBox.Show("Call Clear failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
         }
 
         private void cstaClearConnectionButton_Click(object sender, EventArgs e)
         {
-
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            int callsCount;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
+            if (callsCount < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+            Csta.EventBuffer_t eventBuf = Csta.clearConnection(this.acsHandle, this.privData, conns[0]);
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && 
+                eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_CLEAR_CONNECTION_CONF)
+                MessageBox.Show("Connection clear succeded!");
+            else
+                MessageBox.Show("Connection clear failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
         }
     }
 
