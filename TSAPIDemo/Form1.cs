@@ -684,13 +684,14 @@ namespace TSAPIDemo
                 {
                     System.Reflection.FieldInfo[] _PropertyInfos = evtBuf.evt.cstaConfirmation.getAPICaps.GetType().GetFields();
                     var sb = new StringBuilder();
+                    sb.Append(Environment.NewLine);
                     sb.Append("Received API caps:" + Environment.NewLine);
                     foreach (var info in _PropertyInfos)
                     {
                         var value = info.GetValue(evtBuf.evt.cstaConfirmation.getAPICaps);
                         sb.Append(info.Name + "=" + value.ToString() + Environment.NewLine);
                     }
-                    sb.Append("_________________________" + Environment.NewLine);
+                    sb.Append(Environment.NewLine);
                     sb.Append("ATT Private API caps:" + Environment.NewLine);
                     var attEvt = new Att.ATTEvent_t();
                     retCode = Att.attPrivateData(this.privData, attEvt);
@@ -1768,6 +1769,36 @@ namespace TSAPIDemo
                 MessageBox.Show("Connection clear succeded!");
             else
                 MessageBox.Show("Connection clear failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+        }
+
+        private void attSetAdviceOfChargeButton_Click(object sender, EventArgs e)
+        {
+            Acs.RetCode_t retCode = Att.attSetAdviceOfCharge(this.privData, true);
+            
+            var invokeId = new Acs.InvokeID_t();
+            retCode = Csta.cstaEscapeService(this.acsHandle, invokeId, this.privData);
+
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            this.Log("acsGetEventBlock result = " + retCode._value);
+            if (retCode._value < 0) return;
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_ESCAPE_SVC_CONF)
+            {
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
+                Debug.WriteLine("attPrivateData retCode = " + retCode._value);
+                if (attEvt.eventType.eventType == Att.ATT_SET_ADVICE_OF_CHARGE_CONF)
+                    MessageBox.Show("AdviceOfCharge is set");
+                else
+                    MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
+            }
+            else
+            {
+                MessageBox.Show("SetAdviceOfCharge Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+            }
         }
     }
 

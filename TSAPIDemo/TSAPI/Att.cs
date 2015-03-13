@@ -1119,6 +1119,15 @@ namespace Tsapi
                             Csta.ConnectionID_t activeCall,
                             Csta.DeviceID_t transferredTo);  
 
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSetAdviceOfCharge(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            bool flag);
+
+        
+
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(
                             string requestedVersion,

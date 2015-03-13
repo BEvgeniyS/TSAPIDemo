@@ -68,6 +68,13 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cstaSetMsgWaitingIndButton = new System.Windows.Forms.Button();
+            this.cstaSetForwardingButton = new System.Windows.Forms.Button();
+            this.cstaSetDoNotDisturbButton = new System.Windows.Forms.Button();
+            this.attSetBillRateButton = new System.Windows.Forms.Button();
+            this.cstaSetAgentStateButton = new System.Windows.Forms.Button();
+            this.attSetAdviceOfChargeButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.cstaGetAPICapsButton = new System.Windows.Forms.Button();
             this.cstaGetDeviceListButton = new System.Windows.Forms.Button();
@@ -104,9 +111,9 @@ namespace TSAPIDemo
             this.deviceLabel = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.setFeatureTab = new System.Windows.Forms.TabPage();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -276,6 +283,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.groupBox4);
             this.TestsTab.Controls.Add(this.groupBox3);
             this.TestsTab.Controls.Add(this.groupBox2);
             this.TestsTab.Controls.Add(this.groupBox1);
@@ -291,12 +299,82 @@ namespace TSAPIDemo
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.cstaSetMsgWaitingIndButton);
+            this.groupBox4.Controls.Add(this.cstaSetForwardingButton);
+            this.groupBox4.Controls.Add(this.cstaSetDoNotDisturbButton);
+            this.groupBox4.Controls.Add(this.attSetBillRateButton);
+            this.groupBox4.Controls.Add(this.cstaSetAgentStateButton);
+            this.groupBox4.Controls.Add(this.attSetAdviceOfChargeButton);
+            this.groupBox4.Location = new System.Drawing.Point(314, 7);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(99, 200);
+            this.groupBox4.TabIndex = 43;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Set features";
+            // 
+            // cstaSetMsgWaitingIndButton
+            // 
+            this.cstaSetMsgWaitingIndButton.Location = new System.Drawing.Point(6, 164);
+            this.cstaSetMsgWaitingIndButton.Name = "cstaSetMsgWaitingIndButton";
+            this.cstaSetMsgWaitingIndButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaSetMsgWaitingIndButton.TabIndex = 5;
+            this.cstaSetMsgWaitingIndButton.Text = "SetMsgWtInd";
+            this.cstaSetMsgWaitingIndButton.UseVisualStyleBackColor = true;
+            // 
+            // cstaSetForwardingButton
+            // 
+            this.cstaSetForwardingButton.Location = new System.Drawing.Point(6, 135);
+            this.cstaSetForwardingButton.Name = "cstaSetForwardingButton";
+            this.cstaSetForwardingButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaSetForwardingButton.TabIndex = 4;
+            this.cstaSetForwardingButton.Text = "SetForwarding";
+            this.cstaSetForwardingButton.UseVisualStyleBackColor = true;
+            // 
+            // cstaSetDoNotDisturbButton
+            // 
+            this.cstaSetDoNotDisturbButton.Location = new System.Drawing.Point(6, 106);
+            this.cstaSetDoNotDisturbButton.Name = "cstaSetDoNotDisturbButton";
+            this.cstaSetDoNotDisturbButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaSetDoNotDisturbButton.TabIndex = 3;
+            this.cstaSetDoNotDisturbButton.Text = "SetDND";
+            this.cstaSetDoNotDisturbButton.UseVisualStyleBackColor = true;
+            // 
+            // attSetBillRateButton
+            // 
+            this.attSetBillRateButton.Location = new System.Drawing.Point(6, 77);
+            this.attSetBillRateButton.Name = "attSetBillRateButton";
+            this.attSetBillRateButton.Size = new System.Drawing.Size(87, 23);
+            this.attSetBillRateButton.TabIndex = 2;
+            this.attSetBillRateButton.Text = "SetBillRate";
+            this.attSetBillRateButton.UseVisualStyleBackColor = true;
+            // 
+            // cstaSetAgentStateButton
+            // 
+            this.cstaSetAgentStateButton.Location = new System.Drawing.Point(6, 48);
+            this.cstaSetAgentStateButton.Name = "cstaSetAgentStateButton";
+            this.cstaSetAgentStateButton.Size = new System.Drawing.Size(87, 23);
+            this.cstaSetAgentStateButton.TabIndex = 1;
+            this.cstaSetAgentStateButton.Text = "SetAgentState";
+            this.cstaSetAgentStateButton.UseVisualStyleBackColor = true;
+            // 
+            // attSetAdviceOfChargeButton
+            // 
+            this.attSetAdviceOfChargeButton.Location = new System.Drawing.Point(6, 19);
+            this.attSetAdviceOfChargeButton.Name = "attSetAdviceOfChargeButton";
+            this.attSetAdviceOfChargeButton.Size = new System.Drawing.Size(87, 23);
+            this.attSetAdviceOfChargeButton.TabIndex = 0;
+            this.attSetAdviceOfChargeButton.Text = "SetAdviceOC";
+            this.attSetAdviceOfChargeButton.UseVisualStyleBackColor = true;
+            this.attSetAdviceOfChargeButton.Click += new System.EventHandler(this.attSetAdviceOfChargeButton_Click);
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.cstaGetAPICapsButton);
             this.groupBox3.Controls.Add(this.cstaGetDeviceListButton);
             this.groupBox3.Controls.Add(this.cstaQueryCallMonitorButton);
-            this.groupBox3.Location = new System.Drawing.Point(228, 136);
+            this.groupBox3.Location = new System.Drawing.Point(209, 136);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(99, 110);
             this.groupBox3.TabIndex = 42;
@@ -338,7 +416,7 @@ namespace TSAPIDemo
             this.groupBox2.Controls.Add(this.acsFlushEventQueueButton);
             this.groupBox2.Controls.Add(this.acsQueryAuthInfoButton);
             this.groupBox2.Controls.Add(this.acsSetHeartbeatIntervalButton);
-            this.groupBox2.Location = new System.Drawing.Point(228, 7);
+            this.groupBox2.Location = new System.Drawing.Point(209, 7);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(99, 119);
             this.groupBox2.TabIndex = 41;
@@ -398,14 +476,14 @@ namespace TSAPIDemo
             this.groupBox1.Controls.Add(this.cstaReconnectCallButton);
             this.groupBox1.Location = new System.Drawing.Point(3, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(219, 315);
+            this.groupBox1.Size = new System.Drawing.Size(203, 315);
             this.groupBox1.TabIndex = 40;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "CallControl";
             // 
             // cstaClearConnectionButton
             // 
-            this.cstaClearConnectionButton.Location = new System.Drawing.Point(21, 107);
+            this.cstaClearConnectionButton.Location = new System.Drawing.Point(11, 107);
             this.cstaClearConnectionButton.Name = "cstaClearConnectionButton";
             this.cstaClearConnectionButton.Size = new System.Drawing.Size(87, 23);
             this.cstaClearConnectionButton.TabIndex = 41;
@@ -415,7 +493,7 @@ namespace TSAPIDemo
             // 
             // cstaClearCallButton
             // 
-            this.cstaClearCallButton.Location = new System.Drawing.Point(21, 77);
+            this.cstaClearCallButton.Location = new System.Drawing.Point(11, 77);
             this.cstaClearCallButton.Name = "cstaClearCallButton";
             this.cstaClearCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaClearCallButton.TabIndex = 40;
@@ -425,7 +503,7 @@ namespace TSAPIDemo
             // 
             // cstaTransferCallButton
             // 
-            this.cstaTransferCallButton.Location = new System.Drawing.Point(114, 252);
+            this.cstaTransferCallButton.Location = new System.Drawing.Point(104, 252);
             this.cstaTransferCallButton.Name = "cstaTransferCallButton";
             this.cstaTransferCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaTransferCallButton.TabIndex = 39;
@@ -435,7 +513,7 @@ namespace TSAPIDemo
             // 
             // cstaAlternateCallButton
             // 
-            this.cstaAlternateCallButton.Location = new System.Drawing.Point(21, 20);
+            this.cstaAlternateCallButton.Location = new System.Drawing.Point(11, 20);
             this.cstaAlternateCallButton.Name = "cstaAlternateCallButton";
             this.cstaAlternateCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaAlternateCallButton.TabIndex = 16;
@@ -445,7 +523,7 @@ namespace TSAPIDemo
             // 
             // attSingleStepTransferCallButton
             // 
-            this.attSingleStepTransferCallButton.Location = new System.Drawing.Point(114, 223);
+            this.attSingleStepTransferCallButton.Location = new System.Drawing.Point(104, 223);
             this.attSingleStepTransferCallButton.Name = "attSingleStepTransferCallButton";
             this.attSingleStepTransferCallButton.Size = new System.Drawing.Size(87, 23);
             this.attSingleStepTransferCallButton.TabIndex = 38;
@@ -455,7 +533,7 @@ namespace TSAPIDemo
             // 
             // cstaAnswerCallButton
             // 
-            this.cstaAnswerCallButton.Location = new System.Drawing.Point(21, 49);
+            this.cstaAnswerCallButton.Location = new System.Drawing.Point(11, 49);
             this.cstaAnswerCallButton.Name = "cstaAnswerCallButton";
             this.cstaAnswerCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaAnswerCallButton.TabIndex = 17;
@@ -465,7 +543,7 @@ namespace TSAPIDemo
             // 
             // attSingleStepConferenceCallButton
             // 
-            this.attSingleStepConferenceCallButton.Location = new System.Drawing.Point(114, 194);
+            this.attSingleStepConferenceCallButton.Location = new System.Drawing.Point(104, 194);
             this.attSingleStepConferenceCallButton.Name = "attSingleStepConferenceCallButton";
             this.attSingleStepConferenceCallButton.Size = new System.Drawing.Size(87, 23);
             this.attSingleStepConferenceCallButton.TabIndex = 37;
@@ -475,7 +553,7 @@ namespace TSAPIDemo
             // 
             // cstaConferenceCallButton
             // 
-            this.cstaConferenceCallButton.Location = new System.Drawing.Point(21, 136);
+            this.cstaConferenceCallButton.Location = new System.Drawing.Point(11, 136);
             this.cstaConferenceCallButton.Name = "cstaConferenceCallButton";
             this.cstaConferenceCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaConferenceCallButton.TabIndex = 18;
@@ -485,7 +563,7 @@ namespace TSAPIDemo
             // 
             // attSelectiveListeningRetrieveButton
             // 
-            this.attSelectiveListeningRetrieveButton.Location = new System.Drawing.Point(114, 165);
+            this.attSelectiveListeningRetrieveButton.Location = new System.Drawing.Point(104, 165);
             this.attSelectiveListeningRetrieveButton.Name = "attSelectiveListeningRetrieveButton";
             this.attSelectiveListeningRetrieveButton.Size = new System.Drawing.Size(87, 23);
             this.attSelectiveListeningRetrieveButton.TabIndex = 36;
@@ -495,7 +573,7 @@ namespace TSAPIDemo
             // 
             // cstaConsultantCallButton
             // 
-            this.cstaConsultantCallButton.Location = new System.Drawing.Point(21, 165);
+            this.cstaConsultantCallButton.Location = new System.Drawing.Point(11, 165);
             this.cstaConsultantCallButton.Name = "cstaConsultantCallButton";
             this.cstaConsultantCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaConsultantCallButton.TabIndex = 19;
@@ -505,7 +583,7 @@ namespace TSAPIDemo
             // 
             // attSelectiveListeningHoldButton
             // 
-            this.attSelectiveListeningHoldButton.Location = new System.Drawing.Point(114, 136);
+            this.attSelectiveListeningHoldButton.Location = new System.Drawing.Point(104, 136);
             this.attSelectiveListeningHoldButton.Name = "attSelectiveListeningHoldButton";
             this.attSelectiveListeningHoldButton.Size = new System.Drawing.Size(87, 23);
             this.attSelectiveListeningHoldButton.TabIndex = 35;
@@ -515,7 +593,7 @@ namespace TSAPIDemo
             // 
             // deflectCallButton
             // 
-            this.deflectCallButton.Location = new System.Drawing.Point(21, 194);
+            this.deflectCallButton.Location = new System.Drawing.Point(11, 194);
             this.deflectCallButton.Name = "deflectCallButton";
             this.deflectCallButton.Size = new System.Drawing.Size(87, 23);
             this.deflectCallButton.TabIndex = 20;
@@ -525,7 +603,7 @@ namespace TSAPIDemo
             // 
             // SendDTMFToneButton
             // 
-            this.SendDTMFToneButton.Location = new System.Drawing.Point(114, 107);
+            this.SendDTMFToneButton.Location = new System.Drawing.Point(104, 107);
             this.SendDTMFToneButton.Name = "SendDTMFToneButton";
             this.SendDTMFToneButton.Size = new System.Drawing.Size(87, 23);
             this.SendDTMFToneButton.TabIndex = 34;
@@ -535,7 +613,7 @@ namespace TSAPIDemo
             // 
             // cstaHoldButton
             // 
-            this.cstaHoldButton.Location = new System.Drawing.Point(21, 223);
+            this.cstaHoldButton.Location = new System.Drawing.Point(11, 223);
             this.cstaHoldButton.Name = "cstaHoldButton";
             this.cstaHoldButton.Size = new System.Drawing.Size(87, 23);
             this.cstaHoldButton.TabIndex = 21;
@@ -545,7 +623,7 @@ namespace TSAPIDemo
             // 
             // cstaRetrieveCallButton
             // 
-            this.cstaRetrieveCallButton.Location = new System.Drawing.Point(114, 78);
+            this.cstaRetrieveCallButton.Location = new System.Drawing.Point(104, 78);
             this.cstaRetrieveCallButton.Name = "cstaRetrieveCallButton";
             this.cstaRetrieveCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaRetrieveCallButton.TabIndex = 33;
@@ -555,7 +633,7 @@ namespace TSAPIDemo
             // 
             // cstaMakeCallButton
             // 
-            this.cstaMakeCallButton.Location = new System.Drawing.Point(21, 252);
+            this.cstaMakeCallButton.Location = new System.Drawing.Point(11, 252);
             this.cstaMakeCallButton.Name = "cstaMakeCallButton";
             this.cstaMakeCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaMakeCallButton.TabIndex = 22;
@@ -565,7 +643,7 @@ namespace TSAPIDemo
             // 
             // cstaMakePredictiveCallButton
             // 
-            this.cstaMakePredictiveCallButton.Location = new System.Drawing.Point(21, 281);
+            this.cstaMakePredictiveCallButton.Location = new System.Drawing.Point(11, 281);
             this.cstaMakePredictiveCallButton.Name = "cstaMakePredictiveCallButton";
             this.cstaMakePredictiveCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaMakePredictiveCallButton.TabIndex = 23;
@@ -575,7 +653,7 @@ namespace TSAPIDemo
             // 
             // cstaPickupCallButton
             // 
-            this.cstaPickupCallButton.Location = new System.Drawing.Point(114, 20);
+            this.cstaPickupCallButton.Location = new System.Drawing.Point(104, 20);
             this.cstaPickupCallButton.Name = "cstaPickupCallButton";
             this.cstaPickupCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaPickupCallButton.TabIndex = 24;
@@ -585,7 +663,7 @@ namespace TSAPIDemo
             // 
             // cstaReconnectCallButton
             // 
-            this.cstaReconnectCallButton.Location = new System.Drawing.Point(114, 49);
+            this.cstaReconnectCallButton.Location = new System.Drawing.Point(104, 49);
             this.cstaReconnectCallButton.Name = "cstaReconnectCallButton";
             this.cstaReconnectCallButton.Size = new System.Drawing.Size(87, 23);
             this.cstaReconnectCallButton.TabIndex = 25;
@@ -668,7 +746,6 @@ namespace TSAPIDemo
             // mainTabs
             // 
             this.mainTabs.Controls.Add(this.TestsTab);
-            this.mainTabs.Controls.Add(this.setFeatureTab);
             this.mainTabs.Controls.Add(this.configTab);
             this.mainTabs.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.mainTabs.Location = new System.Drawing.Point(0, 40);
@@ -677,16 +754,6 @@ namespace TSAPIDemo
             this.mainTabs.Size = new System.Drawing.Size(1127, 494);
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
-            // 
-            // setFeatureTab
-            // 
-            this.setFeatureTab.Location = new System.Drawing.Point(4, 22);
-            this.setFeatureTab.Name = "setFeatureTab";
-            this.setFeatureTab.Padding = new System.Windows.Forms.Padding(3);
-            this.setFeatureTab.Size = new System.Drawing.Size(1119, 468);
-            this.setFeatureTab.TabIndex = 2;
-            this.setFeatureTab.Text = "Set Feature";
-            this.setFeatureTab.UseVisualStyleBackColor = true;
             // 
             // mainForm
             // 
@@ -706,6 +773,7 @@ namespace TSAPIDemo
             this.configTab.PerformLayout();
             this.TestsTab.ResumeLayout(false);
             this.TestsTab.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
@@ -768,10 +836,16 @@ namespace TSAPIDemo
         private System.Windows.Forms.CheckBox esrCheckBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button cstaClearCallButton;
-        private System.Windows.Forms.TabPage setFeatureTab;
         private System.Windows.Forms.Button cstaClearConnectionButton;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button cstaSetMsgWaitingIndButton;
+        private System.Windows.Forms.Button cstaSetForwardingButton;
+        private System.Windows.Forms.Button cstaSetDoNotDisturbButton;
+        private System.Windows.Forms.Button attSetBillRateButton;
+        private System.Windows.Forms.Button cstaSetAgentStateButton;
+        private System.Windows.Forms.Button attSetAdviceOfChargeButton;
 
 
 
