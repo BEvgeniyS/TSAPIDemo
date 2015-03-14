@@ -24,9 +24,9 @@ namespace TSAPIDemo
 
         private void Go_Button_Click(object sender, EventArgs e)
         {
-            if (!Int32.TryParse(this.reasonCodeTextBox.Text, out this.reasonCode) &&
-                reasonCode >= 0 &&
-                reasonCode <= 99)
+            if (!Int32.TryParse(this.reasonCodeTextBox.Text, out this.reasonCode) ||
+                reasonCode < 0 ||
+                reasonCode > 99)
             {
                 MessageBox.Show("Wrong reason code. Valid reason codes: 0-99");
                 return;

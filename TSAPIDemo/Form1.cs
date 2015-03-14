@@ -1839,7 +1839,7 @@ namespace TSAPIDemo
                 retCode = Att.attPrivateData(this.privData, attEvt);
                 Debug.WriteLine("attPrivateData retCode = " + retCode._value);
                 if (attEvt.eventType.eventType == Att.ATT_SET_AGENT_STATE_CONF)
-                    MessageBox.Show("cstaSetAgentState Succeded. Pending? " + attEvt.setAgentState.isPending);
+                    MessageBox.Show(string.Format("cstaSetAgentState {0} succeded. Pending? {1}", agentMode, attEvt.setAgentState.isPending));
                 else
                     MessageBox.Show("Got wrong ATT Event... " + attEvt.eventType.eventType);
             }
