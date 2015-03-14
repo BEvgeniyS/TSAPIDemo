@@ -349,6 +349,7 @@ namespace TSAPIDemo
             this.attSetBillRateButton.TabIndex = 2;
             this.attSetBillRateButton.Text = "SetBillRate";
             this.attSetBillRateButton.UseVisualStyleBackColor = true;
+            this.attSetBillRateButton.Click += new System.EventHandler(this.attSetBillRateButton_Click);
             // 
             // cstaSetAgentStateButton
             // 

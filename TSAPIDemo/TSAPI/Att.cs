@@ -1140,7 +1140,15 @@ namespace Tsapi
                             Acs.PrivateData_t privateData,
                             bool flag);
 
-        
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern Acs.RetCode_t attSetBillRate(
+                            [In, Out]
+                            Acs.PrivateData_t privateData,
+                            Csta.ConnectionID_t call,
+                            Att.ATTBillType_t billType,
+                            float billrate);
+
+
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern Acs.RetCode_t attMakeVersionString(

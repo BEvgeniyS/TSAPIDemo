@@ -109,6 +109,12 @@
     <Compile Include="Subforms\attSelectiveListeningHoldPopupForm.Designer.cs">
       <DependentUpon>attSelectiveListeningHoldPopupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Subforms\attSetBillRatePopupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Subforms\attSetBillRatePopupForm.Designer.cs">
+      <DependentUpon>attSetBillRatePopupForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Subforms\cstaConsultationCallPopupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Subforms\attSelectiveListeningHoldPopupForm.resx">
       <DependentUpon>attSelectiveListeningHoldPopupForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Subforms\attSetBillRatePopupForm.resx">
+      <DependentUpon>attSetBillRatePopupForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Subforms\cstaConsultationCallPopupForm.resx">
       <DependentUpon>cstaConsultationCallPopupForm.cs</DependentUpon>
