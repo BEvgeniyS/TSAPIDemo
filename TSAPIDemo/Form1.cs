@@ -1894,6 +1894,26 @@ namespace TSAPIDemo
                 MessageBox.Show("attSetBillRate Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
             }
         }
+
+        private void cstaSetDoNotDisturbButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Csta.cstaSetDoNotDisturb(this.acsHandle, new Acs.InvokeID_t(), currentDevice, true, this.privData);
+
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            Acs.RetCode_t retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            this.Log("acsGetEventBlock result = " + retCode._value);
+            if (retCode._value < 0) return;
+
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_SET_DND_CONF)
+                MessageBox.Show("cstaSetDoNotDisturb succeded");
+            else
+                MessageBox.Show("cstaSetDoNotDisturb Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+        }
     }
 
 

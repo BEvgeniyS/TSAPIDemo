@@ -340,6 +340,7 @@ namespace TSAPIDemo
             this.cstaSetDoNotDisturbButton.TabIndex = 3;
             this.cstaSetDoNotDisturbButton.Text = "SetDND";
             this.cstaSetDoNotDisturbButton.UseVisualStyleBackColor = true;
+            this.cstaSetDoNotDisturbButton.Click += new System.EventHandler(this.cstaSetDoNotDisturbButton_Click);
             // 
             // attSetBillRateButton
             // 
