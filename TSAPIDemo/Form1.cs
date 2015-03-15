@@ -1899,13 +1899,12 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
-            Csta.cstaSetDoNotDisturb(this.acsHandle, new Acs.InvokeID_t(), currentDevice, true, this.privData);
-
+            Acs.RetCode_t retCode = Csta.cstaSetDoNotDisturb(this.acsHandle, new Acs.InvokeID_t(), currentDevice, true, this.privData);
             ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
             this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
             var eventBuf = new Csta.EventBuffer_t();
             ushort numEvents;
-            Acs.RetCode_t retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
             this.Log("acsGetEventBlock result = " + retCode._value);
             if (retCode._value < 0) return;
 
@@ -1913,6 +1912,61 @@ namespace TSAPIDemo
                 MessageBox.Show("cstaSetDoNotDisturb succeded");
             else
                 MessageBox.Show("cstaSetDoNotDisturb Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+        }
+
+        private void cstaSetForwardingButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+
+            var popup = new cstaSetForwardingPopupForm();
+            var dialogResult = popup.ShowDialog();
+            if (dialogResult != DialogResult.OK) return;
+            Csta.DeviceID_t destDevice = popup.deviceId;
+            bool enableForwarding = !popup.disableForwarding;
+
+            Acs.RetCode_t retCode = Csta.cstaSetForwarding(this.acsHandle, new Acs.InvokeID_t(), currentDevice, Csta.ForwardingType_t.FWD_IMMEDIATE, enableForwarding, destDevice, this.privData);
+            if (retCode._value < 0) return;
+
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            this.Log("acsGetEventBlock result = " + retCode._value);
+            if (retCode._value < 0) return;
+
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_SET_FWD_CONF)
+                MessageBox.Show("cstaSetForwarding succeded");
+            else
+                MessageBox.Show("cstaSetForwarding Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+        }
+
+        private void cstaSetMsgWaitingIndButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+
+            var popup = new cstaSetMsgWaitingIndPopupForm();
+            var dialogResult = popup.ShowDialog();
+            if (dialogResult != DialogResult.OK) return;
+            bool mwiEnabled = popup.mwiEnabled;
+            Acs.RetCode_t retCode = Csta.cstaSetMsgWaitingInd(this.acsHandle, new Acs.InvokeID_t(), currentDevice, mwiEnabled, this.privData);
+            if (retCode._value < 0) return;
+
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            this.Log("acsGetEventBlock result = " + retCode._value);
+            if (retCode._value < 0) return;
+
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_SET_MWI_CONF)
+                MessageBox.Show("cstaSetMsgWaitingInd succeded");
+            else
+                MessageBox.Show("cstaSetMsgWaitingInd Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+
         }
     }
 

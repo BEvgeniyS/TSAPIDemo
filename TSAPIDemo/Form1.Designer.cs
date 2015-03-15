@@ -322,6 +322,7 @@ namespace TSAPIDemo
             this.cstaSetMsgWaitingIndButton.TabIndex = 5;
             this.cstaSetMsgWaitingIndButton.Text = "SetMsgWtInd";
             this.cstaSetMsgWaitingIndButton.UseVisualStyleBackColor = true;
+            this.cstaSetMsgWaitingIndButton.Click += new System.EventHandler(this.cstaSetMsgWaitingIndButton_Click);
             // 
             // cstaSetForwardingButton
             // 
@@ -331,6 +332,7 @@ namespace TSAPIDemo
             this.cstaSetForwardingButton.TabIndex = 4;
             this.cstaSetForwardingButton.Text = "SetForwarding";
             this.cstaSetForwardingButton.UseVisualStyleBackColor = true;
+            this.cstaSetForwardingButton.Click += new System.EventHandler(this.cstaSetForwardingButton_Click);
             // 
             // cstaSetDoNotDisturbButton
             // 
