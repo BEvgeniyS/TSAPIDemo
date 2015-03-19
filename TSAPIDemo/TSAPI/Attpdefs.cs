@@ -441,11 +441,12 @@ namespace Tsapi
             Csta.DeviceID_t device;
         };
 
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ATTQueryAcdSplitConfEvent_t
         {
-            short availableAgents;
-            short callsInQueue;
-            short agentsLoggedIn;
+            internal short availableAgents;
+            internal short callsInQueue;
+            internal short agentsLoggedIn;
         };
 
         public struct ATTQueryAgentLogin_t
@@ -453,25 +454,28 @@ namespace Tsapi
             Csta.DeviceID_t device;
         };
 
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ATTPrivEventCrossRefID_t
         {
-            int _value;
+            internal int _value;
         };
 
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ATTQueryAgentLoginConfEvent_t
         {
-            ATTPrivEventCrossRefID_t privEventCrossRefID;
+            internal ATTPrivEventCrossRefID_t privEventCrossRefID;
         };
 
+        [StructLayout(LayoutKind.Sequential, Pack = 2, CharSet = CharSet.Ansi)]
         public struct ATTQueryAgentLoginResp_t
         {
-            ATTPrivEventCrossRefID_t privEventCrossRefID;
-            private struct list
-            {
-                short count;
-                [MarshalAs(UnmanagedType.ByValArray, SizeConst = 10)]
-                Csta.DeviceID_t[] device;
-            }
+            internal ATTPrivEventCrossRefID_t privEventCrossRefID;
+            //private struct list
+            //{
+            internal short count;
+            [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.Struct, SizeConst = 10)]
+            internal Csta.DeviceID_t[] device;
+            //}
         };
 
         public struct ATTQueryAgentState_t

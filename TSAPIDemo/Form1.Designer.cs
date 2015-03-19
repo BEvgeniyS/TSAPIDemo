@@ -68,6 +68,9 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.attQueryAgentLoginButton = new System.Windows.Forms.Button();
+            this.querySplitButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.cstaSetMsgWaitingIndButton = new System.Windows.Forms.Button();
             this.cstaSetForwardingButton = new System.Windows.Forms.Button();
@@ -113,6 +116,7 @@ namespace TSAPIDemo
             this.mainTabs = new System.Windows.Forms.TabControl();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
+            this.queryServiceGroup.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -283,6 +287,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.queryServiceGroup);
             this.TestsTab.Controls.Add(this.groupBox4);
             this.TestsTab.Controls.Add(this.groupBox3);
             this.TestsTab.Controls.Add(this.groupBox2);
@@ -299,6 +304,37 @@ namespace TSAPIDemo
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
             // 
+            // queryServiceGroup
+            // 
+            this.queryServiceGroup.Controls.Add(this.attQueryAgentLoginButton);
+            this.queryServiceGroup.Controls.Add(this.querySplitButton);
+            this.queryServiceGroup.Location = new System.Drawing.Point(315, 7);
+            this.queryServiceGroup.Name = "queryServiceGroup";
+            this.queryServiceGroup.Size = new System.Drawing.Size(98, 451);
+            this.queryServiceGroup.TabIndex = 44;
+            this.queryServiceGroup.TabStop = false;
+            this.queryServiceGroup.Text = "Query Service";
+            // 
+            // attQueryAgentLoginButton
+            // 
+            this.attQueryAgentLoginButton.Location = new System.Drawing.Point(6, 48);
+            this.attQueryAgentLoginButton.Name = "attQueryAgentLoginButton";
+            this.attQueryAgentLoginButton.Size = new System.Drawing.Size(85, 23);
+            this.attQueryAgentLoginButton.TabIndex = 1;
+            this.attQueryAgentLoginButton.Text = "Query A.Login";
+            this.attQueryAgentLoginButton.UseVisualStyleBackColor = true;
+            this.attQueryAgentLoginButton.Click += new System.EventHandler(this.attQueryAgentLoginButton_Click);
+            // 
+            // querySplitButton
+            // 
+            this.querySplitButton.Location = new System.Drawing.Point(7, 19);
+            this.querySplitButton.Name = "querySplitButton";
+            this.querySplitButton.Size = new System.Drawing.Size(85, 23);
+            this.querySplitButton.TabIndex = 0;
+            this.querySplitButton.Text = "Query split";
+            this.querySplitButton.UseVisualStyleBackColor = true;
+            this.querySplitButton.Click += new System.EventHandler(this.querySplitButton_Click);
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.cstaSetMsgWaitingIndButton);
@@ -307,7 +343,7 @@ namespace TSAPIDemo
             this.groupBox4.Controls.Add(this.attSetBillRateButton);
             this.groupBox4.Controls.Add(this.cstaSetAgentStateButton);
             this.groupBox4.Controls.Add(this.attSetAdviceOfChargeButton);
-            this.groupBox4.Location = new System.Drawing.Point(314, 7);
+            this.groupBox4.Location = new System.Drawing.Point(209, 258);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(99, 200);
             this.groupBox4.TabIndex = 43;
@@ -778,6 +814,7 @@ namespace TSAPIDemo
             this.configTab.PerformLayout();
             this.TestsTab.ResumeLayout(false);
             this.TestsTab.PerformLayout();
+            this.queryServiceGroup.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -851,8 +888,9 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button attSetBillRateButton;
         private System.Windows.Forms.Button cstaSetAgentStateButton;
         private System.Windows.Forms.Button attSetAdviceOfChargeButton;
-
-
+        private System.Windows.Forms.GroupBox queryServiceGroup;
+        private System.Windows.Forms.Button querySplitButton;
+        private System.Windows.Forms.Button attQueryAgentLoginButton;
 
     }
 }

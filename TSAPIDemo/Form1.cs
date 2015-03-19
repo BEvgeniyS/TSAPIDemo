@@ -78,7 +78,7 @@ namespace TSAPIDemo
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
                                                  invokeId,
-                                                 currentDevice,
+                                                 ref currentDevice,
                                                  privData);
             if (retCode._value < 0)
             {
@@ -745,15 +745,13 @@ namespace TSAPIDemo
 
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
 
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-
-            if (callCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
             }
-            if (callCount < 2)
+            if (conns == null || conns.Length < 2)
             {
                 MessageBox.Show("We need more than 2 calls on device");
                 return;
@@ -782,9 +780,8 @@ namespace TSAPIDemo
             }
         }
 
-        private Csta.ConnectionID_t[] GetCurrentConnections(out int callCount)
+        private Csta.ConnectionID_t[] GetCurrentConnections(Csta.DeviceID_t device)
         {
-            callCount = 0;
             if (!this.configured)
             {
                 MessageBox.Show("Application is not configured");
@@ -792,11 +789,11 @@ namespace TSAPIDemo
                 return null;
             }
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return null; }
-            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Csta.DeviceID_t currentDevice = device;
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
                                                  invokeId,
-                                                 currentDevice,
+                                                 ref currentDevice,
                                                  privData);
             if (retCode._value < 0)
             {
@@ -826,7 +823,7 @@ namespace TSAPIDemo
                 }
                 return null;
             }
-            callCount = evtBuf.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
+            int callCount = evtBuf.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
             Csta.ConnectionID_t[] conns = new Csta.ConnectionID_t[callCount];
             for (int i = 0; i < callCount; i++)
             {
@@ -839,9 +836,8 @@ namespace TSAPIDemo
         private void cstaAnswerCallButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -872,9 +868,9 @@ namespace TSAPIDemo
         private void cstaConferenceCallButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 2)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length < 2)
             {
                 MessageBox.Show("Need 2 calls on the device to connect them in conference");
                 return;
@@ -918,9 +914,9 @@ namespace TSAPIDemo
                 {
                     Csta.DeviceID_t dev = subform.ReturnDeviceId;
                     Acs.InvokeID_t invoikeId = new Acs.InvokeID_t();
-                    int callCount;
-                    Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-                    if (callCount < 1 || conns.Length < 1)
+                    Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+                    if (conns == null || conns.Length == 0)
                     {
                         MessageBox.Show("No active calls");
                         return;
@@ -935,11 +931,12 @@ namespace TSAPIDemo
                     u2uInfo.type = Att.ATTUUIProtocolType_t.UUI_IA5_ASCII;
                     u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
                     Array.Resize(ref u2uInfo.value, u2uSize);
+                    var dummyDev = new Csta.DeviceID_t();
 
-                    Att.attV6ConsultationCall(this.privData, null, false, ref u2uInfo);
+                    Att.attV6ConsultationCall(this.privData, ref dummyDev, false, ref u2uInfo);
 
 
-                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], dev, this.privData);
+                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], ref dev, this.privData);
                     if (retCode._value > 0)
                     {
                         Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
@@ -970,9 +967,9 @@ namespace TSAPIDemo
                 {
                     Csta.DeviceID_t dev = subform.ReturnDeviceId;
                     Acs.InvokeID_t invoikeId = new Acs.InvokeID_t();
-                    int callCount;
-                    Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-                    if (callCount < 1 || conns.Length < 1)
+                    Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+                    if (conns == null || conns.Length == 0)
                     {
                         MessageBox.Show("No active calls");
                         return;
@@ -989,10 +986,10 @@ namespace TSAPIDemo
                     Array.Resize(ref u2uInfo.value, u2uSize);
                     Csta.DeviceID_t split = subform.ReturnDeviceId;
 
-                    Att.attV6DirectAgentCall(this.privData, split, false, ref u2uInfo);
+                    Att.attV6DirectAgentCall(this.privData, ref split, false, ref u2uInfo);
 
 
-                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], dev, this.privData);
+                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], ref dev, this.privData);
                     if (retCode._value > 0)
                     {
                         Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
@@ -1024,9 +1021,9 @@ namespace TSAPIDemo
                 {
                     Csta.DeviceID_t dev = subform.ReturnDeviceId;
                     Acs.InvokeID_t invoikeId = new Acs.InvokeID_t();
-                    int callCount;
-                    Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-                    if (callCount < 1 || conns.Length < 1)
+                    Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+        
+                    if (conns == null || conns.Length == 0)
                     {
                         MessageBox.Show("No active calls");
                         return;
@@ -1043,10 +1040,10 @@ namespace TSAPIDemo
                     Array.Resize(ref u2uInfo.value, u2uSize);
                     Csta.DeviceID_t split = subform.ReturnDeviceId;
 
-                    Att.attV6SupervisorAssistCall(this.privData, split, ref u2uInfo);
+                    Att.attV6SupervisorAssistCall(this.privData, ref split, ref u2uInfo);
 
 
-                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], dev, this.privData);
+                    Acs.RetCode_t retCode = Csta.cstaConsultationCall(this.acsHandle, invoikeId, conns[0], ref dev, this.privData);
                     if (retCode._value > 0)
                     {
                         Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
@@ -1080,9 +1077,9 @@ namespace TSAPIDemo
         private void deflectCallButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1099,7 +1096,7 @@ namespace TSAPIDemo
             }
             Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
 
-            Acs.RetCode_t retCode = Csta.cstaDeflectCall(this.acsHandle, invokeId, conns[0], calledDevice, null);
+            Acs.RetCode_t retCode = Csta.cstaDeflectCall(this.acsHandle, invokeId, conns[0], ref calledDevice, null);
             Debug.WriteLine("cstaDeflectCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1123,9 +1120,10 @@ namespace TSAPIDemo
         private void cstaHoldButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 1)
+
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1186,13 +1184,13 @@ namespace TSAPIDemo
                 destRouteOrSplit = deviceSelectDialog.destRouteOrSplitTextBox.Text;
 
             if (deviceSelectDialog.normalCallRadio.Checked)
-                Att.attV6MakeCall(this.privData, destRouteOrSplit, false, ref u2uInfo);
+                Att.attV6MakeCall(this.privData, ref destRouteOrSplit, false, ref u2uInfo);
             else if (deviceSelectDialog.directAgentCallRadio.Checked)
-                Att.attV6DirectAgentCall(this.privData, destRouteOrSplit, false, ref u2uInfo);
+                Att.attV6DirectAgentCall(this.privData, ref destRouteOrSplit, false, ref u2uInfo);
             else if (deviceSelectDialog.supervisorAssistCallRadio.Checked)
-                Att.attV6SupervisorAssistCall(this.privData, destRouteOrSplit, ref u2uInfo);
+                Att.attV6SupervisorAssistCall(this.privData, ref destRouteOrSplit, ref u2uInfo);
 
-            Acs.RetCode_t retCode = Csta.cstaMakeCall(this.acsHandle, invokeId, callingDevice, calledDevice, this.privData);
+            Acs.RetCode_t retCode = Csta.cstaMakeCall(this.acsHandle, invokeId, ref callingDevice, ref calledDevice, this.privData);
             Debug.WriteLine("cstaMakeCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1239,11 +1237,12 @@ namespace TSAPIDemo
             u2uInfo.value = Encoding.ASCII.GetBytes(u2uString);
             Array.Resize(ref u2uInfo.value, u2uSize);
             Att.ATTAnswerTreat_t at = Att.ATTAnswerTreat_t.AT_NONE;
+            var dummyDev = new Csta.DeviceID_t();
 
-            Att.attV6MakePredictiveCall(this.privData, false, 2, at, null, ref u2uInfo);
+            Att.attV6MakePredictiveCall(this.privData, false, 2, at, ref dummyDev, ref u2uInfo);
 
             Csta.AllocationState_t allocState = Csta.AllocationState_t.AS_CALL_ESTABLISHED;
-            Acs.RetCode_t retCode = Csta.cstaMakePredictiveCall(this.acsHandle, invokeId, callingDevice, calledDevice, allocState, this.privData);
+            Acs.RetCode_t retCode = Csta.cstaMakePredictiveCall(this.acsHandle, invokeId, ref callingDevice, ref calledDevice, allocState, this.privData);
             Debug.WriteLine("cstaMakePredictiveCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1276,16 +1275,6 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
 
-
-
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 1)
-            {
-                MessageBox.Show("No active calls");
-                return;
-            }
-
             var invokeId = new Acs.InvokeID_t();
             var deviceSelectDialog = new DeviceSelectPopupForm();
             deviceSelectDialog.ShowDialog();
@@ -1295,10 +1284,15 @@ namespace TSAPIDemo
                 //MessageBox.Show("No device selected");
                 return;
             }
-            Csta.DeviceID_t calledDevice = deviceSelectDialog.deviceIdTextBox.Text;
+            Csta.DeviceID_t calledDevice = this.deviceTextBox.Text;
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(deviceSelectDialog.deviceIdTextBox.Text);
+            if (conns == null || conns.Length == 0)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
 
-
-            Acs.RetCode_t retCode = Csta.cstaPickupCall(this.acsHandle, invokeId, conns[0], calledDevice, null);
+            Acs.RetCode_t retCode = Csta.cstaPickupCall(this.acsHandle, invokeId, conns[0], ref calledDevice, null);
             Debug.WriteLine("cstaPickupCall result = " + retCode._value);
 
             var evtBuf = new Csta.EventBuffer_t();
@@ -1322,9 +1316,9 @@ namespace TSAPIDemo
         private void cstaReconnectCallButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 2)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length < 2)
             {
                 MessageBox.Show("Need 2 calls to reconnect them");
                 return;
@@ -1391,9 +1385,9 @@ namespace TSAPIDemo
         private void cstaRetrieveCallButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1424,9 +1418,9 @@ namespace TSAPIDemo
         private void SendDTMFToneButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-            int callCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callCount);
-            if (callCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1470,7 +1464,7 @@ namespace TSAPIDemo
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
                                                  invokeId,
-                                                 currentDevice,
+                                                 ref currentDevice,
                                                  this.privData);
             if (retCode._value < 0)
             {
@@ -1530,7 +1524,7 @@ namespace TSAPIDemo
             Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
             Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
                                                  invokeId,
-                                                 currentDevice,
+                                                 ref currentDevice,
                                                  this.privData);
             if (retCode._value < 0)
             {
@@ -1586,9 +1580,9 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
-            int callsCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
-            if (callsCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1601,7 +1595,7 @@ namespace TSAPIDemo
             var activeCall = conns[0];
 
 
-            Acs.RetCode_t retCode = Att.attSingleStepConferenceCall(this.privData, activeCall, deviceToBeJoin, Att.ATTParticipationType_t.PT_ACTIVE, false);
+            Acs.RetCode_t retCode = Att.attSingleStepConferenceCall(this.privData, activeCall, ref deviceToBeJoin, Att.ATTParticipationType_t.PT_ACTIVE, false);
             Log("attSingleStepConferenceCall result = " + retCode._value);
 
 
@@ -1643,9 +1637,9 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
-            int callsCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
-            if (callsCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1658,7 +1652,7 @@ namespace TSAPIDemo
             Csta.DeviceID_t transferredTo = devicePopup.deviceIdTextBox.Text;
             var activeCall = conns[0];
 
-            Acs.RetCode_t retCode = Att.attSingleStepTransferCall(this.privData, activeCall, transferredTo);
+            Acs.RetCode_t retCode = Att.attSingleStepTransferCall(this.privData, activeCall, ref transferredTo);
             Log("attSingleStepTransferCall result = " + retCode._value);
 
             if (retCode._value < 0) return;
@@ -1699,9 +1693,9 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
-            int callsCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
-            if (callsCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1737,9 +1731,9 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
-            int callsCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
-            if (callsCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1756,9 +1750,9 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
-            int callsCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
-            if (callsCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1821,7 +1815,7 @@ namespace TSAPIDemo
             Acs.RetCode_t retCode = Att.attV6SetAgentState(this.privData, workMode, reasonCode, enablePending);
             Log("attV6SetAgentState result = " + retCode._value);
 
-            retCode = Csta.cstaSetAgentState(this.acsHandle, new Acs.InvokeID_t(), currentDevice, agentMode, agentId, agentGroup, agentPass, this.privData);
+            retCode = Csta.cstaSetAgentState(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, agentMode, agentId, agentGroup, agentPass, this.privData);
             this.Log("cstaSetAgentState result = " + retCode._value);
             if (retCode._value < 0) return;
 
@@ -1854,9 +1848,9 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
-            int callsCount;
-            Csta.ConnectionID_t[] conns = GetCurrentConnections(out callsCount);
-            if (callsCount < 1)
+            Csta.ConnectionID_t[] conns = GetCurrentConnections(this.deviceTextBox.Text);
+
+            if (conns == null || conns.Length == 0)
             {
                 MessageBox.Show("No active calls");
                 return;
@@ -1899,7 +1893,7 @@ namespace TSAPIDemo
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
             Csta.DeviceID_t currentDevice = deviceTextBox.Text;
-            Acs.RetCode_t retCode = Csta.cstaSetDoNotDisturb(this.acsHandle, new Acs.InvokeID_t(), currentDevice, true, this.privData);
+            Acs.RetCode_t retCode = Csta.cstaSetDoNotDisturb(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, true, this.privData);
             ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
             this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
             var eventBuf = new Csta.EventBuffer_t();
@@ -1925,7 +1919,7 @@ namespace TSAPIDemo
             Csta.DeviceID_t destDevice = popup.deviceId;
             bool enableForwarding = !popup.disableForwarding;
 
-            Acs.RetCode_t retCode = Csta.cstaSetForwarding(this.acsHandle, new Acs.InvokeID_t(), currentDevice, Csta.ForwardingType_t.FWD_IMMEDIATE, enableForwarding, destDevice, this.privData);
+            Acs.RetCode_t retCode = Csta.cstaSetForwarding(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, Csta.ForwardingType_t.FWD_IMMEDIATE, enableForwarding, ref destDevice, this.privData);
             if (retCode._value < 0) return;
 
             ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
@@ -1951,7 +1945,7 @@ namespace TSAPIDemo
             var dialogResult = popup.ShowDialog();
             if (dialogResult != DialogResult.OK) return;
             bool mwiEnabled = popup.mwiEnabled;
-            Acs.RetCode_t retCode = Csta.cstaSetMsgWaitingInd(this.acsHandle, new Acs.InvokeID_t(), currentDevice, mwiEnabled, this.privData);
+            Acs.RetCode_t retCode = Csta.cstaSetMsgWaitingInd(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, mwiEnabled, this.privData);
             if (retCode._value < 0) return;
 
             ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
@@ -1967,6 +1961,81 @@ namespace TSAPIDemo
             else
                 MessageBox.Show("cstaSetMsgWaitingInd Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
 
+        }
+
+        private void querySplitButton_Click(object sender, EventArgs e)
+        {
+            Csta.DeviceID_t currentDevice = this.deviceTextBox.Text;
+            Acs.RetCode_t retCode = Att.attQueryAcdSplit(this.privData, ref currentDevice);
+            var escapeData = new Att.CstaEscapeData();
+            escapeData.GetAttEvents(this.acsHandle, this.privData);
+            if (escapeData.cstaReturnCode._value < 0)
+            {
+                MessageBox.Show("Could not get CSTA event. Error code = " + escapeData.cstaReturnCode._value);
+                return;
+            }
+            if (escapeData.attReturnCode._value < 0)
+            {
+                MessageBox.Show("Could not get ATT event. Error code = " + escapeData.attReturnCode._value);
+                return;
+            }
+            if (escapeData.attEvts == null)
+            {
+                MessageBox.Show("ATT method failed. Error was: " + escapeData.cstaError.error);
+                return;
+            }
+           if (escapeData.attEvts[0].eventType.eventType == Att.ATT_QUERY_ACD_SPLIT_CONF)
+           {
+               Log("ATTQueryAcdSplit data:");
+               Log("availableAgents " + escapeData.attEvts[0].queryAcdSplit.availableAgents);
+               Log("callsInQueue  " + escapeData.attEvts[0].queryAcdSplit.callsInQueue);
+               Log("agentsLoggedIn  " + escapeData.attEvts[0].queryAcdSplit.agentsLoggedIn);
+               MessageBox.Show("ATTQueryAcdSplit succeded. Look in the log for details.");
+           }
+        }
+
+        private void attQueryAgentLoginButton_Click(object sender, EventArgs e)
+        {
+            Csta.DeviceID_t currentDevice = this.deviceTextBox.Text;
+            Acs.RetCode_t retCode = Att.attQueryAgentLogin(this.privData, ref currentDevice);
+            var escapeData = new Att.CstaEscapeData();
+            escapeData.GetAttEvents(this.acsHandle, this.privData);
+            if (escapeData.cstaReturnCode._value < 0)
+            {
+                MessageBox.Show("Could not get CSTA event. Error code = " + escapeData.cstaReturnCode._value);
+                return;
+            }
+            if (escapeData.attReturnCode._value < 0)
+            {
+                MessageBox.Show("Could not get ATT event. Error code = " + escapeData.attReturnCode._value);
+                return;
+            }
+            if (escapeData.attEvts == null)
+            {
+                MessageBox.Show("ATT method failed. Error was: " + escapeData.cstaError.error);
+                return;
+            }
+            if (escapeData.attEvts[0].eventType.eventType == Att.ATT_QUERY_AGENT_LOGIN_CONF)
+            {
+                Att.ATTPrivEventCrossRefID_t privEventCrossRefID = escapeData.attEvts[0].queryAgentLogin.privEventCrossRefID;
+                Log("attQueryAgentLogin data:");
+                Log("List of logged in agents:");
+                Log("__________________________________________________________");
+                foreach (Att.ATTEvent_t attEvt in escapeData.attEvts)
+                {
+                    if (attEvt.eventType.eventType == Att.ATT_QUERY_AGENT_LOGIN_RESP &&
+                        attEvt.queryAgentLoginResp.count > 0 &&
+                        attEvt.queryAgentLoginResp.privEventCrossRefID._value == privEventCrossRefID._value)
+                    {
+                        string s = "";
+                        for (int i = 0; i < attEvt.queryAgentLoginResp.count; i++)
+                            s += attEvt.queryAgentLoginResp.device[i] + "\t ";
+                        Log(s);
+                    }
+                }
+
+                MessageBox.Show("attQueryAgentLogin succeded. Look in the log for details.");
+            }
         }
     }
 
