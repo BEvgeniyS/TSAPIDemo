@@ -1627,11 +1627,11 @@ namespace Tsapi
 
         public struct ATTQueryAgentStateConfEvent_t
         {
-            ATTWorkMode_t workMode;
-            ATTTalkState_t talkState;
-            int reasonCode;
-            ATTWorkMode_t pendingWorkMode;
-            int pendingReasonCode;
+            public ATTWorkMode_t workMode;
+            public ATTTalkState_t talkState;
+            public int reasonCode;
+            public ATTWorkMode_t pendingWorkMode;
+            public int pendingReasonCode;
         };
 
         public struct ATTUserToUserInfo_t

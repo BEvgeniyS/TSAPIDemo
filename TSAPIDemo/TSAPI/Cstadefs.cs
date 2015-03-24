@@ -1027,7 +1027,7 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct CSTAQueryAgentStateConfEvent_t
         {
-            AgentState_t agentState;
+            public AgentState_t agentState;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]

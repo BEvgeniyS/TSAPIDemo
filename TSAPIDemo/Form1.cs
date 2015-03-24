@@ -2037,6 +2037,77 @@ namespace TSAPIDemo
                 MessageBox.Show("attQueryAgentLogin succeded. Look in the log for details.");
             }
         }
+
+        private void cstaQueryAgentStateButton_Click(object sender, EventArgs e)
+        {
+            var popup = new cstaQueryAgentStatePopupForm();
+            popup.ShowDialog();
+            if (popup.DialogResult != DialogResult.OK) return;
+            var agentId = popup.device;
+            var split = popup.split;
+
+            // Prepare ATT request
+            Acs.RetCode_t retCode = Att.attQueryAgentState(this.privData, ref split);
+            if (retCode._value < 0 )
+            {
+                Log ("ATT error during attQueryAgentState. Error = " + retCode._value);
+                return;
+            }
+            
+            // Make CSTA call
+            retCode = Csta.cstaQueryAgentState(this.acsHandle, new Acs.InvokeID_t(), ref agentId, this.privData);
+            if (retCode._value < 0)
+            {
+                Log("CSTA  error during cstaQueryAgentState. Error = " + retCode._value);
+                return;
+            }
+
+            // Get CSTA results
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            this.Log("acsGetEventBlock result = " + retCode._value);
+            if (retCode._value < 0)
+            {
+                Log("CSTA  error during acsGetEventBlock. Error = " + retCode._value);
+                return;
+            }
+            if (eventBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION || eventBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_QUERY_AGENT_STATE_CONF )
+            {
+                Log("cstaQueryAgentState failed. Error = " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+                return;
+            }
+            if (eventBuf.evt.cstaConfirmation.queryAgentState.agentState == Csta.AgentState_t.AG_NULL)
+            {
+                Log("AgentID status:" + eventBuf.evt.cstaConfirmation.queryAgentState.agentState);
+                return;
+            }
+
+            // Decode ATT Results
+            var attEvt = new Att.ATTEvent_t();
+            retCode = Att.attPrivateData(this.privData, attEvt);
+            if (retCode._value < 0)
+            {
+                Log("ATT error during attPrivateData. Error = " + retCode._value);
+                return;
+            }
+            if (attEvt.eventType.eventType != Att.ATT_QUERY_AGENT_STATE_CONF)
+                if (retCode._value < 0)
+                {
+                    Log("Wrong ATT Event recieved: " + retCode._value);
+                    return;
+                }
+
+            // Get the output
+            Log("AgentID status:" + eventBuf.evt.cstaConfirmation.queryAgentState.agentState);
+            Log("Work mode: " + attEvt.queryAgentState.workMode);
+            Log("Talk state: " + attEvt.queryAgentState.talkState);
+            Log("Reason code: " + attEvt.queryAgentState.reasonCode);
+            Log("Pending work mode: " + attEvt.queryAgentState.pendingWorkMode);
+            Log("Pending reason code: " + attEvt.queryAgentState.pendingReasonCode);
+        }
     }
 
 

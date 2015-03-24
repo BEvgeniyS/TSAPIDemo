@@ -69,6 +69,7 @@ namespace TSAPIDemo
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.cstaQueryAgentStateButton = new System.Windows.Forms.Button();
             this.attQueryAgentLoginButton = new System.Windows.Forms.Button();
             this.querySplitButton = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -306,6 +307,7 @@ namespace TSAPIDemo
             // 
             // queryServiceGroup
             // 
+            this.queryServiceGroup.Controls.Add(this.cstaQueryAgentStateButton);
             this.queryServiceGroup.Controls.Add(this.attQueryAgentLoginButton);
             this.queryServiceGroup.Controls.Add(this.querySplitButton);
             this.queryServiceGroup.Location = new System.Drawing.Point(315, 7);
@@ -315,11 +317,21 @@ namespace TSAPIDemo
             this.queryServiceGroup.TabStop = false;
             this.queryServiceGroup.Text = "Query Service";
             // 
+            // cstaQueryAgentStateButton
+            // 
+            this.cstaQueryAgentStateButton.Location = new System.Drawing.Point(7, 77);
+            this.cstaQueryAgentStateButton.Name = "cstaQueryAgentStateButton";
+            this.cstaQueryAgentStateButton.Size = new System.Drawing.Size(84, 23);
+            this.cstaQueryAgentStateButton.TabIndex = 2;
+            this.cstaQueryAgentStateButton.Text = "Query Agent state";
+            this.cstaQueryAgentStateButton.UseVisualStyleBackColor = true;
+            this.cstaQueryAgentStateButton.Click += new System.EventHandler(this.cstaQueryAgentStateButton_Click);
+            // 
             // attQueryAgentLoginButton
             // 
-            this.attQueryAgentLoginButton.Location = new System.Drawing.Point(6, 48);
+            this.attQueryAgentLoginButton.Location = new System.Drawing.Point(7, 48);
             this.attQueryAgentLoginButton.Name = "attQueryAgentLoginButton";
-            this.attQueryAgentLoginButton.Size = new System.Drawing.Size(85, 23);
+            this.attQueryAgentLoginButton.Size = new System.Drawing.Size(84, 23);
             this.attQueryAgentLoginButton.TabIndex = 1;
             this.attQueryAgentLoginButton.Text = "Query A.Login";
             this.attQueryAgentLoginButton.UseVisualStyleBackColor = true;
@@ -891,6 +903,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.GroupBox queryServiceGroup;
         private System.Windows.Forms.Button querySplitButton;
         private System.Windows.Forms.Button attQueryAgentLoginButton;
+        private System.Windows.Forms.Button cstaQueryAgentStateButton;
 
     }
 }
