@@ -69,6 +69,7 @@ namespace TSAPIDemo
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.attQueryCallClassifierButton = new System.Windows.Forms.Button();
             this.cstaQueryAgentStateButton = new System.Windows.Forms.Button();
             this.attQueryAgentLoginButton = new System.Windows.Forms.Button();
             this.querySplitButton = new System.Windows.Forms.Button();
@@ -145,7 +146,7 @@ namespace TSAPIDemo
             this.configTab.Location = new System.Drawing.Point(4, 22);
             this.configTab.Name = "configTab";
             this.configTab.Padding = new System.Windows.Forms.Padding(3);
-            this.configTab.Size = new System.Drawing.Size(1119, 468);
+            this.configTab.Size = new System.Drawing.Size(1119, 504);
             this.configTab.TabIndex = 1;
             this.configTab.Text = "Configuration";
             this.configTab.UseVisualStyleBackColor = true;
@@ -307,6 +308,7 @@ namespace TSAPIDemo
             // 
             // queryServiceGroup
             // 
+            this.queryServiceGroup.Controls.Add(this.attQueryCallClassifierButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryAgentStateButton);
             this.queryServiceGroup.Controls.Add(this.attQueryAgentLoginButton);
             this.queryServiceGroup.Controls.Add(this.querySplitButton);
@@ -316,6 +318,16 @@ namespace TSAPIDemo
             this.queryServiceGroup.TabIndex = 44;
             this.queryServiceGroup.TabStop = false;
             this.queryServiceGroup.Text = "Query Service";
+            // 
+            // attQueryCallClassifierButton
+            // 
+            this.attQueryCallClassifierButton.Location = new System.Drawing.Point(7, 107);
+            this.attQueryCallClassifierButton.Name = "attQueryCallClassifierButton";
+            this.attQueryCallClassifierButton.Size = new System.Drawing.Size(84, 23);
+            this.attQueryCallClassifierButton.TabIndex = 3;
+            this.attQueryCallClassifierButton.Text = "QueryCallClass";
+            this.attQueryCallClassifierButton.UseVisualStyleBackColor = true;
+            this.attQueryCallClassifierButton.Click += new System.EventHandler(this.attQueryCallClassifierButton_Click);
             // 
             // cstaQueryAgentStateButton
             // 
@@ -904,6 +916,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button querySplitButton;
         private System.Windows.Forms.Button attQueryAgentLoginButton;
         private System.Windows.Forms.Button cstaQueryAgentStateButton;
+        private System.Windows.Forms.Button attQueryCallClassifierButton;
 
     }
 }

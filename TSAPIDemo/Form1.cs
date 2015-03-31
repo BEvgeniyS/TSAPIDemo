@@ -2018,7 +2018,7 @@ namespace TSAPIDemo
             if (escapeData.attEvts[0].eventType.eventType == Att.ATT_QUERY_AGENT_LOGIN_CONF)
             {
                 Att.ATTPrivEventCrossRefID_t privEventCrossRefID = escapeData.attEvts[0].queryAgentLogin.privEventCrossRefID;
-                Log("attQueryAgentLogin data:");
+                Log("attQueryAgentLogin results:");
                 Log("List of logged in agents:");
                 Log("__________________________________________________________");
                 foreach (Att.ATTEvent_t attEvt in escapeData.attEvts)
@@ -2107,6 +2107,18 @@ namespace TSAPIDemo
             Log("Reason code: " + attEvt.queryAgentState.reasonCode);
             Log("Pending work mode: " + attEvt.queryAgentState.pendingWorkMode);
             Log("Pending reason code: " + attEvt.queryAgentState.pendingReasonCode);
+        }
+
+        private void attQueryCallClassifierButton_Click(object sender, EventArgs e)
+        {
+            Acs.RetCode_t retCode = Att.attQueryCallClassifier(this.privData);
+            var escapeData = new Att.CstaEscapeData();
+            escapeData.GetAttEvents(this.acsHandle, this.privData);
+            if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_CALL_CLASSIFIER_CONF) return;
+            Log("attQueryCallClassifier results:");
+            Log("Available ports:" + escapeData.attEvts[0].queryCallClassifier.numAvailPorts);
+            Log("InUse ports:" + escapeData.attEvts[0].queryCallClassifier.numInUsePorts);
+            MessageBox.Show("attQueryCallClassifier succeded. Look in the log for details.");
         }
     }
 

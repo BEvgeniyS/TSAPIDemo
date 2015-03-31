@@ -496,8 +496,8 @@ namespace Tsapi
 
         public struct ATTQueryCallClassifierConfEvent_t
         {
-            short numAvailPorts;
-            short numInUsePorts;
+            public short numAvailPorts;
+            public short numInUsePorts;
         };
 
         public struct ATTV4QueryDeviceInfoConfEvent_t

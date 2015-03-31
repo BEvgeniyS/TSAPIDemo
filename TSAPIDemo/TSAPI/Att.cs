@@ -136,7 +136,7 @@ public static partial class Att
                 return Aux.ByteArrayToStructure<ATTQueryAgentStateConfEvent_t>(heap);
             }
         }
-        ATTQueryCallClassifierConfEvent_t queryCallClassifier
+        public ATTQueryCallClassifierConfEvent_t queryCallClassifier
         {
             get
             {
@@ -1166,16 +1166,18 @@ public static partial class Att
                         [In, Out]
                         Acs.PrivateData_t privateData,
                         ref Csta.DeviceID_t split);
+
+    [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+    public static extern Acs.RetCode_t attQueryCallClassifier(
+                        [In, Out]
+                        Acs.PrivateData_t privateData);
     
+
     
-
-
-
     [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t attMakeVersionString(
                         string requestedVersion,
                         System.Text.StringBuilder supportedVersion);
-
 
     // Decode ATTPrivateData
     [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
