@@ -26,5 +26,13 @@ namespace TSAPIDemo
             this.split = splitTextBox.Text;
             this.DialogResult = DialogResult.OK;
         }
+
+        private void PressEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                goButton_Click(sender, e);
+            }
+        }
     }
 }

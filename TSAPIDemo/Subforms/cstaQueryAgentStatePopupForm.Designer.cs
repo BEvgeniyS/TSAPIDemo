@@ -37,22 +37,24 @@
             // 
             // DeviceTextBox
             // 
-            this.DeviceTextBox.Location = new System.Drawing.Point(48, 12);
+            this.DeviceTextBox.Location = new System.Drawing.Point(65, 12);
             this.DeviceTextBox.Name = "DeviceTextBox";
             this.DeviceTextBox.Size = new System.Drawing.Size(100, 20);
             this.DeviceTextBox.TabIndex = 0;
+            this.DeviceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PressEnter);
             // 
             // splitTextBox
             // 
-            this.splitTextBox.Location = new System.Drawing.Point(48, 38);
+            this.splitTextBox.Location = new System.Drawing.Point(65, 38);
             this.splitTextBox.Name = "splitTextBox";
             this.splitTextBox.Size = new System.Drawing.Size(100, 20);
             this.splitTextBox.TabIndex = 1;
+            this.splitTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PressEnter);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-2, 15);
+            this.label1.Location = new System.Drawing.Point(15, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 2;
@@ -61,7 +63,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 41);
+            this.label2.Location = new System.Drawing.Point(32, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 3;
@@ -69,7 +71,7 @@
             // 
             // goButton
             // 
-            this.goButton.Location = new System.Drawing.Point(59, 70);
+            this.goButton.Location = new System.Drawing.Point(65, 70);
             this.goButton.Name = "goButton";
             this.goButton.Size = new System.Drawing.Size(75, 23);
             this.goButton.TabIndex = 4;
@@ -89,7 +91,7 @@
             this.Controls.Add(this.DeviceTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "cstaQueryAgentStatePopupForm";
-            this.Text = "cstaQueryAgentStatePopupForm";
+            this.Text = "Select Agent/Split";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -300,7 +300,7 @@ namespace TSAPIDemo
             this.TestsTab.Location = new System.Drawing.Point(4, 22);
             this.TestsTab.Name = "TestsTab";
             this.TestsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.TestsTab.Size = new System.Drawing.Size(1119, 468);
+            this.TestsTab.Size = new System.Drawing.Size(1119, 504);
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
@@ -743,14 +743,14 @@ namespace TSAPIDemo
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
             this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.logTextBox.Size = new System.Drawing.Size(508, 462);
+            this.logTextBox.Size = new System.Drawing.Size(508, 498);
             this.logTextBox.TabIndex = 31;
             this.logTextBox.WordWrap = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 432);
+            this.label7.Location = new System.Drawing.Point(22, 463);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(96, 13);
             this.label7.TabIndex = 10;
@@ -759,7 +759,7 @@ namespace TSAPIDemo
             // streamCheckbox
             // 
             this.streamCheckbox.AutoSize = true;
-            this.streamCheckbox.Location = new System.Drawing.Point(22, 448);
+            this.streamCheckbox.Location = new System.Drawing.Point(25, 479);
             this.streamCheckbox.Name = "streamCheckbox";
             this.streamCheckbox.Size = new System.Drawing.Size(95, 17);
             this.streamCheckbox.TabIndex = 9;
@@ -801,10 +801,10 @@ namespace TSAPIDemo
             this.mainTabs.Controls.Add(this.TestsTab);
             this.mainTabs.Controls.Add(this.configTab);
             this.mainTabs.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.mainTabs.Location = new System.Drawing.Point(0, 40);
+            this.mainTabs.Location = new System.Drawing.Point(0, 28);
             this.mainTabs.Name = "mainTabs";
             this.mainTabs.SelectedIndex = 0;
-            this.mainTabs.Size = new System.Drawing.Size(1127, 494);
+            this.mainTabs.Size = new System.Drawing.Size(1127, 530);
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
@@ -812,7 +812,7 @@ namespace TSAPIDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1127, 534);
+            this.ClientSize = new System.Drawing.Size(1127, 558);
             this.Controls.Add(this.deviceLabel);
             this.Controls.Add(this.mainTabs);
             this.Controls.Add(this.deviceTextBox);
