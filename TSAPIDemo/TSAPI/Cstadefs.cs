@@ -1069,6 +1069,23 @@ namespace Tsapi
         public struct DeviceClass_t
         {
             byte _value;
+            public override string ToString()
+            {
+                string s;
+                switch (_value)
+                {
+                    case DC_VOICE:
+                        return "DC_VOICE";
+                    case DC_DATA:
+                        return "DC_DATA";
+                    case DC_IMAGE:
+                        return "DC_IMAGE";
+                    case DC_OTHER:
+                        return "DC_OTHER";
+                    default:
+                        return _value.ToString();
+                }
+            }
         }
        
         public const byte DC_VOICE = 0x80;
@@ -1079,9 +1096,9 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct CSTAQueryDeviceInfoConfEvent_t
         {
-            DeviceID_t device;
-            DeviceType_t deviceType;
-            DeviceClass_t deviceClass;
+            public DeviceID_t device;
+            public DeviceType_t deviceType;
+            public DeviceClass_t deviceClass;
         }
 
         public struct CSTAReconnectCall_t

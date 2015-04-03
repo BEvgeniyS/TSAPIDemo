@@ -2120,6 +2120,40 @@ namespace TSAPIDemo
             Log("InUse ports:" + escapeData.attEvts[0].queryCallClassifier.numInUsePorts);
             MessageBox.Show("attQueryCallClassifier succeded. Look in the log for details.");
         }
+
+        private void cstaQueryDeviceInfoButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.RetCode_t retCode = Csta.cstaQueryDeviceInfo(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, this.privData);
+            if (retCode._value < 0) return;
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            if (retCode._value < 0) return;
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_QUERY_DEVICE_INFO_CONF)
+            {
+                Log("Device: " + eventBuf.evt.cstaConfirmation.queryDeviceInfo.device);
+                Log("Device Class: " + eventBuf.evt.cstaConfirmation.queryDeviceInfo.deviceClass);
+                Log("Device Type: " + eventBuf.evt.cstaConfirmation.queryDeviceInfo.deviceType);
+
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
+                if (attEvt.eventType.eventType == Att.ATT_QUERY_DEVICE_INFO_CONF)
+                {
+                    Log("Associated Class: " + attEvt.queryDeviceInfo.associatedClass);
+                    Log("Associated Device: " + attEvt.queryDeviceInfo.associatedDevice);
+                    Log("Extension Class: " + attEvt.queryDeviceInfo.extensionClass);
+                }
+
+                MessageBox.Show("cstaQueryDeviceInfo succeded. Look into the log for details");
+            }
+            else
+                MessageBox.Show("cstaQueryDeviceInfo Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+
+        }
     }
 
 

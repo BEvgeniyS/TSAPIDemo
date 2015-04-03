@@ -502,7 +502,7 @@ namespace Tsapi
 
         public struct ATTV4QueryDeviceInfoConfEvent_t
         {
-            ATTExtensionClass_t extensionClass;
+            public ATTExtensionClass_t extensionClass;
         };
 
         public struct ATTQueryMwiConfEvent_t
@@ -1590,9 +1590,9 @@ namespace Tsapi
 
         public struct ATTQueryDeviceInfoConfEvent_t
         {
-            ATTExtensionClass_t extensionClass;
-            ATTExtensionClass_t associatedClass;
-            Csta.DeviceID_t associatedDevice;
+            public ATTExtensionClass_t extensionClass;
+            public ATTExtensionClass_t associatedClass;
+            public Csta.DeviceID_t associatedDevice;
         };
 
         public struct ATTSetAdviceOfCharge_t
