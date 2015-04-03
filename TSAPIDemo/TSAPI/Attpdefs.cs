@@ -114,7 +114,11 @@ namespace Tsapi
         public const int ATT_MAKE_PREDICTIVE_CALL_CONF = 86;
         public const int ATTV5_SET_AGENT_STATE = 87;
         public const int ATTV5_QUERY_AGENT_STATE_CONF = 88;
-        public const int ATT_QUERY_DEVICE_NAME_CONF = 89;
+
+        // public const int ATT_QUERY_DEVICE_NAME_CONF = 89;
+        // Needs to be checked with other servers
+
+        public const int ATT_QUERY_DEVICE_NAME_CONF = 125; // thats what my AES server returns. 
         public const int ATT_CONFERENCE_CALL_CONF = 90;
         public const int ATT_TRANSFER_CALL_CONF = 91;
         public const int ATT_MONITOR_FILTER = 92;
@@ -1258,9 +1262,19 @@ namespace Tsapi
 
         public struct ATTUnicodeDeviceID_t
         {
-            short count;
+            public short count;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 64)]
-            ushort[] value;
+            public ushort[] value;
+
+            public override string ToString()
+            {
+                string s = string.Empty;
+                for (int i = 0; i < count; i++)
+                {
+                    s += Convert.ToChar(value[i]);
+                }
+                return s;
+            }
         };
 
         public struct ATTLookaheadInfo_t
@@ -1466,10 +1480,10 @@ namespace Tsapi
 
         public struct ATTQueryDeviceNameConfEvent_t
         {
-            ATTDeviceType_t deviceType;
-            Csta.DeviceID_t device;
-            Csta.DeviceID_t name;
-            ATTUnicodeDeviceID_t uname;
+            public ATTDeviceType_t deviceType;
+            public Csta.DeviceID_t device;
+            public Csta.DeviceID_t name;
+            public ATTUnicodeDeviceID_t uname;
         };
 
         public struct ATTConferenceCallConfEvent_t

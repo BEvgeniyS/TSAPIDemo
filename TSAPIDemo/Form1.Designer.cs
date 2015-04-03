@@ -69,6 +69,8 @@ namespace TSAPIDemo
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.attQueryDeviceNameButton = new System.Windows.Forms.Button();
+            this.cstaQueryDeviceInfoButton = new System.Windows.Forms.Button();
             this.attQueryCallClassifierButton = new System.Windows.Forms.Button();
             this.cstaQueryAgentStateButton = new System.Windows.Forms.Button();
             this.attQueryAgentLoginButton = new System.Windows.Forms.Button();
@@ -116,7 +118,6 @@ namespace TSAPIDemo
             this.deviceLabel = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaQueryDeviceInfoButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.queryServiceGroup.SuspendLayout();
@@ -309,6 +310,7 @@ namespace TSAPIDemo
             // 
             // queryServiceGroup
             // 
+            this.queryServiceGroup.Controls.Add(this.attQueryDeviceNameButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryDeviceInfoButton);
             this.queryServiceGroup.Controls.Add(this.attQueryCallClassifierButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryAgentStateButton);
@@ -320,6 +322,26 @@ namespace TSAPIDemo
             this.queryServiceGroup.TabIndex = 44;
             this.queryServiceGroup.TabStop = false;
             this.queryServiceGroup.Text = "Query Service";
+            // 
+            // attQueryDeviceNameButton
+            // 
+            this.attQueryDeviceNameButton.Location = new System.Drawing.Point(7, 164);
+            this.attQueryDeviceNameButton.Name = "attQueryDeviceNameButton";
+            this.attQueryDeviceNameButton.Size = new System.Drawing.Size(84, 23);
+            this.attQueryDeviceNameButton.TabIndex = 5;
+            this.attQueryDeviceNameButton.Text = "QryDevName";
+            this.attQueryDeviceNameButton.UseVisualStyleBackColor = true;
+            this.attQueryDeviceNameButton.Click += new System.EventHandler(this.attQueryDeviceNameButton_Click);
+            // 
+            // cstaQueryDeviceInfoButton
+            // 
+            this.cstaQueryDeviceInfoButton.Location = new System.Drawing.Point(7, 137);
+            this.cstaQueryDeviceInfoButton.Name = "cstaQueryDeviceInfoButton";
+            this.cstaQueryDeviceInfoButton.Size = new System.Drawing.Size(84, 23);
+            this.cstaQueryDeviceInfoButton.TabIndex = 4;
+            this.cstaQueryDeviceInfoButton.Text = "QueryDeviceInfo";
+            this.cstaQueryDeviceInfoButton.UseVisualStyleBackColor = true;
+            this.cstaQueryDeviceInfoButton.Click += new System.EventHandler(this.cstaQueryDeviceInfoButton_Click);
             // 
             // attQueryCallClassifierButton
             // 
@@ -822,16 +844,6 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // cstaQueryDeviceInfoButton
-            // 
-            this.cstaQueryDeviceInfoButton.Location = new System.Drawing.Point(7, 137);
-            this.cstaQueryDeviceInfoButton.Name = "cstaQueryDeviceInfoButton";
-            this.cstaQueryDeviceInfoButton.Size = new System.Drawing.Size(84, 23);
-            this.cstaQueryDeviceInfoButton.TabIndex = 4;
-            this.cstaQueryDeviceInfoButton.Text = "QueryDeviceInfo";
-            this.cstaQueryDeviceInfoButton.UseVisualStyleBackColor = true;
-            this.cstaQueryDeviceInfoButton.Click += new System.EventHandler(this.cstaQueryDeviceInfoButton_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -930,6 +942,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaQueryAgentStateButton;
         private System.Windows.Forms.Button attQueryCallClassifierButton;
         private System.Windows.Forms.Button cstaQueryDeviceInfoButton;
+        private System.Windows.Forms.Button attQueryDeviceNameButton;
 
     }
 }

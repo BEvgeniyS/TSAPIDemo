@@ -2154,6 +2154,23 @@ namespace TSAPIDemo
                 MessageBox.Show("cstaQueryDeviceInfo Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
 
         }
+
+        private void attQueryDeviceNameButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.RetCode_t retCode = Att.attQueryDeviceName(this.privData, ref currentDevice);
+            if (retCode._value < 0) return;
+            var escapeData = new Att.CstaEscapeData();
+            escapeData.GetAttEvents(this.acsHandle, this.privData);
+            if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_DEVICE_NAME_CONF) return;
+            Log("attQueryDeviceName results:");
+            Log("Device Type: " + escapeData.attEvts[0].queryDeviceName.deviceType);
+            Log("Device: " + escapeData.attEvts[0].queryDeviceName.device);
+            Log("Name: " + escapeData.attEvts[0].queryDeviceName.name);
+            Log("Unicode Name: " + escapeData.attEvts[0].queryDeviceName.uname);
+            MessageBox.Show("attQueryDeviceName succeded. Look in the log for details.");
+        }
     }
 
 
