@@ -2171,6 +2171,27 @@ namespace TSAPIDemo
             Log("Unicode Name: " + escapeData.attEvts[0].queryDeviceName.uname);
             MessageBox.Show("attQueryDeviceName succeded. Look in the log for details.");
         }
+
+        private void cstaQueryDoNotDisturbButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.RetCode_t retCode = Csta.cstaQueryDoNotDisturb(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, this.privData);
+            if (retCode._value < 0) return;
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            if (retCode._value < 0) return;
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_QUERY_DND_CONF)
+            {
+                Log("DND on " + currentDevice + ": " + eventBuf.evt.cstaConfirmation.queryDnd.doNotDisturb);
+                MessageBox.Show("cstaQueryDeviceInfo succeded. Look into the log for details");
+            }
+            else
+                MessageBox.Show("cstaQueryDeviceInfo Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+        }
     }
 
 
