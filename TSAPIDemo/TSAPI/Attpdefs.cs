@@ -1554,22 +1554,22 @@ namespace Tsapi
         public struct ATTGetAPICapsConfEvent_t
         {
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
-            string switchVersion;
-            bool sendDTMFTone;
-            bool enteredDigitsEvent;
-            bool queryDeviceName;
-            bool queryAgentMeas;
-            bool querySplitSkillMeas;
-            bool queryTrunkGroupMeas;
-            bool queryVdnMeas;
-            bool singleStepConference;
-            bool selectiveListeningHold;
-            bool selectiveListeningRetrieve;
-            bool setBillingRate;
-            bool queryUCID;
-            bool chargeAdviceEvent;
-            bool reserved1;
-            bool reserved2;
+            public string switchVersion;
+            public bool sendDTMFTone;
+            public bool enteredDigitsEvent;
+            public bool queryDeviceName;
+            public bool queryAgentMeas;
+            public bool querySplitSkillMeas;
+            public bool queryTrunkGroupMeas;
+            public bool queryVdnMeas;
+            public bool singleStepConference;
+            public bool selectiveListeningHold;
+            public bool selectiveListeningRetrieve;
+            public bool setBillingRate;
+            public bool queryUCID;
+            public bool chargeAdviceEvent;
+            public bool reserved1;
+            public bool reserved2;
         };
 
         public struct ATTV10GetAPICapsConfEvent_t

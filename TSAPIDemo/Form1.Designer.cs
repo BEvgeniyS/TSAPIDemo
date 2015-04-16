@@ -69,6 +69,7 @@ namespace TSAPIDemo
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.cstaQueryDoNotDisturbButton = new System.Windows.Forms.Button();
             this.attQueryDeviceNameButton = new System.Windows.Forms.Button();
             this.cstaQueryDeviceInfoButton = new System.Windows.Forms.Button();
             this.attQueryCallClassifierButton = new System.Windows.Forms.Button();
@@ -118,7 +119,6 @@ namespace TSAPIDemo
             this.deviceLabel = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.cstaQueryDoNotDisturbButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.queryServiceGroup.SuspendLayout();
@@ -324,6 +324,16 @@ namespace TSAPIDemo
             this.queryServiceGroup.TabIndex = 44;
             this.queryServiceGroup.TabStop = false;
             this.queryServiceGroup.Text = "Query Service";
+            // 
+            // cstaQueryDoNotDisturbButton
+            // 
+            this.cstaQueryDoNotDisturbButton.Location = new System.Drawing.Point(7, 194);
+            this.cstaQueryDoNotDisturbButton.Name = "cstaQueryDoNotDisturbButton";
+            this.cstaQueryDoNotDisturbButton.Size = new System.Drawing.Size(85, 23);
+            this.cstaQueryDoNotDisturbButton.TabIndex = 6;
+            this.cstaQueryDoNotDisturbButton.Text = "QueryDND";
+            this.cstaQueryDoNotDisturbButton.UseVisualStyleBackColor = true;
+            this.cstaQueryDoNotDisturbButton.Click += new System.EventHandler(this.cstaQueryDoNotDisturbButton_Click);
             // 
             // attQueryDeviceNameButton
             // 
@@ -845,16 +855,6 @@ namespace TSAPIDemo
             this.mainTabs.Size = new System.Drawing.Size(1127, 530);
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
-            // 
-            // cstaQueryDoNotDisturbButton
-            // 
-            this.cstaQueryDoNotDisturbButton.Location = new System.Drawing.Point(7, 194);
-            this.cstaQueryDoNotDisturbButton.Name = "cstaQueryDoNotDisturbButton";
-            this.cstaQueryDoNotDisturbButton.Size = new System.Drawing.Size(85, 23);
-            this.cstaQueryDoNotDisturbButton.TabIndex = 6;
-            this.cstaQueryDoNotDisturbButton.Text = "QueryDND";
-            this.cstaQueryDoNotDisturbButton.UseVisualStyleBackColor = true;
-            this.cstaQueryDoNotDisturbButton.Click += new System.EventHandler(this.cstaQueryDoNotDisturbButton_Click);
             // 
             // mainForm
             // 

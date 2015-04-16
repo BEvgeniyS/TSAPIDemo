@@ -332,7 +332,7 @@ public static partial class Att
                 return Aux.ByteArrayToStructure<ATTLinkStatusEvent_t>(heap);
             }
         }
-        ATTGetAPICapsConfEvent_t getAPICaps
+        public ATTGetAPICapsConfEvent_t getAPICaps
         {
             get
             {
