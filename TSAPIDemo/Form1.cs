@@ -2192,6 +2192,18 @@ namespace TSAPIDemo
             else
                 MessageBox.Show("cstaQueryDeviceInfo Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
         }
+
+        private void attQueryEndpointRegistrationInfoButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.RetCode_t retCode = Att.attQueryEndpointRegistrationInfo(this.privData, ref currentDevice);
+            if (retCode._value < 0) return;
+            var escapeData = new Att.CstaEscapeData();
+            escapeData.GetAttEvents(this.acsHandle, this.privData);
+            //if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_ENDPOINT_REGISTRATION_INFO_CONF) return;
+            Log("attQueryEndpointRegistrationInfoButton_Click results:");
+        }
     }
 
 

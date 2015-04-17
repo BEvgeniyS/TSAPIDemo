@@ -30,6 +30,149 @@ public static partial class Att
     public const int ATT_MAX_UUI_SIZE = 96;
     public const int ATTV5_MAX_UUI_SIZE = 32;
 
+    //Additional stuff
+    public enum ATTServiceState_t
+    {
+        SS_UNKNOWN = -1,
+        SS_OUT_OF_SERVICE = 0,
+        SS_IN_SERVICE = 1
+    }
+
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+        public struct ATTQueryEndpointRegistrationInfoConfEvent_t
+        {
+            Csta.DeviceID_t device;
+            ATTServiceState_t serviceState;
+            ATTRegisteredEndpointList_t registeredEndpoints;
+        }
+
+        enum ATTSignalingProtocol_t
+    {
+        SP_NOT_PROVIDED = -1,
+        SP_H323 = 1,
+        SP_SIP = 2
+    };
+
+    [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+    public struct ATTStationType_t
+    {
+    [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
+        public string _value;
+    }
+
+    public const uint US_NONE = 0x00000000;
+    public const uint US_BASIC_LATIN= 0x00000001;
+    public const uint US_LATIN_1_SUPPLEMENT = 0x00000002;
+    public const uint US_LATIN_EXTENDED_A = 0x00000004;
+    public const uint US_LATIN_EXTENDED_B = 0x00000008;
+    public const uint US_GREEK_COPTIC = 0x00000010;
+    public const uint US_CYRILLIC = 0x00000020;
+    public const uint US_ARMENIAN = 0x00000040;
+    public const uint US_HEBREW = 0x00000080;
+    public const uint US_ARABIC = 0x00000100;
+    public const uint US_DEVANAGARI = 0x00000200;
+    public const uint US_BENGALI = 0x00000400;
+    public const uint US_GURMUKHI = 0x00000800;
+    public const uint US_GUJARATI = 0x00001000;
+    public const uint US_ORIYA = 0x00002000;
+    public const uint US_TAMIL = 0x00004000;
+    public const uint US_TELUGU = 0x00008000;
+    public const uint US_KANNADA = 0x00010000;
+    public const uint US_MALAYALAM = 0x00020000;
+    public const uint US_SINHALA = 0x00040000;
+    public const uint US_THAI = 0x00080000;
+    public const uint US_LAO = 0x00100000;
+    public const uint US_MYANMAR = 0x00200000;
+    public const uint US_GEORGIAN = 0x00400000;
+    public const uint US_TAGALOG = 0x00800000;
+    public const uint US_KHMER = 0x01000000;
+    public const uint US_HALF_WIDTH_AND_FULL_WIDTH_KANA = 0x02000000;
+    public const uint US_CJK_RADICALS_SUPPLEMENT_JAPAN = 0x04000000;
+    public const uint US_CJK_RADICALS_SUPPLEMENT_CHINA_S = 0x08000000;
+    public const uint US_CJK_RADICALS_SUPPLEMENT_CHINA_T = 0x10000000;
+    public const uint US_CJK_RADICALS_SUPPLEMENT_KOREAN = 0x20000000;
+    public const uint US_CJK_RADICALS_SUPPLEMENT_VIETNAM = 0x40000000;
+    public const uint US_HANGUL_JAMO = 0x80000000;
+
+    [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+    public struct ATTUnicodeScript_t
+    {
+        public uint _value;
+    }
+
+        public enum ATTDependencyMode_t
+    {
+        DM_OTHER = -1,
+        DM_MAIN = 1,
+        DM_DEPENDENT = 2,
+        DM_INDEPENDENT = 3
+    }
+
+    public enum ATTMediaMode_t
+    {
+        MM_OTHER = -1,
+        MM_NONE = 0,
+        MM_CLIENT_SERVER = 1,
+        MM_TELECOMMUTER = 2
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+    public struct ATTProductID_t
+    {
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 16)]
+        public string _value;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+    public struct ATTMACAddress_t
+        {
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 18)]
+        public string _value;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+    public struct ATTIPAddress_t
+        {
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 46)]
+        public string _value;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+    public struct ATTEndpointAddress_t
+        {
+        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+        public string _value;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+    public struct ATTEndpointInstanceID_t
+    {
+        public short _value;
+    }
+
+    public struct ATTRegisteredEndpointInfo_t
+    {
+        ATTEndpointInstanceID_t instanceID;
+        ATTEndpointAddress_t endpointAddress;
+        ATTIPAddress_t switchEndIpAddress;
+        ATTMACAddress_t macAddress;
+        ATTProductID_t productID;
+        short networkRegion;
+        ATTMediaMode_t mediaMode;
+        ATTDependencyMode_t dependencyMode;
+        ATTUnicodeScript_t unicodeScript;
+        ATTStationType_t stationType;
+        ATTSignalingProtocol_t signalingProtocol;
+    }
+
+        // TODO: Custom marshal pEndpoint array
+        [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
+        public struct ATTRegisteredEndpointList_t
+        {
+            uint count;
+            IntPtr pEndpoint; // ATTRegisteredEndpointInfo_t* endpoint;
+        }
+
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
     public struct ATTEventType_t
@@ -950,7 +1093,14 @@ public static partial class Att
                 return Aux.ByteArrayToStructure<ATTV5RouteSelect_t>(heap);
             }
         }
-    }
+        public ATTQueryEndpointRegistrationInfoConfEvent_t queryEndpointRegistrationInfo
+            {
+                get
+                {
+                    return Aux.ByteArrayToStructure<ATTQueryEndpointRegistrationInfoConfEvent_t>(heap);
+                }
+            }
+        }
 
     [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t attQueryUCID(
@@ -1177,6 +1327,13 @@ public static partial class Att
                         [In, Out]
                         Acs.PrivateData_t privateData,
                         ref Csta.DeviceID_t split);
+
+    [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+    public static extern Acs.RetCode_t attQueryEndpointRegistrationInfo(
+                [In, Out]
+                Acs.PrivateData_t privateData,
+                ref Csta.DeviceID_t device);
+
 
 
     [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
