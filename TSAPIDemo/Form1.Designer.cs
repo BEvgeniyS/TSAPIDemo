@@ -69,6 +69,8 @@ namespace TSAPIDemo
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.cstaQueryForwardingButton = new System.Windows.Forms.Button();
+            this.attQueryEndpointRegistrationInfoButton = new System.Windows.Forms.Button();
             this.cstaQueryDoNotDisturbButton = new System.Windows.Forms.Button();
             this.attQueryDeviceNameButton = new System.Windows.Forms.Button();
             this.cstaQueryDeviceInfoButton = new System.Windows.Forms.Button();
@@ -119,7 +121,6 @@ namespace TSAPIDemo
             this.deviceLabel = new System.Windows.Forms.Label();
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.mainTabs = new System.Windows.Forms.TabControl();
-            this.attQueryEndpointRegistrationInfoButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.queryServiceGroup.SuspendLayout();
@@ -312,6 +313,7 @@ namespace TSAPIDemo
             // 
             // queryServiceGroup
             // 
+            this.queryServiceGroup.Controls.Add(this.cstaQueryForwardingButton);
             this.queryServiceGroup.Controls.Add(this.attQueryEndpointRegistrationInfoButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryDoNotDisturbButton);
             this.queryServiceGroup.Controls.Add(this.attQueryDeviceNameButton);
@@ -326,6 +328,26 @@ namespace TSAPIDemo
             this.queryServiceGroup.TabIndex = 44;
             this.queryServiceGroup.TabStop = false;
             this.queryServiceGroup.Text = "Query Service";
+            // 
+            // cstaQueryForwardingButton
+            // 
+            this.cstaQueryForwardingButton.Location = new System.Drawing.Point(7, 254);
+            this.cstaQueryForwardingButton.Name = "cstaQueryForwardingButton";
+            this.cstaQueryForwardingButton.Size = new System.Drawing.Size(85, 23);
+            this.cstaQueryForwardingButton.TabIndex = 8;
+            this.cstaQueryForwardingButton.Text = "QueryForward";
+            this.cstaQueryForwardingButton.UseVisualStyleBackColor = true;
+            this.cstaQueryForwardingButton.Click += new System.EventHandler(this.cstaQueryForwardingButton_Click);
+            // 
+            // attQueryEndpointRegistrationInfoButton
+            // 
+            this.attQueryEndpointRegistrationInfoButton.Location = new System.Drawing.Point(7, 224);
+            this.attQueryEndpointRegistrationInfoButton.Name = "attQueryEndpointRegistrationInfoButton";
+            this.attQueryEndpointRegistrationInfoButton.Size = new System.Drawing.Size(85, 23);
+            this.attQueryEndpointRegistrationInfoButton.TabIndex = 7;
+            this.attQueryEndpointRegistrationInfoButton.Text = "QEndpointReg";
+            this.attQueryEndpointRegistrationInfoButton.UseVisualStyleBackColor = true;
+            this.attQueryEndpointRegistrationInfoButton.Click += new System.EventHandler(this.attQueryEndpointRegistrationInfoButton_Click);
             // 
             // cstaQueryDoNotDisturbButton
             // 
@@ -858,16 +880,6 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // attQueryEndpointRegistrationInfoButton
-            // 
-            this.attQueryEndpointRegistrationInfoButton.Location = new System.Drawing.Point(7, 224);
-            this.attQueryEndpointRegistrationInfoButton.Name = "attQueryEndpointRegistrationInfoButton";
-            this.attQueryEndpointRegistrationInfoButton.Size = new System.Drawing.Size(85, 23);
-            this.attQueryEndpointRegistrationInfoButton.TabIndex = 7;
-            this.attQueryEndpointRegistrationInfoButton.Text = "QEndpointReg";
-            this.attQueryEndpointRegistrationInfoButton.UseVisualStyleBackColor = true;
-            this.attQueryEndpointRegistrationInfoButton.Click += new System.EventHandler(this.attQueryEndpointRegistrationInfoButton_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -969,6 +981,7 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button attQueryDeviceNameButton;
         private System.Windows.Forms.Button cstaQueryDoNotDisturbButton;
         private System.Windows.Forms.Button attQueryEndpointRegistrationInfoButton;
+        private System.Windows.Forms.Button cstaQueryForwardingButton;
     }
 }
 

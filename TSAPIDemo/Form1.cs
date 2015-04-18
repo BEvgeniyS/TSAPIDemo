@@ -2201,8 +2201,40 @@ namespace TSAPIDemo
             if (retCode._value < 0) return;
             var escapeData = new Att.CstaEscapeData();
             escapeData.GetAttEvents(this.acsHandle, this.privData);
+
+            //TODO: find ATT_QUERY_ENDPOINT_REGISTRATION_INFO_CONF value
             //if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_ENDPOINT_REGISTRATION_INFO_CONF) return;
-            Log("attQueryEndpointRegistrationInfoButton_Click results:");
+
+            Log("attQueryEndpointRegistrationInfo results:");
+            Log("Device:" + escapeData.attEvts[0].queryEndpointRegistrationInfo.device);
+            Log("Service state:" + escapeData.attEvts[0].queryEndpointRegistrationInfo.serviceState);
+            Log("[STUB] ptr to registered endpoints array:" + escapeData.attEvts[0].queryEndpointRegistrationInfo.registeredEndpoints);
+        }
+
+        private void cstaQueryForwardingButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.RetCode_t retCode = Csta.cstaQueryForwarding(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, this.privData);
+            if (retCode._value < 0) return;
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            if (retCode._value < 0) return;
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_QUERY_FWD_CONF)
+            {
+                Log("Fwd enabled? " + eventBuf.evt.cstaConfirmation.queryFwd.forward.param[0].forwardingOn);
+                if (eventBuf.evt.cstaConfirmation.queryFwd.forward.param[0].forwardingOn != 0)
+                {
+                    Log("Fwd DN: " + eventBuf.evt.cstaConfirmation.queryFwd.forward.param[0].forwardDN);
+                    Log("Forwarding Type: " + eventBuf.evt.cstaConfirmation.queryFwd.forward.param[0].forwardingType);
+                }
+                MessageBox.Show("cstaQueryForwardingButton succeded. Look into the log for details");
+            }
+            else
+                MessageBox.Show("cstaQueryForwardingButton Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
         }
     }
 

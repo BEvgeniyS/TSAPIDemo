@@ -698,17 +698,17 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ForwardingInfo_t
         {
-            ForwardingType_t forwardingType;
-            bool forwardingOn;
-            DeviceID_t forwardDN;
+            public ForwardingType_t forwardingType;
+            public byte forwardingOn;
+            public DeviceID_t forwardDN;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ListForwardParameters_t
         {
-            short count;
+            public short count;
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 7)]
-            ForwardingInfo_t[] param;
+            public ForwardingInfo_t[] param;
         }
 
         public enum SelectValue_t
@@ -1006,7 +1006,7 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct CSTAQueryFwdConfEvent_t
         {
-            ListForwardParameters_t forward;
+            public ListForwardParameters_t forward;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]

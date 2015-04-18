@@ -41,9 +41,9 @@ public static partial class Att
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct ATTQueryEndpointRegistrationInfoConfEvent_t
         {
-            Csta.DeviceID_t device;
-            ATTServiceState_t serviceState;
-            ATTRegisteredEndpointList_t registeredEndpoints;
+            public Csta.DeviceID_t device;
+            public ATTServiceState_t serviceState;
+            public ATTRegisteredEndpointList_t registeredEndpoints;
         }
 
         enum ATTSignalingProtocol_t
