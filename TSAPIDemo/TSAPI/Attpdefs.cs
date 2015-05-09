@@ -555,12 +555,12 @@ namespace Tsapi
 
         public struct ATTQueryTodConfEvent_t
         {
-            short year;
-            short month;
-            short day;
-            short hour;
-            short minute;
-            short second;
+            public short year;
+            public short month;
+            public short day;
+            public short hour;
+            public short minute;
+            public short second;
         };
 
         public struct ATTQueryTg_t

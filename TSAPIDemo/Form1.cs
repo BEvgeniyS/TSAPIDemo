@@ -2285,6 +2285,19 @@ namespace TSAPIDemo
             //Log("Service State: " + escapeData.attEvts[0].queryStationStatus.serviceState);
             MessageBox.Show("attQueryStationStatus succeded. Look in the log for details.");
         }
+
+        private void QueryTimeOfDayButton_Click(object sender, EventArgs e)
+        {
+            Acs.RetCode_t retCode = Att.attQueryTimeOfDay(this.privData);
+            if (retCode._value < 0) return;
+            var escapeData = new Att.CstaEscapeData();
+            escapeData.GetAttEvents(this.acsHandle, this.privData);
+            if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_TOD_CONF) return;
+            Log("attQueryTimeOfDay results:");
+            Log("Date: " + escapeData.attEvts[0].queryTod.month + "/" + escapeData.attEvts[0].queryTod.day + "/" + escapeData.attEvts[0].queryTod.year);
+            Log("Time: " + escapeData.attEvts[0].queryTod.hour + ":" + escapeData.attEvts[0].queryTod.minute + ":" + escapeData.attEvts[0].queryTod.second);
+            MessageBox.Show("attQueryTimeOfDay succeded. Look in the log for details.");
+        }
     }
 
 

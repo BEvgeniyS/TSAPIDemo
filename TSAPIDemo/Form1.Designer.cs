@@ -70,6 +70,7 @@ namespace TSAPIDemo
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.attQueryStationStatusButton = new System.Windows.Forms.Button();
             this.cstaQueryMsgWaitingIndButton = new System.Windows.Forms.Button();
             this.cstaQueryForwardingButton = new System.Windows.Forms.Button();
             this.attQueryEndpointRegistrationInfoButton = new System.Windows.Forms.Button();
@@ -124,8 +125,9 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.mainTabs = new System.Windows.Forms.TabControl();
             this.cstaQueryMsgWaitingIndToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.attQueryStationStatusButton = new System.Windows.Forms.Button();
-            this.QueryStationStatus = new System.Windows.Forms.ToolTip(this.components);
+            this.QueryStationStatusToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.QueryTimeofDayToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.QueryTimeOfDayButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.queryServiceGroup.SuspendLayout();
@@ -318,6 +320,7 @@ namespace TSAPIDemo
             // 
             // queryServiceGroup
             // 
+            this.queryServiceGroup.Controls.Add(this.QueryTimeOfDayButton);
             this.queryServiceGroup.Controls.Add(this.attQueryStationStatusButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryMsgWaitingIndButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryForwardingButton);
@@ -335,6 +338,17 @@ namespace TSAPIDemo
             this.queryServiceGroup.TabIndex = 44;
             this.queryServiceGroup.TabStop = false;
             this.queryServiceGroup.Text = "Query Service";
+            // 
+            // attQueryStationStatusButton
+            // 
+            this.attQueryStationStatusButton.Location = new System.Drawing.Point(7, 314);
+            this.attQueryStationStatusButton.Name = "attQueryStationStatusButton";
+            this.attQueryStationStatusButton.Size = new System.Drawing.Size(85, 23);
+            this.attQueryStationStatusButton.TabIndex = 10;
+            this.attQueryStationStatusButton.Text = "QuerySStatus";
+            this.QueryStationStatusToolTip.SetToolTip(this.attQueryStationStatusButton, "Query Station Status");
+            this.attQueryStationStatusButton.UseVisualStyleBackColor = true;
+            this.attQueryStationStatusButton.Click += new System.EventHandler(this.attQueryStationStatusButton_Click);
             // 
             // cstaQueryMsgWaitingIndButton
             // 
@@ -898,16 +912,16 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // attQueryStationStatusButton
+            // QueryTimeOfDayButton
             // 
-            this.attQueryStationStatusButton.Location = new System.Drawing.Point(7, 314);
-            this.attQueryStationStatusButton.Name = "attQueryStationStatusButton";
-            this.attQueryStationStatusButton.Size = new System.Drawing.Size(85, 23);
-            this.attQueryStationStatusButton.TabIndex = 10;
-            this.attQueryStationStatusButton.Text = "QuerySStatus";
-            this.QueryStationStatus.SetToolTip(this.attQueryStationStatusButton, "Query Station Status");
-            this.attQueryStationStatusButton.UseVisualStyleBackColor = true;
-            this.attQueryStationStatusButton.Click += new System.EventHandler(this.attQueryStationStatusButton_Click);
+            this.QueryTimeOfDayButton.Location = new System.Drawing.Point(7, 344);
+            this.QueryTimeOfDayButton.Name = "QueryTimeOfDayButton";
+            this.QueryTimeOfDayButton.Size = new System.Drawing.Size(85, 23);
+            this.QueryTimeOfDayButton.TabIndex = 11;
+            this.QueryTimeOfDayButton.Text = "QueryTOD";
+            this.QueryTimeofDayToolTip.SetToolTip(this.QueryTimeOfDayButton, "Query Time of Day");
+            this.QueryTimeOfDayButton.UseVisualStyleBackColor = true;
+            this.QueryTimeOfDayButton.Click += new System.EventHandler(this.QueryTimeOfDayButton_Click);
             // 
             // mainForm
             // 
@@ -1014,7 +1028,9 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaQueryMsgWaitingIndButton;
         private System.Windows.Forms.ToolTip cstaQueryMsgWaitingIndToolTip;
         private System.Windows.Forms.Button attQueryStationStatusButton;
-        private System.Windows.Forms.ToolTip QueryStationStatus;
+        private System.Windows.Forms.ToolTip QueryStationStatusToolTip;
+        private System.Windows.Forms.ToolTip QueryTimeofDayToolTip;
+        private System.Windows.Forms.Button QueryTimeOfDayButton;
     }
 }
 
