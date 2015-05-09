@@ -328,7 +328,7 @@ public static partial class Att
                 return Aux.ByteArrayToStructure<ATTQueryTodConfEvent_t>(heap);
             }
         }
-        ATTQueryTgConfEvent_t queryTg
+        public ATTQueryTgConfEvent_t queryTg
         {
             get
             {
@@ -1358,9 +1358,14 @@ public static partial class Att
             [In, Out]
             Acs.PrivateData_t privateData);
 
-
-
     [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+    public static extern Acs.RetCode_t attQueryTrunkGroup(
+            [In, Out]
+            Acs.PrivateData_t privateData,
+            ref Csta.DeviceID_t device);
+
+
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t attMakeVersionString(
                         string requestedVersion,
                         System.Text.StringBuilder supportedVersion);

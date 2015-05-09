@@ -570,8 +570,8 @@ namespace Tsapi
 
         public struct ATTQueryTgConfEvent_t
         {
-            short idleTrunks;
-            short usedTrunks;
+            public short idleTrunks;
+            public short usedTrunks;
         };
 
         public struct ATTV4SnapshotDeviceConfEvent_t

@@ -2279,7 +2279,7 @@ namespace TSAPIDemo
             if (retCode._value < 0) return;
             var escapeData = new Att.CstaEscapeData();
             escapeData.GetAttEvents(this.acsHandle, this.privData);
-            if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_STATION_STATUS_CONF) return;
+            if (escapeData.attEvts[0] == null || escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_STATION_STATUS_CONF) return;
             Log("attQueryStationStatus results:");
             Log("Station Status: " + escapeData.attEvts[0].queryStationStatus.stationStatus);
             //Log("Service State: " + escapeData.attEvts[0].queryStationStatus.serviceState);
@@ -2292,11 +2292,26 @@ namespace TSAPIDemo
             if (retCode._value < 0) return;
             var escapeData = new Att.CstaEscapeData();
             escapeData.GetAttEvents(this.acsHandle, this.privData);
-            if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_TOD_CONF) return;
+            if (escapeData.attEvts[0] == null || escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_TOD_CONF) return;
             Log("attQueryTimeOfDay results:");
             Log("Date: " + escapeData.attEvts[0].queryTod.month + "/" + escapeData.attEvts[0].queryTod.day + "/" + escapeData.attEvts[0].queryTod.year);
             Log("Time: " + escapeData.attEvts[0].queryTod.hour + ":" + escapeData.attEvts[0].queryTod.minute + ":" + escapeData.attEvts[0].queryTod.second);
             MessageBox.Show("attQueryTimeOfDay succeded. Look in the log for details.");
+        }
+
+        private void attQueryTrunkGroupButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.RetCode_t retCode = Att.attQueryTrunkGroup(this.privData, ref currentDevice);
+            if (retCode._value < 0) return;
+            var escapeData = new Att.CstaEscapeData();
+            escapeData.GetAttEvents(this.acsHandle, this.privData);
+            if (escapeData.attEvts[0] == null || escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_TG_CONF) return;
+            Log("attQueryTrunkGroup results:");
+            Log("Idle Trunks: " + escapeData.attEvts[0].queryTg.idleTrunks);
+            Log("Busy Trunks: " + escapeData.attEvts[0].queryTg.usedTrunks);
+            MessageBox.Show("attQueryTrunkGroup succeded. Look in the log for details.");
         }
     }
 

@@ -70,6 +70,7 @@ namespace TSAPIDemo
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.QueryTimeOfDayButton = new System.Windows.Forms.Button();
             this.attQueryStationStatusButton = new System.Windows.Forms.Button();
             this.cstaQueryMsgWaitingIndButton = new System.Windows.Forms.Button();
             this.cstaQueryForwardingButton = new System.Windows.Forms.Button();
@@ -127,7 +128,8 @@ namespace TSAPIDemo
             this.cstaQueryMsgWaitingIndToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.QueryStationStatusToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.QueryTimeofDayToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.QueryTimeOfDayButton = new System.Windows.Forms.Button();
+            this.attQueryTrunkGroupButton = new System.Windows.Forms.Button();
+            this.attQueryTrunkGroupToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.queryServiceGroup.SuspendLayout();
@@ -320,6 +322,7 @@ namespace TSAPIDemo
             // 
             // queryServiceGroup
             // 
+            this.queryServiceGroup.Controls.Add(this.attQueryTrunkGroupButton);
             this.queryServiceGroup.Controls.Add(this.QueryTimeOfDayButton);
             this.queryServiceGroup.Controls.Add(this.attQueryStationStatusButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryMsgWaitingIndButton);
@@ -338,6 +341,17 @@ namespace TSAPIDemo
             this.queryServiceGroup.TabIndex = 44;
             this.queryServiceGroup.TabStop = false;
             this.queryServiceGroup.Text = "Query Service";
+            // 
+            // QueryTimeOfDayButton
+            // 
+            this.QueryTimeOfDayButton.Location = new System.Drawing.Point(7, 344);
+            this.QueryTimeOfDayButton.Name = "QueryTimeOfDayButton";
+            this.QueryTimeOfDayButton.Size = new System.Drawing.Size(85, 23);
+            this.QueryTimeOfDayButton.TabIndex = 11;
+            this.QueryTimeOfDayButton.Text = "QueryTOD";
+            this.QueryTimeofDayToolTip.SetToolTip(this.QueryTimeOfDayButton, "Query Time of Day");
+            this.QueryTimeOfDayButton.UseVisualStyleBackColor = true;
+            this.QueryTimeOfDayButton.Click += new System.EventHandler(this.QueryTimeOfDayButton_Click);
             // 
             // attQueryStationStatusButton
             // 
@@ -912,16 +926,16 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // QueryTimeOfDayButton
+            // attQueryTrunkGroupButton
             // 
-            this.QueryTimeOfDayButton.Location = new System.Drawing.Point(7, 344);
-            this.QueryTimeOfDayButton.Name = "QueryTimeOfDayButton";
-            this.QueryTimeOfDayButton.Size = new System.Drawing.Size(85, 23);
-            this.QueryTimeOfDayButton.TabIndex = 11;
-            this.QueryTimeOfDayButton.Text = "QueryTOD";
-            this.QueryTimeofDayToolTip.SetToolTip(this.QueryTimeOfDayButton, "Query Time of Day");
-            this.QueryTimeOfDayButton.UseVisualStyleBackColor = true;
-            this.QueryTimeOfDayButton.Click += new System.EventHandler(this.QueryTimeOfDayButton_Click);
+            this.attQueryTrunkGroupButton.Location = new System.Drawing.Point(7, 374);
+            this.attQueryTrunkGroupButton.Name = "attQueryTrunkGroupButton";
+            this.attQueryTrunkGroupButton.Size = new System.Drawing.Size(85, 23);
+            this.attQueryTrunkGroupButton.TabIndex = 12;
+            this.attQueryTrunkGroupButton.Text = "QueryTrunkGroup";
+            this.QueryTimeofDayToolTip.SetToolTip(this.attQueryTrunkGroupButton, "Query Trunk Group");
+            this.attQueryTrunkGroupButton.UseVisualStyleBackColor = true;
+            this.attQueryTrunkGroupButton.Click += new System.EventHandler(this.attQueryTrunkGroupButton_Click);
             // 
             // mainForm
             // 
@@ -1031,6 +1045,8 @@ namespace TSAPIDemo
         private System.Windows.Forms.ToolTip QueryStationStatusToolTip;
         private System.Windows.Forms.ToolTip QueryTimeofDayToolTip;
         private System.Windows.Forms.Button QueryTimeOfDayButton;
+        private System.Windows.Forms.Button attQueryTrunkGroupButton;
+        private System.Windows.Forms.ToolTip attQueryTrunkGroupToolTip;
     }
 }
 
