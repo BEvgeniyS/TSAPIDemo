@@ -982,7 +982,7 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct CSTAQueryMwiConfEvent_t
         {
-            bool messages;
+            public bool messages;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
@@ -1071,7 +1071,6 @@ namespace Tsapi
             byte _value;
             public override string ToString()
             {
-                string s;
                 switch (_value)
                 {
                     case DC_VOICE:

@@ -293,7 +293,25 @@ namespace Tsapi
 
         public struct ATTMwiApplication_t
         {
-            byte _value;
+            public byte _value;
+            public override string ToString()
+            {
+                switch (_value)
+                {
+                    case AT_MCS:
+                        return "AT_MCS";
+                    case AT_VOICE:
+                        return "AT_VOICE";
+                    case AT_PROPMGT:
+                        return "AT_PROPMGT";
+                    case AT_LWC:
+                        return "AT_LWC";
+                    case AT_CTI:
+                        return "AT_CTI";
+                    default:
+                        return _value.ToString();
+                }
+            }
         }
         public const byte AT_MCS = 0x01;
         public const byte AT_VOICE = 0x02;
@@ -511,7 +529,7 @@ namespace Tsapi
 
         public struct ATTQueryMwiConfEvent_t
         {
-            ATTMwiApplication_t applicationType;
+           public ATTMwiApplication_t applicationType;
         };
 
         public struct ATTQueryStationStatus_t

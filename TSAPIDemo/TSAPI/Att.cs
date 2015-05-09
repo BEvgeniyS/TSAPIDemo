@@ -300,7 +300,7 @@ public static partial class Att
                 return Aux.ByteArrayToStructure<ATTQueryDeviceNameConfEvent_t>(heap);
             }
         }
-        ATTQueryMwiConfEvent_t queryMwi
+        public ATTQueryMwiConfEvent_t queryMwi
         {
             get
             {
@@ -1336,7 +1336,7 @@ public static partial class Att
 
 
 
-    [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+        [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t attMakeVersionString(
                         string requestedVersion,
                         System.Text.StringBuilder supportedVersion);

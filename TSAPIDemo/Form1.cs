@@ -16,12 +16,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Tsapi;
@@ -2204,7 +2200,11 @@ namespace TSAPIDemo
 
             //TODO: find ATT_QUERY_ENDPOINT_REGISTRATION_INFO_CONF value
             //if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_ENDPOINT_REGISTRATION_INFO_CONF) return;
-
+            if (escapeData.attEvts == null || escapeData.attEvts.Length < 1)
+            {
+                MessageBox.Show("attQueryEndpointRegistrationInfo failed. Error: " + escapeData.cstaError.error);
+                return;
+            }
             Log("attQueryEndpointRegistrationInfo results:");
             Log("Device:" + escapeData.attEvts[0].queryEndpointRegistrationInfo.device);
             Log("Service state:" + escapeData.attEvts[0].queryEndpointRegistrationInfo.serviceState);
@@ -2231,10 +2231,44 @@ namespace TSAPIDemo
                     Log("Fwd DN: " + eventBuf.evt.cstaConfirmation.queryFwd.forward.param[0].forwardDN);
                     Log("Forwarding Type: " + eventBuf.evt.cstaConfirmation.queryFwd.forward.param[0].forwardingType);
                 }
-                MessageBox.Show("cstaQueryForwardingButton succeded. Look into the log for details");
+                MessageBox.Show("cstaQueryForwarding succeded. Look into the log for details");
             }
             else
-                MessageBox.Show("cstaQueryForwardingButton Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+                MessageBox.Show("cstaQueryForwarding Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+        }
+
+        private void cstaQueryMsgWaitingIndButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.RetCode_t retCode = Csta.cstaQueryMsgWaitingInd(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, this.privData);
+            if (retCode._value < 0) return;
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            if (retCode._value < 0) return;
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_QUERY_MWI_CONF)
+            {
+                Log("Got messages on " + currentDevice + "? " + eventBuf.evt.cstaConfirmation.queryMwi.messages);
+                if (eventBuf.evt.cstaConfirmation.queryMwi.messages == false)
+                {
+                    return;
+                }
+
+                Att.ATTEvent_t attEvt = new Att.ATTEvent_t();
+                retCode = Att.attPrivateData(this.privData, attEvt);
+                if (attEvt.eventType.eventType == Att.ATT_QUERY_MWI_CONF)
+                {
+                    Log("Application type = " + attEvt.queryMwi.applicationType._value);
+                }
+                MessageBox.Show("cstaQueryDeviceInfo succeded. Look into the log for details");
+
+            }
+            else
+                MessageBox.Show("cstaQueryDeviceInfo Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+
         }
     }
 
