@@ -124,6 +124,8 @@ namespace TSAPIDemo
             this.deviceTextBox = new System.Windows.Forms.TextBox();
             this.mainTabs = new System.Windows.Forms.TabControl();
             this.cstaQueryMsgWaitingIndToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.attQueryStationStatusButton = new System.Windows.Forms.Button();
+            this.QueryStationStatus = new System.Windows.Forms.ToolTip(this.components);
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.queryServiceGroup.SuspendLayout();
@@ -316,6 +318,7 @@ namespace TSAPIDemo
             // 
             // queryServiceGroup
             // 
+            this.queryServiceGroup.Controls.Add(this.attQueryStationStatusButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryMsgWaitingIndButton);
             this.queryServiceGroup.Controls.Add(this.cstaQueryForwardingButton);
             this.queryServiceGroup.Controls.Add(this.attQueryEndpointRegistrationInfoButton);
@@ -340,7 +343,7 @@ namespace TSAPIDemo
             this.cstaQueryMsgWaitingIndButton.Size = new System.Drawing.Size(85, 23);
             this.cstaQueryMsgWaitingIndButton.TabIndex = 9;
             this.cstaQueryMsgWaitingIndButton.Text = "QueryMsgWaitingInd";
-            this.cstaQueryMsgWaitingIndToolTip.SetToolTip(this.cstaQueryMsgWaitingIndButton, "cstaQueryMsgWaitingInd()");
+            this.cstaQueryMsgWaitingIndToolTip.SetToolTip(this.cstaQueryMsgWaitingIndButton, "Query Message Waiting Indicator");
             this.cstaQueryMsgWaitingIndButton.UseVisualStyleBackColor = true;
             this.cstaQueryMsgWaitingIndButton.Click += new System.EventHandler(this.cstaQueryMsgWaitingIndButton_Click);
             // 
@@ -895,6 +898,17 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
+            // attQueryStationStatusButton
+            // 
+            this.attQueryStationStatusButton.Location = new System.Drawing.Point(7, 314);
+            this.attQueryStationStatusButton.Name = "attQueryStationStatusButton";
+            this.attQueryStationStatusButton.Size = new System.Drawing.Size(85, 23);
+            this.attQueryStationStatusButton.TabIndex = 10;
+            this.attQueryStationStatusButton.Text = "QuerySStatus";
+            this.QueryStationStatus.SetToolTip(this.attQueryStationStatusButton, "Query Station Status");
+            this.attQueryStationStatusButton.UseVisualStyleBackColor = true;
+            this.attQueryStationStatusButton.Click += new System.EventHandler(this.attQueryStationStatusButton_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -999,6 +1013,8 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button cstaQueryForwardingButton;
         private System.Windows.Forms.Button cstaQueryMsgWaitingIndButton;
         private System.Windows.Forms.ToolTip cstaQueryMsgWaitingIndToolTip;
+        private System.Windows.Forms.Button attQueryStationStatusButton;
+        private System.Windows.Forms.ToolTip QueryStationStatus;
     }
 }
 

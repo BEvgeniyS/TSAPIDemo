@@ -539,7 +539,13 @@ namespace Tsapi
 
         public struct ATTQueryStationStatusConfEvent_t
         {
-            bool stationStatus;
+            public byte stationStatus;
+            public ATTServiceState_t serviceState;
+        }
+
+        public struct ATTV9QueryStationStatusConfEvent_t
+        {
+            public bool stationStatus;
         };
 
         public struct ATTQueryTod_t

@@ -307,11 +307,18 @@ public static partial class Att
                 return Aux.ByteArrayToStructure<ATTQueryMwiConfEvent_t>(heap);
             }
         }
-        ATTQueryStationStatusConfEvent_t queryStationStatus
+        public ATTQueryStationStatusConfEvent_t queryStationStatus
         {
             get
             {
                 return Aux.ByteArrayToStructure<ATTQueryStationStatusConfEvent_t>(heap);
+            }
+        }
+        public ATTV9QueryStationStatusConfEvent_t queryStationStatusv9
+        {
+            get
+            {
+                return Aux.ByteArrayToStructure<ATTV9QueryStationStatusConfEvent_t>(heap);
             }
         }
         ATTQueryTodConfEvent_t queryTod
@@ -1334,6 +1341,17 @@ public static partial class Att
                 Acs.PrivateData_t privateData,
                 ref Csta.DeviceID_t device);
 
+    [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+    public static extern Acs.RetCode_t attV10QueryStationStatus(
+            [In, Out]
+            Acs.PrivateData_t privateData,
+            ref Csta.DeviceID_t device);
+
+    [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+    public static extern Acs.RetCode_t attQueryStationStatus(
+            [In, Out]
+            Acs.PrivateData_t privateData,
+            ref Csta.DeviceID_t device);
 
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]

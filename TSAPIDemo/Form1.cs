@@ -2263,12 +2263,27 @@ namespace TSAPIDemo
                 {
                     Log("Application type = " + attEvt.queryMwi.applicationType._value);
                 }
-                MessageBox.Show("cstaQueryDeviceInfo succeded. Look into the log for details");
+                MessageBox.Show("cstaQueryMsgWaitingInd succeded. Look into the log for details");
 
             }
             else
-                MessageBox.Show("cstaQueryDeviceInfo Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
+                MessageBox.Show("cstaQueryMsgWaitingInd Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
 
+        }
+
+        private void attQueryStationStatusButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.RetCode_t retCode = Att.attQueryStationStatus(this.privData, ref currentDevice);
+            if (retCode._value < 0) return;
+            var escapeData = new Att.CstaEscapeData();
+            escapeData.GetAttEvents(this.acsHandle, this.privData);
+            if (escapeData.attEvts[0].eventType.eventType != Att.ATT_QUERY_STATION_STATUS_CONF) return;
+            Log("attQueryStationStatus results:");
+            Log("Station Status: " + escapeData.attEvts[0].queryStationStatus.stationStatus);
+            //Log("Service State: " + escapeData.attEvts[0].queryStationStatus.serviceState);
+            MessageBox.Show("attQueryStationStatus succeded. Look in the log for details.");
         }
     }
 
