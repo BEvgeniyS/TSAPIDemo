@@ -69,6 +69,8 @@ namespace TSAPIDemo
             this.login_textBox = new System.Windows.Forms.TextBox();
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cstaMonitorDeviceButton = new System.Windows.Forms.Button();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
             this.attQueryUCIDButton = new System.Windows.Forms.Button();
             this.attQueryTrunkGroupButton = new System.Windows.Forms.Button();
@@ -131,17 +133,15 @@ namespace TSAPIDemo
             this.QueryStationStatusToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.QueryTimeofDayToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.attQueryTrunkGroupToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cstaMonitorDeviceButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.queryServiceGroup.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.mainTabs.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // configTab
@@ -324,6 +324,26 @@ namespace TSAPIDemo
             this.TestsTab.TabIndex = 0;
             this.TestsTab.Text = "Tests";
             this.TestsTab.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.cstaMonitorDeviceButton);
+            this.groupBox5.Location = new System.Drawing.Point(428, 7);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(99, 119);
+            this.groupBox5.TabIndex = 42;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Monitoring";
+            // 
+            // cstaMonitorDeviceButton
+            // 
+            this.cstaMonitorDeviceButton.Location = new System.Drawing.Point(7, 19);
+            this.cstaMonitorDeviceButton.Name = "cstaMonitorDeviceButton";
+            this.cstaMonitorDeviceButton.Size = new System.Drawing.Size(86, 23);
+            this.cstaMonitorDeviceButton.TabIndex = 0;
+            this.cstaMonitorDeviceButton.Text = "MonitorDevice";
+            this.cstaMonitorDeviceButton.UseVisualStyleBackColor = true;
+            this.cstaMonitorDeviceButton.Click += new System.EventHandler(this.cstaMonitorDeviceButton_Click);
             // 
             // queryServiceGroup
             // 
@@ -953,26 +973,6 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.cstaMonitorDeviceButton);
-            this.groupBox5.Location = new System.Drawing.Point(428, 7);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(99, 119);
-            this.groupBox5.TabIndex = 42;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Monitoring";
-            // 
-            // cstaMonitorDeviceButton
-            // 
-            this.cstaMonitorDeviceButton.Location = new System.Drawing.Point(7, 19);
-            this.cstaMonitorDeviceButton.Name = "cstaMonitorDeviceButton";
-            this.cstaMonitorDeviceButton.Size = new System.Drawing.Size(86, 23);
-            this.cstaMonitorDeviceButton.TabIndex = 0;
-            this.cstaMonitorDeviceButton.Text = "MonitorDevice";
-            this.cstaMonitorDeviceButton.UseVisualStyleBackColor = true;
-            this.cstaMonitorDeviceButton.Click += new System.EventHandler(this.cstaMonitorDeviceButton_Click);
-            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -991,13 +991,13 @@ namespace TSAPIDemo
             this.configTab.PerformLayout();
             this.TestsTab.ResumeLayout(false);
             this.TestsTab.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.queryServiceGroup.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.mainTabs.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

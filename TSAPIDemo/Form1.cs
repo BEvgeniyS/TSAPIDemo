@@ -567,6 +567,13 @@ namespace TSAPIDemo
                         short[] wmEventData = Aux.SplitPtr(m.LParam);
                         string logMsg = string.Format("[acsEventNotify Test] Got event: AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]);
                         Log(logMsg);
+                        ushort numevents = 1;
+                        ushort bufsize = 0;
+                        var tmpPrivateData = new Acs.PrivateData_t();
+                        while (numevents > 0)
+                        {
+                            Acs.acsGetEventPoll(this.acsHandle, null, ref bufsize, null, out numevents);
+                        }
                         break;
                     }
             }
@@ -2365,7 +2372,16 @@ namespace TSAPIDemo
         private void cstaMonitorDeviceButton_Click(object sender, EventArgs e)
         {
             if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
-
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            var filter = new Csta.CSTAMonitorFilter_t();
+            Acs.RetCode_t retCode = Csta.cstaMonitorDevice(this.acsHandle, new Acs.InvokeID_t(), ref currentDevice, ref filter, this.privData);
+            if (retCode._value < 0) return;
+            ushort eventBufferSize = Csta.CSTA_MAX_HEAP;
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            var eventBuf = new Csta.EventBuffer_t();
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
+            if (retCode._value < 0) return;
         }
     }
 
