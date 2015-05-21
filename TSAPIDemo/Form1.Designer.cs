@@ -24,6 +24,7 @@ namespace TSAPIDemo
 
         public Acs.ACSHandle_t acsHandle;
         public Acs.PrivateData_t privData;
+        public Csta.CSTAMonitorCrossRefID_t monitorCrossRefId;
 
         /// <summary>
         /// Required designer variable.

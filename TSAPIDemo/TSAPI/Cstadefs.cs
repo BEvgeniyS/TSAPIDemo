@@ -1631,8 +1631,8 @@ namespace Tsapi
 
         public struct CSTAMonitorConfEvent_t
         {
-            CSTAMonitorCrossRefID_t monitorCrossRefID;
-            CSTAMonitorFilter_t monitorFilter;
+            public CSTAMonitorCrossRefID_t monitorCrossRefID;
+            public CSTAMonitorFilter_t monitorFilter;
         }
 
         public struct CSTAChangeMonitorFilter_t

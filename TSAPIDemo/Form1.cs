@@ -566,7 +566,6 @@ namespace TSAPIDemo
                     {
                         short[] wmEventData = Aux.SplitPtr(m.LParam);
                         string logMsg = string.Format("[acsEventNotify Test] Got event: AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]);
-                        Log(logMsg);
                         ushort numevents = 1;
                         ushort bufsize = Csta.CSTA_MAX_HEAP;
                         var tmpPrivateData = new Acs.PrivateData_t();
@@ -580,11 +579,12 @@ namespace TSAPIDemo
                             {
                                 case Csta.CSTA_SERVICE_INITIATED:
                                     {
-                                        Log("CSTA_SERVICE_INITIATED: Cause:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.cause + ", CallId:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.initiatedConnection.callID + ", State:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.localConnectionInfo);
+                                        logMsg = ("CSTA_SERVICE_INITIATED: Cause:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.cause + ", CallId:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.initiatedConnection.callID + ", State:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.localConnectionInfo);
                                     }
                                     break;
                             }
                         }
+                        Log(logMsg);
                         break;
                     }
             }
@@ -2393,6 +2393,14 @@ namespace TSAPIDemo
             ushort numEvents;
             retCode = Acs.acsGetEventBlock(this.acsHandle, eventBuf, ref eventBufferSize, this.privData, out numEvents);
             if (retCode._value < 0) return;
+            if (eventBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && eventBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_MONITOR_CONF)
+            {
+                this.monitorCrossRefId = eventBuf.evt.cstaConfirmation.monitorStart.monitorCrossRefID;
+                Log("Monitoring device " + currentDevice + ", CrossRefID=" + this.monitorCrossRefId);
+                MessageBox.Show("cstaMonitorDevice succeded. Look into the log for details");
+            }
+            else
+                MessageBox.Show("cstaMonitorDevice Failed. Error was: " + eventBuf.evt.cstaConfirmation.universalFailure.error);
         }
     }
 
