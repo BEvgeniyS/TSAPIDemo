@@ -2313,6 +2313,60 @@ namespace TSAPIDemo
             Log("Busy Trunks: " + escapeData.attEvts[0].queryTg.usedTrunks);
             MessageBox.Show("attQueryTrunkGroup succeded. Look in the log for details.");
         }
+
+        private void attQueryUCIDButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+            Csta.DeviceID_t currentDevice = deviceTextBox.Text;
+            Acs.InvokeID_t invokeId = new Acs.InvokeID_t();
+            Acs.RetCode_t retCode = Csta.cstaSnapshotDeviceReq(this.acsHandle,
+                                                 invokeId,
+                                                 ref currentDevice,
+                                                 privData);
+            Csta.EventBuffer_t evtBuf = new Csta.EventBuffer_t();
+            this.privData.length = Att.ATT_MAX_PRIVATE_DATA;
+            ushort eventBufSize = Csta.CSTA_MAX_HEAP;
+            ushort numEvents;
+            retCode = Acs.acsGetEventBlock(this.acsHandle,
+                                          evtBuf,
+                                          ref eventBufSize,
+                                          privData,
+                                          out numEvents);
+            if (retCode._value < 0)
+            {
+                MessageBox.Show("acsGetEventBlock error: " + retCode);
+                return;
+            }
+            if (evtBuf.evt.eventHeader.eventClass.eventClass != Csta.CSTACONFIRMATION || evtBuf.evt.eventHeader.eventType.eventType != Csta.CSTA_SNAPSHOT_DEVICE_CONF)
+            {
+                if (evtBuf.evt.eventHeader.eventClass.eventClass == Csta.CSTACONFIRMATION && evtBuf.evt.eventHeader.eventType.eventType == Csta.CSTA_UNIVERSAL_FAILURE_CONF)
+                {
+                    MessageBox.Show("Snapshot device failed. Error: " + evtBuf.evt.cstaConfirmation.universalFailure.error);
+                }
+                return;
+            }
+            int callCountForSnapshotDevice = evtBuf.evt.cstaConfirmation.snapshotDevice.snapshotData.count;
+            if (callCountForSnapshotDevice < 1)
+            {
+                MessageBox.Show("No active calls");
+                return;
+            }
+
+            var snapDeviceInfoArray = (Csta.CSTASnapshotDeviceResponseInfo_t[])evtBuf.auxData["snapDeviceInfo"];
+            var tmpConn = snapDeviceInfoArray[0].callIdentifier;
+            CallNode callNode = new CallNode();
+            string ucid = GetUcid(tmpConn).ToString();
+            Log("The ucid of call #" + tmpConn.callID + " is " + ucid);
+            MessageBox.Show("attQueryUCID succeded. Look in the log for details.");
+
+
+        }
+
+        private void cstaMonitorDeviceButton_Click(object sender, EventArgs e)
+        {
+            if (!streamCheckbox.Checked || deviceTextBox.Text.Length == 0 || deviceTextBox.Text.Length > 5 || !streamCheckbox.Checked) { return; }
+
+        }
     }
 
 

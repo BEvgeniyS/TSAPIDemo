@@ -70,6 +70,8 @@ namespace TSAPIDemo
             this.serverId_textBox = new System.Windows.Forms.TextBox();
             this.TestsTab = new System.Windows.Forms.TabPage();
             this.queryServiceGroup = new System.Windows.Forms.GroupBox();
+            this.attQueryUCIDButton = new System.Windows.Forms.Button();
+            this.attQueryTrunkGroupButton = new System.Windows.Forms.Button();
             this.QueryTimeOfDayButton = new System.Windows.Forms.Button();
             this.attQueryStationStatusButton = new System.Windows.Forms.Button();
             this.cstaQueryMsgWaitingIndButton = new System.Windows.Forms.Button();
@@ -128,8 +130,9 @@ namespace TSAPIDemo
             this.cstaQueryMsgWaitingIndToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.QueryStationStatusToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.QueryTimeofDayToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.attQueryTrunkGroupButton = new System.Windows.Forms.Button();
             this.attQueryTrunkGroupToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cstaMonitorDeviceButton = new System.Windows.Forms.Button();
             this.configTab.SuspendLayout();
             this.TestsTab.SuspendLayout();
             this.queryServiceGroup.SuspendLayout();
@@ -138,6 +141,7 @@ namespace TSAPIDemo
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.mainTabs.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // configTab
@@ -303,6 +307,7 @@ namespace TSAPIDemo
             // 
             // TestsTab
             // 
+            this.TestsTab.Controls.Add(this.groupBox5);
             this.TestsTab.Controls.Add(this.queryServiceGroup);
             this.TestsTab.Controls.Add(this.groupBox4);
             this.TestsTab.Controls.Add(this.groupBox3);
@@ -322,6 +327,7 @@ namespace TSAPIDemo
             // 
             // queryServiceGroup
             // 
+            this.queryServiceGroup.Controls.Add(this.attQueryUCIDButton);
             this.queryServiceGroup.Controls.Add(this.attQueryTrunkGroupButton);
             this.queryServiceGroup.Controls.Add(this.QueryTimeOfDayButton);
             this.queryServiceGroup.Controls.Add(this.attQueryStationStatusButton);
@@ -341,6 +347,27 @@ namespace TSAPIDemo
             this.queryServiceGroup.TabIndex = 44;
             this.queryServiceGroup.TabStop = false;
             this.queryServiceGroup.Text = "Query Service";
+            // 
+            // attQueryUCIDButton
+            // 
+            this.attQueryUCIDButton.Location = new System.Drawing.Point(7, 404);
+            this.attQueryUCIDButton.Name = "attQueryUCIDButton";
+            this.attQueryUCIDButton.Size = new System.Drawing.Size(85, 23);
+            this.attQueryUCIDButton.TabIndex = 13;
+            this.attQueryUCIDButton.Text = "QueryUCID";
+            this.attQueryUCIDButton.UseVisualStyleBackColor = true;
+            this.attQueryUCIDButton.Click += new System.EventHandler(this.attQueryUCIDButton_Click);
+            // 
+            // attQueryTrunkGroupButton
+            // 
+            this.attQueryTrunkGroupButton.Location = new System.Drawing.Point(7, 374);
+            this.attQueryTrunkGroupButton.Name = "attQueryTrunkGroupButton";
+            this.attQueryTrunkGroupButton.Size = new System.Drawing.Size(85, 23);
+            this.attQueryTrunkGroupButton.TabIndex = 12;
+            this.attQueryTrunkGroupButton.Text = "QueryTrunkGroup";
+            this.QueryTimeofDayToolTip.SetToolTip(this.attQueryTrunkGroupButton, "Query Trunk Group");
+            this.attQueryTrunkGroupButton.UseVisualStyleBackColor = true;
+            this.attQueryTrunkGroupButton.Click += new System.EventHandler(this.attQueryTrunkGroupButton_Click);
             // 
             // QueryTimeOfDayButton
             // 
@@ -926,16 +953,25 @@ namespace TSAPIDemo
             this.mainTabs.TabIndex = 2;
             this.mainTabs.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.mainTabs_Selecting);
             // 
-            // attQueryTrunkGroupButton
+            // groupBox5
             // 
-            this.attQueryTrunkGroupButton.Location = new System.Drawing.Point(7, 374);
-            this.attQueryTrunkGroupButton.Name = "attQueryTrunkGroupButton";
-            this.attQueryTrunkGroupButton.Size = new System.Drawing.Size(85, 23);
-            this.attQueryTrunkGroupButton.TabIndex = 12;
-            this.attQueryTrunkGroupButton.Text = "QueryTrunkGroup";
-            this.QueryTimeofDayToolTip.SetToolTip(this.attQueryTrunkGroupButton, "Query Trunk Group");
-            this.attQueryTrunkGroupButton.UseVisualStyleBackColor = true;
-            this.attQueryTrunkGroupButton.Click += new System.EventHandler(this.attQueryTrunkGroupButton_Click);
+            this.groupBox5.Controls.Add(this.cstaMonitorDeviceButton);
+            this.groupBox5.Location = new System.Drawing.Point(428, 7);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(99, 119);
+            this.groupBox5.TabIndex = 42;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Monitoring";
+            // 
+            // cstaMonitorDeviceButton
+            // 
+            this.cstaMonitorDeviceButton.Location = new System.Drawing.Point(7, 19);
+            this.cstaMonitorDeviceButton.Name = "cstaMonitorDeviceButton";
+            this.cstaMonitorDeviceButton.Size = new System.Drawing.Size(86, 23);
+            this.cstaMonitorDeviceButton.TabIndex = 0;
+            this.cstaMonitorDeviceButton.Text = "MonitorDevice";
+            this.cstaMonitorDeviceButton.UseVisualStyleBackColor = true;
+            this.cstaMonitorDeviceButton.Click += new System.EventHandler(this.cstaMonitorDeviceButton_Click);
             // 
             // mainForm
             // 
@@ -961,6 +997,7 @@ namespace TSAPIDemo
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.mainTabs.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1047,6 +1084,9 @@ namespace TSAPIDemo
         private System.Windows.Forms.Button QueryTimeOfDayButton;
         private System.Windows.Forms.Button attQueryTrunkGroupButton;
         private System.Windows.Forms.ToolTip attQueryTrunkGroupToolTip;
+        private System.Windows.Forms.Button attQueryUCIDButton;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button cstaMonitorDeviceButton;
     }
 }
 
