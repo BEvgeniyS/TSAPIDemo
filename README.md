@@ -1,7 +1,7 @@
 ## TSAPIDemo
 
 ## About
-TSAPIDemo is a demo application to develop a proper C# wrapper for Avaya's TSAPI library by testing all methods in a demo application.
+TSAPIDemo is a demo application which should help develop a proper C# wrapper for Avaya's TSAPI library by testing all methods.
 At this moment, I am able to test Private Data versions up to 7 (AES 4.0). Everything above PDV 7 has to be tested by someone else.
 You can look at project's wiki to see project progress so far
 
