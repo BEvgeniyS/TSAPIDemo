@@ -568,11 +568,22 @@ namespace TSAPIDemo
                         string logMsg = string.Format("[acsEventNotify Test] Got event: AcsHandle = {0}, EventClass = {1}, EventType = {2}", m.WParam, wmEventData[0], wmEventData[1]);
                         Log(logMsg);
                         ushort numevents = 1;
-                        ushort bufsize = 0;
+                        ushort bufsize = Csta.CSTA_MAX_HEAP;
                         var tmpPrivateData = new Acs.PrivateData_t();
+                        tmpPrivateData.length = Att.ATT_MAX_PRIVATE_DATA;
+                        var evtBuf = new Csta.EventBuffer_t();
+                        // flush the event
                         while (numevents > 0)
                         {
-                            Acs.acsGetEventPoll(this.acsHandle, null, ref bufsize, null, out numevents);
+                            Acs.acsGetEventPoll(this.acsHandle, evtBuf, ref bufsize, tmpPrivateData, out numevents);
+                            switch (evtBuf.evt.eventHeader.eventType.eventType)
+                            {
+                                case Csta.CSTA_SERVICE_INITIATED:
+                                    {
+                                        Log("CSTA_SERVICE_INITIATED: Cause:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.cause + ", CallId:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.initiatedConnection.callID + ", State:" + evtBuf.evt.cstaUnsolicited.serviceInitiated.localConnectionInfo);
+                                    }
+                                    break;
+                            }
                         }
                         break;
                     }

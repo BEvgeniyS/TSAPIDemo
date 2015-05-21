@@ -547,11 +547,11 @@ namespace Tsapi
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
         public struct CSTAMonitorFilter_t
         {
-            CSTACallFilter_t call;
-            CSTAFeatureFilter_t feature;
-            CSTAAgentFilter_t agent;
-            CSTAMaintenanceFilter_t maintenance;
-            int privateFilter;
+            public CSTACallFilter_t call;
+            public CSTAFeatureFilter_t feature;
+            public CSTAAgentFilter_t agent;
+            public CSTAMaintenanceFilter_t maintenance;
+            public int privateFilter;
         }
 
         [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Ansi)]
@@ -1314,9 +1314,9 @@ namespace Tsapi
 
         public struct CSTAServiceInitiatedEvent_t
         {
-            ConnectionID_t initiatedConnection;
-            LocalConnectionState_t localConnectionInfo;
-            CSTAEventCause_t cause;
+            public ConnectionID_t initiatedConnection;
+            public LocalConnectionState_t localConnectionInfo;
+            public CSTAEventCause_t cause;
         }
 
         public struct CSTATransferredEvent_t

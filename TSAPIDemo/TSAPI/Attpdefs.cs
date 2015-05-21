@@ -321,7 +321,7 @@ namespace Tsapi
 
         public struct ATTV4PrivateFilter_t
         {
-            byte _value;
+            public byte _value;
         }
 
         public const byte ATT_V4_ENTERED_DIGITS_FILTER = 0x80;
@@ -588,7 +588,7 @@ namespace Tsapi
 
         public struct ATTV4MonitorConfEvent_t
         {
-            ATTV4PrivateFilter_t usedFilter;
+           public ATTV4PrivateFilter_t usedFilter;
         };
 
         public struct ATTMonitorStopOnCall_t
@@ -1473,6 +1473,8 @@ namespace Tsapi
        
         public const byte ATT_ENTERED_DIGITS_FILTER = 0x80;
         public const byte ATT_CHARGE_ADVICE_FILTER = 0x40;
+        public const byte ATT_ENDPOINT_UNREGISTERED_FILTER = 0x20;
+        public const byte ATT_ENDPOINT_REGISTERED_FILTER = 0x10;
 
         public struct ATTConsultationCallConfEvent_t
         {
@@ -1527,7 +1529,7 @@ namespace Tsapi
 
         public struct ATTMonitorConfEvent_t
         {
-            ATTPrivateFilter_t usedFilter;
+            public ATTPrivateFilter_t usedFilter;
         };
 
         public struct ATTSnapshotCall_t

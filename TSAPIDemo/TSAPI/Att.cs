@@ -1364,6 +1364,19 @@ public static partial class Att
             Acs.PrivateData_t privateData,
             ref Csta.DeviceID_t device);
 
+    [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+    public static extern Acs.RetCode_t attMonitorFilterExt(
+            [In, Out]
+            Acs.PrivateData_t privateData,
+            Att.ATTPrivateFilter_t privateFilter);
+
+    [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
+    public static extern Acs.RetCode_t attMonitorFilter(
+            [In, Out]
+            Acs.PrivateData_t privateData,
+            Att.ATTV4PrivateFilter_t privateFilter);
+
+
 
         [DllImport("ATTPRV32.dll", CharSet = CharSet.Ansi, SetLastError = true)]
     public static extern Acs.RetCode_t attMakeVersionString(
